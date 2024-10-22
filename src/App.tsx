@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUp from './components/pages/SignUp';
+import SignUp from './components/pages/auth/SignUp';
 import SignUpPage1 from './components/ui/organisms/forms/signUpForm/SignUpPage1';
 import SignUpPage2 from './components/ui/organisms/forms/signUpForm/SignUpPage2';
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <SignUp />
+    },
     {
       path: '/signup',
       element: <SignUp />,
