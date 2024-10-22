@@ -20,11 +20,11 @@ function App() {
       element: <SignUp />,
       children: [
         {
-          path: "/signup/",
+          path: "",
           element: <SignUpPage1 />
         },
         {
-          path: "/signup/step2",
+          path: "step2",
           element: <SignUpPage2 />
         }
       ]

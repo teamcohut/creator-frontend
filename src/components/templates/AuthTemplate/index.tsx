@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import FormCard from '../../ui/molecules/auth/FormCard'
-import "./indgex.css"
+import "./index.css"
 
 const AuthTemplate: FC<IAuthTemplate> = ({children}) => {
   return (
