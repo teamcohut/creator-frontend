@@ -1,0 +1,8 @@
+.form-template {
+    min-width: 100vw;
+    height: 100vh;
+    background-image: url(/public/asstes/images/BG.png);
+    background-size: cover;
+    background-position: calc();
+    display: flex;
+}

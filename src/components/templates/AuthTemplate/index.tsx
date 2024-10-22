@@ -1,15 +1,19 @@
 import React, { FC } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import FormCard from '../../ui/molecules/auth/FormCard'
+import "./index.css"
 
-const AuthTemplate: FC<IAuthTemplate> = () => {
+const AuthTemplate: FC<IAuthTemplate> = ({children}) => {
   return (
     <>
-        <div>
+        <div className='justify-between items-stretch form-template'>
             <div>
                 <Link to={'/'}><img  src={'/icons/logo/logo-white.png'} alt={'Cohut Logo'} /></Link>
-                <h1>{}</h1>
+                <h1>Launch Your Learning Program in 5 Minutes.</h1>
             </div>
-            <Outlet />
+            <FormCard>
+              {children}
+            </FormCard>
         </div>
     </>
   )

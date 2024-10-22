@@ -1,12 +1,12 @@
 import React from 'react'
 import AuthTemplate from '../../templates/AuthTemplate'
-import SignUpForm from '../../ui/organisms/forms/SignUpForm'
+import { Outlet } from 'react-router-dom'
 
 const SignUp = () => {
   return (
     <>
         <AuthTemplate>
-            <SignUpForm />
+            <Outlet />
         </AuthTemplate>
     </>
   )
