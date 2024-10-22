@@ -1,32 +1,31 @@
 import React from 'react'
 
-const Input: React.FC<IFormInput> = ({inpType}) => {
-
-  // if (inpType === "text") {
-  //   return (
-  //     <div>
-  //       <input type="text" name="" id="" />
-  //     </div>
-  //   )
-  // } else if (inpType === "email") {
-  //   return <input type="email" name="" id="" />
-  // } else if (inpType === "password") {
-  //   return <input type="password" name="" id="" />
-  // } else if (inpType === "number") {
-  //   return <input type="number" name="" id="" />
-  // }
-
+const Input: React.FC<IInput> = ({inpType}) => {
   return (
-    // {
-    //     type = "text"? <input type="text" name="" id="" />: 
-    //     type = "email"? <input type="email" name="" id="" />:
-        <input type="number" />
-    // }
+    <>
+      {
+        !inpType || inpType === "text"?
+        <div className='input'>
+          <input type="text"  placeholder=''/>
+        </div>:
+        inpType === "email"?
+        <div className='input'>
+          <input type="email" placeholder='' />
+        </div>:
+        inpType === "password"?
+        <div className='input'>
+          <input type="passwo placeholder=''rd" />
+        </div>:
+        <div className='input'>
+          <input type="number placeholder=''" />
+        </div>
+      }
+    </>
   )
 }
 
-interface IFormInput {
-    inpType: string
+interface IInput {
+  inpType: string
 }
 
 export default Input
