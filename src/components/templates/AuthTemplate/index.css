@@ -5,8 +5,8 @@
 .form-template {
     width: 100vw;
     height: 100vh;
-    background: url(/public/assets/images/BG.svg);
-    background-color: blue;
+    background: url(/public/assets/images/BG3.png);
+    /* background-color: blue; */
     background-size: cover;
     background-position: center;
     display: flex;
