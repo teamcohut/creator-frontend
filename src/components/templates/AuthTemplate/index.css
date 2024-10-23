@@ -1,8 +1,13 @@
+*{
+    margin: 0;
+    border-box: box-sizing;
+}
 .form-template {
-    min-width: 100vw;
+    width: 100vw;
     height: 100vh;
-    background-image: url(/public/asstes/images/BG.png);
+    background: url(/public/assets/images/BG3.png);
+    /* background-color: blue; */
     background-size: cover;
-    background-position: calc();
+    background-position: center;
     display: flex;
 }
