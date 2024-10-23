@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 const SignUp = () => {
   return (
     <>
-        <AuthTemplate>
+        <AuthTemplate title='Launch Your Learning Program In 5 Minutes'>
             <Outlet />
         </AuthTemplate>
     </>

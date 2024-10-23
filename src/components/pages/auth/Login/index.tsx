@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 const Login = () => {
   return (
     <>
-        <AuthTemplate>
+        <AuthTemplate title='Teach what you know, share what you love.'>
             <Outlet />
         </AuthTemplate>
     </>
