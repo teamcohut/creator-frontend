@@ -1,7 +1,11 @@
+.input-cont label {
+    color: var(--primary-950);
+}
+
 .input-div {
     width: 100%;
     height: clamp(45px, 2vw, 48px);
-    border: 1px solid #E7E7E7;
+    border: 1px solid var(--dark-100) !important;
     overflow: hidden;
 }
 
@@ -13,11 +17,12 @@
 }
 
 .input-div:focus-within {
-    border: 1.5px solid #453BDB;
+    border: 1.5px solid var(--primary-700) !important;
 }
 
 .input-div .icon {
-    color: #B0B0B0;
+    color: var(--dark-400) !important;
+
 }
 
 .input-div .password-eye {

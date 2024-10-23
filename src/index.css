@@ -1,56 +1,203 @@
-body {
-  margin: 0;
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  /* font-weight: <weight>; */
-  font-style: normal;
+/* COLORS & VARIABLES */
+:root {
+  --primary-50: #ECF1FF;
+  --primary-100: #DDE5FF;
+  --primary-200: #C2D0FF;
+  --primary-300: #9DB0FF;
+  --primary-400: #7685FF;
+  --primary-500: #555BFF;
+  --primary-600: #4037F4;
+  --primary-700: #453BDB;
+  --primary-800: #2B25AE;
+  --primary-900: #292689;
+  --primary-950: #191650;
+
+  --dark-50: #FFFFFF;
+  --dark-100: #E7E7E7;
+  --dark-200: #D1D1D1;
+  --dark-300: #B0B0B0;
+  --dark-400: #888888;
+  --dark-500: #6D6D6D;
+  --dark-600: #5D5D5D;
+  --dark-700: #4F4F4F;
+  --dark-800: #454545;
+  --dark-900: #3D3D3D;
+  --dark-950: #0D0D0D;
 }
 
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+}
+
+/* FONTS */
+/* ================ */
 .manrope-200 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 200 !important;
+  font-style: normal !important;
 }
 
 .manrope-300 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
 }
 
 .manrope-400 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
 }
 
 .manrope-500 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
 }
 
 .manrope-600 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
 }
 
 .manrope-700 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
 }
 
 .manrope-800 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+}
+
+/* COLORS */
+/* ================ */
+.primary-50 {
+  color: var(--primary-50);
+}
+
+.primary-100 {
+  color: var(--primary-100);
+}
+
+.primary-200 {
+  color: var(--primary-200);
+}
+
+.primary-300 {
+  color: var(--primary-300);
+}
+
+.primary-400 {
+  color: var(--primary-400);
+}
+
+.primary-500 {
+  color: var(--primary-500);
+}
+
+.primary-600 {
+  color: var(--primary-600);
+}
+
+.primary-700 {
+  color: var(--primary-700);
+}
+
+.primary-800 {
+  color: var(--primary-800);
+}
+
+.primary-900 {
+  color: var(--primary-900);
+}
+
+.primary-950 {
+  color: var(--primary-950);
+}
+
+.dark-50 {
+  color: var(--dark-50);
+}
+
+.dark-100 {
+  color: var(--dark-100);
+}
+
+.dark-200 {
+  color: var(--dark-200);
+}
+
+.dark-300 {
+  color: var(--dark-300);
+}
+
+.dark-400 {
+  color: var(--dark-400);
+}
+
+.dark-500 {
+  color: var(--dark-500);
+}
+
+.dark-600 {
+  color: var(--dark-600);
+}
+
+.dark-700 {
+  color: var(--dark-700);
+}
+
+.dark-800 {
+  color: var(--dark-800);
+}
+
+.dark-900 {
+  color: var(--dark-900);
+}
+
+.dark-950 {
+  color: var(--dark-950);
+}
+
+/* FONT SIZE */
+/* ================ */
+.fs-footer {
+  font-size: clamp(10px, 2vw, 12px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+.fs-caption {
+  font-size: clamp(10px, 2vw, 12px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 2vw, 16px);
 }
