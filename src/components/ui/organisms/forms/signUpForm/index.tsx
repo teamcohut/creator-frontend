@@ -4,13 +4,14 @@ import EmailInput from '../../../atoms/forms/inputs/EmailInput'
 import PasswordInput from '../../../atoms/forms/inputs/PasswordInput'
 import SelectInput from '../../../atoms/forms/inputs/SelectInput'
 import { Link } from 'react-router-dom'
+import './index.css'
 
-const SignUpPage1: React.FC = () => {
+const SignUpForm: React.FC = () => {
   return (
-    <form className='col-6 bg-white d-flex flex-column' action="">
+    <form className='form bg-white d-flex flex-column rounded-5' action="">
       <div className="d-flex flex-column gap-2">
-        <h1 className='manrope-600 primary-950'>Create your account</h1>
-        <span className='manrope-500 dark-700'>Launch your program in no time just by creating an account with us.</span>
+        <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
+        <span className='manrope-500 dark-700 fs-body'>Launch your program in no time just by creating an account with us.</span>
       </div>
       <div className="d-flex flex-column gap-4">
         <EmailInput
@@ -31,14 +32,22 @@ const SignUpPage1: React.FC = () => {
         <SelectInput 
           label='Where are you located at? (Optional)' 
           id='country' 
-          onchange={(e:any)=>console.log(e.target.value)} />
+          onchange={(e:any)=>console.log(e.target.value)} options={[{value: "Nigeria", content: "Nigeria"}]} />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
         <Button text='Create Account' action={(e: any)=>console.log(e.target.value)} type='button' />
-        <span className=''>Already have an account? <Link to={"/glogin"}>Sign in</Link></span>
+        <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
+      </div>
+      <div className="footer w-100 d-flex flex-column align-items-center gap-2">
+        <div className="d-flex gap-2">
+          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Privacy Policy.</Link>
+          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Help.</Link>
+          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Visit www.cohut.co</Link>
+        </div>
+        <span className='dark-500 fs-footer text-decoration-none'>(c) 2024 Cohut</span>
       </div>
     </form>
   )
 }
 
-export default SignUpPage1
+export default SignUpForm

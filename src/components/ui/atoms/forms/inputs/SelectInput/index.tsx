@@ -7,8 +7,8 @@ const SelectInput: React.FC<ISelectInput> = (props) => {
   return (
     <>
         <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
-          {label && <label className='manrope-600' htmlFor={id}>{label}</label>}
-          <div className='input-div d-flex align-items-center gap-2 rounded-pill px-3 width-full border-black'>
+          {label && <label className='manrope-600 fs-body' htmlFor={id}>{label}</label>}
+          <div className='input-div d-flex align-items-center gap-2 rounded-pill px-3 width-full'>
             {icon && icon}
             <select id={id} className="input bg-transparent width-100" name="" onChange={onchange}>
               {

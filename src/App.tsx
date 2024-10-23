@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUp from './components/pages/auth/SignUp';
-import SignUpPage1 from './components/ui/organisms/forms/signUpForm/SignUpPage1';
+import SignUpPage1 from './components/ui/organisms/forms/signUpForm';
 import SignUpPage2 from './components/ui/organisms/forms/signUpForm/SignUpPage2';
 import Login from './components/pages/auth/Login';
 import ForgotPassword from './components/ui/organisms/forms/loginForm/ForgotPassword';

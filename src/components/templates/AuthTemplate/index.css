@@ -1,10 +1,11 @@
-*{
+* {
     margin: 0;
-    border-box: box-sizing;
+    box-sizing: border-box;
 }
+
 .form-template {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: url(/public/assets/images/BG3.png);
     /* background-color: blue; */
     background-size: cover;

@@ -1,0 +1,12 @@
+.form {
+    width: clamp(342px, 66vw, 660px) !important;
+    min-width: 342px !important;
+    padding-inline: clamp(24px, 6vw, 60px);
+    padding-top: clamp(24px, 6vw, 64px);
+    padding-bottom: clamp(24px, 3.5vw, 36px);
+    gap: 36px;
+}
+
+@media (max-width: ) {
+    
+}
