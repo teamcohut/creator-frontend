@@ -11,7 +11,7 @@ const Button: React.FC<IButton> = ({text, type, action}) => {
 
 interface IButton {
   text: string,
-  action: any,
+  action?: any,
   type:  "submit" | "reset" | "button",
 
 }

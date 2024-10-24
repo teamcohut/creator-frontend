@@ -12,3 +12,9 @@
     background-position: center;
     display: flex;
 }
+
+/* @media (max-width: 991px) {
+    .form-container {
+        width: 100vw !important;
+    }
+} */

@@ -3,16 +3,24 @@ import Button from '../../../atoms/forms/Button.tsx'
 import EmailInput from '../../../atoms/forms/inputs/EmailInput'
 import PasswordInput from '../../../atoms/forms/inputs/PasswordInput'
 import SelectInput from '../../../atoms/forms/inputs/SelectInput'
-import { Link } from 'react-router-dom'
+import ProgressBar from '../../../molecules/forms/ProgressBar'
+import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 
 const SignUpForm: React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate('step2')
+  }
   return (
-    <form className='form bg-white d-flex flex-column rounded-5' action="">
+    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit} action="">
+      
       <div className="d-flex flex-column gap-2">
         <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
         <span className='manrope-500 dark-700 fs-body'>Launch your program in no time just by creating an account with us.</span>
       </div>
+      <ProgressBar length={2} page={1} />
       <div className="d-flex flex-column gap-4">
         <EmailInput
           label='Email'
@@ -32,10 +40,10 @@ const SignUpForm: React.FC = () => {
         <SelectInput 
           label='Where are you located at? (Optional)' 
           id='country' 
-          onchange={(e:any)=>console.log(e.target.value)} options={[{value: "Nigeria", content: "Nigeria"}]} />
+          onchange={(e:any)=>console.log(e.target.value)} options={[{value: "Nigeria", content: "Nigeria"}, {value: "Ghana", content: "Ghana"}]} />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button text='Create Account' action={(e: any)=>console.log(e.target.value)} type='button' />
+        <Button text='Create Account' type='submit' />
         <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
       </div>
       <div className="footer w-100 d-flex flex-column align-items-center gap-2">
