@@ -24,7 +24,7 @@ function App() {
           element: <SignUpPage1 />
         },
         {
-          path: "step2",
+          path: "pg2",
           element: <SignUpPage2 />
         }
       ]

@@ -1,6 +1,8 @@
 export interface IInput {
     placeHolder: string,
-    onchange: any,
+    onchange?: any,
+    other?: any,
+    // hook?: any,
     icon?: any,
     label?: string,
     id: string,
@@ -9,14 +11,16 @@ export interface IInput {
 export interface IOtherInput {
     inpType: string,
     placeHolder: string,
-    onchange: any,
+    onchange?: any,
+    other?: any,
     icon?: any,
     label?: string,
     id: string,
   }
 
 export interface ISelectInput {
-    onchange: any,
+    onchange?: any,
+    other?: any,
     options? : Array<option>,
     icon?: any,
     label?: string,

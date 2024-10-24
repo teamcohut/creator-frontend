@@ -3,19 +3,29 @@ import Button from '../../../atoms/forms/Button.tsx'
 import EmailInput from '../../../atoms/forms/inputs/EmailInput'
 import PasswordInput from '../../../atoms/forms/inputs/PasswordInput'
 import SelectInput from '../../../atoms/forms/inputs/SelectInput'
-import ProgressBar from '../../../molecules/forms/ProgressBar'
 import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
 
-  const handleSubmit = () => {
-    navigate('step2')
+  const onSubmit = (data: any) => {
+    navigate('pg2')
   }
+
+  const options = [
+    {
+      value: "Nigeria", 
+      content: "Nigeria"
+    }, {
+      value: "Ghana", 
+      content: "Ghana"
+    }
+
+  ]
+
   return (
-    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit} action="">
-      <ProgressBar length={2} page={1} />
+    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={onSubmit} action="">
       <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
       <div className="d-flex flex-column gap-2">
         <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
@@ -41,7 +51,8 @@ const SignUpForm: React.FC = () => {
         <SelectInput 
           label='Where are you located at? (Optional)' 
           id='country' 
-          onchange={(e:any)=>console.log(e.target.value)} options={[{value: "Nigeria", content: "Nigeria"}, {value: "Ghana", content: "Ghana"}]} />
+          onchange={(e:any)=>console.log(e.target.value)} 
+          options={options} />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
         <Button text='Create Account' type='submit' />

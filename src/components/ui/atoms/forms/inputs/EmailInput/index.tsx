@@ -1,8 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 import { IInput } from '../types'
 import { FiMail } from "react-icons/fi";
+import '../index.css'
 
-const EmailInput: React.FC<IInput> = (props) => {
+const EmailInput: FC<IInput> = (props) => {
     const { label, id, placeHolder, onchange, icon } = props
   return (
     <>

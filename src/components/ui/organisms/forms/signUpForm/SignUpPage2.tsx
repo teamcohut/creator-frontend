@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '../../../atoms/forms/Button.tsx'
 import { Link, useNavigate } from 'react-router-dom'
 import ProgressBar from '../../../molecules/forms/ProgressBar'
 import { FiArrowLeft } from 'react-icons/fi'
@@ -15,14 +14,7 @@ const SignUpPage2 = () => {
           <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
           <span className='dark-700 back' onClick={()=>navigate(-1)}><FiArrowLeft /> Back</span>
         </div>
-        <div className="d-flex flex-column gap-2">
-          <h1 className='manrope-600 primary-950 fs-h2'>What would you like to do with Cohut?</h1>
-        </div>
         <div className="d-flex flex-column">
-        </div>
-        <div className="d-flex flex-column align-items-center gap-3">
-          <Button text='Create Account' action={(e: any)=>console.log(e.target.value)} type='button' />
-          <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
         </div>
         <div className="footer w-100 d-flex flex-column align-items-center gap-2">
           <div className="d-flex gap-2">
