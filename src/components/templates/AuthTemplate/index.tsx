@@ -1,6 +1,7 @@
-import React, { FC, ReactNode } from 'react'
-import { Link } from 'react-router-dom'
 import "./index.css"
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { IAuthTemplate } from '../../../@types/authtemplate.interface'
 
 const AuthTemplate: FC<IAuthTemplate> = ({ children, title }) => {
   return (
@@ -20,11 +21,6 @@ const AuthTemplate: FC<IAuthTemplate> = ({ children, title }) => {
       </div>
     </>
   )
-}
-
-interface IAuthTemplate {
-  children: ReactNode,
-  title: string;
 }
 
 export default AuthTemplate

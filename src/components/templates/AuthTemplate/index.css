@@ -7,7 +7,6 @@
     width: 100vw;
     min-height: 100vh;
     background: url(/public/assets/images/BG3.png);
-    /* background-color: blue; */
     background-size: cover;
     background-position: center;
     display: flex;

@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from '../../../atoms/forms/Button.tsx'
+import Button from '../../../atoms/forms/Button/index'
 import { Link, useNavigate } from 'react-router-dom'
 import ProgressBar from '../../../molecules/forms/ProgressBar'
 import { FiArrowLeft } from 'react-icons/fi'
-import './index.css'
+import '../index.css'
 
 const SignUpPage2 = () => {
   const navigate = useNavigate()
