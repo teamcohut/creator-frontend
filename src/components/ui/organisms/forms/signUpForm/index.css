@@ -9,6 +9,10 @@
     overflow-x: hidden;
 }
 
+.form .back {
+    cursor: pointer;
+}
+
 @media (max-width: 990px ) {
     .form {
         width: 100%;

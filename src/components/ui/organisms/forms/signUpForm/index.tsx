@@ -15,12 +15,13 @@ const SignUpForm: React.FC = () => {
   }
   return (
     <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit} action="">
-      
+      <ProgressBar length={2} page={1} />
+      <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
       <div className="d-flex flex-column gap-2">
         <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
         <span className='manrope-500 dark-700 fs-body'>Launch your program in no time just by creating an account with us.</span>
       </div>
-      <ProgressBar length={2} page={1} />
+      
       <div className="d-flex flex-column gap-4">
         <EmailInput
           label='Email'
