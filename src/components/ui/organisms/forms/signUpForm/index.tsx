@@ -10,7 +10,7 @@ const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
 
   const onSubmit = (data: any) => {
-    navigate('pg2')
+    navigate('success')
   }
 
   const options = [
