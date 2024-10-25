@@ -1,0 +1,15 @@
+.button {
+    height: clamp(45px, 2vw, 48px);
+    border: 1px solid var(--primary-700);
+}
+
+.fill {
+    background-color: var(--primary-700) !important;
+    color: var(--dark-50) !important;
+}
+
+.outline {
+    background-color: transparent;
+    color: var(--primary-700);
+
+}

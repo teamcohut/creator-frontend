@@ -3,7 +3,7 @@ export interface IInput {
     onchange?: any,
     other?: any,
     // hook?: any,
-    icon?: any,
+    icon?: React.ReactNode,
     label?: string,
     id: string,
 }
@@ -13,16 +13,25 @@ export interface IOtherInput {
     placeHolder: string,
     onchange?: any,
     other?: any,
-    icon?: any,
+    icon?: React.ReactNode,
     label?: string,
     id: string,
   }
+
+export interface IRadioInput {
+  icon?: React.ReactNode,
+  label?: string,
+  id: string,
+  name: string,
+  selected: boolean,
+  click: any
+}
 
 export interface ISelectInput {
     onchange?: any,
     other?: any,
     options? : Array<option>,
-    icon?: any,
+    icon?: React.ReactNode,
     label?: string,
     id: string,
   }

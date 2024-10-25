@@ -13,6 +13,19 @@
     cursor: pointer;
 }
 
+.bc-card {
+    min-width: 70%;
+    max-width: 347px;
+    border: 1px solid var(--dark-100);
+    box-shadow: 0px 0px 48px #1916501A;
+}
+
+.bc-card img {
+    aspect-ratio: square;
+    width: clamp(79px, 10vw, 104px);
+    height: clamp(79px, 10vw, 104px);
+}
+
 @media (max-width: 990px ) {
     .form {
         width: 100%;

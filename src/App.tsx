@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUp from './components/pages/auth/SignUp';
-import SignUpPage1 from './components/ui/organisms/forms/signUpForm';
-import SignUpPage2 from './components/ui/organisms/forms/signUpForm/SignUpPage2';
+import SignUpPage1 from './components/ui/organisms/forms/signupForm';
 import Login from './components/pages/auth/Login';
 import ForgotPassword from './components/ui/organisms/forms/loginForm/ForgotPassword';
 import ResetPassword from './components/ui/organisms/forms/loginForm/ResetPassword';
 import LoginPage from './components/ui/organisms/forms/loginForm/LoginPage';
+import SignupSuccess from './components/ui/organisms/forms/signupForm/SignupSuccess';
+import ResetPasswordSuccess from './components/ui/organisms/forms/success/ResetPasswordSuccess';
+import UserChoice from './components/ui/organisms/forms/loginForm/UserChoice';
+import LoginSuccess from './components/ui/organisms/forms/success/LoginSuccess';
 
 function App() {
   const router = createBrowserRouter([
@@ -24,8 +25,8 @@ function App() {
           element: <SignUpPage1 />
         },
         {
-          path: "pg2",
-          element: <SignUpPage2 />
+          path: "success",
+          element: <SignupSuccess />
         }
       ]
     },
@@ -44,6 +45,18 @@ function App() {
         {
           path: 'reset-password',
           element: <ResetPassword />
+        },
+        {
+          path: 'reset-password-success',
+          element: <ResetPasswordSuccess />
+        },
+        {
+          path: 'user-choice',
+          element: <UserChoice />
+        },
+        {
+          path: 'login-success',
+          element: <LoginSuccess />
         }
       ]
     },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IInput } from '../types'
+import { IInput } from '../../../../../../@types/input.interface'
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi'
 import "../index.css"
 

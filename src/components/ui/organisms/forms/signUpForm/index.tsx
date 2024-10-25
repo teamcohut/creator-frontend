@@ -1,10 +1,10 @@
 import React from 'react'
-import Button from '../../../atoms/forms/Button.tsx'
+import Button from '../../../atoms/forms/Button/index'
 import EmailInput from '../../../atoms/forms/inputs/EmailInput'
 import PasswordInput from '../../../atoms/forms/inputs/PasswordInput'
 import SelectInput from '../../../atoms/forms/inputs/SelectInput'
 import { Link, useNavigate } from 'react-router-dom'
-import './index.css'
+import '../index.css'
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
