@@ -41,4 +41,9 @@ export interface ISelectInput {
     content: string
   }
 
-  
+export interface ITextAreaInput {
+  label?: string,
+  placeHolder: string,
+  onchange: any,
+  id: string
+}

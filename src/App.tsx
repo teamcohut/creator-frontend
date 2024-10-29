@@ -8,6 +8,7 @@ import LoginPage from './components/ui/organisms/forms/loginForm/LoginPage';
 import SignupSuccess from './components/ui/organisms/forms/signUpForm/SignupSuccess';
 import ResetPasswordSuccess from './components/ui/organisms/forms/success/ResetPasswordSuccess';
 import UserChoice from './components/ui/organisms/forms/loginForm/UserChoice';
+import ProgramDetails from './components/ui/organisms/forms/loginForm/UserChoice/programdetails'
 import LoginSuccess from './components/ui/organisms/forms/success/LoginSuccess';
 
 function App() {
@@ -53,6 +54,10 @@ function App() {
         {
           path: 'user-choice',
           element: <UserChoice />
+        },
+        {
+          path: 'program-details',
+          element: <ProgramDetails />
         },
         {
           path: 'login-success',

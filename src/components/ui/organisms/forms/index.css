@@ -26,6 +26,12 @@
     height: clamp(79px, 10vw, 104px);
 }
 
+.dashed-border {
+    border: 2px dashed var(--dark-200); 
+    border-radius: 8px;     
+    height: 100%;
+  }
+
 @media (max-width: 990px ) {
     .form {
         width: 100%;
