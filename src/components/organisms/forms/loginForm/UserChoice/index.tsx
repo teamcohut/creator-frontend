@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../../../../atoms/Button'
 import { Link, useNavigate } from 'react-router-dom'
-import CustomRadioInput from '../../../../atoms/inputs/CustomRadioInput'
+import CustomRadioInput from '../../../../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
 
 const UserChoice = () => {

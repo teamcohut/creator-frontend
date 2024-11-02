@@ -2,16 +2,40 @@
     margin: 0;
     box-sizing: border-box;
 }
+html, body {
+    height: 100%;
+}
 
 .form-template {
     width: 100vw;
-    min-height: 100vh;
-    background: url(/public/assets/images/BG3.png);
+    height: 100vh;
+    background: url(/public/assets/images/BG3.png) no-repeat center center;
     background-size: cover;
-    background-position: center;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
 }
 
+.form-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.scroll-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
 /* @media (max-width: 991px) {
     .form-container {
         width: 100vw !important;

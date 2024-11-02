@@ -1,6 +1,6 @@
 import React from 'react'
-import { ISelectInput } from "../../../../@types/input.interface"
-import "../index.css"
+import { ISelectInput } from "./types"
+import "./index.css"
 
 const SelectInput: React.FC<ISelectInput> = (props) => {
     const { label, id, icon, onchange, options } = props

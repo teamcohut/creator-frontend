@@ -25,7 +25,7 @@ const ForgotPassword: React.FC = () => {
                   label='Email'
                   id='email'
                   onchange={(e:any)=>console.log(e.target.value)}
-                  placeHolder='user@email.com' />
+                  placeholder='user@email.com' />
             </div>
                 <div className="d-flex flex-column align-items-center gap-3">
                   <Button text='Send email' type='submit' />

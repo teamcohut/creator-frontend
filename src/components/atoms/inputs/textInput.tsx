@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { IInput } from "../../../../@types/input.interface";
-import "../index.css";
+import { ITextInput } from "./types";
+import "./index.css";
 
-const TextInput: React.FC<IInput> = (props) => {
+const TextInput: React.FC<ITextInput> = (props) => {
     const { label, id, icon, placeHolder, onchange } = props;
     
     const [isInvalid, setIsInvalid] = useState(false);

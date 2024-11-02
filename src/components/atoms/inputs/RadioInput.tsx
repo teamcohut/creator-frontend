@@ -1,6 +1,6 @@
 import React from 'react'
-import { IRadioInput } from '../../../../@types/input.interface'
-import '../index.css'
+import { IRadioInput } from './types'
+import './index.css'
 
 const CustomRadioInput: React.FC<IRadioInput> = ({ id, name, icon, label, selected, click}) => {
   return (

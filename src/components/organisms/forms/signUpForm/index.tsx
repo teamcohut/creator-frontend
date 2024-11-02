@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from '../../../atoms/Button/index'
 import EmailInput from '../../../atoms/inputs/EmailInput'
-import PasswordInput from '../../../atoms/inputs/PasswordInput'
-import SelectInput from '../../../atoms/inputs/SelectInput'
+import PasswordInput from '../../../atoms/inputs/passwordInput'
+import SelectInput from '../../../atoms/inputs/selectInput'
 import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
 
@@ -37,7 +37,7 @@ const SignUpForm: React.FC = () => {
           label='Email'
           id='email'
           onchange={(e:any)=>console.log(e.target.value)}
-          placeHolder='user@email.com' />
+          placeholder='user@email.com' />
         <PasswordInput 
           label='Password' 
           id='password' 

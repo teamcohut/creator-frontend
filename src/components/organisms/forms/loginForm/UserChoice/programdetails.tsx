@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import ProgressBar from '../../../../molecules/forms/ProgressBar'
 import { FiArrowLeft } from 'react-icons/fi'
 import '../../index.css'
-import TextAreaInput from '../../../../atoms/inputs/TextAreaInput'
-import TextInput from '../../../../atoms/inputs/TextInput'
+import TextAreaInput from '../../../../atoms/inputs/textareaInput'
+import TextInput from '../../../../atoms/inputs/textInput'
 
 const SignUpPage2 = () => {
   const navigate = useNavigate()

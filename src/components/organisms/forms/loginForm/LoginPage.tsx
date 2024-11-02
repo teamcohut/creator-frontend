@@ -2,7 +2,7 @@ import React from 'react'
 import '../index.css';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailInput from '../../../atoms/inputs/EmailInput';
-import PasswordInput from '../../../atoms/inputs/PasswordInput';
+import PasswordInput from '../../../atoms/inputs/passwordInput';
 import Button from '../../../atoms/Button';
 
 const LoginPage: React.FC = () => {
@@ -23,7 +23,7 @@ const LoginPage: React.FC = () => {
                   label='Email'
                   id='email'
                   onchange={(e:any)=>console.log(e.target.value)}
-                  placeHolder='user@email.com' />
+                  placeholder='user@email.com' />
                 <PasswordInput 
                   label='Password' 
                   id='password' 

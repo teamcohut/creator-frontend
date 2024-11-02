@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { IInput } from '../../../../@types/input.interface';
+import { IPasswordInput } from './types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
-import "../index.css";
+import "./index.css";
 
-const PasswordInput: React.FC<IInput> = (props) => {
+const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isInvalid, setIsInvalid] = useState(false);
-    const { label, id, placeHolder, onchange } = props;
+    const { id, label, placeHolder, onchange } = props;
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
