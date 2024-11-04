@@ -5,6 +5,7 @@ import PasswordInput from '../../../atoms/inputs/passwordInput'
 import SelectInput from '../../../atoms/inputs/selectInput'
 import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
+import CountrySelectInput from '../../../atoms/inputs/countryInput'
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
@@ -53,6 +54,11 @@ const SignUpForm: React.FC = () => {
           id='country' 
           onchange={(e:any)=>console.log(e.target.value)} 
           options={options} />
+          <CountrySelectInput
+            label="Select Country"
+            id="country"
+            // onchange={(e) => console.log(e.target.value)}
+            />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
         <Button text='Create Account' type='submit' />

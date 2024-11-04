@@ -57,6 +57,16 @@ export interface ISelectInput {
     content: string
   }
 
+  export interface ICountryInput {
+    id: string,
+    options?: Array<option>,
+    icon?: React.ReactNode,
+    label?: string,
+    // onchange(e: ChangeEvent<HTMLSelectElement>): void,
+    onchange?: (countryCode: string) => void; 
+  }
+  
+
 export interface ITextAreaInput {
   id: string
   label?: string,
