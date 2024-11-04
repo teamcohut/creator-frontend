@@ -1,9 +1,9 @@
 import React from 'react'
 import '../index.css';
 import { Link, useNavigate } from 'react-router-dom';
-import EmailInput from '../../../atoms/inputs/EmailInput';
-import PasswordInput from '../../../atoms/inputs/passwordInput';
 import Button from '../../../atoms/Button';
+import EmailInput from '../../../atoms/inputs/EmailInput';
+import PasswordInput from '../../../atoms/inputs/PasswordInput';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate()
@@ -27,6 +27,7 @@ const LoginPage: React.FC = () => {
                 <PasswordInput 
                   label='Password' 
                   id='password' 
+                  showStrength={false}
                   onchange={(e:any)=>console.log(e.target.value)} 
                   placeHolder='password' />
                 <span><Link className='primary-700 text-decoration-none' to={"/login/forgot-password"}>Forgot password?</Link></span>

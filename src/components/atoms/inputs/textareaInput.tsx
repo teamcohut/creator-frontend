@@ -1,5 +1,5 @@
 import React from 'react'
-import { ITextAreaInput } from "./types"
+import { ITextAreaInput } from "./Types"
 import "./index.css"
 
 const TextAreaInput: React.FC<ITextAreaInput> = (props) => {

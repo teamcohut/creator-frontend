@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import PasswordInput from '../../../atoms/inputs/passwordInput'
+import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
 
 const ResetPassword: React.FC = () => {
@@ -20,11 +20,13 @@ const ResetPassword: React.FC = () => {
             <PasswordInput 
               label='New password' 
               id='password' 
+              showStrength={true}
               onchange={(e:any)=>console.log(e.target.value)} 
               placeHolder='password' />
             <PasswordInput 
               label='Confirm password' 
               id='password' 
+              showStrength={false}
               onchange={(e:any)=>console.log(e.target.value)} 
               placeHolder='password' />
         </div>

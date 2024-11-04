@@ -1,9 +1,12 @@
-.progress-div {
-    width: 100%;
+.absolute {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+}
+
+.progress-div {
+    width: 100%;
 }
 
 .progress-page {

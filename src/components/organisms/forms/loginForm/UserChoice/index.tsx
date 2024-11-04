@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../../../../atoms/Button'
 import { Link, useNavigate } from 'react-router-dom'
-import CustomRadioInput from '../../../../atoms/inputs/RadioInput'
+import RadioInput from '../../../../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
 
 const UserChoice = () => {
@@ -29,31 +29,31 @@ const UserChoice = () => {
             <div className="d-flex flex-column gap-3">
                 <span className='manrope-500 dark-700'>I want to ...</span>
                 <div className="d-flex flex-column gap-3">
-                    <CustomRadioInput 
+                    <RadioInput 
                         label='Launch a Bootcamp' 
                         id='bootcamp' name='choice' 
                         icon={<FiStar className='primary-700' />} 
                         selected={selected === 'bootcamp'}
                         click={()=>handleRadioChange('bootcamp')}/>
-                    <CustomRadioInput 
+                    <RadioInput 
                         label='Host an online Course' 
                         id='course' name='choice' 
                         icon={<FiBookOpen className='fushia-500' />} 
                         selected={selected === 'course'}
                         click={()=>handleRadioChange('course')}/>
-                    <CustomRadioInput 
+                    <RadioInput 
                         label='Create a Workshop' 
                         id='workshop' name='choice' 
                         icon={<FiTool className='rose-500' />} 
                         selected={selected === 'workshop'}
                         click={()=>handleRadioChange('workshop')}/>
-                    <CustomRadioInput 
+                    <RadioInput 
                         label='Offer a Coaching/Mentorship' 
                         id='mentorship' name='choice' 
                         icon={<FiCalendar className='fushia-500' />} 
                         selected={selected === 'mentorship'}
                         click={()=>handleRadioChange('mentorship')}/>
-                    <CustomRadioInput 
+                    <RadioInput 
                         label='Not sure - Just browsing through' 
                         id='none' name='choice' 
                         icon={<FiUser className='dark-400' />} 

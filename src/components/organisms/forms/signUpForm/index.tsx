@@ -1,8 +1,8 @@
 import React from 'react'
-import Button from '../../../atoms/Button/index'
+import Button from '../../../atoms/Button'
 import EmailInput from '../../../atoms/inputs/EmailInput'
-import PasswordInput from '../../../atoms/inputs/passwordInput'
-import SelectInput from '../../../atoms/inputs/selectInput'
+import PasswordInput from '../../../atoms/inputs/PasswordInput'
+import SelectInput from '../../../atoms/inputs/SelectInput'
 import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
 import CountrySelectInput from '../../../atoms/inputs/countryInput'
@@ -42,11 +42,13 @@ const SignUpForm: React.FC = () => {
         <PasswordInput 
           label='Password' 
           id='password' 
+          showStrength={true}
           onchange={(e:any)=>console.log(e.target.value)} 
           placeHolder='password' />
         <PasswordInput 
           label='Confirm Password' 
           id='cpassword' 
+          showStrength={false}
           onchange={(e:any)=>console.log(e.target.value)} 
           placeHolder='password' />
         <SelectInput 

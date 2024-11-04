@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = process.env.COHUT_API_URL
+const BASE_URL = process.env.REACT_APP_COHUT_API_URL
 
 const axiosPublic = axios.create({
     baseURL: BASE_URL,
