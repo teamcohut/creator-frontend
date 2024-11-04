@@ -1,5 +1,5 @@
 import React from 'react'
-import { IOtherInput } from '../../../../../../@types/input.interface'
+import { IOtherInput } from '../../../../../@types/input.interface'
 import "./index.css"
 
 const Input: React.FC<IOtherInput> = (props) => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IInput } from "../../../../../../@types/input.interface";
+import { IInput } from "../../../../../@types/input.interface";
 import "../index.css";
 
 const TextInput: React.FC<IInput> = (props) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import EmailInput from '../../../atoms/forms/inputs/EmailInput'
-import Button from '../../../atoms/forms/Button'
+import EmailInput from '../../../atoms/inputs/EmailInput'
+import Button from '../../../atoms/Button'
 import { FiArrowLeft } from 'react-icons/fi'
 
 const ForgotPassword: React.FC = () => {

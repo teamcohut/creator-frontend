@@ -1,7 +1,7 @@
 import React from 'react'
 import SuccessCard from '../../../../molecules/forms/SuccessCard'
 import { FiCheckCircle } from 'react-icons/fi'
-import Button from '../../../../atoms/forms/Button'
+import Button from '../../../../atoms/Button'
 import { useNavigate } from 'react-router-dom'
 import '../../index.css'
 

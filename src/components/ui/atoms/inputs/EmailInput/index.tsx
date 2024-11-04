@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import { IInput } from '../../../../../../@types/input.interface';
-import { FiMail } from "react-icons/fi";
+import { IInput } from '../../../../../@types/input.interface';
+import { FiMail } from 'react-icons/fi';
 import '../index.css';
 
 const EmailInput: FC<IInput> = (props) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { IButton } from '../../../../../@types/button.interface'
+import { IButton } from '../../../../@types/button.interface'
 import './index.css'
 
 const Button: React.FC<IButton> = ({text, type, action, fill}) => {

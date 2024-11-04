@@ -1,9 +1,9 @@
 import React from 'react'
 import '../index.css';
 import { Link, useNavigate } from 'react-router-dom';
-import EmailInput from '../../../atoms/forms/inputs/EmailInput';
-import PasswordInput from '../../../atoms/forms/inputs/PasswordInput';
-import Button from '../../../atoms/forms/Button';
+import EmailInput from '../../../atoms/inputs/EmailInput';
+import PasswordInput from '../../../atoms/inputs/PasswordInput';
+import Button from '../../../atoms/Button';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate()
