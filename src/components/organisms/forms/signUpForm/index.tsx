@@ -1,8 +1,8 @@
 import React from 'react'
-import Button from '../../../atoms/Button/index'
+import Button from '../../../atoms/Button'
 import EmailInput from '../../../atoms/inputs/EmailInput'
-import PasswordInput from '../../../atoms/inputs/passwordInput'
-import SelectInput from '../../../atoms/inputs/selectInput'
+import PasswordInput from '../../../atoms/inputs/PasswordInput'
+import SelectInput from '../../../atoms/inputs/SelectInput'
 import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
 

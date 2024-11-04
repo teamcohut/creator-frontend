@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import PasswordInput from '../../../atoms/inputs/passwordInput'
+import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
 
 const ResetPassword: React.FC = () => {
