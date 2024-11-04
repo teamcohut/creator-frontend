@@ -20,11 +20,13 @@ const ResetPassword: React.FC = () => {
             <PasswordInput 
               label='New password' 
               id='password' 
+              showStrength={true}
               onchange={(e:any)=>console.log(e.target.value)} 
               placeHolder='password' />
             <PasswordInput 
               label='Confirm password' 
               id='password' 
+              showStrength={false}
               onchange={(e:any)=>console.log(e.target.value)} 
               placeHolder='password' />
         </div>

@@ -41,11 +41,13 @@ const SignUpForm: React.FC = () => {
         <PasswordInput 
           label='Password' 
           id='password' 
+          showStrength={true}
           onchange={(e:any)=>console.log(e.target.value)} 
           placeHolder='password' />
         <PasswordInput 
           label='Confirm Password' 
           id='cpassword' 
+          showStrength={false}
           onchange={(e:any)=>console.log(e.target.value)} 
           placeHolder='password' />
         <SelectInput 

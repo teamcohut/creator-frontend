@@ -1,12 +1,34 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { IPasswordInput } from './Types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
 import "./index.css";
+import ProgressBar from '../../molecules/forms/ProgressBar';
 
 const PasswordInput: React.FC<IPasswordInput> = (props) => {
+    const { id, label, placeHolder, onchange, showStrength } = props;
+
+    const [strengthBar, setStrengthBar] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
     const [isInvalid, setIsInvalid] = useState(false);
-    const { id, label, placeHolder, onchange } = props;
+    const [strength, setStrength] = useState(0);
+
+    const checkStrength = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+
+        // SHOW PASSWORD STRENGTH BAR
+        showStrength && setStrengthBar(true)
+
+        // CHECK FOR PASSWORD STRENGTH
+        const checkCaps = /[A-Z]/.test(value)
+        const checkNums = /[0-9]/.test(value)
+        const checkSpecialCharacter = /[!@#$%^&*()_\-+=;:'",<.>/?`~]/.test(value)
+        const checkLength = value.length >= 8
+
+        const result = [ checkCaps, checkNums, checkSpecialCharacter, checkLength ]
+        const passedChecks = result.filter(Boolean);
+
+        setStrength(passedChecks.length);        
+    }
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -16,6 +38,8 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
         if (value.length < 8) {
             setIsInvalid(true);
         }
+        checkStrength(e)
+        
     };
 
     return (
@@ -31,6 +55,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                         placeholder={placeHolder} 
                         onChange={handleOnChange} 
                         onInvalid={() => setIsInvalid(true)} 
+                        onFocus={checkStrength}
                         required
                     />
                     <button 
@@ -41,6 +66,10 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                         {showPassword ? <FiEyeOff className='icon' /> : <FiEye className='icon' />}
                     </button>
                 </div>
+                {
+                    strengthBar &&
+                    <ProgressBar page={strength} length={4} />
+                }
                 {isInvalid && (
                     <div className="validation-message text-danger">
                         Password must be at least 8 characters long.

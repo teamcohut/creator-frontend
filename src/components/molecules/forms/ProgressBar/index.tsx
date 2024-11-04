@@ -2,10 +2,10 @@ import {FC} from 'react'
 import './index.css'
 import { IProgressbar } from '../../../../@types/progressbar.interface'
 
-const ProgressBar:FC<IProgressbar> = ({ length, page }) => {
+const ProgressBar:FC<IProgressbar> = ({ length, page, absolute }) => {
   return (
     <>
-        <div className='d-flex gap-1 progress-div'>
+        <div className={`d-flex gap-1 progress-div ${absolute && 'absolute'}`}>
             {
                 Array(length).fill(0).map((el, i) => (
                     <div className={`progress-page w-100 p-1 ${ i+1 <= page? 'active': 'inactive'}`}></div>

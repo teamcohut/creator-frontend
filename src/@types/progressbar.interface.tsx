@@ -1,4 +1,5 @@
 export interface IProgressbar {
     length: number,
-    page: number
+    page: number,
+    absolute?: Boolean
 }
