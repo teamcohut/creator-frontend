@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUp from './components/pages/auth/SignUp';
-import SignUpPage1 from './components/ui/organisms/forms/signUpForm';
-import Login from './components/pages/auth/Login';
-import ForgotPassword from './components/ui/organisms/forms/loginForm/ForgotPassword';
-import ResetPassword from './components/ui/organisms/forms/loginForm/ResetPassword';
-import LoginPage from './components/ui/organisms/forms/loginForm/LoginPage';
-import SignupSuccess from './components/ui/organisms/forms/signUpForm/SignupSuccess';
-import ResetPasswordSuccess from './components/ui/organisms/forms/success/ResetPasswordSuccess';
-import UserChoice from './components/ui/organisms/forms/loginForm/UserChoice';
-import ProgramDetails from './components/ui/organisms/forms/loginForm/UserChoice/programdetails'
-import LoginSuccess from './components/ui/organisms/forms/success/LoginSuccess';
+import SignUp from './pages/auth/SignUp';
+import SignUpPage1 from './components/organisms/forms/signUpForm';
+import Login from './pages/auth/Login';
+import ForgotPassword from './components/organisms/forms/loginForm/ForgotPassword';
+import ResetPassword from './components/organisms/forms/loginForm/ResetPassword';
+import LoginPage from './components/organisms/forms/loginForm/LoginPage';
+import SignupSuccess from './components/organisms/forms/signUpForm/SignupSuccess';
+import ResetPasswordSuccess from './components/organisms/forms/success/ResetPasswordSuccess';
+import UserChoice from './components/organisms/forms/loginForm/UserChoice';
+import ProgramDetails from './components/organisms/forms/loginForm/UserChoice/programdetails'
+import LoginSuccess from './components/organisms/forms/success/LoginSuccess';
 
 function App() {
   const router = createBrowserRouter([
