@@ -11,6 +11,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [isInvalid, setIsInvalid] = useState(false);
     const [strength, setStrength] = useState(0);
+    const [status, setStatus] = useState('Weak');
 
     const checkStrength = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
@@ -25,9 +26,15 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
         const checkLength = value.length >= 8
 
         const result = [ checkCaps, checkNums, checkSpecialCharacter, checkLength ]
-        const passedChecks = result.filter(Boolean);
+        const passedChecks = result.filter(Boolean).length;
 
-        setStrength(passedChecks.length);        
+        if (passedChecks <= 2) {
+            setStatus('Weak')
+        } else {
+            setStatus('Strong')
+        }
+
+        setStrength(passedChecks);        
     }
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +74,12 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                     </button>
                 </div>
                 {
-                    strengthBar &&
-                    <ProgressBar page={strength} length={4} />
+                    strengthBar && (
+                        <>
+                            <ProgressBar height={4} page={strength} length={4} />
+                            <span className='manrope-500 dark-600'>Password strength: &nbsp; <span className={`${status === 'Weak'? 'text-danger': 'success-600'}`}>{status}</span></span>
+                        </>
+                    )
                 }
                 {isInvalid && (
                     <div className="validation-message text-danger">
