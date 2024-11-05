@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { ICountryInput } from "./types";
+import { ICountryInput } from "./Types";
 import './index.css';
 
 interface Country {
@@ -24,8 +24,21 @@ const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) =>
                     flag: country.flags?.png || "",
                     code: country.cca2
                 }));
-                setCountries(countryData);
-                setFilteredCountries(countryData);
+
+                // SORT COUNTRIES ARRAY
+                const sorted = countryData.sort((a: Country, b: Country) => {  
+                    if (a.name < b.name) return -1;  
+                    if (a.name > b.name) return 1;  
+                    return 0;  
+                })
+
+                // SET DEFAULT COUNTRY
+                const defaultCountry = sorted.find((country: Country)=> country.name === "Nigeria")
+
+                // SET STATES
+                setCountries(sorted);
+                setFilteredCountries(sorted);
+                setSelectedCountry(defaultCountry)
             })
             .catch((error) => console.log("Error fetching countries:", error));
     }, []);
@@ -46,7 +59,6 @@ const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) =>
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
-        console.log("Dropdown open:", isDropdownOpen); 
     };
 
     return (
@@ -71,7 +83,7 @@ const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) =>
                         {selectedCountry.name}
                     </div>
                 ) : (
-                    <span>Select a country...</span>
+                    <span>{label}</span>
                 )}
             </div>
             {isDropdownOpen && (
@@ -81,13 +93,13 @@ const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) =>
                             placeholder="Search country..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="search-input rounded-pill px-3 width-full"
+                            className="search-input rounded-pill px-3 w-100"
                         />
-                        <ul className="dropdown-list">
+                        <ul className="dropdown-list w-100">
                             {filteredCountries.map((country, index) => (
                                 <li
                                     key={index}
-                                    className="dropdown-item"
+                                    className="dropdown-items w-100"
                                     onClick={() => handleCountrySelect(country)}
                                 >
                                     <img

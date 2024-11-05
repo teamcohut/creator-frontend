@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { IPasswordInput } from './types';
+import React, { ChangeEvent, useState } from 'react';
+import { IPasswordInput } from './Types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
 import "./index.css";
 import ProgressBar from '../../molecules/forms/ProgressBar';
@@ -12,7 +12,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const [isInvalid, setIsInvalid] = useState(false);
     const [strength, setStrength] = useState(0);
 
-    const checkStrength = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checkStrength = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
 
         // SHOW PASSWORD STRENGTH BAR
@@ -30,7 +30,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
         setStrength(passedChecks.length);        
     }
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setIsInvalid(false);
         onchange?.(e);

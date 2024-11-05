@@ -3,7 +3,7 @@ import '../index.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import EmailInput from '../../../atoms/inputs/EmailInput';
-import PasswordInput from '../../../atoms/inputs/passwordInput';
+import PasswordInput from '../../../atoms/inputs/PasswordInput';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate()

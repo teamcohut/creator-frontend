@@ -1,11 +1,10 @@
 import React from 'react'
 import Button from '../../../atoms/Button'
 import EmailInput from '../../../atoms/inputs/EmailInput'
-import PasswordInput from '../../../atoms/inputs/passwordInput'
-import SelectInput from '../../../atoms/inputs/selectInput'
+import PasswordInput from '../../../atoms/inputs/PasswordInput'
+import CountrySelectInput from '../../../atoms/inputs/CountryInput'
 import { Link, useNavigate } from 'react-router-dom'
 import '../index.css'
-import CountrySelectInput from '../../../atoms/inputs/countryInput'
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
@@ -13,17 +12,6 @@ const SignUpForm: React.FC = () => {
   const onSubmit = (data: any) => {
     navigate('success')
   }
-
-  const options = [
-    {
-      value: "Nigeria", 
-      content: "Nigeria"
-    }, {
-      value: "Ghana", 
-      content: "Ghana"
-    }
-
-  ]
 
   return (
     <form className='form bg-white d-flex flex-column rounded-5' onSubmit={onSubmit} action="">
@@ -51,15 +39,9 @@ const SignUpForm: React.FC = () => {
           showStrength={false}
           onchange={(e:any)=>console.log(e.target.value)} 
           placeHolder='password' />
-        <SelectInput 
-          label='Where are you located at? (Optional)' 
-          id='country' 
-          onchange={(e:any)=>console.log(e.target.value)} 
-          options={options} />
           <CountrySelectInput
-            label="Select Country"
+            label="Where are you located at? (Optional)"
             id="country"
-            // onchange={(e) => console.log(e.target.value)}
             />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
