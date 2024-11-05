@@ -8,7 +8,7 @@ import LoginPage from './components/organisms/forms/loginForm/LoginPage';
 import SignupSuccess from './components/organisms/forms/signUpForm/SignupSuccess';
 import ResetPasswordSuccess from './components/organisms/forms/success/ResetPasswordSuccess';
 import UserChoice from './components/organisms/forms/loginForm/UserChoice';
-import ProgramDetails from './components/organisms/forms/loginForm/UserChoice/Programdetails'
+import ProgramDetails from './components/organisms/forms/loginForm/UserChoice/programdetails'
 import LoginSuccess from './components/organisms/forms/success/LoginSuccess';
 
 function App() {

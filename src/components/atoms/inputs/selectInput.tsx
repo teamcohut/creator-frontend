@@ -1,5 +1,5 @@
 import React from 'react'
-import { ISelectInput } from "./Types"
+import { ISelectInput } from "./types"
 import "./index.css"
 
 const SelectInput: React.FC<ISelectInput> = (props) => {

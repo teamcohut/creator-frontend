@@ -71,7 +71,6 @@
     overflow-y: auto;
 }
 
-/* Show when isDropdownOpen is true */
 .input-cont .dropdown-menu.open {
     display: block;
 }

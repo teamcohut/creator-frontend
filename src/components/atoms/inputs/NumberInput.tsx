@@ -1,5 +1,5 @@
 import React from 'react'
-import { INumberInput } from './Types'
+import { INumberInput } from './types'
 import './index.css'
 
 const NumberInput: React.FC<INumberInput> = (props) => {
