@@ -3,6 +3,7 @@ import Button from '../../../../atoms/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import RadioInput from '../../../../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
+import FormFooter from '../../../../molecules/forms/FormFooter'
 
 const UserChoice = () => {
     const [selected, setSelected] = useState("")
@@ -62,14 +63,7 @@ const UserChoice = () => {
                 </div>
             </div>
             <Button text='Continue' type='submit' />
-            <div className="footer w-100 d-flex flex-column align-items-center gap-2">
-                <div className="d-flex gap-2">
-                <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Privacy Policy.</Link>
-                <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Help.</Link>
-                <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Visit www.cohut.co</Link>
-                </div>
-                <span className='dark-500 fs-footer text-decoration-none'>(c) 2024 Cohut</span>
-            </div>
+            <FormFooter />
         </form>
     </>
   )

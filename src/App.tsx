@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUp from './pages/auth/SignUp';
-import SignUpPage1 from './components/organisms/forms/signUpForm';
 import Login from './pages/auth/Login';
 import ForgotPassword from './components/organisms/forms/loginForm/ForgotPassword';
 import ResetPassword from './components/organisms/forms/loginForm/ResetPassword';
@@ -20,16 +19,16 @@ function App() {
     {
       path: '/signup',
       element: <SignUp />,
-      children: [
-        {
-          path: "",
-          element: <SignUpPage1 />
-        },
-        {
-          path: "success",
-          element: <SignupSuccess />
-        }
-      ]
+      // children: [
+      //   {
+      //     path: "",
+      //     element: <SignUpPage1 />
+      //   },
+      //   {
+      //     path: "success",
+      //     element: <SignupSuccess />
+      //   }
+      // ]
     },
     {
       path: '/login',

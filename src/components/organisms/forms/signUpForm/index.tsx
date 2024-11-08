@@ -1,20 +1,41 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Button from '../../../atoms/Button'
 import EmailInput from '../../../atoms/inputs/EmailInput'
 import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import CountrySelectInput from '../../../atoms/inputs/CountryInput'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../index.css'
+import FormFooter from '../../../molecules/forms/FormFooter'
+import { ISignupForm, ISignupData } from '../../../../@types/forms.interface'
+import { Country } from '../../../atoms/inputs/Types'
 
-const SignUpForm: React.FC = () => {
-  const navigate = useNavigate()
+const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
+  const [form, setForm] = useState<ISignupData>({email: '', password: '', country: 'Nigeria'})
+  const [isvalid, setIsvalid] = useState(false)
 
-  const onSubmit = (data: any) => {
-    navigate('success')
+  const handleInputChange = (name: string, value: string) => {
+    setForm({...form, [name]: value})
+  }
+
+  const confirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsvalid(e.target.value === form.password)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(e);
+    if (isvalid) {
+      submitForm(form);
+      console.log(form);
+      
+  } else {
+      setIsvalid(false);
+      console.log("Passwords do not match!");
+  }
   }
 
   return (
-    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={onSubmit} action="">
+    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={()=>handleSubmit} action="">
       <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
       <div className="d-flex flex-column gap-2">
         <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
@@ -25,37 +46,34 @@ const SignUpForm: React.FC = () => {
         <EmailInput
           label='Email'
           id='email'
-          onchange={(e:any)=>console.log(e.target.value)}
+          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange(e.target.name, e.target.value)}
+
           placeholder='user@email.com' />
         <PasswordInput 
           label='Password' 
           id='password' 
+          valid={true}
           showStrength={true}
-          onchange={(e:any)=>console.log(e.target.value)} 
+          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange(e.target.name, e.target.value)} 
           placeHolder='password' />
         <PasswordInput 
           label='Confirm Password' 
           id='cpassword' 
+          valid={isvalid}
           showStrength={false}
-          onchange={(e:any)=>console.log(e.target.value)} 
+          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>confirmPassword(e)} 
           placeHolder='password' />
-          <CountrySelectInput
-            label="Where are you located at? (Optional)"
-            id="country"
-            />
+        <CountrySelectInput
+          label="Where are you located at? (Optional)"
+          id="country"
+          onchange={(e: Country)=>handleInputChange('country', e.name)}
+          />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button text='Create Account' type='submit' />
+        <Button text='Create Account' type='submit' action={handleSubmit} />
         <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
       </div>
-      <div className="footer w-100 d-flex flex-column align-items-center gap-2">
-        <div className="d-flex gap-2">
-          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Privacy Policy.</Link>
-          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Help.</Link>
-          <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Visit www.cohut.co</Link>
-        </div>
-        <span className='dark-500 fs-footer text-decoration-none'>(c) 2024 Cohut</span>
-      </div>
+      <FormFooter />
     </form>
   )
 }

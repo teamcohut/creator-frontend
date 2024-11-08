@@ -8,7 +8,11 @@ const EmailInput: FC<IEmailInput> = (props) => {
     const [isInvalid, setIsInvalid] = useState(false);
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target
+        
         onchange?.(e); 
+        (value === "" || value === null || value === undefined)? 
+        setIsInvalid(true): 
         setIsInvalid(false); 
     };
 
@@ -26,6 +30,7 @@ const EmailInput: FC<IEmailInput> = (props) => {
                 {icon ? icon : <FiMail className="icon" />}
                 <input 
                     id={id}
+                    name="email"
                     className="input bg-transparent w-100 h-100 border-none"
                     type="email"
                     placeholder={placeholder}

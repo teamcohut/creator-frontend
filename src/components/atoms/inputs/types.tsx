@@ -18,12 +18,13 @@ export interface INumberInput {
 
 
 export interface IPasswordInput {
-  id: string,
-  placeHolder: string,
-  icon?: React.ReactNode,
-  label?: string,
-  showStrength: Boolean,
-  onchange(e: ChangeEvent<HTMLInputElement>): void,
+  id: string;
+  placeHolder: string;
+  icon?: React.ReactNode;
+  label?: string;
+  showStrength: Boolean;
+  valid: Boolean;
+  onchange(e: ChangeEvent<HTMLInputElement>): void
 }
 
 export interface IOtherInput {
@@ -64,8 +65,14 @@ export interface ISelectInput {
     icon?: React.ReactNode,
     label?: string,
     // onchange(e: ChangeEvent<HTMLSelectElement>): void,
-    onchange?: (countryCode: string) => void; 
-  }
+    onchange: (countryCode: Country) => void; 
+  } 
+
+export interface Country {
+  name: string;
+  flag: string;
+  code: string;
+}
   
 
 export interface ITextAreaInput {

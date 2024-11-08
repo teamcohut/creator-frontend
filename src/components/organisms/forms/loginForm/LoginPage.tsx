@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import EmailInput from '../../../atoms/inputs/EmailInput';
 import PasswordInput from '../../../atoms/inputs/PasswordInput';
+import FormFooter from '../../../molecules/forms/FormFooter';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate()
@@ -27,23 +28,17 @@ const LoginPage: React.FC = () => {
                 <PasswordInput 
                   label='Password' 
                   id='password' 
+                  valid={true}
                   showStrength={false}
                   onchange={(e:any)=>console.log(e.target.value)} 
                   placeHolder='password' />
                 <span><Link className='primary-700 text-decoration-none' to={"/login/forgot-password"}>Forgot password?</Link></span>
             </div>
-                <div className="d-flex flex-column align-items-center gap-3">
-                  <Button text='Sign in' type='submit' />
-                  <span>Don't have an account? <Link className='primary-700 text-decoration-none' to={"/signup"}>Create one here</Link></span>
-                </div>
-                <div className="footer w-100 d-flex flex-column align-items-center gap-2">
-                  <div className="d-flex gap-2">
-                    <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Privacy Policy.</Link>
-                    <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Help.</Link>
-                    <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Visit www.cohut.co</Link>
-                  </div>
-                  <span className='dark-500 fs-footer text-decoration-none'>(c) 2024 Cohut</span>
-                </div>
+            <div className="d-flex flex-column align-items-center gap-3">
+              <Button text='Sign in' type='submit' />
+              <span>Don't have an account? <Link className='primary-700 text-decoration-none' to={"/signup"}>Create one here</Link></span>
+            </div>
+            <FormFooter />
     </form>
   )
 }

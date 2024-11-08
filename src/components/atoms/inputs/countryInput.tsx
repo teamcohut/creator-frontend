@@ -1,12 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { ICountryInput } from "./Types";
 import './index.css';
-
-interface Country {
-    name: string;
-    flag: string;
-    code: string;
-}
+import { Country } from "./Types";
 
 const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) => {
     const [countries, setCountries] = useState<Country[]>([]);
@@ -54,7 +49,7 @@ const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) =>
     const handleCountrySelect = (country: Country) => {
         setSelectedCountry(country);
         setIsDropdownOpen(false);
-        // onchange && onchange(country.code); 
+        onchange && onchange(country); 
     };
 
     const toggleDropdown = () => {

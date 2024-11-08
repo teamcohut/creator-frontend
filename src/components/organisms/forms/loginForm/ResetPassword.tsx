@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
+import FormFooter from '../../../molecules/forms/FormFooter'
 
 const ResetPassword: React.FC = () => {
+  const [form, setForm] = useState({email: '', password: '', country: 'Nigeria'})
+  const [isvalid, setIsvalid] = useState(false)
   const navigate = useNavigate()
+
+  const handleInputChange = (name: string, value: string) => {
+    setForm({...form, [name]: value})
+  }
+
+  const confirmPassword = (e: string) => {
+    if (e === form.password) {
+      setIsvalid(true)
+    }
+  }
 
   const handleSubmit = () => {
     navigate('/login/reset-password-success')
@@ -20,27 +33,22 @@ const ResetPassword: React.FC = () => {
             <PasswordInput 
               label='New password' 
               id='password' 
+              valid={true}
               showStrength={true}
-              onchange={(e:any)=>console.log(e.target.value)} 
+              onchange={(e:any)=>handleInputChange(e.target.name, e.target.value)} 
               placeHolder='password' />
             <PasswordInput 
               label='Confirm password' 
               id='password' 
+              valid={isvalid}
               showStrength={false}
-              onchange={(e:any)=>console.log(e.target.value)} 
+              onchange={(e:any)=>confirmPassword(e.target.value)} 
               placeHolder='password' />
         </div>
         <div className="d-flex flex-column align-items-center gap-3">
           <Button text='Reset Password' type='submit' />
         </div>
-        <div className="footer w-100 d-flex flex-column align-items-center gap-2">
-          <div className="d-flex gap-2">
-            <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Privacy Policy.</Link>
-            <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Help.</Link>
-            <Link className='dark-500 fs-footer text-decoration-none' to={"#"}>Visit www.cohut.co</Link>
-          </div>
-          <span className='dark-500 fs-footer text-decoration-none'>(c) 2024 Cohut</span>
-        </div>
+        <FormFooter />
     </form>
   )
 }
