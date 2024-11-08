@@ -1,4 +1,9 @@
-import React from "react";
+export interface IAuthContext {
+    auth: Record<string, any>; 
+    setAuth: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+    persist: boolean;
+    setPersist: React.Dispatch<React.SetStateAction<boolean>>;
+  }
 
 export interface ISuccessCard {
     title: string,
