@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import '../index.css'
 import FormFooter from '../../../molecules/forms/FormFooter'
 import { ISignupForm, ISignupData } from '../../../../@types/forms.interface'
-import { Country } from '../../../atoms/inputs/Types'
+import { Country } from '../../../atoms/inputs/types'
 
 const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
   const [form, setForm] = useState<ISignupData>({email: '', password: '', country: 'Nigeria'})

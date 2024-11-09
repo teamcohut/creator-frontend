@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { IEmailInput } from './Types';
+import { IEmailInput } from './types';
 import { FiMail } from "react-icons/fi";
 import './index.css';
 

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { IPasswordInput } from './Types';
+import { IPasswordInput } from './types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
 import "./index.css";
 import ProgressBar from '../../molecules/forms/ProgressBar';

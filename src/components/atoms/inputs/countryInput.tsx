@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
-import { ICountryInput } from "./Types";
+import { ICountryInput, Country } from "./types";
 import './index.css';
-import { Country } from "./Types";
 
 const CountrySelectInput: FC<ICountryInput> = ({ id, label, icon, onchange }) => {
     const [countries, setCountries] = useState<Country[]>([]);
