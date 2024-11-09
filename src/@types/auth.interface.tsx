@@ -1,5 +1,5 @@
 export interface IAuthContext {
-    auth: Record<string, any>; 
+    auth: Record<string, any> | null; 
     setAuth: React.Dispatch<React.SetStateAction<Record<string, any>>>;
     persist: boolean;
     setPersist: React.Dispatch<React.SetStateAction<boolean>>;
