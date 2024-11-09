@@ -21,7 +21,7 @@ export interface IPasswordInput {
   id: string;
   placeHolder: string;
   icon?: React.ReactNode;
-  label?: string;
+  label: string;
   showStrength: Boolean;
   valid: Boolean;
   onchange(e: ChangeEvent<HTMLInputElement>): void
