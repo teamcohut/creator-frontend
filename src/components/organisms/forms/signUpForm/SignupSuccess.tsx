@@ -8,7 +8,7 @@ const SignupSuccess = () => {
         <SuccessCard 
             title='Success' 
             description='You have succeeded in creating your account. You can now click the link in your mail to verify your mail'
-            icon={<FiCheckCircle />}>
+            icon={<FiCheckCircle className='h1 success-600' />}>
 
         </SuccessCard>
     </>

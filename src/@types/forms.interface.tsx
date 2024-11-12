@@ -1,5 +1,5 @@
 export interface ISignupForm {
-    submitForm: (data: ISignupData) => void;
+    submitForm: () => void;
 }
 
 export interface ISignupData {

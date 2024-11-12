@@ -2,9 +2,12 @@ import axios from "axios"
 
 const BASE_URL = process.env.REACT_APP_COHUT_API_URL
 
-const axiosPublic = axios.create({
+export const axiosPublic = axios.create({
     baseURL: BASE_URL,
-    withCredentials: true,
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+    // withCredentials: true
 })
 
 export const axiosPrivate = axios.create({

@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import AuthTemplate from '../../../components/templates/AuthTemplate'
-import { ISignupData } from '../../../@types/forms.interface'
 import SignupSuccess from '../../../components/organisms/forms/signUpForm/SignupSuccess'
 import SignUpForm from '../../../components/organisms/forms/signUpForm'
 
 const SignUp = () => {
   const [signupSuccess, setsignupSuccess] = useState(false)
 
-  const submitForm = (data: ISignupData) => {
+  const submitForm = () => {
     setsignupSuccess(true)
   }
   return (

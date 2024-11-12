@@ -8,10 +8,12 @@ import '../index.css'
 import FormFooter from '../../../molecules/forms/FormFooter'
 import { ISignupForm, ISignupData } from '../../../../@types/forms.interface'
 import { Country } from '../../../atoms/inputs/types'
+import { useSignup } from '../../../../hooks/useSignUp'
 
 const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
   const [form, setForm] = useState<ISignupData>({email: '', password: '', country: 'Nigeria'})
   const [isvalid, setIsvalid] = useState(false)
+  const {signup, error, isLoading} = useSignup()
 
   const handleInputChange = (name: string, value: string) => {
     setForm({...form, [name]: value})
@@ -21,21 +23,19 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
     setIsvalid(e.target.value === form.password)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(e);
+    const {email, password, country} = form
     if (isvalid) {
-      submitForm(form);
-      console.log(form);
-      
-  } else {
-      setIsvalid(false);
-      console.log("Passwords do not match!");
-  }
+      await signup(email, password, country, submitForm)
+      console.log('Form values:', form)
+    } else {
+      console.log("Passwords do not match!")
+    }
   }
 
   return (
-    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={()=>handleSubmit} action="">
+    <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit}>
       <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
       <div className="d-flex flex-column gap-2">
         <h1 className='manrope-600 primary-950 fs-h2'>Create your account</h1>
@@ -46,7 +46,7 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
         <EmailInput
           label='Email'
           id='email'
-          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange(e.target.name, e.target.value)}
+          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange('email', e.target.value)}
 
           placeholder='user@email.com' />
         <PasswordInput 
@@ -54,21 +54,24 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
           id='password' 
           valid={true}
           showStrength={true}
-          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange(e.target.name, e.target.value)} 
+          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>handleInputChange('password', e.target.value)} 
           placeHolder='password' />
         <PasswordInput 
           label='Confirm Password' 
           id='cpassword' 
           valid={isvalid}
           showStrength={false}
-          onchange={(e: React.ChangeEvent<HTMLInputElement>)=>confirmPassword(e)} 
-          placeHolder='confirm password' />
+          // onchange={(e: React.ChangeEvent<HTMLInputElement>)=>confirmPassword(e)} 
+          onchange={confirmPassword} 
+
+          placeHolder='password' />
         <CountrySelectInput
           label="Where are you located at? (Optional)"
           id="country"
           onchange={(e: Country)=>handleInputChange('country', e.name)}
           />
       </div>
+      {error && <div>{error}</div>}
       <div className="d-flex flex-column align-items-center gap-3">
         <Button text='Create Account' type='submit' />
         <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
