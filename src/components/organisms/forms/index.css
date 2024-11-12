@@ -2,11 +2,12 @@
     position: relative;
     width: clamp(342px, 66vw, 660px);
     /* min-width: 342px !important; */
+    height: fit-content;
     padding-inline: clamp(24px, 6vw, 60px);
     padding-top: clamp(24px, 6vw, 64px);
     padding-bottom: clamp(24px, 3.5vw, 36px);
     gap: 36px;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .form .back {

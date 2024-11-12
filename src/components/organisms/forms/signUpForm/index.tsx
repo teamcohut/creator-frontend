@@ -62,7 +62,7 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
           valid={isvalid}
           showStrength={false}
           onchange={(e: React.ChangeEvent<HTMLInputElement>)=>confirmPassword(e)} 
-          placeHolder='password' />
+          placeHolder='confirm password' />
         <CountrySelectInput
           label="Where are you located at? (Optional)"
           id="country"
@@ -70,7 +70,7 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
           />
       </div>
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button text='Create Account' type='submit' action={handleSubmit} />
+        <Button text='Create Account' type='submit' />
         <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
       </div>
       <FormFooter />
