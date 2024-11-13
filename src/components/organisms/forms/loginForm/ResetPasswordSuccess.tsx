@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import SuccessCard from '../../../../molecules/forms/SuccessCard'
+import SuccessCard from '../../../molecules/forms/SuccessCard'
 import { FiCheckCircle } from 'react-icons/fi'
-import Button from '../../../../atoms/Button'
+import Button from '../../../atoms/Button'
 import { useNavigate } from 'react-router-dom'
-import '../../index.css'
+import '../index.css'
 
 const ResetPasswordSuccess: FC = () => {
     const navigate = useNavigate()
