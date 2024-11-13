@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthTemplate from '../../../components/templates/AuthTemplate'
+import AuthTemplate from '../../components/templates/AuthTemplate'
 import { Outlet } from 'react-router-dom'
 
 const Login = () => {

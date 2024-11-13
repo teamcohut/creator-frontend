@@ -4,31 +4,21 @@ import Login from './pages/auth/Login';
 import ForgotPassword from './components/organisms/forms/loginForm/ForgotPassword';
 import ResetPassword from './components/organisms/forms/loginForm/ResetPassword';
 import LoginPage from './components/organisms/forms/loginForm/LoginPage';
-import SignupSuccess from './components/organisms/forms/signUpForm/SignupSuccess';
-import ResetPasswordSuccess from './components/organisms/forms/success/ResetPasswordSuccess';
-import UserChoice from './components/organisms/forms/loginForm/UserChoice';
-import ProgramDetails from './components/organisms/forms/loginForm/UserChoice/programdetails'
-import LoginSuccess from './components/organisms/forms/success/LoginSuccess';
+import ResetPasswordSuccess from './components/organisms/forms/loginForm/ResetPasswordSuccess';
+import UserChoice from './components/organisms/forms/loginForm/CustomizeProgram';
+import ProgramDetails from './components/organisms/forms/loginForm/CustomizeProgram/programdetails'
+import LoginSuccess from './components/organisms/forms/loginForm';
+import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <SignUp />
+      element: <Login />
     },
     {
       path: '/signup',
-      element: <SignUp />,
-      // children: [
-      //   {
-      //     path: "",
-      //     element: <SignUpPage1 />
-      //   },
-      //   {
-      //     path: "success",
-      //     element: <SignupSuccess />
-      //   }
-      // ]
+      element: <SignUp />
     },
     {
       path: '/login',
@@ -64,6 +54,10 @@ function App() {
         }
       ]
     },
+    {
+      path: '/dashboard',
+      element: <Dashboard />,
+    }
   ])
   return (
     <>

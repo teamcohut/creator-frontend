@@ -1,0 +1,5 @@
+.side-nav {
+    width: 300px;
+    padding: 15px 24px;
+    border-right: 1px solid var(--dark-50) !important;
+}

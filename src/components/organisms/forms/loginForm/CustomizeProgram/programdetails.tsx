@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../../../../atoms/Button/index'
 import { Link, useNavigate } from 'react-router-dom'
 import ProgressBar from '../../../../molecules/forms/ProgressBar'
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft, FiImage } from 'react-icons/fi'
 import '../../index.css'
 import TextAreaInput from '../../../../atoms/inputs/TextareaInput'
 import TextInput from '../../../../atoms/inputs/TextInput'
@@ -13,7 +13,7 @@ const SignUpPage2 = () => {
   return (
     <>
       <form className='form bg-white d-flex flex-column rounded-5' action="">
-        <ProgressBar height={8} length={2} page={2} />
+        <ProgressBar height={8} length={2} page={2} absolute={true} />
         <div className="w-100 d-flex justify-content-between">
           <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
           <span className='dark-700 back' onClick={()=>navigate(-1)}><FiArrowLeft /> Back</span>
@@ -39,7 +39,8 @@ const SignUpPage2 = () => {
           />
 
           <div className='dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center'>
-              <img src={'/assets/images/Big.png'} alt={'Cohut Logo'} />
+              {/* <img src={'/assets/images/Big.png'} alt={'Cohut Logo'} /> */}
+              <FiImage className='h1 dark-400' />
                 <p className='fs-caption'>Drag-n-drop or <span className='primary-600'>Upload</span> Thumbnail image</p>
           </div>
           <span className='fs-caption primary-400'>(png,jpeg,jpg)</span>

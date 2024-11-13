@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import AuthTemplate from '../../../components/templates/AuthTemplate'
-import SignupSuccess from '../../../components/organisms/forms/signUpForm/SignupSuccess'
-import SignUpForm from '../../../components/organisms/forms/signUpForm'
+import AuthTemplate from '../../components/templates/AuthTemplate'
+import SignupSuccess from '../../components/organisms/forms/signUpForm/SignupSuccess'
+import SignUpForm from '../../components/organisms/forms/signUpForm'
 
 const SignUp = () => {
   const [signupSuccess, setsignupSuccess] = useState(false)

@@ -1,0 +1,6 @@
+.nav-link {
+    background-color: var(--primary-50) !important;
+    padding: 16px 12px !important;
+    gap: 12px;
+    border-radius: 16px;
+}
