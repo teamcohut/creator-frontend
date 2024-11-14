@@ -1,17 +1,15 @@
 import React from 'react'
-import { FiBell, FiSearch } from 'react-icons/fi'
+import { FiBell } from 'react-icons/fi'
+import SearchInput from '../../../atoms/inputs/SearchInput'
 
 const TopNav = () => {
   return (
     <>
-      <div className="d-flex w-100 justify-centent-between">
-        <div className="d-flex">
-          <input type="text" name="" id="" />
-          <button><FiSearch /></button>
-        </div>
+      <div className="top-nav w-100 d-flex justify-centent-between">
+        <SearchInput id='search' onchange={()=>{}} placeHolder='Search for anything' label='' />
         <div className="d-felx align-items-center gap-2">
           <button><FiBell /></button>
-          <img src="/assets/image/bootcamp.png" alt="" />
+          <img src="/assets/images/bootcamp.png" width={30} alt="" />
         </div>
       </div>
     </>

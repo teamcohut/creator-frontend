@@ -46,7 +46,7 @@ const ResetPassword: React.FC = () => {
               placeHolder='password' />
         </div>
         <div className="d-flex flex-column align-items-center gap-3">
-          <Button text='Reset Password' type='submit' />
+          <Button children='Reset Password' type='submit' fill={true} action={handleSubmit} />
         </div>
         <FormFooter />
     </form>

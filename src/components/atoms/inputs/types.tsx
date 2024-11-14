@@ -64,7 +64,6 @@ export interface ISelectInput {
     options?: Array<option>,
     icon?: React.ReactNode,
     label?: string,
-    // onchange(e: ChangeEvent<HTMLSelectElement>): void,
     onchange: (countryCode: Country) => void; 
   } 
 
@@ -90,3 +89,9 @@ export interface ITextInput {
   onchange(e: ChangeEvent<HTMLInputElement>): void,
 }
 
+export interface ISearchInput {
+  id: string,
+  placeHolder: string,
+  label?: string,
+  onchange(e: ChangeEvent<HTMLInputElement>): void
+}

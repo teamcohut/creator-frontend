@@ -6,9 +6,9 @@ import { IDashboardTemplate } from '../../../@types/dashboard.interface'
 const DashboardTemplate: FC<IDashboardTemplate> = ({ children }) => {
   return (
     <>
-        <div className="d-flex">
+        <div className="d-flex w-100">
             <SideNav />
-            <div>
+            <div className='w-100'>
                 <TopNav />
                 {children}
             </div>

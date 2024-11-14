@@ -9,7 +9,7 @@ const UserChoice = () => {
     const [selected, setSelected] = useState("")
     const navigate = useNavigate()
 
-    const onSubmit = () => {
+    const handleSubmit = () => {
         navigate('/login/login-success')
     }
 
@@ -21,7 +21,7 @@ const UserChoice = () => {
     
   return (
     <>
-        <form className='form bg-white d-flex flex-column rounded-5' onSubmit={onSubmit} action="">
+        <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit} action="">
             <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
             <div className="d-flex flex-column gap-2">
                 <h1 className='manrope-600 primary-950 fs-h2'>What would you like to do with Cohut?</h1>
@@ -62,7 +62,7 @@ const UserChoice = () => {
                         click={()=>handleRadioChange('none')}/>
                 </div>
             </div>
-            <Button text='Continue' type='submit' />
+            <Button children='Continue' type='submit' action={handleSubmit} fill={true} />
             <FormFooter />
         </form>
     </>

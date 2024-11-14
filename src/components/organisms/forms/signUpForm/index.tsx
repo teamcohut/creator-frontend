@@ -73,7 +73,7 @@ const SignUpForm: React.FC<ISignupForm> = ( { submitForm } ) => {
       </div>
       {error && <div>{error}</div>}
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button text='Create Account' type='submit' />
+        <Button children='Create Account' type='submit' action={()=>{}} fill={true} />
         <span className=''>Already have an account? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in</Link></span>
       </div>
       <FormFooter />

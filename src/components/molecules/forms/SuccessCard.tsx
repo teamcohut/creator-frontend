@@ -1,6 +1,7 @@
+
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { ISuccessCard } from '../../../../@types/auth.interface'
+import { ISuccessCard } from '../../../@types/auth.interface'
 
 const SuccessCard: FC<ISuccessCard> = ({ title, description, icon, children }) => {
   return (

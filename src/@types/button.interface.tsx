@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
+
 export interface IButton {
-    text: string,
-    action?: any,
+    children: ReactNode | string,
+    action: ()=> void,
     type:  "submit" | "reset" | "button",
-    fill?: boolean
+    fill: boolean
   }
