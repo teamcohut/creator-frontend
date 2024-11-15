@@ -1,0 +1,59 @@
+.deadline-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .calendar-carousel {
+    display: flex;
+    align-items: center;
+  }
+  
+  .carousel-button {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
+  .calendar-dates {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  
+  .date-box {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 50px;
+  }
+  
+  .date-box.active {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .deadline-details {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .deadline-item {
+    margin: 5px 0;
+  }
+  
+  .no-deadlines {
+    color: #888;
+  }
+  
