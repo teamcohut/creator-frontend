@@ -1,0 +1,91 @@
+.course-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 800px;
+    padding: 15px;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .course-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+  
+  .course-info h2 {
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+  .course-info p {
+    color: #888;
+    margin: 5px 0 0;
+  }
+  
+  .status {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+  }
+  
+  .active {
+    color: #4caf50;
+    background-color: #e8f5e9;
+  }
+  
+  .inactive {
+    color: #f44336;
+    background-color: #ffebee;
+  }
+  
+  .course-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .progress-bar {
+    width: 150px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .progress {
+    height: 100%;
+    background: blue;
+    border-radius: 4px;
+  }
+  
+  /* .progress-info {
+    display: flex;
+    align-items: center;
+  } */
+  
+  .view-details {
+    border: none;
+    background: none;
+    color: #007bff;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+  }
+  
+  .view-details span {
+    margin-right: 5px;
+  }
+  
