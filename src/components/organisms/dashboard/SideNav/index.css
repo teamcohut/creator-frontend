@@ -1,5 +1,73 @@
-.side-nav {
+.nav {
+    width: fit-content;
+    height: fit-content;
+    transition: all ease-in-out 1s !important;
+}
+
+.nav .side-nav {
+    padding: 15px 18px;
+    border-right: 1px solid var(--primary-100) !important;
+    width: 96px;
+    transition: all ease-in-out 1s !important;
+    background-color: var(--dark-50);
+}
+
+.logo-lg {
+    display: none;
+    transition: all ease-in-out 1s;
+}
+
+.nav .nav-tools .nav-icon {
+    margin-right: -24px;
+}
+
+.nav:hover .side-nav {
     width: 300px;
-    padding: 15px 24px;
-    border-right: 1px solid var(--dark-50) !important;
+}
+
+.nav:hover .program-dropdown {
+    width: 252px;
+}
+
+.nav:hover .nav-link {
+    justify-content: start !important;
+    width: 100% !important;
+    padding: 16px 12px;
+}
+
+.nav:hover .nav-dropdown {
+    justify-content: space-between !important;
+}
+
+.nav:hover .dropdown-btn {
+    justify-content: space-between !important;
+}
+
+/* .nav:hover .dropdown-btn small {
+    gap: 12px;
+} */
+
+.nav:hover .nav-link span {
+    width: 100%;
+}
+
+.nav:hover .nav-link .span {
+    width: fit-content;
+}
+
+.nav:hover .logo-lg {
+    display: block;
+}
+
+.nav:hover .logo-sm {
+    display: none;
+}
+
+.nav:hover .dropdown-div {
+    width: 100%;
+    height: fit-content;
+}
+
+.nav:hover .nav-icon {
+    margin: 0;
 }

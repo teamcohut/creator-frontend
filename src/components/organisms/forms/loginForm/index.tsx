@@ -25,8 +25,8 @@ const LoginSuccess = () => {
                     </div>
                 </div>
                 <div className="w-100 px-5 d-flex flex-column-reverse flex-sm-row gap-3">
-                  <Button fill={true} text='Customize' type='button' action={()=>navigate('')} />
-                  <Button fill={false} text='Go To Dashboard' type='button' action={()=>navigate('')} />
+                  <Button fill={true} children='Customize' type='button' action={()=>navigate('')} />
+                  <Button fill={false} children='Go To Dashboard' type='button' action={()=>navigate('')} />
                 </div>
         </SuccessCard>
     </>

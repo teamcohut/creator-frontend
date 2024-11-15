@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { IPasswordInput } from './types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
 import "./index.css";
-import ProgressBar from '../../molecules/forms/ProgressBar';
+import ProgressBar from '../../molecules/forms/PregressBar';
 
 const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const { id, label, placeHolder, onchange, showStrength, valid } = props;
@@ -94,17 +94,6 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                         </>
                     )
                 }
-                {/* {isInvalid && (
-                    <div className="validation-message text-danger">
-                        Password must be at least 8 characters long.
-                    </div>
-                )}
-                
-                {password && !valid && (
-                    <div className="validation-message text-danger">
-                        Password does not match.
-                    </div>
-                )} */}
                 {isInvalid && (
                     <div className="validation-message text-danger">
                         {password.length < 8 ? "Password must be at least 8 characters long." : "Passwords do not match."}

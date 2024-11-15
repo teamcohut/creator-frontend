@@ -29,7 +29,7 @@ const ForgotPassword: React.FC = () => {
                   placeholder='user@email.com' />
             </div>
               <div className="d-flex flex-column align-items-center gap-3">
-                <Button text='Send email' type='submit' />
+                <Button children='Send email' type='submit' action={()=>{}} fill={true} />
                 <span>Remember your password? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in here</Link></span>
               </div>
               <FormFooter />

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import Button from '../../../../atoms/Button/index'
 import { Link, useNavigate } from 'react-router-dom'
-import ProgressBar from '../../../../molecules/forms/ProgressBar'
+import ProgressBar from '../../../../molecules/forms/PregressBar'
 import { FiArrowLeft, FiImage } from 'react-icons/fi'
 import '../../index.css'
 import TextAreaInput from '../../../../atoms/inputs/TextareaInput'
@@ -47,7 +47,7 @@ const SignUpPage2 = () => {
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">
-          <Button text='Continue' action={(e: any)=>console.log(e.target.value)} type='button' />
+          <Button children='Continue' action={()=>{}} type='button' fill={true} />
         </div>
         <FormFooter />
       </form>

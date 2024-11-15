@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
             </div>
             {error && <div className=''>{error}</div>}
             <div className="d-flex flex-column align-items-center gap-3">
-              <Button text='Sign in' type='submit' />
+              <Button children='Sign in' type='submit' fill={true} action={()=>{}} />
               <span>Don't have an account? <Link className='primary-700 text-decoration-none' to={"/signup"}>Create one here</Link></span>
             </div>
             <FormFooter />

@@ -14,7 +14,7 @@ const ResetPasswordSuccess: FC = () => {
             description='You have succeeded in resetting your password. You can now sign in to your account'
             icon={<FiCheckCircle className='fs-h1 success-600' />}>
                 <div className="w-50">
-                  <Button text='Sign In' type='button' action={()=>navigate('/login')} />
+                  <Button children='Sign In' type='button' action={()=>navigate('/login')} fill={true} />
                 </div>
         </SuccessCard>
     </>

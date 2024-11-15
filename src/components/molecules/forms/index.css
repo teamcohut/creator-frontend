@@ -20,3 +20,9 @@
 .inactive {
     background-color: var(--primary-100);
 }
+
+@media (max-width: 400px) {
+    .head {
+        width: 100% !important;
+    }
+}

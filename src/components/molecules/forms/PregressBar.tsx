@@ -1,6 +1,6 @@
 import {FC} from 'react'
 import './index.css'
-import { IProgressbar } from '../../../../@types/progressbar.interface'
+import { IProgressbar } from '../../../@types/progressbar.interface'
 
 const ProgressBar:FC<IProgressbar> = ({ length, page, height, absolute }) => {
   return (
