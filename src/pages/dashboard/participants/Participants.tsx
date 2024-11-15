@@ -3,6 +3,8 @@ import { IParticipant } from "../../../@types/participants.interface";
 import DashboardTemplate from "../../../components/templates/DashboardTemplate";
 import "./index.css";
 import ParticipantsTable from "../../../components/molecules/ParticipantsTable";
+import Header from "../../../components/organisms/dashboard/Header";
+import Overview from "../../../components/organisms/dashboard/Overview";
 const ParticipantsPage: React.FC = () => {
   const participants: IParticipant[] = [
     {
@@ -33,15 +35,9 @@ const ParticipantsPage: React.FC = () => {
 
   return (
     <DashboardTemplate>
-      <div>
-        <div className="p-container">
-          <div className="p-top"></div>
-          <div className="p-middle"></div>
-          <div className="p-bottom">
-            <ParticipantsTable participants={participants} />
-          </div>
-        </div>
-      </div>
+      <Header />
+      <Overview />
+      <ParticipantsTable participants={participants} />
     </DashboardTemplate>
   );
 };
