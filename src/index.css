@@ -12,6 +12,12 @@
   --primary-900: #292689;
   --primary-950: #191650;
 
+  --secondary-50: #d86dff;
+  --secondary-100: #fcf3ff;
+  --secondary-200: #191650;
+  --secondary-300: #c9ffe9;
+  --secondary-350: #008f6c;
+
   --dark-50: #ffffff;
   --dark-100: #e7e7e7;
   --dark-200: #d1d1d1;
@@ -137,6 +143,26 @@ body {
 
 .primary-950 {
   color: var(--primary-950);
+}
+
+.secondary-50 {
+  color: var(--secondary-50);
+}
+
+.secondary-200 {
+  color: var(--secondary-200);
+}
+
+.secondary-350 {
+  color: var(--secondary-350);
+}
+
+.bg-secondary-100 {
+  background: var(--secondary-100);
+}
+
+.bg-secondary-300 {
+  background: var(--secondary-300);
 }
 
 .dark-50 {
