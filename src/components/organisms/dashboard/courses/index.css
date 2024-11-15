@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .course-card {
     display: flex;
     justify-content: space-between;
@@ -54,16 +58,16 @@
     align-items: center;
   }
   
-  .progress-bar {
+  .progressbar {
     width: 150px;
     height: 8px;
-    background-color: #e0e0e0;
+    background: red;
     border-radius: 4px;
     margin-right: 10px;
     position: relative;
   }
   
-  .progress {
+  .progres {
     height: 100%;
     background: blue;
     border-radius: 4px;

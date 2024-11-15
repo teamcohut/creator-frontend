@@ -17,6 +17,7 @@
   --secondary-200: #191650;
   --secondary-300: #C9FFE9;
   --secondary-350: #008F6C;
+  --secondary-400: #888888;
 
 
   --dark-50: #FFFFFF;
@@ -152,6 +153,10 @@ body {
 
 .secondary-350 {
   color: var(--secondary-350);
+}
+
+.secondary-400 {
+  color: var(--secondary-400);
 }
 
 .bg-secondary-100 {

@@ -16,8 +16,8 @@ const CourseCard: React.FC<CourseCardProps> = ({name, dateCreated, isActive, pro
         <div className="icon secondary-50 bg-secondary-100 px-3 py-2"><FiBookOpen/></div>
         <div className="course-info">
           <h2 className='manrope-700 secondary-200'>{name}</h2>
-          <div className='d-flex flex-row'>
-            <p>Date created: {dateCreated}</p>
+          <div className='d-flex flex-row justify-content-between'>
+            <p className='manrope-400 secondary-400'>Date created: {dateCreated}</p>
             <span className={`status ${isActive ? 'active' : 'inactive'}`}>
                 {isActive ? 'Active' : 'Inactive'}
             </span>
@@ -26,10 +26,10 @@ const CourseCard: React.FC<CourseCardProps> = ({name, dateCreated, isActive, pro
         </div>
       </div>
 
-      <div className="course-right d-flex flex-column">
+      <div className="course-right d-flex flex-column align-items-start">
         <div className="progress-info d-flex align-items-center">
-            <div className="progress-bar">
-            <div className="progress primary-700" style={{ width: `${progress}%` }}></div>
+            <div className="progressbar">
+              <div className="progres primary-700 align-items-center" style={{ width: `${progress}%` }}></div>
             </div>
             <span className="progress-percentage">{progress}%</span>
         </div>
