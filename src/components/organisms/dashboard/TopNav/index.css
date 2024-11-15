@@ -1,0 +1,7 @@
+.top-nav {
+    padding: 11px 36px;
+}
+
+.search-div {
+    width: clamp(300px, 40vw ,420px);
+}
