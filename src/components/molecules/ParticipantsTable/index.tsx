@@ -21,7 +21,6 @@ const ParticipantsTable: React.FC<IParticipantTable> = ({ participants }) => {
         <tbody className="manrope-500 dark-700">
           {participants.map((participant) => (
             <tr key={participant.id}>
-              {/* <td>{participant.fullName}</td> */}
               <td>
                 <FullName fullName={participant.fullName} />
               </td>
