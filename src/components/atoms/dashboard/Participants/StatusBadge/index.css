@@ -1,0 +1,14 @@
+.active-badge {
+  background-color: var(--success-100);
+  color: var(--success-700);
+  border-radius: 18px;
+  padding: 0.1rem 0.5rem;
+  border: none;
+}
+.inactive {
+  background-color: var(--dark-100);
+  color: var(--dark-400);
+  border-radius: 18px;
+  padding: 0.1rem 0.5rem;
+  border: none;
+}

@@ -24,7 +24,10 @@
   --dark-900: #3D3D3D;
   --dark-950: #0D0D0D;
 
+  --success-100: #C9FFE9;
+  --success-300: #48FFC5;
   --success-600: #00B382;
+  --success-700: #008F6C;
 
   --fushia-500: #C848FF;
 
@@ -179,8 +182,18 @@ body {
   color: var(--dark-950);
 }
 
+.success-100 {
+  color: var(--success-100);
+}
+.success-300 {
+  color: var(--success-300);
+}
+
 .success-600 {
   color: var(--success-600);
+}
+.success-700 {
+  color: var(--success-700);
 }
 
 .fushia-500 {

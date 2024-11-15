@@ -9,56 +9,61 @@ import UserChoice from './components/organisms/forms/loginForm/CustomizeProgram'
 import ProgramDetails from './components/organisms/forms/loginForm/CustomizeProgram/programdetails'
 import LoginSuccess from './components/organisms/forms/loginForm';
 import Dashboard from './pages/dashboard/Dashboard';
+import ParticipantsPage from './pages/dashboard/participants/Participants';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <Login />
+      path: "/",
+      element: <Login />,
     },
     {
-      path: '/signup',
-      element: <SignUp />
+      path: "/signup",
+      element: <SignUp />,
     },
     {
-      path: '/login',
+      path: "/login",
       element: <Login />,
       children: [
         {
-          path: '',
-          element: <LoginPage />
+          path: "",
+          element: <LoginPage />,
         },
         {
-          path: 'forgot-password',
-          element: <ForgotPassword />
+          path: "forgot-password",
+          element: <ForgotPassword />,
         },
         {
-          path: 'reset-password',
-          element: <ResetPassword />
+          path: "reset-password",
+          element: <ResetPassword />,
         },
         {
-          path: 'reset-password-success',
-          element: <ResetPasswordSuccess />
+          path: "reset-password-success",
+          element: <ResetPasswordSuccess />,
         },
         {
-          path: 'user-choice',
-          element: <UserChoice />
+          path: "user-choice",
+          element: <UserChoice />,
         },
         {
-          path: 'program-details',
-          element: <ProgramDetails />
+          path: "program-details",
+          element: <ProgramDetails />,
         },
         {
-          path: 'login-success',
-          element: <LoginSuccess />
-        }
-      ]
+          path: "login-success",
+          element: <LoginSuccess />,
+        },
+      ],
     },
     {
-      path: '/dashboard',
+      path: "/dashboard",
       element: <Dashboard />,
-    }
-  ])
+    },
+    {
+      path: "/participants",
+      element: <ParticipantsPage />,
+    },
+  ]);
   return (
     <>
       <RouterProvider router={router} />
