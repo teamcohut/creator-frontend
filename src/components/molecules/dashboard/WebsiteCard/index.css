@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+.mcard {
+  display: flex;
+  position: relative;
+  border: 1px solid var(--primary-50);
+  border-radius: 12px;
+  height: 111px !important;
+  width: 256px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  background: linear-gradient(to bottom right, #453bdb, #7685ff, #c2d0ff);
+  overflow: hidden;
+}
+.mcard:hover {
+  background: linear-gradient(to bottom right, #292689, #555bff, #9db0ff);
+}
+.mcard img {
+  height: 95px;
+}
+
+span {
+  white-space: nowrap;
+}
