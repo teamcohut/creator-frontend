@@ -3,7 +3,7 @@ import { IParticipantTable } from "../../../@types/participants.interface";
 import "./index.css";
 import FullName from "../../atoms/dashboard/Participants/FullName";
 import { FiMoreVertical } from "react-icons/fi";
-import StatusBadge from "../../atoms/dashboard/Participants/StatusBadge";
+import StatusBadge from "../../atoms/dashboard/StatusBadge";
 
 const ParticipantsTable: React.FC<IParticipantTable> = ({ participants }) => {
   return (

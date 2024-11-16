@@ -7,17 +7,18 @@
 
 .progress-div {
     width: 100%;
+    overflow: hidden;
 }
 
 .progress-page {
     width: 100%;
 }
 
-.active {
+.active-page {
     background-color: var(--primary-700);
 }
 
-.inactive {
+.inactive-page {
     background-color: var(--primary-100);
 }
 

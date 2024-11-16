@@ -12,9 +12,6 @@ const SideNav: FC = () => {
     <>
       <div className="nav">
         <div className='side-nav d-flex flex-column align-items-start gap-5'>
-          <Link className='logo-sm w-100 text-center' to={'/'}>
-            <Icon type='logo' fill="false" size={36} />
-          </Link>
           <Link className='logo-lg' to={'/'}>
             <Icon type='text-logo' fill={"true"} size={130} />
           </Link>

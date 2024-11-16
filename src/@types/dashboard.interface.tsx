@@ -12,6 +12,17 @@ export interface INavLink {
   dropdownList: Array<IMenu>;
 }
 
+export interface IHeader {
+    title: string;
+    subtitle: string;
+    children: ReactNode;
+}
+
+export interface IChecklistItem {
+    checked: boolean;
+    title: string;
+}
+
 type IMenu = {
   path: string;
   icon: ReactNode;

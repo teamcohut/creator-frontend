@@ -1,8 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+.courseDisplay {
+  min-width: 800px;
+  max-width: 800px;
+  margin-left: 20px;
+}
+
 .course-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 800px;
+    width: 100%;
     padding: 15px;
     border: 1px dashed #ddd;
     border-radius: 8px;
@@ -19,6 +29,7 @@
   .icon {
     font-size: 30px;
     margin-right: 10px;
+    border-radius: 10px;
   }
   
   .course-info h2 {
@@ -54,18 +65,18 @@
     align-items: center;
   }
   
-  .progress-bar {
+  .progressbar {
     width: 150px;
     height: 8px;
-    background-color: #e0e0e0;
+    background: #ECF1FF;
     border-radius: 4px;
     margin-right: 10px;
     position: relative;
   }
   
-  .progress {
+  .progres {
     height: 100%;
-    background: blue;
+    background: #453BDB;
     border-radius: 4px;
   }
   
@@ -80,10 +91,9 @@
     color: #007bff;
     font-size: 0.9em;
     display: flex;
-    align-items: center;
     cursor: pointer;
     padding: 0;
-    margin-left: 10px;
+    /* margin-left: 10px; */
   }
   
   .view-details span {
