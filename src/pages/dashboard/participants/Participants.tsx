@@ -36,7 +36,7 @@ const ParticipantsPage: React.FC = () => {
   ];
 
   return (
-    <DashboardTemplate>
+    <>
       <Header title="Participants" subtitle="View and manage your learners here">
           <Button action={()=>{}} fill gap type="button" border={false}>
             <FiPlus className="fs-body" />
@@ -45,7 +45,7 @@ const ParticipantsPage: React.FC = () => {
       </Header>
       <Overview />
       <ParticipantsTable participants={participants} />
-    </DashboardTemplate>
+    </>
   );
 };
 

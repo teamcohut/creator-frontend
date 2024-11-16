@@ -2,12 +2,6 @@
   box-sizing: border-box;
 }
 
-.courseDisplay {
-  min-width: 800px;
-  max-width: 800px;
-  margin-left: 20px;
-}
-
 .course-card {
     display: flex;
     justify-content: space-between;
@@ -18,7 +12,6 @@
     border-radius: 8px;
     background-color: #fff;
     margin-bottom: 20px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   }
   
   .course-left {
@@ -30,11 +23,6 @@
     font-size: 30px;
     margin-right: 10px;
     border-radius: 10px;
-  }
-  
-  .course-info h2 {
-    font-size: 1.2em;
-    margin: 0;
   }
   
   .course-info p {

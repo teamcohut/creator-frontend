@@ -43,8 +43,6 @@
     width: 0;
     height: 0;
     overflow: hidden;
-    padding: 8px 1px 8px 25px;
-    margin-inline: 22px;
     border-left: 1px solid var(--primary-200);
     gap: 20px;
 }

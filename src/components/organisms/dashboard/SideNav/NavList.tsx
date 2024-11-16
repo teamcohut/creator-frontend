@@ -4,27 +4,27 @@ export const NavList = [
     {
         icon: <FiLayout className="nav-icon" />,
         title: "Dashboard",
-        path: "/#"
+        path: "/dashboard"
     },{
         icon: <FiLayers className="nav-icon" />,
         title: "Curriculum",
-        path: "/#"
+        path: "curriculum"
     },{
         icon: <FiUsers className="nav-icon" />,
         title: "Participants",
-        path: "/#"
+        path: "participants"
     },{
         icon: <FiVideo className="nav-icon" />,
         title: "Sessions",
-        path: "/#"
+        path: "sessions"
     },{
         icon: <FiCheckSquare className="nav-icon" />,
         title: "Assessments",
-        path: "/#"
+        path: "assessments"
     },{
         icon: <FiCalendar className="nav-icon" />,
         title: "Calendar",
-        path: "/#"
+        path: "calendar"
     }
 ]
 

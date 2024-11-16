@@ -48,6 +48,12 @@
   --rose-500: #ff48bc;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Manrope", sans-serif !important;
@@ -176,7 +182,7 @@ body {
 }
 
 .bg-secondary-450 {
-  background: var(--secondary-450);
+  background: var(--secondary-450) !important;
 }
 
 .dark-50 {

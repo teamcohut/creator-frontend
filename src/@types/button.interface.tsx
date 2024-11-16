@@ -5,6 +5,11 @@ export interface IButton {
     action: ()=> void,
     type:  "submit" | "reset" | "button",
     fill: boolean,
+    outline?: 'white',
     border?: boolean,
     gap?: boolean
   }
+
+export interface IFilterButton {
+  text: 'All' | 'Active' | 'Inactive' | 'Closed',
+}

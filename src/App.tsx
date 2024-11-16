@@ -11,6 +11,8 @@ import LoginSuccess from './components/organisms/forms/loginForm';
 import Dashboard from './pages/dashboard/Dashboard';
 import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
+import DashboardTemplate from './components/templates/DashboardTemplate';
+import NotFound from './pages/NotFound';
 
 function App() {
   const router = createBrowserRouter([
@@ -58,15 +60,24 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
-    },
-    {
+      element: <DashboardTemplate />,
+      children: [
+        {
+          path: '',
+          element: <Dashboard />,
+        },{
+          path: "participants",
+          element: <ParticipantsPage />,
+        },
+      ]
+    },{
       path: '/preview',
       element: <Preview />,
     },{
-      path: "/participants",
-      element: <ParticipantsPage />,
+      path: '*',
+      element: <NotFound />,
     },
+    
   ]);
   return (
     <>

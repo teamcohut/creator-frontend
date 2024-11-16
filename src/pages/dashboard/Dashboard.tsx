@@ -1,5 +1,4 @@
 import React from 'react'
-import DashboardTemplate from '../../components/templates/DashboardTemplate'
 import Header from '../../components/organisms/dashboard/Header'
 import Overview from '../../components/organisms/dashboard/Overview'
 import Button from '../../components/atoms/Button'
@@ -7,11 +6,12 @@ import { FiChevronDown, FiDownload, FiPlus } from 'react-icons/fi'
 import CourseDisplay from '../../components/organisms/dashboard/courses/CourseDisplay'
 import RecentActivity from '../../components/organisms/dashboard/RecentActivity'
 import DeadlineDisplay from '../../components/organisms/dashboard/upcomingDeadline/DeadlineDisplay'
+import './index.css'
 
 const Dashboard = () => {
   return (
     <>
-      <DashboardTemplate>
+      <>
         <Header title='Good morning Evergreen,' subtitle="Here’s an overview of your program, My First Bootcamp">
           <Button action={()=>{}} fill gap type='button'>
             <FiPlus />
@@ -23,16 +23,16 @@ const Dashboard = () => {
           </Button>
         </Header>
         <Overview />
-        <div className='d-flex flex-row'>
-          <div>
-          <CourseDisplay />
+        <div className='w-100 d-flex gap-5 align-items-start'>
+          <div className='dashboard-section1'>
+            <CourseDisplay />
           </div>
-          <div>
+          <div className='dashboard-section2 d-flex flex-column'>
             <RecentActivity />
             <DeadlineDisplay />
           </div>
         </div>
-      </DashboardTemplate>
+      </>
     </>
   )
 }

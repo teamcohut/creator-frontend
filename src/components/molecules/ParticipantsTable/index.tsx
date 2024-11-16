@@ -7,7 +7,7 @@ import StatusBadge from "../../atoms/dashboard/StatusBadge";
 
 const ParticipantsTable: React.FC<IParticipantTable> = ({ participants }) => {
   return (
-    <div className="p-table">
+    <div className="p-table w-100">
       <table className="table-spacing">
         <thead>
           <tr className="tr">

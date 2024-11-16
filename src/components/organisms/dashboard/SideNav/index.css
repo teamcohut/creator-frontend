@@ -65,6 +65,8 @@
 .nav:hover .dropdown-div {
     width: 100%;
     height: fit-content;
+    padding: 8px 1px 8px 25px;
+    margin-inline: 22px;
 }
 
 .nav:hover .nav-icon {

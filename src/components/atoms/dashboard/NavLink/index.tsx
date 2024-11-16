@@ -10,7 +10,7 @@ const NavLink: FC<INavLink> = ({ path, children, type, dropdownList }) => {
   if (type === 'dropdown') {
     return (
       <div className={`${openDropDown && 'hover'} rounded-3`}>
-        <button onClick={()=>setOpenDropDown(!openDropDown)} className='nav-link nav-dropdown w-100 dropdown-btn d-flex align-items-center justify-content-between p-3'>
+        <button onClick={()=>setOpenDropDown(!openDropDown)} className='nav-link nav-dropdown w-100 dropdown-btn d-flex align-items-center justify-content-between p-3 rounded-3'>
           <small className='d-flex align-items-center manrope-500 fs-body'>{children}</small>
           <span className='span'>
             {openDropDown ? <FiChevronUp /> : <FiChevronDown />}
