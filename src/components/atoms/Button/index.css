@@ -1,6 +1,8 @@
 .button {
     height: clamp(45px, 2vw, 48px);
     border: 1px solid var(--primary-700);
+    padding: 12px 16px;
+    white-space: nowrap;
 }
 
 .fill {
@@ -8,8 +10,15 @@
     color: var(--dark-50) !important;
 }
 
+.border-none {
+    border: none !important;
+}
+
 .outline {
     background-color: transparent;
     color: var(--primary-700);
+}
 
+.gap {
+    gap: 8px;
 }

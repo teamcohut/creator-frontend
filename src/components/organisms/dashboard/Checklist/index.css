@@ -1,0 +1,28 @@
+.checklist {
+    background-color: var(--dark-50);
+    width: 344px;
+    box-shadow: 0px 4px 16px 0px #19165026;
+    position: fixed;
+    right: 36px;
+    bottom: 71px;
+    overflow: hidden;
+    transition: all ease-in-out 0.3s;
+}
+
+.checklist .checklist-box {
+    border: 1px solid var(--primary-50);
+    border-radius: 12px;
+    gap: 12px;
+}
+
+.open {
+    height: 330px;
+}
+
+.close {
+    height: 70px;
+}
+
+.checklist .checklist-box .list {
+    gap: 10px;
+}

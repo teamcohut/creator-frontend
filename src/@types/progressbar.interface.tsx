@@ -2,5 +2,7 @@ export interface IProgressbar {
     length: number,
     page: number,
     height: number,
-    absolute: Boolean
+    absolute: boolean,
+    gap: boolean,
+    rounded: boolean,
 }

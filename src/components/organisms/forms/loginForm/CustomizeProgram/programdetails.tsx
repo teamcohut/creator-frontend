@@ -13,7 +13,7 @@ const SignUpPage2 = () => {
   return (
     <>
       <form className='form bg-white d-flex flex-column rounded-5' action="">
-        <ProgressBar height={8} length={2} page={2} absolute={true} />
+        <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
         <div className="w-100 d-flex justify-content-between">
           <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
           <span className='dark-700 back' onClick={()=>navigate(-1)}><FiArrowLeft /> Back</span>

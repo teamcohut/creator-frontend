@@ -1,15 +1,15 @@
 .nav {
     width: fit-content;
     height: fit-content;
-    transition: all ease-in-out 1s !important;
+    transition: all ease-in-out 0.3s !important;
 }
 
 .nav .side-nav {
     padding: 15px 18px;
     border-right: 1px solid var(--primary-100) !important;
     width: 96px;
-    transition: all ease-in-out 1s !important;
-    background-color: var(--dark-50);
+    transition: all ease-in-out 0.3s !important;
+    background-color: white;
 }
 
 .logo-lg {
@@ -42,10 +42,6 @@
 .nav:hover .dropdown-btn {
     justify-content: space-between !important;
 }
-
-/* .nav:hover .dropdown-btn small {
-    gap: 12px;
-} */
 
 .nav:hover .nav-link span {
     width: 100%;

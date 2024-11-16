@@ -89,7 +89,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                 {
                     strengthBar && (
                         <>
-                            <ProgressBar height={4} page={strength} length={4} absolute={false} />
+                            <ProgressBar height={4} page={strength} length={4} absolute={false} gap rounded={false} />
                             <span className='manrope-500 dark-600'>Password strength: &nbsp; <span className={`${status === 'Weak'? 'text-danger': 'success-600'}`}>{status}</span></span>
                         </>
                     )

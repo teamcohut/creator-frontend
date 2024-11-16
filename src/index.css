@@ -24,7 +24,10 @@
   --dark-900: #3D3D3D;
   --dark-950: #0D0D0D;
 
+  --hover-40: #ecf1ff66;
+
   --success-600: #00B382;
+  --success-700: #008F6C;
 
   --fushia-500: #C848FF;
 
@@ -181,6 +184,10 @@ body {
 
 .success-600 {
   color: var(--success-600);
+}
+
+.success-700 {
+  color: var(--success-700);
 }
 
 .fushia-500 {
