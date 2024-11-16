@@ -13,8 +13,11 @@
 }
 
 .logo-lg {
-    display: none;
-    transition: all ease-in-out 1s;
+    width: 100%;
+    overflow: hidden;
+    padding-left: 17px;
+    /* display: none;
+    transition: all ease-in-out 1s; */
 }
 
 .nav .nav-tools .nav-icon {

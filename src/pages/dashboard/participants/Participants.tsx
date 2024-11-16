@@ -6,6 +6,7 @@ import ParticipantsTable from "../../../components/molecules/ParticipantsTable";
 import Header from "../../../components/organisms/dashboard/Header";
 import Overview from "../../../components/organisms/dashboard/Overview";
 import { FiPlus } from "react-icons/fi";
+import Button from "../../../components/atoms/Button";
 const ParticipantsPage: React.FC = () => {
   const participants: IParticipant[] = [
     {
@@ -37,8 +38,10 @@ const ParticipantsPage: React.FC = () => {
   return (
     <DashboardTemplate>
       <Header title="Participants" subtitle="View and manage your learners here">
-        <FiPlus className="fs-body" />
-        Invite Learner
+          <Button action={()=>{}} fill gap type="button" border={false}>
+            <FiPlus className="fs-body" />
+            Invite Learner
+          </Button>
       </Header>
       <Overview />
       <ParticipantsTable participants={participants} />

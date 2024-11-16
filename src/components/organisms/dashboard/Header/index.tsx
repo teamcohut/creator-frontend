@@ -10,7 +10,9 @@ const Header: FC<IHeader> = ({ title, subtitle, children }) => {
           <h1 className='manrope-600 fs-h3 primary-950'>{title}</h1>
           <span className='manrope-500 fs-body'>{subtitle}</span>
         </div>
-        {children}
+        <div className='d-flex align-items-center gap-4'>
+          {children}
+        </div>
       </div>
     </>
   )

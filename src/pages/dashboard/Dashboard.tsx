@@ -11,16 +11,14 @@ const Dashboard = () => {
     <>
       <DashboardTemplate>
         <Header title='Good morning Evergreen,' subtitle="Here’s an overview of your program, My First Bootcamp">
-          <div className="d-flex align-items-center gap-4">
-            <Button action={()=>{}} fill gap type='button'>
-              <FiPlus />
-              Create New
-              <FiChevronDown />
-            </Button>
-            <Button action={()=>{}} fill={false} border={false} type='button'>
-              <FiDownload className='fs-h3' />
-            </Button>
-          </div>
+          <Button action={()=>{}} fill gap type='button'>
+            <FiPlus />
+            Create New
+            <FiChevronDown />
+          </Button>
+          <Button action={()=>{}} fill={false} border={false} type='button'>
+            <FiDownload className='fs-h3' />
+          </Button>
         </Header>
         <Overview />
         <CourseDisplay />
