@@ -4,6 +4,7 @@ import Header from '../../components/organisms/dashboard/Header'
 import Overview from '../../components/organisms/dashboard/Overview'
 import Button from '../../components/atoms/Button'
 import { FiChevronDown, FiDownload, FiPlus } from 'react-icons/fi'
+import CourseDisplay from '../../components/organisms/dashboard/courses/CourseDisplay'
 
 const Dashboard = () => {
   return (
@@ -22,6 +23,7 @@ const Dashboard = () => {
           </div>
         </Header>
         <Overview />
+        <CourseDisplay />
       </DashboardTemplate>
     </>
   )

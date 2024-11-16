@@ -1,21 +1,21 @@
 import React from 'react';
 import './index.css';
+import { FiBookOpen } from 'react-icons/fi';
 
 interface CourseCardProps {
-  icon: any; 
   name: string;
   dateCreated: string;
   isActive: boolean;
   progress: number; 
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ icon, name, dateCreated, isActive, progress }) => {
+const CourseCard: React.FC<CourseCardProps> = ({name, dateCreated, isActive, progress }) => {
   return (
     <div className="course-card">
       <div className="course-left">
-        <div className="icon">{icon}</div>
+        <div className="icon secondary-50 bg-secondary-100 px-3 py-2"><FiBookOpen/></div>
         <div className="course-info">
-          <h2>{name}</h2>
+          <h2 className='manrope-700 secondary-200'>{name}</h2>
           <div className='d-flex flex-row'>
             <p>Date created: {dateCreated}</p>
             <span className={`status ${isActive ? 'active' : 'inactive'}`}>
@@ -25,6 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ icon, name, dateCreated, isActi
           
         </div>
       </div>
+
       <div className="course-right d-flex flex-column">
         <div className="progress-info d-flex align-items-center">
             <div className="progress-bar">
