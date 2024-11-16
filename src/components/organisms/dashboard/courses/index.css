@@ -38,16 +38,6 @@
     font-weight: bold;
   }
   
-  .active {
-    color: #008F6C;
-    background-color: #C9FFE9;
-  }
-  
-  .inactive {
-    color: #f44336;
-    background-color: #ffebee;
-  }
-  
   .course-right {
     display: flex;
     align-items: center;

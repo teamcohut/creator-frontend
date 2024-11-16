@@ -6,9 +6,9 @@ const StatusBadge: React.FC<IBadge> = ({ status }) => {
   return (
     <>
       {status === "active" ? (
-        <span className="active-badge manrope-400">Active</span>
+        <span className="fs-small active-badge manrope-400">Active</span>
       ) : (
-        <span className="inactive">Inactive</span>
+        <span className="fs-small inactive">Inactive</span>
       )}
     </>
   );

@@ -1,0 +1,34 @@
+/* Parent container for card */
+.card-container {
+  display: flex;
+  border: 1px solid var(--primary-50);
+  border-radius: 12px;
+  height: 111px !important;
+  width: 256px;
+  margin: 0px;
+  padding: 1rem;
+}
+
+.dblock {
+  display: block;
+  white-space: nowrap;
+}
+.width {
+  max-width: 131px;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border-radius: 10px;
+  width: 79px;
+  height: 79px;
+
+  
+}
+
+.wh {
+  width: 48px;
+  height: 48px;
+}
