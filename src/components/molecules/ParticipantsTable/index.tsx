@@ -1,7 +1,7 @@
 import React from "react";
 import { IParticipantTable } from "../../../@types/participants.interface";
 import "./index.css";
-import FullName from "../../atoms/dashboard/Participants/FullName";
+import FullName from "../../atoms/dashboard/Participants/Initials";
 import { FiMoreVertical } from "react-icons/fi";
 import StatusBadge from "../../atoms/dashboard/StatusBadge";
 
@@ -10,7 +10,7 @@ const ParticipantsTable: React.FC<IParticipantTable> = ({ participants }) => {
     <div className="p-table">
       <table className="table-spacing">
         <thead>
-          <tr className="tr">
+          <tr className="tr fs-body">
             <th className="btlr">Full Name</th>
             <th>Email Address</th>
             <th>Status</th>
@@ -18,7 +18,7 @@ const ParticipantsTable: React.FC<IParticipantTable> = ({ participants }) => {
             <th className="btrr"></th>
           </tr>
         </thead>
-        <tbody className="manrope-500 dark-700">
+        <tbody className="fs-body manrope-500 dark-700">
           {participants.map((participant) => (
             <tr key={participant.id}>
               <td>

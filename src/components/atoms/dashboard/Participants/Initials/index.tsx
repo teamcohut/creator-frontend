@@ -9,8 +9,8 @@ const FullName: React.FC<IFullname> = ({ fullName }) => {
   const initials = `${first}${last}`;
   return (
     <>
-      <span className="avatar">{initials}</span>
-      <span>{fullName}</span>
+      <span className="fs-small manrope-600 avatar">{initials}</span>
+      <span className="fs-body manrope-500">{fullName}</span>
     </>
   );
 };
