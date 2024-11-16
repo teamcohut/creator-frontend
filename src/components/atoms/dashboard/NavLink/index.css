@@ -1,22 +1,29 @@
 .nav-link {
-    /* background-color: var(--primary-50) !important; */
     color: var(--primary-950) !important;
     padding: 16px !important;
     border-radius: 16px;
     white-space: nowrap;
-    transition: all ease-in-out 1s !important;
+    transition: all ease-in-out 0.3s !important;
     transition: background-color ease-in-out 0.3s !important;
-    transition: justify-content 1s ease-in-out 1s !important;
+    transition: justify-content 0.3s ease-in-out 0.3s !important;
 }
 
 .nav-link:hover {
+    background-color: var(--hover-40) !important;
+}
+
+.focus {
     background-color: var(--primary-50) !important;
+}
+
+.hover {
+    background-color: var(--hover-40) !important;
 }
 
 .nav-link .nav-icon {
     font-size: 24px !important;
     margin-right: -12px;
-    transition: margin 0s ease-out 1s !important;
+    transition: margin 0.3s ease-in-out !important;
 }
 
 .nav-link span {
@@ -25,9 +32,7 @@
     color: var(--primary-950);
     text-align: start;
     padding-left: 12px;
-    /* color: transparent; */
-    transition: all 1s ease-in-out !important;
-    /* transition-delay:; */
+    transition: all 0.3s ease-in-out !important;
 }
 
 .dropdown-btn {

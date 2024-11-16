@@ -4,5 +4,7 @@ export interface IButton {
     children: ReactNode | string,
     action: ()=> void,
     type:  "submit" | "reset" | "button",
-    fill: boolean
+    fill: boolean,
+    border?: boolean,
+    gap?: boolean
   }

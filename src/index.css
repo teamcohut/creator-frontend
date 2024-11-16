@@ -35,6 +35,9 @@
 
   --hover-40: #ecf1ff66;
 
+  --success-600: #00B382;
+  --success-700: #008F6C;
+
   --success-100: #c9ffe9;
   --success-300: #48ffc5;
   --success-600: #00b382;
@@ -230,6 +233,10 @@ body {
 .success-600 {
   color: var(--success-600);
 }
+.success-700 {
+  color: var(--success-700);
+}
+
 .success-700 {
   color: var(--success-700);
 }

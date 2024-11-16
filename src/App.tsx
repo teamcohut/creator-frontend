@@ -9,6 +9,7 @@ import UserChoice from './components/organisms/forms/loginForm/CustomizeProgram'
 import ProgramDetails from './components/organisms/forms/loginForm/CustomizeProgram/programdetails'
 import LoginSuccess from './components/organisms/forms/loginForm';
 import Dashboard from './pages/dashboard/Dashboard';
+import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 
 function App() {
@@ -60,6 +61,9 @@ function App() {
       element: <Dashboard />,
     },
     {
+      path: '/preview',
+      element: <Preview />,
+    },{
       path: "/participants",
       element: <ParticipantsPage />,
     },
