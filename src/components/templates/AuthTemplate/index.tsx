@@ -1,7 +1,7 @@
 import "./index.css";
 import { FC } from "react";
 import { IAuthTemplate } from "../../../@types/authtemplate.interface";
-import Logo from "../../atoms/Logo/Logo";
+import Logo from "../../atoms/logo/Logo";
 
 const AuthTemplate: FC<IAuthTemplate> = ({ children, title }) => {
   return (

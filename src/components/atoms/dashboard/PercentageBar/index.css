@@ -1,0 +1,14 @@
+.progressbar {
+    width: 150px;
+    height: 8px;
+    background: #ECF1FF;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .progres {
+    height: 100%;
+    background: #453BDB;
+    border-radius: 4px;
+  }

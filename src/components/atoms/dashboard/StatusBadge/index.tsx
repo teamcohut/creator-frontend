@@ -1,5 +1,5 @@
 import React from "react";
-import { IBadge } from "../../../../../@types/participants.interface";
+import { IBadge } from "../../../../@types/participants.interface";
 import "./index.css";
 
 const StatusBadge: React.FC<IBadge> = ({ status }) => {
