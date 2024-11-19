@@ -1,6 +1,6 @@
 import React from 'react'
 import { IOtherInput } from './types'
-import "./index.css"
+import "../style.css"
 
 const Input: React.FC<IOtherInput> = (props) => {
   const {id, label, inpType, placeHolder, icon, onchange} = props

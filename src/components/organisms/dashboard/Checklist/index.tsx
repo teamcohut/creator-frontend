@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
-import ProgressBar from '../../../molecules/forms/PregressBar'
+import ProgressBar from '../../../molecules/auth/PregressBar'
 import ChecklistItem from '../../../atoms/dashboard/ChecklistItem'
 import { ChecklistArray } from './ChecklistArray'
 import { IChecklistItem } from '../../../../@types/dashboard.interface'
-import './index.css'
+import '../../style.css'
 
 const Checklist = () => {
     const [percentage, setPercentage] = useState(10)

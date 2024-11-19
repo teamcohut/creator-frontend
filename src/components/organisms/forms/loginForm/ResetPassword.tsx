@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
-import FormFooter from '../../../molecules/forms/FormFooter'
+import FormFooter from '../../../molecules/auth/FormFooter'
 
 const ResetPassword: React.FC = () => {
   const [form, setForm] = useState({email: '', password: '', country: 'Nigeria'})

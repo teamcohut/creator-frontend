@@ -65,20 +65,22 @@ const DeadlineCalendar: React.FC<DeadlineCalendarProps> = ({ deadlines }) => {
 
   return (
     <div className="deadline-calendar">
-      <div className="header">
-        <h4 className="manrope-400 secondary-200">
-          Upcoming Deadlines <FiCalendar className='primary-700' />
-        </h4>
-        <p className='secondary-400'>{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</p>
-      </div>
+      <div className='w-100 gap-2'>
+        <div className="header w-100 d-flex align-items-center justify-content-between">
+          <h4 className="manrope-600 fs-h4 primary-950 d-flex align-items-center gap-2">
+            Upcoming Deadlines <FiCalendar className='fs-body primary-700' />
+          </h4>
+          <span className='manrope-400 fs-caption secondary-400'>{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</span>
+        </div>
 
-      <CalendarCarousel
-        dateArray={dateArray}
-        activeDate={activeDate}
-        setActiveDate={setActiveDate}
-        handlePrev={handlePrev}
-        handleNext={handleNext}
-      />
+        <CalendarCarousel
+          dateArray={dateArray}
+          activeDate={activeDate}
+          setActiveDate={setActiveDate}
+          handlePrev={handlePrev}
+          handleNext={handleNext}
+        />
+      </div>
 
       <div className="deadline-details position-relative">
         {getDeadlinesForDate(activeDate).length > 0 ? (

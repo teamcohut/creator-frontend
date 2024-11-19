@@ -1,6 +1,6 @@
 import React from 'react'
 import { ITextAreaInput } from "./types"
-import "./index.css"
+import "../style.css"
 
 const TextAreaInput: React.FC<ITextAreaInput> = (props) => {
     const { label, id, placeHolder, onchange } = props

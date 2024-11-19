@@ -2,7 +2,7 @@ import React from "react";
 import { IParticipant } from "../../../@types/participants.interface";
 import DashboardTemplate from "../../../components/templates/DashboardTemplate";
 import "./index.css";
-import ParticipantsTable from "../../../components/molecules/ParticipantsTable";
+import Table from "../../../components/organisms/dashboard/Table";
 import Header from "../../../components/organisms/dashboard/Header";
 import Overview from "../../../components/organisms/dashboard/Overview";
 import { FiPlus } from "react-icons/fi";
@@ -35,6 +35,8 @@ const ParticipantsPage: React.FC = () => {
     },
   ];
 
+  const header = ["Full Name", "Email address", "Status", "Time enrolled", "" ]
+
   return (
     <>
       <Header title="Participants" subtitle="View and manage your learners here">
@@ -44,7 +46,7 @@ const ParticipantsPage: React.FC = () => {
           </Button>
       </Header>
       <Overview />
-      <ParticipantsTable participants={participants} />
+      <Table header={header} body={participants} />
     </>
   );
 };

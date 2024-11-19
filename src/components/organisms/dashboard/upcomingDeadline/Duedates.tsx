@@ -39,10 +39,10 @@ const Duedates: React.FC<DuedatesProps> = ({ deadline, index, dropdownIndex, tog
       <div className="d-flex flex-row align-items-start">
         <FiClock className="me-2" style={{ color: deadline.color }} />
         <div className="d-flex flex-column">
-          <span className="deadline-date" style={{ color: deadline.color }}>
+          <span className="deadline-date manrope-500 fs-caption" style={{ color: deadline.color }}>
             Due {new Date(deadline.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}
           </span>
-          <span className="deadline-title manrope-500 secondary-400">{deadline.title}</span>
+          <span className="deadline-title manrope-500 secondary-400 fs-body">{deadline.title}</span>
         </div>
         <FiMoreVertical
           className="ms-auto primary-700"

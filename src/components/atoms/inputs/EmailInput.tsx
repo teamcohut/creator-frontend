@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { IEmailInput } from './types';
 import { FiMail } from "react-icons/fi";
-import './index.css';
+import '../style.css';
 
 const EmailInput: FC<IEmailInput> = (props) => {
     const { id, label, placeholder, onchange, icon } = props;

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import EmailInput from '../../../atoms/inputs/EmailInput'
 import Button from '../../../atoms/Button'
 import { FiArrowLeft } from 'react-icons/fi'
-import FormFooter from '../../../molecules/forms/FormFooter'
+import FormFooter from '../../../molecules/auth/FormFooter'
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate()
