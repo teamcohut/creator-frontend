@@ -13,6 +13,7 @@ import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
+import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 
 function App() {
   const router = createBrowserRouter([
@@ -65,19 +66,23 @@ function App() {
         {
           path: '',
           element: <Dashboard />,
-        },{
+        }, {
           path: "participants",
           element: <ParticipantsPage />,
         },
+        {
+          path: "calendar",
+          element: <Calendar />
+        },
       ]
-    },{
+    }, {
       path: '/preview',
       element: <Preview />,
-    },{
+    }, {
       path: '*',
       element: <NotFound />,
     },
-    
+
   ]);
   return (
     <>
