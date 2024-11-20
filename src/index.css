@@ -62,6 +62,7 @@ body {
 
 /* FONTS */
 /* ================ */
+
 .manrope-200 {
   font-family: "Manrope", sans-serif !important;
   font-optical-sizing: auto !important;
@@ -113,6 +114,7 @@ body {
 
 /* COLORS */
 /* ================ */
+
 .primary-50 {
   color: var(--primary-50);
 }
@@ -257,6 +259,7 @@ body {
 
 /* FONT SIZE */
 /* ================ */
+
 .fs-footer {
   font-size: clamp(10px, 1.5vw, 12px);
 }
@@ -287,4 +290,11 @@ body {
 
 .fs-h1 {
   font-size: clamp(32px, 4.5vw, 48px);
+}
+
+/* TEXTS */
+/* ================ */
+
+.no-wrap {
+  white-space: nowrap;
 }

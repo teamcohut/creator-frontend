@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { IPasswordInput } from './types';
 import { FiEye, FiEyeOff, FiLock } from 'react-icons/fi';
-import "./index.css";
-import ProgressBar from '../../molecules/forms/PregressBar';
+import ProgressBar from '../../molecules/auth/PregressBar';
+import "../style.css";
 
 const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const { id, label, placeHolder, onchange, showStrength, valid } = props;

@@ -3,12 +3,12 @@ import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
 import CountrySelectInput from "../../../atoms/inputs/CountryInput";
 import { Link } from "react-router-dom";
-import "../index.css";
-import FormFooter from "../../../molecules/forms/FormFooter";
+import FormFooter from "../../../molecules/auth/FormFooter";
 import { ISignupForm, ISignupData } from "../../../../@types/forms.interface";
 import { Country } from "../../../atoms/inputs/types";
 import { useSignup } from "../../../../hooks/useSignUp";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
+import "../../style.css";
 
 const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
   const [form, setForm] = useState<ISignupData>({

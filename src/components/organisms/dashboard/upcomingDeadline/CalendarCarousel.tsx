@@ -18,22 +18,22 @@ const CalendarCarousel: React.FC<CalendarCarouselProps> = ({
   handleNext,
 }) => {
   return (
-    <div className="calendar-carousel">
+    <div className="calendar-carousel w-100 d-flex align-items-center">
       <button onClick={handlePrev} className="carousel-button">
         <FiChevronLeft />
       </button>
 
-      <div className="calendar-dates">
+      <div className="calendar-dates w-100 d-flex justify-content-around">
         {dateArray.map((date) => (
           <div
             key={date}
-            className={`date-box ${date === activeDate ? 'active' : ''}`}
+            className={`date-box d-flex flex-column align-items-center justify-content-center text-center ${date === activeDate && 'active'}`}
             onClick={() => setActiveDate(date)}
           >
-            <div className="day manrope-600">
+            <span className="day manrope-600 fs-caption">
               {new Date(date).toLocaleString('en-US', { weekday: 'short' })}
-            </div>
-            <div className="date manrope-600">{new Date(date).getDate()}</div>
+            </span>
+            <span className="date manrope-600 fs-body">{new Date(date).getDate()}</span>
           </div>
         ))}
       </div>

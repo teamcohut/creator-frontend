@@ -1,0 +1,245 @@
+/* BUTTON */
+/* ================= */
+
+.button {
+    height: clamp(45px, 2vw, 48px);
+    border: 1px solid var(--primary-700);
+    padding: 12px 16px;
+    white-space: nowrap;
+}
+
+.fill {
+    background-color: var(--primary-700) !important;
+    color: var(--dark-50) !important;
+}
+
+.border-none {
+    border: none !important;
+}
+
+.outline {
+    background-color: transparent;
+    color: var(--primary-700);
+}
+
+.gap {
+    gap: 8px;
+}
+
+/* INPUTS */
+/* ================= */
+
+.input-cont{
+    position: relative;
+}
+
+.input-cont label {
+    color: var(--primary-950);
+}
+
+.input-div {
+    width: 100%;
+    height: fit-content;
+    border: 1px solid var(--dark-100);
+    overflow: hidden;
+}
+
+.input-div .input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: clamp(45px, 4.5vw, 48px);
+}
+
+.input-div:focus-within {
+    border: 1.5px solid var(--primary-700) !important;
+}
+
+.input-div .icon {
+    color: var(--dark-400) !important;
+
+}
+
+.input-div .password-eye {
+    border: none !important;
+}
+
+.active {
+    border: 1.5px solid var(--primary-700) !important;
+
+}
+
+.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.custom-dropdown {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    top: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    width: 50%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: white;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+    border-radius: 10px;
+}
+
+.input-cont .dropdown-menu.open {
+    display: block;
+}
+
+.dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-items {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.input-div .search {
+    height: 42px;
+}
+
+.search .search-icon {
+    padding: 13px;
+}
+
+/* STATUS BADGE */
+/* ================= */
+
+.active-badge {
+    background-color: var(--success-100);
+    color: var(--success-700);
+    border-radius: 18px;
+    padding: 0.1rem 0.5rem;
+    border: none;
+  }
+  
+  .inactive-badge {
+    background-color: var(--dark-100);
+    color: var(--dark-400);
+    border-radius: 18px;
+    padding: 0.1rem 0.5rem;
+    border: none;
+  }
+
+  /* PERCENTAGE BAR */
+/* ================= */
+
+  .percentage-bar {
+    height: 4px;
+    background: #ECF1FF;
+    border-radius: 4px;
+    position: relative;
+  }
+  
+  .percentage-progress {
+    height: 100%;
+    background: #453BDB;
+    border-radius: 4px;
+  }
+
+  /* TABLES */
+/* ================= */
+
+  .table-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--dark-100);
+    font-size: 0.9rem;
+  }
+  
+  /* NAVIGATION */
+/* ================= */
+
+  .nav-link {
+    color: var(--primary-950) !important;
+    padding: 16px !important;
+    border-radius: 16px;
+    white-space: nowrap;
+    transition: all ease-in-out 0.3s !important;
+    transition: background-color ease-in-out 0.3s !important;
+    transition: justify-content 0.3s ease-in-out 0.3s !important;
+}
+
+.nav-link:hover {
+    background-color: var(--hover-40) !important;
+}
+
+.focus {
+    background-color: var(--primary-50) !important;
+}
+
+.hover {
+    background-color: var(--hover-40) !important;
+}
+
+.nav-link .nav-icon {
+    font-size: 24px !important;
+    margin-right: -12px;
+    transition: margin 0.3s ease-in-out !important;
+}
+
+.nav-link span {
+    width: 0;
+    overflow: hidden;
+    color: var(--primary-950);
+    text-align: start;
+    padding-left: 12px;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.dropdown-btn {
+    border-radius: 0px;
+}
+
+.dropdown-div {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-left: 1px solid var(--primary-200);
+    gap: 20px;
+}
+
+.dropdown-link {
+    color: var(--dark-300);
+    gap: 12px;
+}
+
+.dropdown-link:hover {
+    color: var(--primary-950);
+}

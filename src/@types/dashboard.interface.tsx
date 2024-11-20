@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode } from "react";
-import { IconType } from "react-icons";
 
 export interface INavLink {
   path: string;
@@ -27,12 +26,12 @@ type IMenu = {
 
 export interface IOverviewCard {
   icon: ReactElement<any>;
-  topText: string | number;
-  bottomText: string | number;
+  title: string;
+  subtitle: string | number;
   iconColor: string;
   iconBgColor: string;
   iconBorderColor: string;
-
+  children?: ReactNode;
 }
 
 

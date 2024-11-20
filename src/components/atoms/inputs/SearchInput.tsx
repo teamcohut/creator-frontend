@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import "./index.css";
 import { ISearchInput } from './types';
+import "../style.css";
 
 const SearchInput: FC<ISearchInput> = (props) => {
     const { id, label, onchange, placeHolder } = props

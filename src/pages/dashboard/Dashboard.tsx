@@ -3,7 +3,7 @@ import Header from '../../components/organisms/dashboard/Header'
 import Overview from '../../components/organisms/dashboard/Overview'
 import Button from '../../components/atoms/Button'
 import { FiChevronDown, FiDownload, FiPlus } from 'react-icons/fi'
-import CourseDisplay from '../../components/organisms/dashboard/courses/CourseDisplay'
+import CourseDisplay from '../../components/organisms/dashboard/CourseDisplay'
 import RecentActivity from '../../components/organisms/dashboard/RecentActivity'
 import DeadlineDisplay from '../../components/organisms/dashboard/upcomingDeadline/DeadlineDisplay'
 import './index.css'
@@ -12,7 +12,7 @@ const Dashboard = () => {
   return (
     <>
       <>
-        <Header title='Good morning Evergreen,' subtitle="Here’s an overview of your program, My First Bootcamp">
+        <Header title='Good morning Evergreen,' subtitle={`Here’s an overview of your program, My First Bootcamp`}>
           <Button action={()=>{}} fill gap type='button'>
             <FiPlus />
             Create New

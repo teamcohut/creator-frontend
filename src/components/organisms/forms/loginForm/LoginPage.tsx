@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import '../index.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import EmailInput from '../../../atoms/inputs/EmailInput';
 import PasswordInput from '../../../atoms/inputs/PasswordInput';
-import FormFooter from '../../../molecules/forms/FormFooter';
+import FormFooter from '../../../molecules/auth/FormFooter';
 import { useLogin } from '../../../../hooks/useLogin'
+import '../../style.css';
 
 
 const LoginPage: React.FC = () => {

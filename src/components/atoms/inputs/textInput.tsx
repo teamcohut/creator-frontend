@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ITextInput } from "./types";
-import "./index.css";
+import "../style.css";
 
 const TextInput: React.FC<ITextInput> = (props) => {
     const { label, id, icon, placeHolder, onchange } = props;

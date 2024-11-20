@@ -11,8 +11,9 @@ export interface IBadge {
   status: "active" | "inactive";
 }
 
-export interface IParticipantTable {
-  participants: Array<IParticipant>;
+export interface ITable {
+  header: Array<string>,
+  body: Array<any>;
 }
 
 export interface IFullname {

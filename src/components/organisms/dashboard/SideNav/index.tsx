@@ -1,17 +1,17 @@
 import React, { FC } from 'react'
 import NavLink from '../../../atoms/dashboard/NavLink'
-import './index.css'
 import { HelpList, NavList, SettingsList } from './NavList'
 import Icon from '../../../atoms/Icon'
 import { Link } from 'react-router-dom'
-import Program from '../../../molecules/dashboard/sideNav/Program'
+import Program from '../../../molecules/dashboard/ProgramDropdown'
 import { FiHelpCircle, FiLogOut, FiSettings } from 'react-icons/fi'
+import '../../style.css'
 
 const SideNav: FC = () => {
   return (
     <>
       <div className="nav">
-        <div className='side-nav d-flex flex-column align-items-start gap-5'>
+        <div className='side-nav d-flex flex-column align-items-start justify-content-start gap-5'>
           <Link className='logo-lg' to={'/'}>
             <Icon type='text-logo' fill={"true"} size={130} />
           </Link>

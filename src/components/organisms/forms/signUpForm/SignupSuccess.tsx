@@ -1,14 +1,14 @@
 import React from 'react'
-import SuccessCard from '../../../molecules/forms/SuccessCard'
-import { FiCheckCircle } from 'react-icons/fi'
+import SuccessCard from '../../../molecules/auth/SuccessCard'
+import { FiMail } from 'react-icons/fi'
 
 const SignupSuccess = () => {
   return (
     <>
         <SuccessCard 
-            title='Success' 
+            title="You've got mail" 
             description='You have succeeded in creating your account. You can now click the link in your mail to verify your mail'
-            icon={<FiCheckCircle className='h1 success-600' />}>
+            icon={<FiMail className='h1 success-600' />}>
 
         </SuccessCard>
     </>

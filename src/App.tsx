@@ -19,7 +19,16 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
+      element: <DashboardTemplate />,
+      children: [
+        {
+          path: '',
+          element: <Dashboard />,
+        }, {
+          path: "participants",
+          element: <ParticipantsPage />,
+        },
+      ]
     },
     {
       path: "/signup",
@@ -69,10 +78,6 @@ function App() {
         }, {
           path: "participants",
           element: <ParticipantsPage />,
-        },
-        {
-          path: "calendar",
-          element: <Calendar />
         },
       ]
     }, {
