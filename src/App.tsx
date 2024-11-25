@@ -13,6 +13,7 @@ import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
+import Sessions from './pages/dashboard/sessions/Sessions';
 
 function App() {
   const router = createBrowserRouter([
@@ -21,13 +22,18 @@ function App() {
       element: <DashboardTemplate />,
       children: [
         {
-          path: '',
+          path: "",
           element: <Dashboard />,
-        },{
+        },
+        {
           path: "participants",
           element: <ParticipantsPage />,
         },
-      ]
+        {
+          path: "sessions",
+          element: <Sessions/>,
+        },
+      ],
     },
     {
       path: "/signup",
@@ -66,14 +72,15 @@ function App() {
           element: <LoginSuccess />,
         },
       ],
-    },{
-      path: '/preview',
+    },
+    {
+      path: "/preview",
       element: <Preview />,
-    },{
-      path: '*',
+    },
+    {
+      path: "*",
       element: <NotFound />,
     },
-    
   ]);
   return (
     <>
