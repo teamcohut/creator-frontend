@@ -16,16 +16,4 @@ export const axiosPrivate = axios.create({
     withCredentials: true
 })
 
-axiosPublic.defaults.maxRedirects = 0;
-axiosPublic.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && [301, 302].includes(error.response.status)) {
-      const redirectUrl = error.response.headers.location;
-      return axiosPublic.get(redirectUrl);
-    }
-    return Promise.reject(error);
-  }
-);
-
 export default axiosPublic;

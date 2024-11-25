@@ -5,16 +5,20 @@ import ForgotPassword from './components/organisms/forms/loginForm/ForgotPasswor
 import ResetPassword from './components/organisms/forms/loginForm/ResetPassword';
 import LoginPage from './components/organisms/forms/loginForm/LoginPage';
 import ResetPasswordSuccess from './components/organisms/forms/loginForm/ResetPasswordSuccess';
-import UserChoice from './components/organisms/forms/loginForm/CustomizeProgram';
-import ProgramDetails from './components/organisms/forms/loginForm/CustomizeProgram/programdetails'
-import LoginSuccess from './components/organisms/forms/loginForm';
+import UserChoice from './components/organisms/forms/CustomizeProgram';
+import ProgramDetails from './components/organisms/forms/CustomizeProgram/programdetails'
+import LoginSuccess from './components/organisms/forms/loginForm/LoginSuccess';
 import Dashboard from './pages/dashboard/Dashboard';
 import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
+import { useReducer } from 'react';
+import { authReducer } from './context/auth/AuthReducer';
+import { AuthContext } from './context/auth/AuthContext';
 
 function App() {
+  const [state, dispatch] = useReducer(authReducer, { user: null })
   const router = createBrowserRouter([
     {
       path: "/",
@@ -23,7 +27,7 @@ function App() {
         {
           path: '',
           element: <Dashboard />,
-        },{
+        }, {
           path: "participants",
           element: <ParticipantsPage />,
         },
@@ -66,18 +70,21 @@ function App() {
           element: <LoginSuccess />,
         },
       ],
-    },{
+    }, {
       path: '/preview',
       element: <Preview />,
-    },{
+    }, {
       path: '*',
       element: <NotFound />,
     },
-    
+
   ]);
+
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthContext.Provider value={{ ...state, dispatch }}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
     </>
   );
 }

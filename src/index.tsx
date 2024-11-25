@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.bundle"
-import { AuthContextProvider } from "./context/auth/AuthContext";
+import { AuthContextProvider } from './context/auth/AuthState';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

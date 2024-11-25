@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import FormFooter from "../../../molecules/auth/FormFooter";
 import { ISignupForm, ISignupData } from "../../../../@types/forms.interface";
 import { Country } from "../../../atoms/inputs/types";
-import { useSignup } from "../../../../hooks/useSignUp";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
 import "../../style.css";
+import { useSignup } from "../../../../hooks/auth/useSignUp";
 
 const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
   const [form, setForm] = useState<ISignupData>({
@@ -43,12 +43,14 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
       className="form bg-white d-flex flex-column rounded-5"
       onSubmit={handleSubmit}
     >
+
       <Link
         className="primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none"
         to={"/"}
       >
         Cohut
       </Link>
+
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Create your account</h1>
         <span className="manrope-500 dark-700 fs-body">
@@ -57,6 +59,7 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
       </div>
 
       <div className="d-flex flex-column gap-4">
+
         <EmailInput
           label="Email"
           id="email"
@@ -65,6 +68,7 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
           }
           placeholder="user@email.com"
         />
+
         <PasswordInput
           label="Password"
           id="password"
@@ -75,37 +79,46 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
           }
           placeHolder="password"
         />
+
         <PasswordInput
           label="Confirm Password"
           id="cpassword"
           valid={isvalid}
           showStrength={false}
-          // onchange={(e: React.ChangeEvent<HTMLInputElement>)=>confirmPassword(e)}
           onchange={confirmPassword}
           placeHolder="password"
         />
+
         <CountrySelectInput
           label="Where are you located at? (Optional)"
           id="country"
           onchange={(e: Country) => handleInputChange("country", e.name)}
         />
+
       </div>
+
       {error && <div>{error}</div>}
+
       <div className="d-flex flex-column align-items-center gap-3">
+
         <Button
           children="Create Account"
           type="submit"
           action={() => {}}
           fill={true}
         />
+
         <span className="">
           Already have an account?{" "}
           <Link className="primary-700 text-decoration-none" to={"/login"}>
             Sign in
           </Link>
         </span>
+
       </div>
+
       <FormFooter />
+      
     </form>
   );
 };
