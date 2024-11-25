@@ -14,12 +14,9 @@ import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
 import Calendar from './components/organisms/dashboard/Calendar/Calendar';
-import { useReducer } from 'react';
-import { authReducer } from './context/auth/AuthReducer';
-import { AuthContext } from './context/auth/AuthContext';
+import { AuthContextProvider } from './context/auth/AuthState';
 
 function App() {
-  const [state, dispatch] = useReducer(authReducer, { user: null })
   const router = createBrowserRouter([
     {
       path: "/",
@@ -33,6 +30,10 @@ function App() {
           path: "participants",
           element: <ParticipantsPage />,
         },
+        {
+          path: "calendar",
+          element: <Calendar />
+        }
       ]
     },
     {
@@ -73,24 +74,7 @@ function App() {
         },
       ],
     },
-    {
-      path: "/dashboard",
-      element: <DashboardTemplate />,
-      children: [
-        {
-          path: '',
-          element: <Dashboard />,
-        }, {
-          path: "participants",
-          element: <ParticipantsPage />,
-        },
-        {
-          path: "calendar",
-          element: <Calendar />
-        }
-      ]
-    }, {
-    }, {
+     {
       path: '/preview',
       element: <Preview />,
     }, {
@@ -104,9 +88,9 @@ function App() {
 
   return (
     <>
-      <AuthContext.Provider value={{ ...state, dispatch }}>
+      <AuthContextProvider>
         <RouterProvider router={router} />
-      </AuthContext.Provider>
+      </AuthContextProvider>
     </>
   );
 }

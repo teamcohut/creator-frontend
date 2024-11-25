@@ -43,27 +43,33 @@
 
 /* SIDENAV */
 
-.nav {
+.sidenav-div {
+    position: sticky;
+    top: 0;
+    left: 0;
     background-color: var(--dark-50);
     width: fit-content;
+    min-width: 96px;
     height: 100vh;
+    overflow-y: auto;
     transition: all ease-in-out 0.3s !important;
 }
 
-.nav .side-nav {
+.sidenav-div .side-nav {
     background-color: var(--dark-50);
     padding: 15px 18px;
     border-right: 1px solid var(--primary-100) !important;
     width: 96px;
-    height: 100%;
+    /* height: 100%; */
     overflow-y: auto;
     position: sticky;
     top: 0;
     left: 0;
     transition: all ease-in-out 0.3s !important;
+    z-index: 3;
 }
 
-.nav .side-nav::-webkit-scrollbar {
+.sidenav-div::-webkit-scrollbar, .sidenav-div .side-nav::-webkit-scrollbar {
     width: 0px;
     height: 0px;
 }
@@ -76,56 +82,60 @@
     transition: all ease-in-out 1s; */
 }
 
-.nav .nav-tools .nav-icon {
+.sidenav-div .nav-tools .nav-icon {
     margin-right: -24px;
 }
 
-.nav:hover .side-nav {
+.sidenav-div:hover {
+    min-width: 300px;
+}
+
+.sidenav-div:hover .side-nav {
     width: 300px;
 }
 
-.nav:hover .program-dropdown {
+.sidenav-div:hover .program-dropdown {
     width: 252px;
 }
 
-.nav:hover .nav-link {
+.sidenav-div:hover .nav-link {
     justify-content: start !important;
     width: 100% !important;
     padding: 16px 12px;
 }
 
-.nav:hover .nav-dropdown {
+.sidenav-div:hover .nav-dropdown {
     justify-content: space-between !important;
 }
 
-.nav:hover .dropdown-btn {
+.sidenav-div:hover .dropdown-btn {
     justify-content: space-between !important;
 }
 
-.nav:hover .nav-link span {
+.sidenav-div:hover .nav-link span {
     width: 100%;
 }
 
-.nav:hover .nav-link .span {
+.sidenav-div:hover .nav-link .span {
     width: fit-content;
 }
 
-.nav:hover .logo-lg {
+.sidenav-div:hover .logo-lg {
     display: block;
 }
 
-.nav:hover .logo-sm {
+.sidenav-div:hover .logo-sm {
     display: none;
 }
 
-.nav:hover .dropdown-div {
+.sidenav-div:hover .dropdown-div {
     width: 100%;
     height: fit-content;
     padding: 8px 1px 8px 25px;
     margin-inline: 22px;
 }
 
-.nav:hover .nav-icon {
+.sidenav-div:hover .nav-icon {
     margin: 0;
 }
 
