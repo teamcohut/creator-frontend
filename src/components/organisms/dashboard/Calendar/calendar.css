@@ -1,4 +1,65 @@
-.time-column {
+.calendar-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.week-schedule {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.week-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.controls {
+    text-align: right;
+}
+
+.controls p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: gray;
+}
+
+.controls .arrows svg {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.calendar-grid table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.calendar-grid th,
+.calendar-grid td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar-grid th select {
+    border: none;
+    background: none;
+    font-size: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+/* .time-column {
     width: 80px;
     font-weight: bold;
     background-color: #f8f9fa;
@@ -25,4 +86,4 @@ tbody tr {
 
 tbody td {
     border-right: 1px solid #dee2e6;
-}
+} */

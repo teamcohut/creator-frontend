@@ -79,6 +79,10 @@ function App() {
           path: "participants",
           element: <ParticipantsPage />,
         },
+        {
+          path: "calendar",
+          element: <Calendar />
+        }
       ]
     }, {
       path: '/preview',
