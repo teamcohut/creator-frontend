@@ -13,6 +13,7 @@ import Preview from './pages/Preview';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
+import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { useReducer } from 'react';
 import { authReducer } from './context/auth/AuthReducer';
 import { AuthContext } from './context/auth/AuthContext';
@@ -27,6 +28,7 @@ function App() {
         {
           path: '',
           element: <Dashboard />,
+        }, {
         }, {
           path: "participants",
           element: <ParticipantsPage />,
@@ -70,13 +72,33 @@ function App() {
           element: <LoginSuccess />,
         },
       ],
+    },
+    {
+      path: "/dashboard",
+      element: <DashboardTemplate />,
+      children: [
+        {
+          path: '',
+          element: <Dashboard />,
+        }, {
+          path: "participants",
+          element: <ParticipantsPage />,
+        },
+        {
+          path: "calendar",
+          element: <Calendar />
+        }
+      ]
+    }, {
     }, {
       path: '/preview',
       element: <Preview />,
     }, {
+    }, {
       path: '*',
       element: <NotFound />,
     },
+
 
   ]);
 
