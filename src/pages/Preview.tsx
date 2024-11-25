@@ -1,16 +1,15 @@
 import React from 'react'
 import DeadlineCalendar from '../components/organisms/dashboard/upcomingDeadline'
-import Overview from '../components/organisms/dashboard/Overview'
+import AddTask from '../components/organisms/dashboard/Calendar/AddTask'
 import RecentActivity from '../components/organisms/dashboard/RecentActivity';
 
 const Preview = () => {
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center">
-        {/* <DeadlineCalendar deadlines={[]} /> */}
-        {/* <Overview /> */}
-        <RecentActivity />
-      </div>
+      {/* <h1 className='fs-h3 manrope-700 primary-800'>This page is for previewing components <br /> Preview your component below</h1>
+      <DeadlineCalendar deadlines={[]} /> */}
+
+      <AddTask />
     </>
   );
 }

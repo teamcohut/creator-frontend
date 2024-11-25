@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/components/organisms/forms/loginForm/CustomizeProgram/programdetails.tsx
 import React from "react";
 import Button from "../../../../atoms/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +9,17 @@ import "../../../style.css";
 import TextInput from "../../../../atoms/inputs/TextInput";
 import TextAreaInput from "../../../../atoms/inputs/TextareaInput";
 
+=======
+import React from 'react'
+import Button from '../../../atoms/Button'
+import { Link, useNavigate } from 'react-router-dom'
+import ProgressBar from '../../../molecules/auth/PregressBar'
+import { FiArrowLeft, FiImage } from 'react-icons/fi'
+import TextAreaInput from '../../../atoms/inputs/TextareaInput'
+import TextInput from '../../../atoms/inputs/TextInput'
+import FormFooter from '../../../molecules/auth/FormFooter'
+import '../../style.css'
+>>>>>>> 5f79feb1501b412bfee5dd215608508e190ec49e:src/components/organisms/forms/CustomizeProgram/programdetails.tsx
 
 const SignUpPage2 = () => {
   const navigate = useNavigate();

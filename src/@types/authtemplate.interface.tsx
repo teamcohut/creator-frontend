@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
 export interface IAuthTemplate {
-    children: ReactNode,
-    title: string;
-  }
+  children: ReactNode,
+  title: string;
+}

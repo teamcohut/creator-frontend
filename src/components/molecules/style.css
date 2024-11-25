@@ -115,7 +115,7 @@
       background-color: var(--dark-50);
     }
     
-    .icon {
+    .course-card .icon {
       font-size: 30px;
       border-radius: 10px;
     }

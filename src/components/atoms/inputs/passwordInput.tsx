@@ -52,9 +52,8 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
         } else if (value.length >= 8 && valid) {
             setIsInvalid(false);
         }
-        // setIsInvalid(false);
+        
         onchange?.(e);
-        console.log(valid);
         
         checkStrength(e)
         

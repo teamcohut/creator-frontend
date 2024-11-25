@@ -10,7 +10,7 @@ import '../../style.css'
 const SideNav: FC = () => {
   return (
     <>
-      <div className="nav">
+      <div className="sidenav-div">
         <div className='side-nav d-flex flex-column align-items-start justify-content-start gap-5'>
           <Link className='logo-lg' to={'/'}>
             <Icon type='text-logo' fill={"true"} size={130} />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import { axiosPublic } from "../api/axios";
+import axiosPublic from "../../api/axios";
 
 export const useSignup = () => {
     const [error, setError] = useState<string | null>(null);
@@ -11,6 +11,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
+           try {
             const response = await axiosPublic.post('/auth/register', {
                 email,
                 password,
@@ -24,6 +25,10 @@ export const useSignup = () => {
                 console.log("signup successful:", response.data)
                 submitForm()
             }
+           } catch (error) {
+            console.log(error);
+            
+           }
     }
 
     return {signup, error, isLoading}

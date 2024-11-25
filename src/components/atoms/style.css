@@ -39,7 +39,7 @@
 
 .input-div {
     width: 100%;
-    height: fit-content;
+    height: clamp(45px, 4.5vw, 48px);
     border: 1px solid var(--dark-100);
     overflow: hidden;
 }
@@ -48,7 +48,6 @@
     border: none;
     outline: none;
     width: 100%;
-    height: clamp(45px, 4.5vw, 48px);
 }
 
 .input-div:focus-within {

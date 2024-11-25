@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Button from '../../../../atoms/Button'
+import Button from '../../../atoms/Button'
 import { Link, useNavigate } from 'react-router-dom'
-import RadioInput from '../../../../atoms/inputs/RadioInput'
+import RadioInput from '../../../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
-import FormFooter from '../../../../molecules/auth/FormFooter'
+import FormFooter from '../../../molecules/auth/FormFooter'
 
 const UserChoice = () => {
     const [selected, setSelected] = useState("")
