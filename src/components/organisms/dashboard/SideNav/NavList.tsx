@@ -4,7 +4,7 @@ export const NavList = [
     {
         icon: <FiLayout className="nav-icon" />,
         title: "Dashboard",
-        path: ""
+        path: "/dashboard"
     }, {
         icon: <FiLayers className="nav-icon" />,
         title: "Curriculum",

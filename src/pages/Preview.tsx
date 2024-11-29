@@ -1,7 +1,6 @@
 import React from 'react'
 import DeadlineCalendar from '../components/organisms/dashboard/upcomingDeadline'
 import AddTask from '../components/organisms/dashboard/Calendar/AddTask'
-import AssessmentCard from '../components/molecules/dashboard/AssessmentCard'
 
 const Preview = () => {
   return (
@@ -13,7 +12,7 @@ const Preview = () => {
 
       <AssessmentCard />
     </>
-  )
+  );
 }
 
 export default Preview

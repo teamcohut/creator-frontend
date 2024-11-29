@@ -108,9 +108,9 @@
     height: 95px;
   }
 
-  /* COURSE CARD */
+  /* INFO CARD */
 
-  .course-card {
+  .info-card {
       border: 1px dashed var(--primary-50);
       background-color: var(--dark-50);
     }
@@ -120,12 +120,12 @@
       border-radius: 10px;
     }
     
-    .course-info p {
+    .card-info p {
       color: #888;
       margin: 5px 0 0;
     }
     
-    .course-right {
+    .card-right {
       display: flex;
       align-items: center;
     }

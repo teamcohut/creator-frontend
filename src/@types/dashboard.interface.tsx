@@ -39,4 +39,14 @@ export interface IOverviewCard {
   children?: ReactNode;
 }
 
-
+export interface IinfoCardProps {
+  title: string;
+  subtitle: string;
+  isActive: boolean;
+  progress?: number;
+  isProgressBar?: boolean;
+  infoCardIcon: ReactElement<any>;
+  infoCardIconBgColor: string;
+  isOngoing?: boolean
+  dateOfSession?: string
+}

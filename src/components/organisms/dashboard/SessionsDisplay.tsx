@@ -1,19 +1,17 @@
 import React from "react";
 import "../style.css";
 import InfoCard from "../../molecules/dashboard/InfoCard";
-import { courseDisplayList} from "./courseDisplayList";
-import { FiBookOpen } from "react-icons/fi";
+import { FiVideo } from "react-icons/fi";
+import { sessionDisplayList } from "./sessionDisplayList";
 
-const CourseDisplay = () => {
-  
-
+const SessionsDisplay = () => {
   return (
     <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-2">
-          <h4 className="manrope-600 fs-h4 primary-950">Courses </h4>
+          <h4 className="manrope-600 fs-h4 primary-950">Sessions </h4>
           <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-            5
+            4
           </span>
         </div>
 
@@ -33,20 +31,20 @@ const CourseDisplay = () => {
         </div>
       </div>
 
-      {courseDisplayList.map((el, i) => (
+      {sessionDisplayList.map((el, i) => (
         <InfoCard
-          title={el.name}
-          subtitle={el.dateCreated}
+          title={el.title}
+          subtitle={el.subtitle}
           isActive={el.isActive}
-          progress={el.progress}
-          isProgressBar={true}
+          dateOfSession={el.dateOfSession}
+          isOngoing
           key={i}
-          infoCardIcon={<FiBookOpen color="#D86DFF" />}
-          infoCardIconBgColor="#FCF3FF"
+          infoCardIcon={<FiVideo color="#D86DFF" />}
+          infoCardIconBgColor="#FEF1FA"
         />
       ))}
     </div>
   );
 };
 
-export default CourseDisplay;
+export default SessionsDisplay;
