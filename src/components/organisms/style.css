@@ -60,7 +60,6 @@
     padding: 15px 18px;
     border-right: 1px solid var(--primary-100) !important;
     width: 96px;
-    /* height: 100%; */
     overflow-y: auto;
     position: sticky;
     top: 0;

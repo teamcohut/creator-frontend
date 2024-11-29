@@ -25,3 +25,7 @@ export interface IAuthProvider {
 export type TAuthAction = 
     | { type: 'LOGIN'; payload: Record<string, any> } 
     | { type: 'LOGOUT' };
+
+export interface IUserChoice {
+  onSubmit: (selected: string) => void
+}

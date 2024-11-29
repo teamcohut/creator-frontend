@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import Button from '../../../atoms/Button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import RadioInput from '../../../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
 import FormFooter from '../../../molecules/auth/FormFooter'
+import { IUserChoice } from '../../../../@types/auth.interface'
 
-const UserChoice = () => {
+const UserChoice: FC<IUserChoice> = ({ onSubmit }) => {
     const [selected, setSelected] = useState("")
-    const navigate = useNavigate()
 
     const handleSubmit = () => {
-        navigate('/login/login-success')
+        onSubmit(selected)
     }
 
     const handleRadioChange = (e: string) => {

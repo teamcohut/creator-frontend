@@ -10,6 +10,7 @@ import ProgramDetails from './components/organisms/forms/CustomizeProgram/progra
 import LoginSuccess from './components/organisms/forms/loginForm/LoginSuccess';
 import Dashboard from './pages/dashboard/Dashboard';
 import Preview from './pages/Preview';
+import VerifyMail from './pages/auth/VerifyMail';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
@@ -48,33 +49,39 @@ function App() {
           path: "",
           element: <LoginPage />,
         },
-        {
-          path: "forgot-password",
-          element: <ForgotPassword />,
-        },
-        {
-          path: "reset-password",
-          element: <ResetPassword />,
-        },
-        {
-          path: "reset-password-success",
-          element: <ResetPasswordSuccess />,
-        },
-        {
-          path: "user-choice",
-          element: <UserChoice />,
-        },
-        {
-          path: "program-details",
-          element: <ProgramDetails />,
-        },
-        {
-          path: "login-success",
-          element: <LoginSuccess />,
-        },
+        // {
+        //   path: "forgot-password",
+        //   element: <ForgotPassword />,
+        // },
+        // {
+        //   path: "reset-password",
+        //   element: <ResetPassword />,
+        // },
+        // {
+        //   path: "reset-password-success",
+        //   element: <ResetPasswordSuccess />,
+        // },
+
+        // {
+        //   path: "user-choice",
+        //   element: <UserChoice />,
+        // },
+        // {
+        //   path: "program-details",
+        //   element: <ProgramDetails />,
+        // },
+
+        // {
+        //   path: "login-success",
+        //   element: <LoginSuccess />,
+        // },
       ],
     },
-     {
+    {
+      path: "/activate/:id",
+      element: <VerifyMail />
+    },
+    {
       path: '/preview',
       element: <Preview />,
     }, {
