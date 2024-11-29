@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseCard from "../../../molecules/dashboard/CourseCard";
+// import CourseCard from "../../../molecules/dashboard/CourseCard";
 import "../style.css"
 
 const AssessmentDisplay = () => {
@@ -22,7 +22,7 @@ const AssessmentDisplay = () => {
 
             </div>
 
-            {
+            {/* {
                 Array(6).fill(1).map((el, i) => (
                     <CourseCard
                         name="Introduction to UI/UX Design"
@@ -31,7 +31,7 @@ const AssessmentDisplay = () => {
                         progress={25}
                         key={i} />
                 ))
-            }
+            } */}
         </div>
     )
 }

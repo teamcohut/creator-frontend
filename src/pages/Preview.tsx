@@ -10,7 +10,6 @@ const Preview = () => {
 
       {/* <AddTask /> */}
 
-      <AssessmentCard />
     </>
   );
 }

@@ -31,6 +31,10 @@ function App() {
           path: "sessions",
           element: <Sessions />,
         },
+        {
+          path: "sessions",
+          element: <Sessions />,
+        },
       ],
     },{
       path: "calendar",
@@ -68,13 +72,13 @@ function App() {
 
   ]);
 
-return (
-  <>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
-  </>
-);
+  return (
+    <>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </>
+  );
 }
 
 export default App;
