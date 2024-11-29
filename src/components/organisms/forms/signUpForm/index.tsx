@@ -1,14 +1,16 @@
 import React, { ChangeEvent, useState } from "react";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
-import CountrySelectInput from "../../../atoms/inputs/CountryInput";
 import { Link } from "react-router-dom";
 // import FormFooter from "../../../molecules/auth/FormFooter";
 import { ISignupForm, ISignupData } from "../../../../@types/forms.interface";
 import { Country } from "../../../atoms/inputs/types";
-import PasswordInput from "../../../atoms/inputs/PasswordInput";
+import "../../style.css";
+import CountrySelectInput from "../../../atoms/inputs/CountryInput";
 import "../../style.css";
 import { useSignup } from "../../../../hooks/auth/useSignUp";
+import PasswordInput from "../../../atoms/inputs/PasswordInput";
+
 
 const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
   const [form, setForm] = useState<ISignupData>({

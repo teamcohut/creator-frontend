@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import SideNav from '../../organisms/dashboard/SideNav'
-import TopNav from '../../organisms/dashboard/TopNav'
 import Checklist from '../../organisms/dashboard/Checklist'
 import './index.css'
 import { Outlet } from 'react-router-dom'
+import TopNav from '../../organisms/dashboard/TopNav'
 
 const DashboardTemplate: FC = () => {
   return (

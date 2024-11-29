@@ -43,6 +43,8 @@
   --success-600: #00b382;
   --success-700: #008f6c;
 
+  --error-300: #FF9D9F;
+
   --fushia-500: #c848ff;
 
   --rose-500: #ff48bc;
@@ -247,6 +249,10 @@ body {
 
 .success-700 {
   color: var(--success-700);
+}
+
+.error-300 {
+  color: var(--error-300);
 }
 
 .fushia-500 {

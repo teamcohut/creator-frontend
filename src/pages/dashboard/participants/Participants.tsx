@@ -1,12 +1,11 @@
 import React from "react";
 import { IParticipant } from "../../../@types/participants.interface";
-import DashboardTemplate from "../../../components/templates/DashboardTemplate";
 import "./index.css";
 import Table from "../../../components/organisms/dashboard/Table";
-import Header from "../../../components/organisms/dashboard/Header";
-import Overview from "../../../components/organisms/dashboard/Overview";
 import { FiPlus } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
+import Overview from "../../../components/organisms/dashboard/Overview";
+import Header from "../../../components/organisms/dashboard/Header";
 const ParticipantsPage: React.FC = () => {
   const participants: IParticipant[] = [
     {
