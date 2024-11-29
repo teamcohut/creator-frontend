@@ -15,6 +15,7 @@ import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
 import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { AuthContextProvider } from './context/auth/AuthState';
+import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
         {
           path: "calendar",
           element: <Calendar />
+        },
+        {
+          path: "curriculum",
+          element: <Curriculum />
         }
       ]
     },
@@ -74,7 +79,7 @@ function App() {
         },
       ],
     },
-     {
+    {
       path: '/preview',
       element: <Preview />,
     }, {

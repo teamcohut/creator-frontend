@@ -8,14 +8,19 @@ export interface INavLink {
 }
 
 export interface IHeader {
-    title: string;
-    subtitle: string;
-    children: ReactNode;
+  title: string;
+  subtitle: string;
+  children: ReactNode;
+}
+
+export interface ITitle {
+  text: string;
+  children?: ReactNode;
 }
 
 export interface IChecklistItem {
-    checked: boolean;
-    title: string;
+  checked: boolean;
+  title: string;
 }
 
 type IMenu = {
@@ -27,10 +32,10 @@ type IMenu = {
 export interface IOverviewCard {
   icon: ReactElement<any>;
   title: string;
-  subtitle: string | number;
+  subtitle?: string | number;
   iconColor: string;
   iconBgColor: string;
-  iconBorderColor: string;
+  iconBorderColor?: string;
   children?: ReactNode;
 }
 
