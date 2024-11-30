@@ -28,14 +28,14 @@ export interface IPasswordInput {
 }
 
 export interface IOtherInput {
-    id: string,
-    label?: string,
-    inpType: string,
-    placeHolder: string,
-    other?: any,
-    icon?: React.ReactNode,
-    onchange(e: ChangeEvent<HTMLInputElement>): void,
-  }
+  id: string,
+  label?: string,
+  inpType: string,
+  placeHolder: string,
+  other?: any,
+  icon?: React.ReactNode,
+  onchange(e: ChangeEvent<HTMLInputElement>): void,
+}
 
 export interface IRadioInput {
   icon?: React.ReactNode,
@@ -47,32 +47,32 @@ export interface IRadioInput {
 }
 
 export interface ISelectInput {
-    id: string,
-    options: Array<option>,
-    icon?: React.ReactNode,
-    label?: string,
-    onchange(e: ChangeEvent<HTMLSelectElement>): void,
-  }
-  
-  type option = {
-    value: string,
-    content: string
-  }
+  id: string,
+  options: Array<option>,
+  icon?: React.ReactNode,
+  label?: string,
+  onchange(e: ChangeEvent<HTMLSelectElement>): void,
+}
 
-  export interface ICountryInput {
-    id: string,
-    options?: Array<option>,
-    icon?: React.ReactNode,
-    label?: string,
-    onchange: (countryCode: Country) => void; 
-  } 
+type option = {
+  value: string,
+  content: string
+}
+
+export interface ICountryInput {
+  id: string,
+  options?: Array<option>,
+  icon?: React.ReactNode,
+  label?: string,
+  onchange: (countryCode: Country) => void;
+}
 
 export interface Country {
   name: string;
   flag: string;
   code: string;
 }
-  
+
 
 export interface ITextAreaInput {
   id: string
@@ -94,4 +94,11 @@ export interface ISearchInput {
   placeHolder: string,
   label?: string,
   onchange(e: ChangeEvent<HTMLInputElement>): void
+}
+
+export interface IDragnDrop {
+  id: string
+  label?: string,
+  detail: string,
+  onchange?: (file: File | null) => void;
 }

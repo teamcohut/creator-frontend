@@ -4,22 +4,20 @@ import { axiosPrivate } from "../../api/axios";
 import AuthTemplate from '../../components/templates/AuthTemplate'
 import SuccessCard from '../../components/molecules/auth/SuccessCard';
 import Button from '../../components/atoms/Button';
-import { useAuthContext } from '../../hooks/auth/useAuthContext';
 import { FiLoader, FiShieldOff, FiUserCheck } from 'react-icons/fi';
 import EmailInput from '../../components/atoms/inputs/EmailInput';
 
 const VerifyMail = () => {
-    const [status, setstatus] = useState<status>("loading")
-    const navigate = useNavigate()
-    const {dispatch} = useAuthContext();
+  const [status, setstatus] = useState<status>("loading")
+  const navigate = useNavigate()
 
-    const route = useParams()
-    const { id } = route
+  const route = useParams()
+  const { id } = route
 
 
-    useEffect(() => {
-      verifyMail()
-    }, [])
+  useEffect(() => {
+    verifyMail()
+  }, [])
 
     const verifyMail = async () => {
       try {
@@ -41,7 +39,7 @@ const VerifyMail = () => {
         }
       }
     }
-    
+
 
     if (status === 'loading') {
       return (

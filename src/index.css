@@ -46,6 +46,7 @@
   --error-300: #FF9D9F;
 
   --fushia-500: #c848ff;
+  --fushia-600: #AA16E3;
 
   --rose-500: #ff48bc;
 }
@@ -257,6 +258,10 @@ body {
 
 .fushia-500 {
   color: var(--fushia-500);
+}
+
+.fushia-600 {
+  color: var(--fushia-600);
 }
 
 .rose-500 {

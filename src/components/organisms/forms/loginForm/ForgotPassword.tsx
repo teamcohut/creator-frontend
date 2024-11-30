@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import EmailInput from '../../../atoms/inputs/EmailInput'
 import Button from '../../../atoms/Button'
 import { FiArrowLeft } from 'react-icons/fi'
-import axiosPublic, { axiosPrivate } from '../../../../api/axios'
+import axiosPublic from '../../../../api/axios'
 import { IForgotPassword } from '../../../../@types/auth.interface'
 
 const ForgotPassword: FC<IForgotPassword> = ({ verify }) => {

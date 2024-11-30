@@ -1,0 +1,27 @@
+.setup-program-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+    text-align: center;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+}
+
+.icon-left {
+    transform: rotate(-10deg); 
+    font-size: 2.5rem;
+    color: var(--fushia-600);
+}
+
+.icon-right {
+    transform: rotate(10deg); 
+    font-size: 2.5rem;
+    color: var(--rose-500);
+}

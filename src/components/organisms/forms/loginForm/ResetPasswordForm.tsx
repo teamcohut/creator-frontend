@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
-import FormFooter from '../../../molecules/auth/FormFooter'
 import { IResetPasswordForm } from '../../../../@types/auth.interface'
 import { axiosPrivate } from '../../../../api/axios'
 
