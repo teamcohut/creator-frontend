@@ -2,21 +2,16 @@ import React, { ChangeEvent, useState } from "react";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
 import { Link } from "react-router-dom";
-// import FormFooter from "../../../molecules/auth/FormFooter";
-import { ISignupForm, ISignupData } from "../../../../@types/forms.interface";
-import { Country } from "../../../atoms/inputs/types";
-import "../../style.css";
-import CountrySelectInput from "../../../atoms/inputs/CountryInput";
 import "../../style.css";
 import { useSignup } from "../../../../hooks/auth/useSignUp";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
+import { ISignupData } from "../../../../@types/auth.interface";
 
 
-const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
+const SignUpForm: React.FC = () => {
   const [form, setForm] = useState<ISignupData>({
     email: "",
     password: "",
-    country: "Nigeria",
   });
   const [isvalid, setIsvalid] = useState(false);
   const { signup, error, isLoading } = useSignup();
@@ -31,9 +26,9 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { email, password, country } = form;
+    const { email, password } = form;
     if (isvalid) {
-      await signup(email, password, country, submitForm);
+      await signup(email, password);
       console.log("Form values:", form);
     } else {
       console.log("Passwords do not match!");
@@ -91,12 +86,6 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
           placeHolder="password"
         />
 
-        <CountrySelectInput
-          label="Where are you located at? (Optional)"
-          id="country"
-          onchange={(e: Country) => handleInputChange("country", e.name)}
-        />
-
       </div>
 
       {error && <div>{error}</div>}
@@ -118,8 +107,6 @@ const SignUpForm: React.FC<ISignupForm> = ({ submitForm }) => {
         </span>
 
       </div>
-
-      {/* <FormFooter /> */}
       
     </form>
   );

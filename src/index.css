@@ -298,6 +298,10 @@ body {
   font-size: clamp(32px, 4.5vw, 48px);
 }
 
+.fs-icon {
+  font-size: clamp(60px, 8vw, 80px);
+}
+
 /* TEXTS */
 /* ================ */
 

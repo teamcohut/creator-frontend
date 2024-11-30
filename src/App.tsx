@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
-import LoginPage from './components/organisms/forms/loginForm/LoginPage';
+// import LoginPage from './components/organisms/forms/loginForm/LoginPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Preview from './pages/Preview';
 import VerifyMail from './pages/auth/VerifyMail';
@@ -12,12 +12,18 @@ import Sessions from './pages/dashboard/sessions/Sessions';
 import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { AuthContextProvider } from './context/auth/AuthState';
 import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
+import RequireAuth from './pages/auth/RequireAuth';
+import ResetPassword from './pages/auth/ResetPassword';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <DashboardTemplate />,
+      element: (
+        <RequireAuth>
+          <DashboardTemplate />
+        </RequireAuth>
+      ),
       children: [
         {
           path: "",
@@ -36,7 +42,8 @@ function App() {
           element: <Sessions />,
         },
       ],
-    },{
+    }, 
+    {
       path: "calendar",
       element: <Calendar />
     },
@@ -44,30 +51,29 @@ function App() {
       path: "curriculum",
       element: <Curriculum />
     },
-{
-  path: "/signup",
-    element: <SignUp />,
-}, {
-  path: "/login",
-    element: <Login />,
-      children: [
-        {
-          path: "",
-          element: <LoginPage />,
-        },
-      ],
+    {
+      path: "/signup",
+      element: <SignUp />
+    }, 
+    {
+      path: "/login",
+      element: <Login />
+    }, 
+    {
+      path: "/reset-password",
+      element: <ResetPassword />
     },
-{
-  path: "/activate/:id",
-    element: <VerifyMail />
-},
-{
-  path: '/preview',
-    element: <Preview />
-}, {
-  path: '*',
-    element: <NotFound />
-}
+    {
+      path: "/activate/:id",
+      element: <VerifyMail />
+    },
+    {
+      path: '/preview',
+      element: <Preview />
+    }, {
+      path: '*',
+      element: <NotFound />
+    }
 
 
   ]);

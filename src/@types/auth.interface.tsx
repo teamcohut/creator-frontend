@@ -10,8 +10,8 @@ export interface IAuthContext {
 export interface ISuccessCard {
     title: string,
     description: string,
-    children?: React.ReactNode,
-    icon: React.ReactNode
+    children?: ReactNode,
+    icon: ReactNode
 }
 
 export interface IAuthState {
@@ -28,4 +28,21 @@ export type TAuthAction =
 
 export interface IUserChoice {
   onSubmit: (selected: string) => void
+}
+
+export interface ISignupForm {
+  submitForm: () => void;
+}
+
+export interface ISignupData {
+  email: string;
+  password: string;
+}
+
+export interface IForgotPassword {
+  verify: () => void;
+}
+
+export interface IResetPasswordForm {
+  successful: () => void;
 }

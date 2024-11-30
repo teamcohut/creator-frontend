@@ -5,9 +5,10 @@ export interface IButton {
     action: ()=> void,
     type:  "submit" | "reset" | "button",
     fill: boolean,
-    outline?: 'white',
+    outline?: 'white' | 'primary',
     border?: boolean,
-    gap?: boolean
+    gap?: boolean,
+    width?: number
   }
 
 export interface IFilterButton {

@@ -7,15 +7,14 @@ export const useSignup = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { dispatch } = useAuthContext();
 
-    const signup = async (email:string, password:string, country:string, submitForm: SubmitForm) => {
+    const signup = async (email:string, password:string) => {
         setIsLoading(true)
         setError(null)
 
            try {
             const response = await axiosPublic.post('/auth/register', {
                 email,
-                password,
-                country
+                password
             })
             const json = response.data
             if(response.status === 200) {
@@ -23,7 +22,6 @@ export const useSignup = () => {
                 dispatch({type: 'LOGIN', payload: json})
                 setIsLoading(false)
                 console.log("signup successful:", response.data)
-                submitForm()
             }
            } catch (error) {
             console.log(error);
@@ -33,5 +31,3 @@ export const useSignup = () => {
 
     return {signup, error, isLoading}
 }
-
-type SubmitForm = () => void;

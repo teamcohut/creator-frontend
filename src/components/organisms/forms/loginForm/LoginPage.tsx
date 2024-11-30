@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../../../atoms/Button';
 import EmailInput from '../../../atoms/inputs/EmailInput';
 import PasswordInput from '../../../atoms/inputs/PasswordInput';
-import FormFooter from '../../../molecules/auth/FormFooter';
 import { useLogin } from '../../../../hooks/auth/useLogin'
 import '../../style.css';
 
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate()
   const {login, error, isLoading} = useLogin();
 
   const [email, setEmail] = useState("");
@@ -17,7 +15,6 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // navigate('')
     await login(email, password)
   }
   return (
@@ -42,14 +39,13 @@ const LoginPage: React.FC = () => {
                   onchange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
                   placeHolder='password' />
 
-                <span><Link className='primary-700 text-decoration-none' to={"/login/forgot-password"}>Forgot password?</Link></span>
+                <span><Link className='primary-700 text-decoration-none' to={"/reset-password"}>Forgot password?</Link></span>
             </div>
             {error && <div className=''>{error}</div>}
             <div className="d-flex flex-column align-items-center gap-3">
               <Button children='Sign in' type='submit' fill={true} action={()=>{}} />
               <span>Don't have an account? <Link className='primary-700 text-decoration-none' to={"/signup"}>Create one here</Link></span>
             </div>
-            <FormFooter />
     </form>
   )
 }

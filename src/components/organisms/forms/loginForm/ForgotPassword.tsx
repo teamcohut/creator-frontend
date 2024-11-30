@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import EmailInput from '../../../atoms/inputs/EmailInput'
 import Button from '../../../atoms/Button'
 import { FiArrowLeft } from 'react-icons/fi'
-import FormFooter from '../../../molecules/auth/FormFooter'
+import axiosPublic, { axiosPrivate } from '../../../../api/axios'
+import { IForgotPassword } from '../../../../@types/auth.interface'
 
-const ForgotPassword: React.FC = () => {
+const ForgotPassword: FC<IForgotPassword> = ({ verify }) => {
+  const [email, setEmail] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = () => {
-    navigate('')
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    setEmail(value)
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    try {
+      const response = await axiosPublic.post('/auth/forgot-password', {email})
+      if (response.data.error) {
+        console.log(response.data);
+        
+      }
+      verify()
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
   return (
     <form className='form bg-white d-flex flex-column rounded-5' onSubmit={handleSubmit} action="">
@@ -25,14 +43,13 @@ const ForgotPassword: React.FC = () => {
                 <EmailInput
                   label='Email'
                   id='email'
-                  onchange={(e:any)=>console.log(e.target.value)}
+                  onchange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                   placeholder='user@email.com' />
             </div>
               <div className="d-flex flex-column align-items-center gap-3">
                 <Button children='Send email' type='submit' action={()=>{}} fill={true} />
                 <span>Remember your password? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in here</Link></span>
               </div>
-              <FormFooter />
     </form>
   )
 }
