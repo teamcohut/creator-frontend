@@ -163,4 +163,11 @@
     .view-details span {
       margin-right: 5px;
     }
+
+
+    /* CONGRATULATIONS */
+    .fiBookOpen {
+      font-size: 60px;
+      color: var(--success-600);
+    }
     

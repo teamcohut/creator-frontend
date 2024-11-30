@@ -1,97 +1,97 @@
-import React, { useState } from "react";
-import { FiPlus, FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import Header from '../Header';
-import Button from "../../../../components/atoms/Button";
-import './calendar.css';
+// import React, { useState } from "react";
+// import { FiPlus, FiArrowLeft, FiArrowRight } from "react-icons/fi";
+// import Header from '../Header';
+// import Button from "../../../../components/atoms/Button";
+// import './calendar.css';
 
-const CalendarPage: React.FC = () => {
-    const [currentDate, setCurrentDate] = useState(new Date());
+// const CalendarPage: React.FC = () => {
+//     const [currentDate, setCurrentDate] = useState(new Date());
 
-    const changeWeek = (direction: "prev" | "next") => {
-        const newDate = new Date(currentDate);
-        newDate.setDate(currentDate.getDate() + (direction === "next" ? 7 : -7));
-        setCurrentDate(newDate);
-    };
+//     const changeWeek = (direction: "prev" | "next") => {
+//         const newDate = new Date(currentDate);
+//         newDate.setDate(currentDate.getDate() + (direction === "next" ? 7 : -7));
+//         setCurrentDate(newDate);
+//     };
 
-    const getWeekRange = (date: Date) => {
-        const startOfWeek = new Date(date);
-        startOfWeek.setDate(date.getDate() - date.getDay());
-        const endOfWeek = new Date(startOfWeek);
-        endOfWeek.setDate(startOfWeek.getDate() + 6);
-        return {
-            start: startOfWeek.toLocaleDateString(undefined, { weekday: "short", month: "long", day: "numeric" }),
-            end: endOfWeek.toLocaleDateString(undefined, { weekday: "short", month: "long", day: "numeric" }),
-        };
-    };
+//     const getWeekRange = (date: Date) => {
+//         const startOfWeek = new Date(date);
+//         startOfWeek.setDate(date.getDate() - date.getDay());
+//         const endOfWeek = new Date(startOfWeek);
+//         endOfWeek.setDate(startOfWeek.getDate() + 6);
+//         return {
+//             start: startOfWeek.toLocaleDateString(undefined, { weekday: "short", month: "long", day: "numeric" }),
+//             end: endOfWeek.toLocaleDateString(undefined, { weekday: "short", month: "long", day: "numeric" }),
+//         };
+//     };
 
-    const weekRange = getWeekRange(currentDate);
+//     const weekRange = getWeekRange(currentDate);
 
-    return (
-        <div className="calendar-page">
-            <Header title="Calendar" subtitle="View and manage your calendar here">
-                <Button action={() => { }} fill gap type="button" border={false}>
-                    <FiPlus className="fs-body" />
-                    Add Task
-                </Button>
-            </Header>
+//     return (
+//         <div className="calendar-page">
+//             <Header title="Calendar" subtitle="View and manage your calendar here">
+//                 <Button action={() => { }} fill gap type="button" border={false}>
+//                     <FiPlus className="fs-body" />
+//                     Add Task
+//                 </Button>
+//             </Header>
 
-            <div className="week-schedule">
-                <h2>Weekly Schedule</h2>
-                <div className="week-details">
-                    <span>{`${weekRange.start} - ${weekRange.end}`}</span>
-                    <div className="controls">
-                        <p>Upcoming Deadline</p>
-                        <div className="arrows">
-                            <FiArrowLeft onClick={() => changeWeek("prev")} />
-                            <FiArrowRight onClick={() => changeWeek("next")} />
-                        </div>
-                    </div>
-                </div>
-            </div>
+//             <div className="week-schedule">
+//                 <h2>Weekly Schedule</h2>
+//                 <div className="week-details">
+//                     <span>{`${weekRange.start} - ${weekRange.end}`}</span>
+//                     <div className="controls">
+//                         <p>Upcoming Deadline</p>
+//                         <div className="arrows">
+//                             <FiArrowLeft onClick={() => changeWeek("prev")} />
+//                             <FiArrowRight onClick={() => changeWeek("next")} />
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
 
-            <div className="calendar-grid">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                <select
-                                    onChange={(e) => {
-                                        console.log(e.target.value);
-                                    }}
-                                >
-                                    <option value="GMT">GMT</option>
-                                    <option value="PST">PST</option>
-                                    <option value="EST">EST</option>
-                                </select>
-                            </th>
-                            {[...Array(7)].map((_, i) => {
-                                const day = new Date(currentDate);
-                                day.setDate(currentDate.getDate() - currentDate.getDay() + i);
-                                return (
-                                    <th key={i}>
-                                        {day.toLocaleDateString(undefined, { weekday: "short", day: "numeric" })}
-                                    </th>
-                                );
-                            })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {[...Array(12)].map((_, i) => (
-                            <tr key={i}>
-                                <td>{`${7 + i}:00 AM`}</td>
-                                {[...Array(7)].map((_, j) => (
-                                    <td key={j}>&nbsp;</td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-};
+//             <div className="calendar-grid">
+//                 <table>
+//                     <thead>
+//                         <tr>
+//                             <th>
+//                                 <select
+//                                     onChange={(e) => {
+//                                         console.log(e.target.value);
+//                                     }}
+//                                 >
+//                                     <option value="GMT">GMT</option>
+//                                     <option value="PST">PST</option>
+//                                     <option value="EST">EST</option>
+//                                 </select>
+//                             </th>
+//                             {[...Array(7)].map((_, i) => {
+//                                 const day = new Date(currentDate);
+//                                 day.setDate(currentDate.getDate() - currentDate.getDay() + i);
+//                                 return (
+//                                     <th key={i}>
+//                                         {day.toLocaleDateString(undefined, { weekday: "short", day: "numeric" })}
+//                                     </th>
+//                                 );
+//                             })}
+//                         </tr>
+//                     </thead>
+//                     <tbody>
+//                         {[...Array(12)].map((_, i) => (
+//                             <tr key={i}>
+//                                 <td>{`${7 + i}:00 AM`}</td>
+//                                 {[...Array(7)].map((_, j) => (
+//                                     <td key={j}>&nbsp;</td>
+//                                 ))}
+//                             </tr>
+//                         ))}
+//                     </tbody>
+//                 </table>
+//             </div>
+//         </div>
+//     );
+// };
 
-export default CalendarPage;
+// export default CalendarPage;
 
 
 
@@ -329,92 +329,92 @@ export default CalendarPage;
 
 
 
-// // import React, { useState } from 'react';
-// // import { Container, Row, Col, Dropdown, Table } from 'react-bootstrap';
-// // import './calendar.css';
-// // import Header from '../Header';
-// // import Button from "../../../../components/atoms/Button";
-// // import { FiPlus } from 'react-icons/fi';
+import React, { useState } from 'react';
+import { Container, Row, Col, Dropdown, Table } from 'react-bootstrap';
+import './calendar.css';
+import Header from '../Header';
+import Button from "../../../../components/atoms/Button";
+import { FiPlus } from 'react-icons/fi';
 
-// // interface Event {
-// //     day: number;
-// //     time: string;
-// //     title: string;
-// // }
+interface Event {
+    day: number;
+    time: string;
+    title: string;
+}
 
-// // const timezones = ['GMT', 'PST', 'EST', 'CET'];
+const timezones = ['GMT', 'PST', 'EST', 'CET'];
 
-// // const Calendar: React.FC = () => {
-// //     const [events, setEvents] = useState<Event[]>([]);
-// //     const hours = Array.from({ length: 12 }, (_, i) => `${i + 7} AM`);
+const Calendar: React.FC = () => {
+    const [events, setEvents] = useState<Event[]>([]);
+    const hours = Array.from({ length: 12 }, (_, i) => `${i + 7} AM`);
 
-// //     const handleAddEvent = (day: number, time: string) => {
-// //         const title = prompt('Enter Event Title:');
-// //         if (title) {
-// //             setEvents([...events, { day, time, title }]);
-// //         }
-// //     };
+    const handleAddEvent = (day: number, time: string) => {
+        const title = prompt('Enter Event Title:');
+        if (title) {
+            setEvents([...events, { day, time, title }]);
+        }
+    };
 
-// //     const getEvent = (day: number, time: string) => {
-// //         return events.find(event => event.day === day && event.time === time);
-// //     };
+    const getEvent = (day: number, time: string) => {
+        return events.find(event => event.day === day && event.time === time);
+    };
 
-// //     return (
-// //         <Container fluid className="p-3">
+    return (
+        <Container fluid className="p-3">
 
-// //             <Header title="Calendar" subtitle="View and manage your calendar here">
-// //                 <Button action={() => { }} fill gap type="button" border={false}>
-// //                     <FiPlus className="fs-body" />
-// //                     Add Task
-// //                 </Button>
-// //             </Header>
+            <Header title="Calendar" subtitle="View and manage your calendar here">
+                <Button action={() => { }} fill gap type="button" border={false}>
+                    <FiPlus className="fs-body" />
+                    Add Task
+                </Button>
+            </Header>
 
-// //             <Table bordered>
-// //                 <thead>
-// //                     <tr>
-// //                         <th className="time-column">
-// //                             <Dropdown>
-// //                                 <Dropdown.Toggle variant="primary" id="dropdown-basic">
-// //                                     GMT
-// //                                 </Dropdown.Toggle>
-// //                                 <Dropdown.Menu>
-// //                                     {timezones.map((timezone) => (
-// //                                         <Dropdown.Item key={timezone}>{timezone}</Dropdown.Item>
-// //                                     ))}
-// //                                 </Dropdown.Menu>
-// //                             </Dropdown>
-// //                         </th>
-// //                         <th>Sunday</th>
-// //                         <th>Monday</th>
-// //                         <th>Tuesday</th>
-// //                         <th>Wednesday</th>
-// //                         <th>Thursday</th>
-// //                         <th>Friday</th>
-// //                         <th>Saturday</th>
-// //                     </tr>
-// //                 </thead>
-// //                 <tbody>
-// //                     {hours.map((hour, index) => (
-// //                         <tr key={index}>
-// //                             <td className="time-column">{hour}</td>
-// //                             {Array.from({ length: 7 }).map((_, dayIndex) => {
-// //                                 const event = getEvent(dayIndex, hour);
-// //                                 return (
-// //                                     <td
-// //                                         key={dayIndex}
-// //                                         className="event-slot"
-// //                                         onClick={() => handleAddEvent(dayIndex, hour)}
-// //                                     >
-// //                                         {event && <span>{event.title}</span>}
-// //                                     </td>
-// //                                 );
-// //                             })}
-// //                         </tr>
-// //                     ))}
-// //                 </tbody>
-// //             </Table>
-// //         </Container>
-// //     );
-// // };
+            <Table bordered>
+                <thead>
+                    <tr>
+                        <th className="time-column">
+                            <Dropdown>
+                                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                    GMT
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {timezones.map((timezone) => (
+                                        <Dropdown.Item key={timezone}>{timezone}</Dropdown.Item>
+                                    ))}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </th>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {hours.map((hour, index) => (
+                        <tr key={index}>
+                            <td className="time-column">{hour}</td>
+                            {Array.from({ length: 7 }).map((_, dayIndex) => {
+                                const event = getEvent(dayIndex, hour);
+                                return (
+                                    <td
+                                        key={dayIndex}
+                                        className="event-slot"
+                                        onClick={() => handleAddEvent(dayIndex, hour)}
+                                    >
+                                        {event && <span>{event.title}</span>}
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </Container>
+    );
+};
 
-// // export default Calendar;
+export default Calendar;
