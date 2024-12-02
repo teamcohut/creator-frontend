@@ -214,3 +214,32 @@
   .table-div tr:hover {
     background-color: var(--hover-40);
   }
+
+  /* MODAL */
+  /* ==================== */
+
+  .modal-bg {
+    background-color: #19165040;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .modal-div {
+    animation: modal 1s 1;
+  }
+
+  @keyframes modal {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+  }

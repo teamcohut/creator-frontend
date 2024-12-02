@@ -45,4 +45,6 @@ export interface IForgotPassword {
 
 export interface IResetPasswordForm {
   successful: () => void;
+  token: string | null;
+  id: string | null;
 }

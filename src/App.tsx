@@ -9,10 +9,11 @@ import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
 import Sessions from './pages/dashboard/sessions/Sessions';
-import Calendar from './components/organisms/dashboard/Calendar/Calendar';
+// import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { AuthContextProvider } from './context/auth/AuthState';
 import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
 import RequireAuth from './pages/auth/RequireAuth';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 
 function App() {
@@ -43,10 +44,10 @@ function App() {
         },
       ],
     }, 
-    {
-      path: "calendar",
-      element: <Calendar />
-    },
+    // {
+    //   path: "calendar",
+    //   element: <Calendar />
+    // },
     {
       path: "curriculum",
       element: <Curriculum />
@@ -58,6 +59,10 @@ function App() {
     {
       path: "/login",
       element: <Login />
+    }, 
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />
     }, 
     {
       path: "/reset-password",

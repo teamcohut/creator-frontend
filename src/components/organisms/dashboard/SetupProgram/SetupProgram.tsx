@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { FiUser, FiBookOpen } from 'react-icons/fi'
 import Button from '../../../atoms/Button'
 import './SetupProgram.css'
+import { ISetupProgram } from '../../../../@types/dashboard.interface'
 
-const SetupProgram = () => {
+const SetupProgram: FC<ISetupProgram> = ({ openModal }) => {
     return (
         <div className='setup-program-container gap-2'>
             <h3 className='manrope-600'>Welcome Evergreen</h3>
@@ -14,7 +15,7 @@ const SetupProgram = () => {
             </div>
             <p>With Cohut, Create and Launch Your Program in 5 minutes. Start Today</p>
             <div>
-                <Button children='Setup Your Program' type='submit' action={() => { }} fill={true} />
+                <Button children='Setup Your Program' type='button' action={openModal} fill={true} />
             </div>
         </div>
     )

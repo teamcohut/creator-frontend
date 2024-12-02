@@ -4,8 +4,8 @@ import Header from '../Header';
 import { FiPlus } from 'react-icons/fi';
 import OverviewCard from '../../../molecules/dashboard/OverviewCard';
 import { cardData } from './DashBoardCard';
-import Title from '../Title';
-import Calendar from '../Calendar/Calendar';
+// import Title from '../Title';
+// import Calendar from '../Calendar/Calendar';
 
 const DashBoard = () => {
     return (
@@ -23,7 +23,7 @@ const DashBoard = () => {
                 ))}
             </div>
 
-            <Calendar />
+            {/* <Calendar /> */}
         </div>
     )
 }

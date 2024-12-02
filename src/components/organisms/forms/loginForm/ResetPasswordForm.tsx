@@ -5,7 +5,7 @@ import Button from '../../../atoms/Button'
 import { IResetPasswordForm } from '../../../../@types/auth.interface'
 import { axiosPrivate } from '../../../../api/axios'
 
-const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful }) => {
+const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) => {
   const [form, setForm] = useState({password: ''})
   const [isvalid, setIsvalid] = useState(false)
 

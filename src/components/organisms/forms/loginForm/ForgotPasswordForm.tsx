@@ -6,7 +6,7 @@ import { FiArrowLeft } from 'react-icons/fi'
 import axiosPublic from '../../../../api/axios'
 import { IForgotPassword } from '../../../../@types/auth.interface'
 
-const ForgotPassword: FC<IForgotPassword> = ({ verify }) => {
+const ForgotPasswordForm: FC<IForgotPassword> = ({ verify }) => {
   const [email, setEmail] = useState('')
   const navigate = useNavigate()
 
@@ -54,4 +54,4 @@ const ForgotPassword: FC<IForgotPassword> = ({ verify }) => {
   )
 }
 
-export default ForgotPassword
+export default ForgotPasswordForm

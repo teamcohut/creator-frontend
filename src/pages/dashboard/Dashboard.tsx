@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/atoms/Button";
 import { FiChevronDown, FiDownload, FiPlus } from "react-icons/fi";
 import CourseDisplay from "../../components/organisms/dashboard/CourseDisplay";
@@ -7,12 +7,49 @@ import "./index.css";
 import RecentActivity from "../../components/organisms/dashboard/RecentActivity";
 import Overview from "../../components/organisms/dashboard/Overview";
 import Header from "../../components/organisms/dashboard/Header";
+import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBoard";
+import SetupProgram from "../../components/organisms/dashboard/SetupProgram/SetupProgram";
+import { AuthContext } from "../../context/auth/AuthContext";
+import Modal from "../../components/organisms/dashboard/Modal";
+import ProgramDetail from "../../components/organisms/forms/CustomizeProgram/programdetails";
 
 const Dashboard = () => {
+  const [modalOpen, setmodalOpen] = useState<boolean>(false)
+  const { user } = useContext(AuthContext)
+  console.log(user);
+  
+
+  const openModal = () => {
+    console.log(modalOpen);
+    setmodalOpen(true)
+    
+  }
+
   return (
     <>
-      <>
-        <Header
+        {
+          <>
+          {/* <DashBoard /> */}
+        
+          <SetupProgram openModal={openModal} />
+
+          <Modal open={modalOpen}>
+            <ProgramDetail />
+          </Modal>
+
+          </>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /* <Header
           title="Good morning Evergreen,"
           subtitle={`Here’s an overview of your program, My First Bootcamp`}
         >
@@ -34,8 +71,7 @@ const Dashboard = () => {
             <RecentActivity />
             <DeadlineDisplay />
           </div>
-        </div>
-      </>
+        </div> */}
     </>
   );
 };

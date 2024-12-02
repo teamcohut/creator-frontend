@@ -50,3 +50,12 @@ export interface IinfoCardProps {
   isOngoing?: boolean
   dateOfSession?: string
 }
+
+export interface ISetupProgram {
+  openModal: ()=> void
+}
+
+export interface IModal {
+  open: boolean;
+  children: ReactNode;
+}
