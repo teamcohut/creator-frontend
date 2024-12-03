@@ -7,7 +7,7 @@ import { ISetupProgram } from '../../../../@types/dashboard.interface'
 const SetupProgram: FC<ISetupProgram> = ({ openModal }) => {
     return (
         <div className='setup-program-container gap-2'>
-            <h3 className='manrope-600'>Welcome Evergreen</h3>
+            <h3 className='manrope-600'>Welcome Admin</h3>
             <div className='icon-container'>
                 <FiUser className='icon-left' />
                 <h2 className='manrope-600'>Setup Your Program</h2>

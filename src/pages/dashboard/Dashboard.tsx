@@ -10,45 +10,71 @@ import React, { useContext, useState } from "react";
 import "./index.css";
 import SetupProgram from "../../components/organisms/dashboard/SetupProgram/SetupProgram";
 import { AuthContext } from "../../context/auth/AuthContext";
-import Modal from "../../components/organisms/dashboard/Modal";
+import Modal from "../../components/organisms/dashboard/Modal/Modal";
 import ProgramDetail from "../../components/organisms/forms/CustomizeProgram/programdetails";
+import CustomizeProgram from "../../components/organisms/forms/CustomizeProgram/CustomizeProgram";
 
 const Dashboard = () => {
-  const [modalOpen, setmodalOpen] = useState<boolean>(false)
-  const { user } = useContext(AuthContext)
-  console.log(user);
-  
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [currentStep, setCurrentStep] = useState<number>(0); // Step-based state
+  const { user } = useContext(AuthContext);
 
-  const openModal = () => {
-    console.log(modalOpen);
-    setmodalOpen(true)
-    
-  }
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  // Step-based component rendering
+  const renderStep = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <SetupProgram
+            openModal={() => {
+              openModal();
+              setCurrentStep(1); // Move to the next step
+            }}
+          />
+        );
+      case 1:
+        return (
+          <Modal open={modalOpen}>
+            <ProgramDetail
+              onContinue={() => {
+                closeModal();
+                setCurrentStep(2);
+              }}
+            />
+          </Modal>
+        );
+      case 2:
+        return <CustomizeProgram />;
+      default:
+        return <div>Unknown step</div>;
+    }
+  };
 
   return (
     <>
-        {
-          <>
-          {/* <DashBoard /> */}
-        
-          <SetupProgram openModal={openModal} />
+      <>
+        {/* <DashBoard /> */}
 
-          <Modal open={modalOpen}>
-            <ProgramDetail />
-          </Modal>
+        {renderStep()}
+        {/* <SetupProgram openModal={openModal} /> */}
+        {/* <Modal open={modalOpen}> */}
+        {/* <button onClick={closeModal} className="close-btn">Close</button> */}
+        {/* <ProgramDetail /> */}
+        {/* </Modal> */}
+      </>
 
-          </>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+      {
+
         /* <Header
           title="Good morning Evergreen,"
           subtitle={`Here’s an overview of your program, My First Bootcamp`}

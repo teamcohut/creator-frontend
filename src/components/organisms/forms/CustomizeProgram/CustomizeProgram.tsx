@@ -6,6 +6,12 @@ import { FiArrowLeft, FiImage } from 'react-icons/fi'
 import '../../style.css'
 import DragNDropInput from '../../../atoms/inputs/DragNDropInput'
 
+
+interface CustomizeProgramProps {
+    onContinue: () => void; // Add this prop
+}
+
+
 const CustomizeProgram = () => {
     const navigate = useNavigate();
     return (
@@ -26,7 +32,7 @@ const CustomizeProgram = () => {
                 >
                     Cohut
                 </Link> */}
-                    <span className="dark-700 back" onClick={() => navigate(-1)}>
+                    <span className="dark-700 back" onClick={() => { }}>
                         <FiArrowLeft /> Back
                     </span>
                 </div>
