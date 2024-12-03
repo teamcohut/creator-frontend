@@ -218,7 +218,7 @@
   /* MODAL */
   /* ==================== */
 
-  .modal-bg {
+  /* .modal-bg {
     background-color: #19165040;
     position: fixed;
     top: 0;
@@ -226,18 +226,60 @@
     right: 0;
     width: 100vw;
     height: 100vh;
-  }
+  } */
 
   .modal-div {
-    animation: modal 1s 1;
   }
+
+  .modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; 
+    z-index: 1000;
+  }
+  
+  .modal-bg.d-flex {
+    display: flex; 
+  }
+  
+  .modal-bg.hidden {
+    display: none; 
+  }
+  
+  .modal-div {
+    animation: modal 0.6s 1;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .close-btn {
+    background: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
 
   @keyframes modal {
     0% {
-        transform: scale(0.8);
+        transform: scale(0.9);
+    }
+    25% {
+        transform: scale(1.03);
     }
     50% {
-        transform: scale(1.2);
+        transform: scale(0.97);
+    }
+    75% {
+        transform: scale(1.02);
     }
     100% {
         transform: scale(1);

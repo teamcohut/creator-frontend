@@ -11,7 +11,7 @@ import Sessions from './pages/dashboard/sessions/Sessions';
 // import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { AuthContextProvider } from './context/auth/AuthState';
 import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
-import RequireAuth from './pages/auth/RequireAuth';
+import RequireAuth from './components/utils/RequireAuth';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import ResendMail from './pages/auth/ResendMail';

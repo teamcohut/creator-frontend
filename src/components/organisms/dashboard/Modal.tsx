@@ -1,20 +1,26 @@
 import React, { FC, useEffect, useState } from "react";
-import './Modal.css';
-import { IModal } from "../../../../@types/dashboard.interface";
+import '../style.css';
+import { IModal } from "../../../@types/dashboard.interface";
 
-const Modal: FC<IModal> = ({ open, children }) => {
-  const [modalOpen, setModalOpen] = useState(open);
+const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
+  // const [modalOpen, setModalOpen] = useState(open);
 
   useEffect(() => {
     setModalOpen(open);
   }, [open]); // Re-render when `open` changes
 
+  useEffect(() => {
+    if (children === <></>) {
+      setModalOpen(false)
+    }
+  }, [children])
+
+
   return (
     <>
       <div
         onClick={() => setModalOpen(false)}
-        className={`modal-bg align-items-center justify-content-center ${modalOpen ? "d-flex" : "hidden"
-          }`}
+        className={`modal-bg align-items-center justify-content-center ${open ? "d-flex" : "hidden"}`}
       >
         <div
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
@@ -41,7 +47,7 @@ export default Modal;
 //     <>
 //       <div
 //         className={`modal-bg align-items-center justify-content-center ${open ? 'd-flex' : 'hidden'}`}
-//         onClick={(e) => e.stopPropagation()} 
+//         onClick={(e) => e.stopPropagation()}
 //       >
 //         <div className="modal-div w-fit h-fit">
 //           {children}

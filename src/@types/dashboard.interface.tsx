@@ -57,5 +57,6 @@ export interface ISetupProgram {
 
 export interface IModal {
   open: boolean;
+  setModalOpen: (open: boolean) => void;
   children: ReactNode;
 }
