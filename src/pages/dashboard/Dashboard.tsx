@@ -1,67 +1,87 @@
-import React, { useContext, useState } from "react";
-// import Button from "../../components/atoms/Button";
-// import { FiChevronDown, FiDownload, FiPlus } from "react-icons/fi";
-// import CourseDisplay from "../../components/organisms/dashboard/CourseDisplay";
-// import DeadlineDisplay from "../../components/organisms/dashboard/upcomingDeadline/DeadlineDisplay";
-// import RecentActivity from "../../components/organisms/dashboard/RecentActivity";
-// import Overview from "../../components/organisms/dashboard/Overview";
-// import Header from "../../components/organisms/dashboard/Header";
-// import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBoard";
+import React, { useState } from "react";
 import "./index.css";
 import SetupProgram from "../../components/organisms/dashboard/SetupProgram/SetupProgram";
-import { AuthContext } from "../../context/auth/AuthContext";
 import Modal from "../../components/organisms/dashboard/Modal";
 import ProgramDetail from "../../components/organisms/forms/CustomizeProgram/programdetails";
 import CustomizeProgram from "../../components/organisms/forms/CustomizeProgram/CustomizeProgram";
+import axiosPublic from "../../../src/api/axios";
+
+interface ProgramData {
+  title: string;
+  description: string;
+  cover: File | null;
+  logo: File | null;
+  format: string;
+  communities: string[];
+  certificates: string[];
+}
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [currentStep, setCurrentStep] = useState<number>(0); // Step-based state
-  const { user } = useContext(AuthContext);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [programData, setProgramData] = useState<ProgramData>({
+    title: "",
+    description: "",
+    cover: null,
+    logo: null,
+    format: "hybrid",
+    communities: [],
+    certificates: [],
+  });
 
   const openModal = () => setModalOpen(true);
-  const closeModal = () => {
-    setModalOpen(false)
+  const closeModal = () => setModalOpen(false);
+
+  const handleProgramDetailContinue = (data: { title: string; description: string }) => {
+    setProgramData((prev) => ({ ...prev, ...data }));
+    setCurrentStep(2);
   };
 
-  // Step-based component rendering
-  // const renderStep = () => {
-  //   switch (currentStep) {
-  //     case 0:
-  //       return (
-  //         <SetupProgram
-  //           openModal={() => {
-  //             openModal();
-  //             setCurrentStep(1); // Move to the next step
-  //           }}
-  //         />
-  //       );
-  //     case 1:
-  //       return (
-  //         <Modal open={modalOpen}>
-  //           <ProgramDetail
-  //             onContinue={() => {
-  //               closeModal();
-  //               setCurrentStep(2);
-  //             }}
-  //           />
-  //         </Modal>
-  //       );
-  //     case 2:
-  //       return (
-  //         <Modal open={modalOpen}>
-  //           <CustomizeProgram />
-  //         </Modal>
-  //       );
-  //     default:
-  //       return <div>Unknown step</div>;
-  //   }
-  // };
+  const handleProgramSubmit = async () => {
+    try {
+      const formData = new FormData();
+      Object.keys(programData).forEach((key) => {
+        const value = programData[key as keyof ProgramData];
+        if (value !== null) {
+          if (Array.isArray(value)) {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value as any);
+          }
+        }
+      });
+
+      const response = await axiosPublic.post("/program", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("Program created:", response.data);
+      alert("Program successfully created!");
+
+      // Reset state and close modal
+      setModalOpen(false);
+      setProgramData({
+        title: "",
+        description: "",
+        cover: null,
+        logo: null,
+        format: "hybrid",
+        communities: [],
+        certificates: [],
+      });
+      setCurrentStep(0);
+    } catch (error) {
+      console.error("Error submitting program:", error);
+      alert("Failed to create the program. Please try again.");
+    }
+  };
+
+  const updateProgramData = (data: Partial<ProgramData>) => {
+    setProgramData((prev) => ({ ...prev, ...data }));
+  };
 
   return (
     <>
-      {/* <DashBoard /> */}
-
       <SetupProgram
         openModal={() => {
           openModal();
@@ -70,34 +90,17 @@ const Dashboard = () => {
       />
 
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
-        {
-          currentStep === 1 ?
-            <ProgramDetail
-              onContinue={() => {
-                setCurrentStep(2);
-              }}
-            /> :
-            currentStep === 2 ?
-              <CustomizeProgram /> :
-              <></>
-        }
+        {currentStep === 1 && (
+          <ProgramDetail onContinue={handleProgramDetailContinue} />
+        )}
+        {currentStep === 2 && (
+          <CustomizeProgram
+            programData={programData}
+            onSubmit={handleProgramSubmit}
+            updateProgramData={updateProgramData} // Pass the corrected prop
+          />
+        )}
       </Modal>
-
-      {/* {
-          currentStep === 1?
-          <Modal open={modalOpen} setModalOpen={setModalOpen}>
-            <ProgramDetail
-              onContinue={() => {
-                setCurrentStep(2);
-              }}
-            />
-          </Modal>:
-          currentStep === 2?
-          <Modal open={modalOpen} setModalOpen={setModalOpen}>
-            <CustomizeProgram />
-          </Modal>:
-          <></>
-        } */}
     </>
   );
 };
