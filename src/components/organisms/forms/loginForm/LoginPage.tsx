@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
                   onchange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
                   placeHolder='password' />
 
-                <span><Link className='primary-700 text-decoration-none' to={"/reset-password"}>Forgot password?</Link></span>
+                <span><Link className='primary-700 text-decoration-none' to={"/forgot-password"}>Forgot password?</Link></span>
             </div>
             {error && <div className=''>{error}</div>}
             <div className="d-flex flex-column align-items-center gap-3">

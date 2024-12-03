@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import AuthTemplate from '../../components/templates/AuthTemplate';
 import SuccessCard from '../../components/molecules/auth/SuccessCard';
 import { FiCheckCircle } from 'react-icons/fi';
@@ -13,12 +13,16 @@ const ResetPassword = () => {
     const token = searchParams.get('token')
     const id = searchParams.get('id')
 
-    // if (token == null || id == null) {
-        
-    // }
-
     const success = () => {
         setSuccessful(true)
+    }
+
+    if (token == null || id == null) {
+        return (
+          <AuthTemplate title='The simplest solution is often the best solution.'>
+              <Navigate to={'/login'} />
+          </AuthTemplate>
+      )
     }
 
     if (!successful) {

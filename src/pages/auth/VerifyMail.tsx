@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { axiosPrivate } from "../../api/axios";
+import axiosPublic from "../../api/axios";
 import AuthTemplate from '../../components/templates/AuthTemplate'
 import SuccessCard from '../../components/molecules/auth/SuccessCard';
 import Button from '../../components/atoms/Button';
 import { FiLoader, FiShieldOff, FiUserCheck } from 'react-icons/fi';
-import EmailInput from '../../components/atoms/inputs/EmailInput';
 
 const VerifyMail = () => {
   const [status, setstatus] = useState<status>("loading")
@@ -21,7 +20,7 @@ const VerifyMail = () => {
 
     const verifyMail = async () => {
       try {
-        const response = await axiosPrivate.post(`/auth/activate-account/${id}`)
+        const response = await axiosPublic.post(`/auth/activate-account/${id}`)
         if (!response) {
           navigate('/signup')
         }
@@ -34,9 +33,7 @@ const VerifyMail = () => {
         }
       } catch (error: any) {
         console.log(error);
-        if (error.response?.data.error) {
-          setstatus('error')
-        }
+        setstatus('error')
       }
     }
 
@@ -61,14 +58,26 @@ const VerifyMail = () => {
       return (
         <AuthTemplate title='Launch Your Learning Program In 5 Minutes'>
           <SuccessCard icon={<FiShieldOff className='error-300 fs-icon' />} title='Verification Failed!' description={`Your account could not be verified. \n The verification link you used has expired. To proceed, you can request for a new link to be sent to your mail.`}>
-            <div className='w-75 d-flex flex-column gap-4'>
-              <EmailInput id='email' onchange={()=>{}} placeholder='Email address' />
-              <Button action={()=>{}} children='Resend Mail' type='button' fill={false} border outline='primary' />
+            <div className='w-50'>
+              <Button action={()=>navigate('/resend-mail')} children='Resend Mail' type='button' fill={false} border outline='primary' gap width={192} />
             </div>
           </SuccessCard>
         </AuthTemplate>
       )
-    }
+    } 
+    // else if (status === 'resent') {
+    //   <AuthTemplate title='Launch Your Learning Program In 5 Minutes'>
+    //     <SuccessCard icon={<FiMail className='success-600 fs-icon' />} title="You've got mail" description='You have successfully sent a new verification link to your email'>
+    //       {/* <Button action={()=>{}} children='Sign In' type='button' fill={false} border outline='primary' /> */}
+    //     </SuccessCard>
+    //   </AuthTemplate>
+    // } else if (status === 'unsent') {
+    //   <AuthTemplate title='Launch Your Learning Program In 5 Minutes'>
+    //     <SuccessCard icon={<FiMail className='success-600 fs-icon' />} title="Could not send mail" description='There was an error sending a new verification link to your email'>
+    //       <Button action={resendMail} children='Sign In' type='button' fill={false} border outline='primary' />
+    //     </SuccessCard>
+    //   </AuthTemplate>
+    // }
 
     return (
       <></>

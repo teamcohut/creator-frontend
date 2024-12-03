@@ -7,7 +7,6 @@ import { AuthContext } from '../../context/auth/AuthContext'
 const SignUp = () => {
 
   const { dispatch, user } = useContext(AuthContext)
-  // console.log(dispatch, user);
   
 
   return (

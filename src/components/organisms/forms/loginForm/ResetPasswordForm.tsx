@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom'
 import PasswordInput from '../../../atoms/inputs/PasswordInput'
 import Button from '../../../atoms/Button'
 import { IResetPasswordForm } from '../../../../@types/auth.interface'
-import { axiosPrivate } from '../../../../api/axios'
+import axiosPublic, { axiosPrivate } from '../../../../api/axios'
 
 const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) => {
-  const [form, setForm] = useState({password: ''})
+  const [password, setPassword] = useState('')
   const [isvalid, setIsvalid] = useState(false)
 
-  const handleInputChange = (name: string, value: string) => {
-    setForm({...form, [name]: value})
-  }
+  // const handleInputChange = (name: string, value: string) => {
+  //   setForm({...form, [name]: value})
+  // }
 
   const confirmPassword = (e: string) => {
-    if (e === form.password) {
+    if (e === password) {
       setIsvalid(true)
     } else {
       setIsvalid(false)
@@ -28,7 +28,7 @@ const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) =>
       return
     }
     try {
-      const response = await axiosPrivate.post('/auth/reset-password', form)
+      const response = await axiosPublic.post(`/auth/reset-password?token=${token}&id=${id}`, {password})
       if (!response.data.error) {
         console.log(response.data);
         
@@ -52,7 +52,7 @@ const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) =>
               id='password' 
               valid={true}
               showStrength={true}
-              onchange={(e:any)=>handleInputChange(e.target.name, e.target.value)} 
+              onchange={(e:any)=>setPassword(e.target.value)} 
               placeHolder='password' />
             <PasswordInput 
               label='Confirm password' 
@@ -64,6 +64,7 @@ const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) =>
         </div>
         <div className="d-flex flex-column align-items-center gap-3">
           <Button children='Reset Password' type='submit' fill action={()=>{}} />
+          <span>Remember your password? <Link className='primary-700 text-decoration-none' to={"/login"}>Sign in here</Link></span>
         </div>
     </form>
   )

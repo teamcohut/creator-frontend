@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignUp from './pages/auth/SignUp';
 import Login from './pages/auth/Login';
-// import LoginPage from './components/organisms/forms/loginForm/LoginPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Preview from './pages/Preview';
 import VerifyMail from './pages/auth/VerifyMail';
@@ -15,6 +14,7 @@ import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
 import RequireAuth from './pages/auth/RequireAuth';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import ResendMail from './pages/auth/ResendMail';
 
 function App() {
   const router = createBrowserRouter([
@@ -67,6 +67,10 @@ function App() {
     {
       path: "/reset-password",
       element: <ResetPassword />
+    },
+    {
+      path: "/resend-mail",
+      element: <ResendMail />
     },
     {
       path: "/activate/:id",

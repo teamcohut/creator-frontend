@@ -1,15 +1,13 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import AuthTemplate from '../../components/templates/AuthTemplate'
 import ForgotPasswordForm from '../../components/organisms/forms/loginForm/ForgotPasswordForm'
-import ResetPasswordForm from '../../components/organisms/forms/loginForm/ResetPasswordForm'
 import SuccessCard from '../../components/molecules/auth/SuccessCard'
 import Button from '../../components/atoms/Button'
-import { FiCheckCircle, FiMail } from 'react-icons/fi'
+import { FiMail } from 'react-icons/fi'
 
 const ForgotPassword = () => {
   const [verified, setVerified] = useState<verified>(false)
-  const navigate = useNavigate()
   const route = useParams()
   console.log(route);
 
