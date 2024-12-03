@@ -8,8 +8,20 @@ export const axiosPublic = axios.create({
 
 export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     withCredentials: true
 })
+
+axiosPrivate.interceptors.request.use(
+    (config) => {
+        let token = localStorage.getItem("auth-token")
+        if (!config.headers["Authorization"]) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 
 export default axiosPublic;

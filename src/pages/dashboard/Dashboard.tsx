@@ -4,7 +4,7 @@ import SetupProgram from "../../components/organisms/dashboard/SetupProgram/Setu
 import Modal from "../../components/organisms/dashboard/Modal";
 import ProgramDetail from "../../components/organisms/forms/CustomizeProgram/programdetails";
 import CustomizeProgram from "../../components/organisms/forms/CustomizeProgram/CustomizeProgram";
-import axiosPublic from "../../../src/api/axios";
+import axiosPublic, { axiosPrivate } from "../../../src/api/axios";
 
 interface ProgramData {
   title: string;
@@ -51,7 +51,7 @@ const Dashboard = () => {
         }
       });
 
-      const response = await axiosPublic.post("/program", formData, {
+      const response = await axiosPrivate.post("/program", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
