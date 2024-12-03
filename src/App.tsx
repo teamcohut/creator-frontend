@@ -43,7 +43,7 @@ function App() {
           element: <Sessions />,
         },
       ],
-    }, 
+    },
     // {
     //   path: "calendar",
     //   element: <Calendar />
@@ -55,15 +55,15 @@ function App() {
     {
       path: "/signup",
       element: <SignUp />
-    }, 
+    },
     {
       path: "/login",
       element: <Login />
-    }, 
+    },
     {
       path: "/forgot-password",
       element: <ForgotPassword />
-    }, 
+    },
     {
       path: "/reset-password",
       element: <ResetPassword />

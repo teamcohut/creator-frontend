@@ -6,7 +6,7 @@ const Button: React.FC<IButton> = ({ children, type, action, fill, outline, bord
   return (
     <>
       <button type={type}
-        onClick={() => action}
+        onClick={action}
         className={`
         ${fill ? 'fill' : 'outline'} 
         ${outline === 'white' ? 'border-white text-white' : outline === 'primary' ? 'primary-600' : ''} 

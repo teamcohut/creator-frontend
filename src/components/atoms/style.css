@@ -160,6 +160,57 @@
     font-weight: 600;
 }
 
+.input-div {
+    align-items: center;
+    gap: 8px; 
+    padding: 4px 8px;
+    border: 1px solid #ccc;]
+    border-radius: 12px;
+    background-color: #fff; 
+    min-height: 48px; 
+  }
+  
+  .track-block {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    max-width: 150px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+  }
+  
+  .track-block button.remove-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  
+  .track-block button.remove-btn:hover {
+    color: darkred;
+  }
+  
+  .input {
+    flex-grow: 1; 
+    min-width: 150px;
+    border: none; 
+    outline: none; 
+    padding: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: transparent; 
+  }
+  
+  
 
 /* STATUS BADGE */
 /* ================= */

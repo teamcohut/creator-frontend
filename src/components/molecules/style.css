@@ -170,4 +170,10 @@
       font-size: 60px;
       color: var(--success-600);
     }
+
+    /* ONBOARD */
+    .fiUser {
+      font-size: 60px;
+      color: var(--rose-500);
+    }
     
