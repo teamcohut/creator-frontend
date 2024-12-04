@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Button from "../../../atoms/Button";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../molecules/auth/PregressBar";
@@ -7,7 +7,7 @@ import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 
 
-const SendEmail = () => {
+const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
     return (
         <>
             <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
@@ -40,7 +40,7 @@ const SendEmail = () => {
                 <div className="d-flex flex-column align-items-center gap-3">
                     <Button
                         children="Onboard Cohort"
-                        action={() => { }}
+                        action={onSubmit}
                         type="button"
                         fill={true}
                     />
@@ -49,5 +49,9 @@ const SendEmail = () => {
         </>
     );
 };
+
+interface ISendEmail {
+    onSubmit: () => void;
+}
 
 export default SendEmail;

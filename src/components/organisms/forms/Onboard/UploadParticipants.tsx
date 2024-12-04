@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import Button from "../../../atoms/Button";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../../molecules/auth/PregressBar";
@@ -8,7 +8,7 @@ import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 
 
-const UploadParticipants = () => {
+const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
 
     const [tracks, setTracks] = useState<string[]>([]);
     const [currentTrack, setCurrentTrack] = useState<string>("");
@@ -80,7 +80,7 @@ const UploadParticipants = () => {
                 <div className="d-flex flex-column align-items-center gap-3">
                     <Button
                         children="Continue"
-                        action={() => { }}
+                        action={onSubmit}
                         type="button"
                         fill={true}
                     />
@@ -89,5 +89,9 @@ const UploadParticipants = () => {
         </>
     );
 };
+
+interface IUploadParticipants {
+    onSubmit: () => void
+}
 
 export default UploadParticipants;

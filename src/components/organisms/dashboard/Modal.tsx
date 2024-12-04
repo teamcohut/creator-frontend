@@ -3,7 +3,6 @@ import '../style.css';
 import { IModal } from "../../../@types/dashboard.interface";
 
 const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
-  // const [modalOpen, setModalOpen] = useState(open);
 
   useEffect(() => {
     setModalOpen(open);

@@ -9,7 +9,7 @@ import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBo
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [currentStep, setCurrentStep] = useState<number>(0); // Step-based state
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {

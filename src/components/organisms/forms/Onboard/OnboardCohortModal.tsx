@@ -87,7 +87,7 @@
 
 
 
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import { FiCalendar } from "react-icons/fi";
@@ -95,7 +95,7 @@ import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 
-const OnboardCohortModal = () => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
     const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
 
     return (
@@ -183,11 +183,15 @@ const OnboardCohortModal = () => {
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-3">
-                    <Button children="Continue" action={() => { }} type="button" fill={true} />
+                    <Button children="Continue" action={onSubmit} type="button" fill={true} />
                 </div>
             </form>
         </>
     );
 };
+
+interface IOnboardCohortModal {
+    onSubmit: () => void;
+}
 
 export default OnboardCohortModal;
