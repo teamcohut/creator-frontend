@@ -11,6 +11,7 @@ import OnboardCohort from '../components/molecules/dashboard/OnboardCohort';
 import OnboardCohortModal from '../components/organisms/forms/Onboard/OnboardCohortModal';
 import SendEmail from '../components/organisms/forms/Onboard/SendEmail';
 import UploadParticipants from '../components/organisms/forms/Onboard/UploadParticipants';
+import SessionsDisplay from '../components/organisms/dashboard/SessionsDisplay';
 
 const Preview = () => {
   return (
