@@ -15,6 +15,7 @@ import RequireAuth from './components/utils/RequireAuth';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import ResendMail from './pages/auth/ResendMail';
+import PersistLogin from './components/utils/PersistLogin';
 
 function App() {
   const router = createBrowserRouter([
@@ -89,9 +90,11 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+      <PersistLogin>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </PersistLogin>
     </>
   );
 }

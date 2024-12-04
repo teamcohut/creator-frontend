@@ -8,14 +8,11 @@ import Modal from '../Modal';
 import OnboardCohortModal from '../../forms/Onboard/OnboardCohortModal';
 import UploadParticipants from '../../forms/Onboard/UploadParticipants';
 import SendEmail from '../../forms/Onboard/SendEmail';
-// import Title from '../Title';
-// import Calendar from '../Calendar/Calendar';
 
 const DashBoard = () => {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [currentStep, setCurrentStep] = useState<number>(1);
 
-    const openModal = () => setModalOpen(true);
     const nextStep = () => {
         setCurrentStep(currentStep+1)
     }

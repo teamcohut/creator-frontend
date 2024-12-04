@@ -218,19 +218,6 @@
   /* MODAL */
   /* ==================== */
 
-  /* .modal-bg {
-    background-color: #19165040;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-  } */
-
-  .modal-div {
-  }
-
   .modal-bg {
     position: fixed;
     top: 0;
@@ -254,8 +241,7 @@
     animation: modal 0.6s 1;
     padding: 20px;
     border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
+    width: fit-content;
   }
   
   .close-btn {

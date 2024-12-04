@@ -13,8 +13,8 @@ const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
             <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
                 <ProgressBar
                     height={8}
-                    length={2}
-                    page={2}
+                    length={3}
+                    page={3}
                     absolute={true}
                     gap
                     rounded={false}
