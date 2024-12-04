@@ -47,9 +47,11 @@ const Dashboard = () => {
     try {
       const payload = {
         ...programData,
-        cover: programData.cover ? await fileToBase64(programData.cover) : null,
-        logo: programData.logo ? await fileToBase64(programData.logo) : null,
+        cover: programData.cover ? await fileToBase64(programData.cover) : "https://www.shutterstock.com/image-photo/group-workers-people-isolated-on-white-221842699",
+        logo: programData.logo ? await fileToBase64(programData.logo) : "https://www.shutterstock.com/image-photo/gen-z-abbreviation-generation-generational-cohort-2232879569",
       };
+      console.log(payload);
+      
 
       const response = await axiosPrivate.post("/program", payload, {
         headers: { "Content-Type": "application/json" },
