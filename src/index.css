@@ -48,6 +48,8 @@
   --fushia-500: #c848ff;
   --fushia-600: #AA16E3;
 
+  --rose-50: #fef1fa;
+  --rose-400: #FF63CD;
   --rose-500: #ff48bc;
 }
 
@@ -264,9 +266,18 @@ body {
   color: var(--fushia-600);
 }
 
+.rose-50 {
+  color: var(--rose-50);
+}
+
+.rose-400 {
+  color: var(--rose-400);
+}
+
 .rose-500 {
   color: var(--rose-500);
 }
+
 
 /* FONT SIZE */
 /* ================ */

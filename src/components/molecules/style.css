@@ -121,13 +121,18 @@
     }
     
     .card-info p {
-      color: #888;
+      /* color: #888; */
       margin: 5px 0 0;
     }
     
     .card-right {
       display: flex;
       align-items: center;
+    }
+
+    .icon {
+      font-size: 30px;
+      background: var(--rose-50);
     }
     
     .progressbar {
@@ -146,7 +151,7 @@
     }
     
     .progress-info {
-      width: 150px;
+      /* width: 150px; */
     }
     
     .view-details {
