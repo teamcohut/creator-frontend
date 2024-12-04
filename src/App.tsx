@@ -1,52 +1,97 @@
-import React from 'react';
-import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUp from './components/pages/auth/SignUp';
-import SignUpPage1 from './components/ui/organisms/forms/signUpForm/SignUpPage1';
-import SignUpPage2 from './components/ui/organisms/forms/signUpForm/SignUpPage2';
-import Login from './components/pages/auth/Login';
-import ForgotPassword from './components/ui/organisms/forms/loginForm/ForgotPassword';
-import ResetPassword from './components/ui/organisms/forms/loginForm/ResetPassword';
-import LoginPage from './components/ui/organisms/forms/loginForm/LoginPage';
+import SignUp from './pages/auth/SignUp';
+import Login from './pages/auth/Login';
+import Dashboard from './pages/dashboard/Dashboard';
+import Preview from './pages/Preview';
+import VerifyMail from './pages/auth/VerifyMail';
+import ParticipantsPage from './pages/dashboard/participants/Participants';
+import DashboardTemplate from './components/templates/DashboardTemplate';
+import NotFound from './pages/NotFound';
+import Sessions from './pages/dashboard/sessions/Sessions';
+// import Calendar from './components/organisms/dashboard/Calendar/Calendar';
+import { AuthContextProvider } from './context/auth/AuthState';
+import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
+import RequireAuth from './components/utils/RequireAuth';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
+import ResendMail from './pages/auth/ResendMail';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '/signup',
-      element: <SignUp />,
+      path: "/",
+      element: (
+        <RequireAuth>
+          <DashboardTemplate />
+        </RequireAuth>
+      ),
       children: [
         {
-          path: "/signup/",
-          element: <SignUpPage1 />
+          path: "",
+          element: <Dashboard />,
         },
         {
-          path: "/signup/step2",
-          element: <SignUpPage2 />
-        }
-      ]
+          path: "participants",
+          element: <ParticipantsPage />,
+        },
+        {
+          path: "sessions",
+          element: <Sessions />,
+        },
+        {
+          path: "sessions",
+          element: <Sessions />,
+        },
+      ],
+    },
+    // {
+    //   path: "calendar",
+    //   element: <Calendar />
+    // },
+    {
+      path: "curriculum",
+      element: <Curriculum />
     },
     {
-      path: '/login',
-      element: <Login />,
-      children: [
-        {
-          path: '',
-          element: <LoginPage />
-        },
-        {
-          path: 'forgot-password',
-          element: <ForgotPassword />
-        },
-        {
-          path: 'reset-password',
-          element: <ResetPassword />
-        }
-      ]
+      path: "/signup",
+      element: <SignUp />
     },
-  ])
+    {
+      path: "/login",
+      element: <Login />
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />
+    },
+    {
+      path: "/reset-password",
+      element: <ResetPassword />
+    },
+    {
+      path: "/resend-mail",
+      element: <ResendMail />
+    },
+    {
+      path: "/activate/:id",
+      element: <VerifyMail />
+    },
+    {
+      path: '/preview',
+      element: <Preview />
+    }, {
+      path: '*',
+      element: <NotFound />
+    }
+
+
+  ]);
+
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   );
 }

@@ -1,56 +1,315 @@
-body {
-  margin: 0;
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  /* font-weight: <weight>; */
-  font-style: normal;
+/* COLORS & VARIABLES */
+:root {
+  --primary-50: #ecf1ff;
+  --primary-100: #dde5ff;
+  --primary-200: #c2d0ff;
+  --primary-300: #9db0ff;
+  --primary-400: #7685ff;
+  --primary-500: #555bff;
+  --primary-600: #4037f4;
+  --primary-700: #453bdb;
+  --primary-800: #2b25ae;
+  --primary-900: #292689;
+  --primary-950: #191650;
+
+  --secondary-50: #d86dff;
+  --secondary-100: #fcf3ff;
+  --secondary-200: #191650;
+  --secondary-300: #C9FFE9;
+  --secondary-350: #008F6C;
+  --secondary-400: #888888;
+  --secondary-450: #ECF1FF;
+
+
+  --dark-50: #ffffff;
+  --dark-100: #e7e7e7;
+  --dark-200: #d1d1d1;
+  --dark-300: #b0b0b0;
+  --dark-400: #888888;
+  --dark-500: #6d6d6d;
+  --dark-600: #5d5d5d;
+  --dark-700: #4f4f4f;
+  --dark-800: #454545;
+  --dark-900: #3d3d3d;
+  --dark-950: #0d0d0d;
+
+  --hover-40: #ecf1ff66;
+
+  --success-600: #00B382;
+  --success-700: #008F6C;
+
+  --success-100: #c9ffe9;
+  --success-300: #48ffc5;
+  --success-600: #00b382;
+  --success-700: #008f6c;
+
+  --error-300: #FF9D9F;
+
+  --fushia-500: #c848ff;
+  --fushia-600: #AA16E3;
+
+  --rose-500: #ff48bc;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+}
+
+/* FONTS */
+/* ================ */
+
 .manrope-200 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 200 !important;
+  font-style: normal !important;
 }
 
 .manrope-300 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
 }
 
 .manrope-400 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
 }
 
 .manrope-500 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
 }
 
 .manrope-600 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
 }
 
 .manrope-700 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
 }
 
 .manrope-800 {
-  font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
+}
+
+/* COLORS */
+/* ================ */
+
+.primary-50 {
+  color: var(--primary-50);
+}
+
+.primary-100 {
+  color: var(--primary-100);
+}
+
+.primary-200 {
+  color: var(--primary-200);
+}
+
+.primary-300 {
+  color: var(--primary-300);
+}
+
+.primary-400 {
+  color: var(--primary-400);
+}
+
+.primary-500 {
+  color: var(--primary-500);
+}
+
+.primary-600 {
+  color: var(--primary-600);
+}
+
+.primary-700 {
+  color: var(--primary-700);
+}
+
+.primary-800 {
+  color: var(--primary-800);
+}
+
+.primary-900 {
+  color: var(--primary-900);
+}
+
+.primary-950 {
+  color: var(--primary-950);
+}
+
+.secondary-50 {
+  color: var(--secondary-50);
+}
+
+.secondary-200 {
+  color: var(--secondary-200);
+}
+
+.secondary-350 {
+  color: var(--secondary-350);
+}
+
+.secondary-400 {
+  color: var(--secondary-400);
+}
+
+.bg-secondary-100 {
+  background: var(--secondary-100);
+}
+
+.bg-secondary-300 {
+  background: var(--secondary-300);
+}
+
+.bg-secondary-450 {
+  background: var(--secondary-450) !important;
+}
+
+.dark-50 {
+  color: var(--dark-50);
+}
+
+.dark-100 {
+  color: var(--dark-100);
+}
+
+.dark-200 {
+  color: var(--dark-200);
+}
+
+.dark-300 {
+  color: var(--dark-300);
+}
+
+.dark-400 {
+  color: var(--dark-400);
+}
+
+.dark-500 {
+  color: var(--dark-500);
+}
+
+.dark-600 {
+  color: var(--dark-600);
+}
+
+.dark-700 {
+  color: var(--dark-700);
+}
+
+.dark-800 {
+  color: var(--dark-800);
+}
+
+.dark-900 {
+  color: var(--dark-900);
+}
+
+.dark-950 {
+  color: var(--dark-950);
+}
+
+.success-100 {
+  color: var(--success-100);
+}
+.success-300 {
+  color: var(--success-300);
+}
+
+.success-600 {
+  color: var(--success-600);
+}
+.success-700 {
+  color: var(--success-700);
+}
+
+.success-700 {
+  color: var(--success-700);
+}
+
+.error-300 {
+  color: var(--error-300);
+}
+
+.fushia-500 {
+  color: var(--fushia-500);
+}
+
+.fushia-600 {
+  color: var(--fushia-600);
+}
+
+.rose-500 {
+  color: var(--rose-500);
+}
+
+/* FONT SIZE */
+/* ================ */
+
+.fs-footer {
+  font-size: clamp(10px, 1.5vw, 12px);
+}
+
+.fs-button {
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.fs-caption {
+  font-size: clamp(10px, 1.5vw, 12px);
+}
+
+.fs-body {
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+
+.fs-h4 {
+  font-size: clamp(16px, 1.5vw, 18px);
+}
+
+.fs-h3 {
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+.fs-h2 {
+  font-size: clamp(24px, 3.5vw, 36px);
+}
+
+.fs-h1 {
+  font-size: clamp(32px, 4.5vw, 48px);
+}
+
+.fs-icon {
+  font-size: clamp(60px, 8vw, 80px);
+}
+
+/* TEXTS */
+/* ================ */
+
+.no-wrap {
+  white-space: nowrap;
 }

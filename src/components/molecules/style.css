@@ -1,0 +1,179 @@
+/* AUTH */
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.progress-div {
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress-page {
+  width: 100%;
+}
+
+.active-page {
+  background-color: var(--primary-700);
+}
+
+.inactive-page {
+  background-color: var(--primary-100);
+}
+
+@media (max-width: 400px) {
+  .head {
+      width: 100% !important;
+  }
+}
+
+/* PROGRAM DROPDOWN */
+
+.programs {
+    position: relative;
+}
+
+.current-program {
+    gap: 12px;
+    padding: 8px 12px;
+    border: 1px solid var(--dark-100);
+    overflow-x: hidden;
+    cursor: pointer;
+    border-radius: 16px;
+    background-color: var(--dark-50);
+}
+
+.current-program span, .other-programs span {
+    white-space: nowrap;
+}
+
+.program-dropdown {
+    background-color: var(--dark-50);
+    box-shadow: 0px 4px 16px #19165026;
+    border-radius: 16px;
+    width: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all ease-in-out 0.3s;
+    position: absolute;
+    top: 110%;
+    left: 0;
+}
+
+.other-program {
+    gap: 12px;
+    cursor: pointer;
+}
+
+.other-program:hover {
+    background-color: var(--primary-50);
+}
+
+/* OVERVIEW COMPONENTS */
+
+.overview-card {
+    border: 1px solid var(--primary-50);
+    border-radius: 12px;
+    aspect-ratio: 26/11;
+    width: 20%;
+    min-width: 250px;
+    margin: 0px;
+  }
+  
+  .overview-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+  }
+
+  .website-card {
+    border: 1px solid var(--primary-50);
+    border-radius: 12px;
+    aspect-ratio: 26/11;
+    width: 20%;
+    min-width: 250px;
+    padding-left: 16px;
+    background: linear-gradient(to bottom right, #453bdb, #7685ff, #c2d0ff);
+    overflow: hidden;
+  }
+
+  .website-card:hover {
+    background: linear-gradient(to bottom right, #292689, #555bff, #9db0ff);
+  }
+
+  .website-card img {
+    height: 95px;
+  }
+
+  /* INFO CARD */
+
+  .info-card {
+      border: 1px dashed var(--primary-50);
+      background-color: var(--dark-50);
+    }
+    
+    .course-card .icon {
+      font-size: 30px;
+      border-radius: 10px;
+    }
+    
+    .card-info p {
+      color: #888;
+      margin: 5px 0 0;
+    }
+    
+    .card-right {
+      display: flex;
+      align-items: center;
+    }
+    
+    .progressbar {
+      width: 150px;
+      height: 8px;
+      background: #ECF1FF;
+      border-radius: 4px;
+      margin-right: 10px;
+      position: relative;
+    }
+    
+    .progres {
+      height: 100%;
+      background: #453BDB;
+      border-radius: 4px;
+    }
+    
+    .progress-info {
+      width: 150px;
+    }
+    
+    .view-details {
+      border: none;
+      background: none;
+      color: #007bff;
+      font-size: 0.9em;
+      display: flex;
+      cursor: pointer;
+      padding: 0;
+      /* margin-left: 10px; */
+    }
+    
+    .view-details span {
+      margin-right: 5px;
+    }
+
+
+    /* CONGRATULATIONS */
+    .fiBookOpen {
+      font-size: 60px;
+      color: var(--success-600);
+    }
+
+    /* ONBOARD */
+    .fiUser {
+      font-size: 60px;
+      color: var(--rose-500);
+    }
+    

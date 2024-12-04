@@ -1,26 +1,20 @@
-import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
-import FormCard from '../../ui/molecules/auth/FormCard'
-import "./index.css"
+import "./index.css";
+import { FC } from "react";
+import { IAuthTemplate } from "../../../@types/authtemplate.interface";
+import Icon from "../../atoms/Icon";
 
-const AuthTemplate: FC<IAuthTemplate> = ({children}) => {
+const AuthTemplate: FC<IAuthTemplate> = ({ children, title }) => {
   return (
     <>
-        <div className='justify-between items-stretch form-template'>
-            <div>
-                <Link to={'/'}><img  src={'/icons/logo/logo-white.png'} alt={'Cohut Logo'} /></Link>
-                <h1>Launch Your Learning Program in 5 Minutes.</h1>
-            </div>
-            <FormCard>
-              {children}
-            </FormCard>
+      <div className="form-template container-fluid">
+        <div className="left-div d-none d-lg-flex flex-column justify-content-between align-items-start">
+          <Icon fill="false" type="text-logo" size={130} />
+          <h1 className="mt-auto text-white">{title}</h1>
         </div>
+        <div className="form-container">{children}</div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-interface IAuthTemplate {
-  children: React.ReactNode
-}
-
-export default AuthTemplate
+export default AuthTemplate;
