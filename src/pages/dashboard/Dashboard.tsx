@@ -31,9 +31,9 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    
+
   }, [])
-  
+
 
   const openModal = () => setModalOpen(true);
 
@@ -47,8 +47,10 @@ const Dashboard = () => {
     try {
       const payload = {
         ...programData,
-        cover: programData.cover ? await fileToBase64(programData.cover) : null,
-        logo: programData.logo ? await fileToBase64(programData.logo) : null,
+        // cover: programData.cover ? await fileToBase64(programData.cover) : null,
+        // logo: programData.logo ? await fileToBase64(programData.logo) : null,
+        cover: "https://media.gettyimages.com/id/1397998210/vector/stock-market.jpg?s=612x612&w=0&k=20&c=USOZhCCA9PuJa7ffVr5w6r2NLyuCIYet0rm4v3SIT1I=",
+        logo: "https://media.gettyimages.com/id/1397998210/vector/stock-market.jpg?s=612x612&w=0&k=20&c=USOZhCCA9PuJa7ffVr5w6r2NLyuCIYet0rm4v3SIT1I=",
       };
 
       const response = await axiosPrivate.post("/program", payload, {

@@ -12,6 +12,7 @@ import OnboardCohortModal from '../components/organisms/forms/Onboard/OnboardCoh
 import SendEmail from '../components/organisms/forms/Onboard/SendEmail';
 import UploadParticipants from '../components/organisms/forms/Onboard/UploadParticipants';
 import SessionsDisplay from '../components/organisms/dashboard/Sessions/SessionsDisplay';
+import SessionDetails from '../components/organisms/dashboard/Sessions/SessionDetails';
 
 const Preview = () => {
   return (
@@ -29,7 +30,8 @@ const Preview = () => {
       {/* <OnboardCohortModal /> */}
       {/* <SendEmail /> */}
       {/* <UploadParticipants /> */}
-      <SessionsDisplay />
+      {/* <SessionsDisplay /> */}
+      <SessionDetails />
     </>
   );
 }

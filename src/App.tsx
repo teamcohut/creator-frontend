@@ -15,15 +15,16 @@ import RequireAuth from './components/utils/RequireAuth';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import ResendMail from './pages/auth/ResendMail';
+import SessionsDisplay from './components/organisms/dashboard/Sessions/SessionsDisplay';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        // <RequireAuth>
-        <DashboardTemplate />
-        // </RequireAuth>
+        <RequireAuth>
+          <DashboardTemplate />
+        </RequireAuth>
       ),
       children: [
         {
@@ -36,12 +37,12 @@ function App() {
         },
         {
           path: "sessions",
-          element: <Sessions />,
+          element: <SessionsDisplay />,
         },
-        {
-          path: "sessions",
-          element: <Sessions />,
-        },
+        // {
+        //   path: "sessions",
+        //   element: <Sessions />,
+        // },
       ],
     },
     // {
