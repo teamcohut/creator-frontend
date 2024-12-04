@@ -22,9 +22,9 @@ function App() {
     {
       path: "/",
       element: (
-        <RequireAuth>
-          <DashboardTemplate />
-        </RequireAuth>
+        // <RequireAuth>
+        <DashboardTemplate />
+        // </RequireAuth>
       ),
       children: [
         {
