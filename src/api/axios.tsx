@@ -9,9 +9,9 @@ export const axiosPublic = axios.create({
 export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
     headers: {
-         "Content-Type": "application/json",
-         "Authorisation": `Bearer ${localStorage.getItem("auth-token")}`,
-         },
+        "Content-Type": "application/json",
+        //  "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
+    },
     // withCredentials: true
 })
 

@@ -6,8 +6,15 @@ const useRefreshToken = () => {
   const { setAuth } = useContext(AuthContext);
 
   const refresh = async () => {
-    const response = await axiosPrivate.get("/auth/refresh-token");
-
+    const response = await axiosPrivate.get("/auth/refresh-token"
+    //     , {
+    //     withCredentials: true,
+    //     headers: {
+    //         "Authorization" : `Bearer ${localStorage.getItem("auth-token")}`
+    //     }
+    // }
+);
+    
     if (response.data) {
       setAuth(() => response.data);
     } else {
