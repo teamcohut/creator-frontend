@@ -7,6 +7,7 @@ import CustomizeProgram from "../../components/organisms/forms/CustomizeProgram/
 import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBoard";
 import { axiosPrivate } from "../../../src/api/axios";
 import { ProgramContext } from "../../context/programs/ProgramContext";
+import { useGetProgram } from "../../hooks/program/useGetProgram";
 
 interface ProgramData {
   title: string;
@@ -31,13 +32,12 @@ const Dashboard = () => {
     certificates: [],
   });
   const { program } = useContext(ProgramContext)
-
-  console.log(program);
-  
+  const { getProgram, error, isLoading } = useGetProgram()
 
   useEffect(() => {
-
+    getProgram()
   }, [])
+  
 
 
   const openModal = () => setModalOpen(true);
@@ -103,14 +103,19 @@ const Dashboard = () => {
 
   return (
     <>
-      <DashBoard />
-
+    {
+      program?.data.length > 0?
+      <DashBoard />:
       <SetupProgram
         openModal={() => {
           openModal();
           setCurrentStep(1);
         }}
       />
+    }
+      
+
+      
 
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 && (
