@@ -5,8 +5,9 @@ import { ISuccessCard } from '../../../@types/auth.interface'
 import { FiBookOpen } from 'react-icons/fi'
 import Button from '../../atoms/Button'
 import { useNavigate } from 'react-router-dom'
+import { TModal } from '../../../@types/dashboard.interface'
 
-const Congratulations = () => {
+const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
     const navigate = useNavigate()
 
     return (
@@ -20,17 +21,22 @@ const Congratulations = () => {
                     <p className='manrope-500 dark-700 fs-body'>Create your first Cohort to launch your program</p>
                 </div>
                 <div className="footer w-100 d-flex flex-row align-items-center gap-2">
-                    <Button children='Go to Dashboard' type='button' action={() => navigate('/')} fill={true} />
-                    <Button children='Onboard New Cohort' type='button' action={() => navigate('/login')} fill={true} />
+                    <Button children='Go to Dashboard' type='button' action={clear} fill={true} />
+                    <Button children='Onboard New Cohort' type='button' action={()=>openModal('cohort')} fill={true} />
                 </div>
                 <div>
                     <p>A Cohort is a group of individuals learning together through a shared program over a set period
-                        <p>Onboard yours today</p>
+                        <span>Onboard yours today</span>
                     </p>
                 </div>
             </div>
         </>
     )
+}
+
+interface ICongratulations {
+    clear: () => void;
+    openModal: (modal: TModal) => void;
 }
 
 export default Congratulations

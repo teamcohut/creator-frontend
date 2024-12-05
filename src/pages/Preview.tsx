@@ -35,7 +35,7 @@ const Preview = () => {
       {/* <SessionsDisplay /> */}
       {/* <SessionDetails /> */}
       {/* <AddSession /> */}
-      <AdditionalSession />
+      {/* <AdditionalSession /> */}
     </>
   );
 }

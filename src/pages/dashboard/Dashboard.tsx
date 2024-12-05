@@ -8,6 +8,11 @@ import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBo
 import { axiosPrivate } from "../../../src/api/axios";
 import { ProgramContext } from "../../context/programs/ProgramContext";
 import { useGetProgram } from "../../hooks/program/useGetProgram";
+import Congratulations from "../../components/molecules/dashboard/Congratulations";
+import OnboardCohortModal from "../../components/organisms/forms/Onboard/OnboardCohortModal";
+import UploadParticipants from "../../components/organisms/forms/Onboard/UploadParticipants";
+import SendEmail from "../../components/organisms/forms/Onboard/SendEmail";
+import { TModal } from "../../@types/dashboard.interface";
 
 interface ProgramData {
   title: string;
@@ -21,6 +26,7 @@ interface ProgramData {
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [activeModal, setActiveModal] = useState<TModal>(null)
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [programData, setProgramData] = useState<ProgramData>({
     title: "",
@@ -40,7 +46,11 @@ const Dashboard = () => {
   
 
 
-  const openModal = () => setModalOpen(true);
+  const openModal = (modal: TModal) => {
+    setCurrentStep(1)
+    setActiveModal(modal)
+    setModalOpen(true)
+  };
 
   const handleProgramDetailContinue = (data: { title: string; description: string }) => {
     setProgramData((prev) => ({ ...prev, ...data }));
@@ -66,7 +76,8 @@ const Dashboard = () => {
       alert("Program successfully created!");
 
       // Reset state and close modal
-      resetState();
+      // resetState();
+      setCurrentStep(3)
     } catch (error) {
       console.error("Error submitting program:", error);
       alert("Failed to create the program. Please try again.");
@@ -97,6 +108,10 @@ const Dashboard = () => {
     setCurrentStep(0);
   };
 
+  const nextStep = () => {
+    setCurrentStep(currentStep+1)
+  }
+
   const updateProgramData = (data: Partial<ProgramData>) => {
     setProgramData((prev) => ({ ...prev, ...data }));
   };
@@ -105,30 +120,56 @@ const Dashboard = () => {
     <>
     {
       program?.data.length > 0?
-      <DashBoard />:
+      <DashBoard openModal={openModal} />:
       <SetupProgram
         openModal={() => {
-          openModal();
+          openModal('program');
           setCurrentStep(1);
         }}
       />
     }
       
 
-      
+      {
+        activeModal === 'program' &&
+        <Modal open={modalOpen} setModalOpen={setModalOpen}>
+          {currentStep === 1 && (
+            <ProgramDetail onContinue={handleProgramDetailContinue} />
+          )}
+          {currentStep === 2 && (
+            <CustomizeProgram
+              programData={programData}
+              onSubmit={handleProgramSubmit}
+              updateProgramData={updateProgramData}
+            />
+          )}
+          {
+            currentStep === 3 && (
+              <Congratulations clear={resetState} openModal={openModal} />
+            )
+          }
+        </Modal>
+      }
 
-      <Modal open={modalOpen} setModalOpen={setModalOpen}>
-        {currentStep === 1 && (
-          <ProgramDetail onContinue={handleProgramDetailContinue} />
-        )}
-        {currentStep === 2 && (
-          <CustomizeProgram
-            programData={programData}
-            onSubmit={handleProgramSubmit}
-            updateProgramData={updateProgramData}
-          />
-        )}
-      </Modal>
+      {
+        activeModal === 'cohort' &&
+        <Modal open={modalOpen} setModalOpen={setModalOpen} >
+                {
+                    currentStep === 1 ?
+                    <OnboardCohortModal onSubmit={nextStep} />:
+                    currentStep === 2?
+                    <UploadParticipants onSubmit={nextStep} />:
+                    currentStep === 3?
+                    <SendEmail onSubmit={()=>{
+                        setCurrentStep(1)
+                        setModalOpen(false)
+                    }} />:
+                    <></>
+                }
+            </Modal>
+      }
+
+      
     </>
   );
 };

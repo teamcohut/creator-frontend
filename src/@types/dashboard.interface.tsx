@@ -60,3 +60,5 @@ export interface IModal {
   setModalOpen: (open: boolean) => void;
   children: ReactNode;
 }
+
+export type TModal = 'program' | 'cohort' | null
