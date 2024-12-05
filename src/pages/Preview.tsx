@@ -13,6 +13,8 @@ import SendEmail from '../components/organisms/forms/Onboard/SendEmail';
 import UploadParticipants from '../components/organisms/forms/Onboard/UploadParticipants';
 import SessionsDisplay from '../components/organisms/dashboard/Sessions/SessionsDisplay';
 import SessionDetails from '../components/organisms/dashboard/Sessions/SessionDetails';
+import AddSession from '../components/organisms/forms/Session/AddSession';
+import AdditionalSession from '../components/organisms/forms/Session/AdditionalSession';
 
 const Preview = () => {
   return (
@@ -31,7 +33,9 @@ const Preview = () => {
       {/* <SendEmail /> */}
       {/* <UploadParticipants /> */}
       {/* <SessionsDisplay /> */}
-      <SessionDetails />
+      {/* <SessionDetails /> */}
+      {/* <AddSession /> */}
+      <AdditionalSession />
     </>
   );
 }
