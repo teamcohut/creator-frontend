@@ -1,3 +1,7 @@
+@import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+
+
+
 /* COLORS & VARIABLES */
 :root {
   --primary-50: #ecf1ff;
