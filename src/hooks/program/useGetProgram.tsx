@@ -13,9 +13,9 @@ export const useGetProgram = () => {
         setIsLoading(true)
         setError(null)
         try {
-            const response = await axiosPrivate.get(`/program/${user.id}`)
-            setIsLoading(false)
+            const response = await axiosPrivate.get('/program')
             dispatch({type: "SETUP", payload: response.data})
+            setIsLoading(false)
         } catch (error: any) {
             console.error(error)
             setError(error.message)

@@ -23,9 +23,10 @@ export const useSignup = () => {
                 setIsLoading(false)
                 console.log("signup successful:", response.data)
             }
-           } catch (error) {
+            return json
+           } catch (error: any) {
             console.log(error);
-            
+            return error.response || error.data
            }
     }
 

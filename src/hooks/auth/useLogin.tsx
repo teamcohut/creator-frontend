@@ -20,7 +20,7 @@ export const useLogin = () => {
                 })
                 const json = response.data.data
                 if(response.status === 200) {
-                    localStorage.setItem('user', JSON.stringify(json))
+                    localStorage.setItem('auth-token', json.authToken)
                     dispatch({type: 'LOGIN', payload: json})
                     setIsLoading(false)
                     console.log("login successful:", response.data)
@@ -29,6 +29,7 @@ export const useLogin = () => {
             } catch (error) {
                 console.log(error);
                 setIsLoading(false)
+                return error
             }
     }
 

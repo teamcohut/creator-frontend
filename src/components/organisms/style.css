@@ -2,7 +2,7 @@
 
 .form {
     position: relative;
-    width: clamp(342px, 66vw, 660px);
+    width: clamp(342px, 45vw, 660px);
     height: fit-content;
     min-height: 636px;
     padding-inline: clamp(24px, 6vw, 60px);

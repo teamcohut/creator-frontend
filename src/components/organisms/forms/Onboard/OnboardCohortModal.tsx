@@ -93,13 +93,26 @@ import ProgressBar from "../../../molecules/auth/PregressBar";
 import "../../style.css";
 import NumberInput from "../../../atoms/inputs/NumberInput";
 import DateInput from "../../../atoms/inputs/DateInput";
+import { ICohort } from "../../../../@types/dashboard.interface";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
+    const [form, setForm] = useState({
+        number: 1,
+        description: "",
+        startDate: "",
+        endDate: "",
+        hasTrack: true,
+        program: ""
+    })
     const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
+
+    const handleInputChange = (name: string, value: string | boolean | number) => {
+        setForm({ ...form, [name]: value });
+      };
 
     return (
         <>
-            <form className="form bg-white d-flex flex-column rounded-5 mx-auto" action="">
+            <form className="form bg-white d-flex flex-column rounded-5 mx-auto" onSubmit={()=>{onSubmit(form)}} action="">
                 {/* Progress bar dynamically changes length */}
                 <ProgressBar
                     height={8}
@@ -119,22 +132,22 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                 <div className="d-flex flex-column gap-3">
                     <div className="w-25">
                         {/* <p>Cohort Number</p> */}
-                        <NumberInput id="number" onchange={() => { }} placeHolder="" label="Cohort Number" />
+                        <NumberInput id="number" onchange={(e) => handleInputChange(e.target.name, e.target.value)} placeHolder="" label="Cohort Number" />
                     </div>
 
                     <div className="d-flex flex-row align-items-end gap-3">
-                        <DateInput id="start" onchange={() => { }} placeHolder="" label="Set Cohort Duration" />
+                        <DateInput id="startDate" onchange={(e) => handleInputChange(e.target.name, e.target.value)} placeHolder="" label="Set Cohort Duration" />
                         <h2>-</h2>
-                        <DateInput id="end" onchange={() => { }} placeHolder="" />
+                        <DateInput id="endDate" onchange={(e) => handleInputChange(e.target.name, e.target.value)} placeHolder="" />
                     </div>
                     {/* Checkbox to toggle track */}
                     <div>
                         <label className="d-flex gap-2 manrope-500" htmlFor="enable-track">
                         <input
                             type="checkbox"
-                            id="enable-track"
+                            id="hasTrack"
                             checked={isTrackEnabled}
-                            onChange={(e) => setIsTrackEnabled(e.target.checked)} // Update state
+                            onChange={(e) => handleInputChange(e.target.name, e.target.checked)} // Update state
                         />
                             Enable Tracks
                         </label>
@@ -177,7 +190,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-3">
-                    <Button children="Continue" action={onSubmit} type="button" fill={true} />
+                    <Button children="Continue" action={()=>{}} type="submit" fill={true} />
                 </div>
             </form>
         </>
@@ -185,7 +198,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
 };
 
 interface IOnboardCohortModal {
-    onSubmit: () => void;
+    onSubmit: (cohort: ICohort) => void;
 }
 
 export default OnboardCohortModal;

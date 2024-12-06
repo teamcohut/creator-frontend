@@ -26,7 +26,7 @@ const Table: React.FC<ITable> = ({ header, body }) => {
               </td>
               <td>{participant.email}</td>
               <td>
-                <StatusBadge status={participant.status}></StatusBadge>
+                <StatusBadge status={participant.status} />
               </td>
               <td>{participant.enrollmentDate}</td>
               <td>

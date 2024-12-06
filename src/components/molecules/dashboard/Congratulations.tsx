@@ -1,14 +1,10 @@
 
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import { ISuccessCard } from '../../../@types/auth.interface'
 import { FiBookOpen } from 'react-icons/fi'
 import Button from '../../atoms/Button'
-import { useNavigate } from 'react-router-dom'
 import { TModal } from '../../../@types/dashboard.interface'
 
 const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
-    const navigate = useNavigate()
 
     return (
         <>
