@@ -10,7 +10,7 @@ const DateInput: React.FC<IDateInput> = (props) => {
           {label && <label className='manrope-600 fs-body' htmlFor={id}>{label}</label>}
           <div className='input-div d-flex align-items-center gap-2 rounded-pill px-3'>
             {icon && icon}
-            <input id={id} className="input bg-transparent w-100 h-100 border-none" type="date" placeholder={placeHolder} onChange={onchange} />
+            <input id={id} name={id} className="input bg-transparent w-100 h-100 border-none" type="date" placeholder={placeHolder} onChange={onchange} />
           </div>
         </div>
     </>

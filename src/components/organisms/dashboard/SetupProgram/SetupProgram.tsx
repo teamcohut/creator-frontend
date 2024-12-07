@@ -5,6 +5,9 @@ import './SetupProgram.css'
 import { ISetupProgram } from '../../../../@types/dashboard.interface'
 
 const SetupProgram: FC<ISetupProgram> = ({ openModal }) => {
+    const openModalHandler = () => {
+        openModal('program')
+    }
     return (
         <div className='setup-program-container gap-2'>
             <h3 className='manrope-600'>Welcome Admin</h3>
@@ -15,7 +18,7 @@ const SetupProgram: FC<ISetupProgram> = ({ openModal }) => {
             </div>
             <p>With Cohut, Create and Launch Your Program in 5 minutes. Start Today</p>
             <div>
-                <Button children='Setup Your Program' type='button' action={openModal} fill={true} />
+                <Button children='Setup Your Program' type='button' action={openModalHandler} fill={true} />
             </div>
         </div>
     )

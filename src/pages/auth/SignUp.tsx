@@ -11,7 +11,7 @@ const SignUp = () => {
 
   return (
     <>
-        <AuthTemplate title='Launch Your Learning Program In 5 Minutes'>
+        <AuthTemplate title={`Launch Your Learning Program In 5 Minutes`} author='Cohut'>
         {
           user?
           <SignupSuccess />:
