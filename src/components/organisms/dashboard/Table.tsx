@@ -12,7 +12,7 @@ const Table: React.FC<ITable> = ({ header, body }) => {
         <thead>
           <tr className="manrope-600 fs-body primary-950">
             {
-              header.map((el, i)=>(
+              header.map((el, i) => (
                 <th key={i}>{el}</th>
               ))
             }
@@ -21,17 +21,11 @@ const Table: React.FC<ITable> = ({ header, body }) => {
         <tbody className="fs-body manrope-500 dark-700">
           {body.map((participant, i) => (
             <tr key={i}>
-              <td>
-                <FullName fullName={participant.fullName} />
-              </td>
+              <td> <FullName fullName={participant.fullName} /> </td>
               <td>{participant.email}</td>
-              <td>
-                <StatusBadge status={participant.status} />
-              </td>
+              <td> <StatusBadge status={participant.status}></StatusBadge>  </td>
               <td>{participant.enrollmentDate}</td>
-              <td>
-                <FiMoreVertical />
-              </td>
+              <td> <FiMoreVertical />  </td>
             </tr>
           ))}
         </tbody>
