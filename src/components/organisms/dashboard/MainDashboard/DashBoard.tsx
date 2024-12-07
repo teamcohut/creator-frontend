@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import Button from "../../../atoms/Button";
 import Header from '../Header';
 import { FiPlus } from 'react-icons/fi';
@@ -12,7 +12,7 @@ const DashBoard: FC<IDashboard> = ({ openModal }) => {
 
     console.log(program);
     
-    const activeProgram = program[0]
+    const activeProgram = program.data[0]
     
     return (
         <>

@@ -13,6 +13,7 @@ const Overview = () => {
           icon={<FiInfo />}
           title={"Program Status"}
           subtitle={"Inactive"}
+          iconColor="dark-300"
           iconBgColor="#E7E7E733"
           iconBorderColor="#E7E7E7"
         />
@@ -21,6 +22,7 @@ const Overview = () => {
           icon={<FiClock />}
           title={"Program Duration"}
           subtitle={"5 Weeks"}
+          iconColor="primary-300"
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF">
             <PercentageBar progress={25} />
@@ -30,6 +32,7 @@ const Overview = () => {
           icon={<FiUsers />}
           title={"Total Participants"}
           subtitle={"300"}
+          iconColor="primary-300"
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF"
         />

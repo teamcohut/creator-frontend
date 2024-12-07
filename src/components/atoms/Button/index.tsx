@@ -2,7 +2,7 @@ import React from 'react'
 import { IButton } from '../../../@types/button.interface'
 import '../style.css'
 
-const Button: React.FC<IButton> = ({ children, type, action, fill, outline, border, gap, width, disabled, loading }) => {
+const Button: React.FC<IButton> = ({ children, type, action, fill, outline, border, gap, width }) => {
   return (
     <>
       <button type={type}
@@ -19,9 +19,8 @@ const Button: React.FC<IButton> = ({ children, type, action, fill, outline, bord
             width: `${width}px`
           }
         }
-        disabled={loading || disabled}
       >
-        {loading? <div className={`spinner-border ${fill && 'text-white'} ${outline && outline === 'white'? 'text-white': 'text-primary'}`}></div>: children}
+        {children}
       </button>
     </>
   )

@@ -491,8 +491,8 @@
 
 
 import React, { useState } from "react";
-// import Calendar from "@toast-ui/react-calendar";
-// import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+import Calendar from "@toast-ui/react-calendar";
+import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 
 type Event = {
     id: string;
@@ -557,7 +557,7 @@ const CalendarComponent: React.FC = () => {
                     Day View
                 </button>
             </div>
-            {/* <Calendar
+            <Calendar
                 height="900px"
                 view={view}
                 events={events.map((event) => ({
@@ -568,7 +568,7 @@ const CalendarComponent: React.FC = () => {
                 onClickSchedule={(event) => {
                     alert(`Event clicked: ${event.schedule.title}`);
                 }}
-            /> */}
+            />
         </div>
     );
 };

@@ -33,6 +33,7 @@ export interface IOverviewCard {
   icon: ReactElement<any>;
   title: string;
   subtitle?: string | number;
+  iconColor: string;
   iconBgColor: string;
   iconBorderColor?: string;
   children?: ReactNode;
@@ -51,16 +52,7 @@ export interface IinfoCardProps {
 }
 
 export interface ISetupProgram {
-  openModal: (modal: TModal)=> void;
-}
-
-export interface ICohort {
-  number: number,
-  description: string,
-  startDate: string,
-  endDate: string,
-  hasTrack: boolean,
-  program: string
+  openModal: ()=> void
 }
 
 export interface IModal {
@@ -69,4 +61,4 @@ export interface IModal {
   children: ReactNode;
 }
 
-export type TModal = 'program' | 'cohort' | 'session' | 'task' | null
+export type TModal = 'program' | 'cohort' | null

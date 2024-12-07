@@ -12,7 +12,7 @@ export const axiosPrivate = axios.create({
         "Content-Type": "application/json",
         //  "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
     },
-    withCredentials: true
+    // withCredentials: true
 })
 
 axiosPrivate.interceptors.request.use(
