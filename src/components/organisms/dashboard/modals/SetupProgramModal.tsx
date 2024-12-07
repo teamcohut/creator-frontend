@@ -5,6 +5,7 @@ import CustomizeProgram from '../../forms/CustomizeProgram/CustomizeProgram'
 import Congratulations from '../../../molecules/dashboard/Congratulations'
 import { axiosPrivate } from '../../../../api/axios'
 import { TModal } from '../../../../@types/dashboard.interface'
+import { useGetProgram } from '../../../../hooks/program/useGetProgram'
 
 const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) => {
     const [currentStep, setCurrentStep] = useState<number>(1)
@@ -17,6 +18,7 @@ const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) 
       communities: [],
       certificates: [],
     });
+    const { getProgram } = useGetProgram()
 
     const updateProgramData = (data: Partial<ProgramData>) => {
       setProgramData((prev) => ({ ...prev, ...data }));
@@ -61,6 +63,7 @@ const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) 
 
     const handleProgramSubmit = async () => {
       try {
+        
         const payload = {
           ...programData,
           cover: programData.cover ? await fileToBase64(programData.cover) : "https://www.shutterstock.com/image-photo/group-workers-people-isolated-on-white-221842699",
@@ -74,10 +77,8 @@ const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) 
         });
   
         console.log("Program created:", response.data);
-        alert("Program successfully created!");
-  
-        // Reset state and close modal
-        // resetState();
+        getProgram()
+        
         setCurrentStep(3)
       } catch (error) {
         console.error("Error submitting program:", error);

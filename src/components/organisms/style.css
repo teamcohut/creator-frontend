@@ -53,6 +53,7 @@
     height: 100vh;
     overflow-y: auto;
     transition: all ease-in-out 0.3s !important;
+    z-index: 3;
 }
 
 .sidenav-div .side-nav {
@@ -79,6 +80,25 @@
     padding-left: 17px;
     /* display: none;
     transition: all ease-in-out 1s; */
+}
+
+.sidenav-div .setup-button {
+    background-color: var(--primary-700);
+    padding: 8px 12px;
+    gap: 12px;
+    overflow-x: hidden;
+}
+
+.sidenav-div .setup-button .plus-icon {
+    margin-right: -24px;
+    transition: margin 0.3s ease-in-out !important;
+}
+
+.sidenav-div .setup-button span {
+    width: 0;
+    overflow: hidden;
+    text-align: start;
+    transition: all 0.3s ease-in-out !important;
 }
 
 .sidenav-div .nav-tools .nav-icon {
@@ -109,6 +129,14 @@
 
 .sidenav-div:hover .dropdown-btn {
     justify-content: space-between !important;
+}
+
+.sidenav-div:hover .setup-button .plus-icon {
+    margin: 0;
+}
+
+.sidenav-div:hover .setup-button span {
+    width: 100%;
 }
 
 .sidenav-div:hover .nav-link span {

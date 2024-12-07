@@ -87,32 +87,43 @@
 
 
 
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import "../../style.css";
 import NumberInput from "../../../atoms/inputs/NumberInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import { ICohort } from "../../../../@types/dashboard.interface";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
-    const [form, setForm] = useState({
+    const { program } = useContext(ProgramContext)
+    const [form, setForm] = useState<ICohort>({
         number: 1,
         description: "",
         startDate: "",
         endDate: "",
         hasTrack: true,
-        program: ""
+        program: program[0]._id
     })
     const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
 
     const handleInputChange = (name: string, value: string | boolean | number) => {
+        console.log(name, value);
+        
         setForm({ ...form, [name]: value });
-      };
+    };
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        console.log(form);
+        
+        onSubmit(form)
+    }
 
     return (
         <>
-            <form className="form bg-white d-flex flex-column rounded-5 mx-auto" onSubmit={()=>{onSubmit(form)}} action="">
+            <form className="form bg-white d-flex flex-column rounded-5 mx-auto" onSubmit={handleSubmit} action="">
                 {/* Progress bar dynamically changes length */}
                 <ProgressBar
                     height={8}
@@ -142,13 +153,14 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                     </div>
                     {/* Checkbox to toggle track */}
                     <div>
-                        <label className="d-flex gap-2 manrope-500" htmlFor="enable-track">
-                        <input
-                            type="checkbox"
-                            id="hasTrack"
-                            checked={isTrackEnabled}
-                            onChange={(e) => handleInputChange(e.target.name, e.target.checked)} // Update state
-                        />
+                        <label className="d-flex gap-2 manrope-500" htmlFor="hasTrack">
+                            <input
+                                type="checkbox"
+                                id="hasTrack"
+                                name="hasTrack"
+                                defaultChecked={isTrackEnabled}
+                                onChange={(e) => handleInputChange(e.target.name, e.target.checked)} // Update state
+                            />
                             Enable Tracks
                         </label>
                         <p className="fs-caption primary-400">
@@ -190,7 +202,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-3">
-                    <Button children="Continue" action={()=>{}} type="submit" fill={true} />
+                    <Button children="Continue" action={() => { }} type="submit" fill={true} />
                 </div>
             </form>
         </>

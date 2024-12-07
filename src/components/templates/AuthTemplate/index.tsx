@@ -11,7 +11,7 @@ const AuthTemplate: FC<IAuthTemplate> = ({ children, title, author }) => {
           <Logo logo="logo-white" width={88.91} />
           <img width={400} src="/assets/images/auth-img.png" alt="Dashboard preview" />
           <div>
-            <h1 className="manrope-300 fs-h1 mt-auto text-white">{title}</h1>
+            <h1 className="manrope-300 fs-h1 text-white">{title}</h1>
             <span className="manrope-500 fs-body dark-50">-{author}</span>
           </div>
         </div>

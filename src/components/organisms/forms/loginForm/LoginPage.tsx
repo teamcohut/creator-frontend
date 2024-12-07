@@ -16,14 +16,27 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const response: any = await login(email, password)
-    // if ( response.code === "ERR_NETWORK" || response.data?.error ) {
-    //   const message = response.message || response.data?.errors[0]
-    //   api.error({
-    //     message,
-    //     description: message === "Your account is not activated" && "Check your mail"
-    //   })
-    // }
+    try {
+      const response: any = await login(email, password)
+      if (response.code === "ERR_BAD_RESPONSE" ) {
+        const message = response.response.data.errors[0]
+        console.log(message);
+        
+        api.error({
+          message,
+          description: message === "Your account is not activated" && "Check your mail"
+        })
+      }
+      if ( response.code === "ERR_NETWORK" ) {
+        const message = response.message
+        api.error({
+          message
+        })
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
   return (
     <>

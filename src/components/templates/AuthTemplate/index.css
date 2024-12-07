@@ -40,13 +40,13 @@ html, body {
     }
 }
 
-/* .form-container {
-    height: 80vh;
-} */
+.form-container {
+    height: 90vh;
+}
 
-/* @media (min-height: 900px) {
+@media (min-height: 900px) {
     .form-container {
         display: flex;
         align-items: center;
     }
-} */
+}

@@ -69,4 +69,4 @@ export interface IModal {
   children: ReactNode;
 }
 
-export type TModal = 'program' | 'cohort' | null
+export type TModal = 'program' | 'cohort' | 'session' | 'task' | null

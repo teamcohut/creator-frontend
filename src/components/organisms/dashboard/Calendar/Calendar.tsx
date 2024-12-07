@@ -418,4 +418,159 @@
 // };
 
 // export default Calendar;
-export {}
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import Calendar from "@toast-ui/react-calendar";
+// import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+// import { fetchSchedules } from "./api";
+// import Button from "../../../atoms/Button";
+
+// type Event = {
+//     id: string;
+//     calendarId: string;
+//     title: string;
+//     category: "time" | "allday";
+//     start: string;
+//     end: string;
+// };
+
+// const CalendarComponent: React.FC = () => {
+//     const [events, setEvents] = useState<Event[]>([]);
+//     const [view, setView] = useState<"month" | "week" | "day">("month");
+
+//     useEffect(() => {
+//         const loadEvents = async () => {
+//             try {
+//                 const data = await fetchSchedules();
+//                 setEvents(data);
+//             } catch (error) {
+//                 console.error("Failed to fetch events", error);
+//             }
+//         };
+
+//         loadEvents();
+//     }, []);
+
+//     return (
+//         <div>
+//             <h1 className="manrope-600 primary-700">My Calendar</h1>
+//             <div style={{ marginBottom: "10px" }}>
+//                 <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("month")}>Month View</button>
+//                 <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("week")}>Week View</button>
+//                 <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("day")}>Day View</button>
+//             </div>
+//             <Calendar
+//                 height="900px"
+//                 view={view}
+//                 events={events.map((event) => ({
+//                     ...event,
+//                     isReadOnly: true, // Optional: makes events read-only
+//                 }))}
+//                 usageStatistics={false} // Disable analytics tracking
+//                 onClickSchedule={(event) => {
+//                     alert(`Event clicked: ${event.schedule.title}`);
+//                 }}
+//             />
+//         </div>
+//     );
+// };
+
+// export default CalendarComponent;
+
+
+
+
+
+
+
+
+import React, { useState } from "react";
+// import Calendar from "@toast-ui/react-calendar";
+// import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+
+type Event = {
+    id: string;
+    calendarId: string;
+    title: string;
+    category: "time" | "allday";
+    start: string;
+    end: string;
+};
+
+const CalendarComponent: React.FC = () => {
+    // Dummy data for testing
+    const dummyEvents: Event[] = [
+        {
+            id: "1",
+            calendarId: "1",
+            title: "Team Standup",
+            category: "time",
+            start: "2024-12-06T10:00:00",
+            end: "2024-12-06T10:30:00",
+        },
+        {
+            id: "2",
+            calendarId: "1",
+            title: "Lunch Break",
+            category: "allday",
+            start: "2024-12-06T12:00:00",
+            end: "2024-12-06T13:00:00",
+        },
+        {
+            id: "3",
+            calendarId: "2",
+            title: "Project Demo",
+            category: "time",
+            start: "2024-12-07T15:00:00",
+            end: "2024-12-07T16:00:00",
+        },
+        {
+            id: "4",
+            calendarId: "2",
+            title: "Project Demo",
+            category: "time",
+            start: "2024-12-07T15:00:00",
+            end: "2024-12-07T17:00:00",
+        },
+    ];
+
+    const [events] = useState<Event[]>(dummyEvents); // Use dummy data
+    const [view, setView] = useState<"month" | "week" | "day">("month");
+
+    return (
+        <div>
+            <h1 className="manrope-600 primary-700">My Calendar</h1>
+            <div style={{ marginBottom: "10px" }}>
+                <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("month")}>
+                    Month View
+                </button>
+                <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("week")}>
+                    Week View
+                </button>
+                <button className="primary-700 px-2 py-2 rounded-4 bg-secondary-300" onClick={() => setView("day")}>
+                    Day View
+                </button>
+            </div>
+            {/* <Calendar
+                height="900px"
+                view={view}
+                events={events.map((event) => ({
+                    ...event,
+                    isReadOnly: true, // Optional: makes events read-only
+                }))}
+                usageStatistics={false} // Disable analytics tracking
+                onClickSchedule={(event) => {
+                    alert(`Event clicked: ${event.schedule.title}`);
+                }}
+            /> */}
+        </div>
+    );
+};
+
+export default CalendarComponent;

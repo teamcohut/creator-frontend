@@ -12,7 +12,7 @@ const DashBoard: FC<IDashboard> = ({ openModal }) => {
 
     console.log(program);
     
-    const activeProgram = program.data[0]
+    const activeProgram = program[0]
     
     return (
         <>
