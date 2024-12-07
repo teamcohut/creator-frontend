@@ -37,7 +37,9 @@ const ResetPassword = () => {
     <>
         <AuthTemplate title='The simplest solution is often the best solution.'>
           <SuccessCard icon={<FiCheckCircle className='fs-icon success-600' />} title='Successful' description='You have succeeded in resetting your password. You can now sign in to your account'>
-            <Button fill children='Sign In' action={()=>{navigate('/login')}} type='button' width={192} />
+            <div>
+              <Button fill children='Sign In' action={()=>{navigate('/login')}} type='button' width={192} />
+            </div>
           </SuccessCard>
         </AuthTemplate>
     </>

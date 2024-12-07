@@ -15,6 +15,9 @@ import RequireAuth from './components/utils/RequireAuth';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import ResendMail from './pages/auth/ResendMail';
+import PersistLogin from './components/utils/PersistLogin';
+import SessionsDisplay from './components/organisms/dashboard/Sessions/SessionsDisplay';
+import { ProgramContextProvider } from './context/programs/ProgramState';
 
 function App() {
   const router = createBrowserRouter([
@@ -22,7 +25,9 @@ function App() {
       path: "/",
       element: (
         <RequireAuth>
-          <DashboardTemplate />
+          <ProgramContextProvider>
+            <DashboardTemplate />
+          </ProgramContextProvider>
         </RequireAuth>
       ),
       children: [
@@ -36,12 +41,12 @@ function App() {
         },
         {
           path: "sessions",
-          element: <Sessions />,
+          element: <SessionsDisplay />,
         },
-        {
-          path: "sessions",
-          element: <Sessions />,
-        },
+        // {
+        //   path: "sessions",
+        //   element: <Sessions />,
+        // },
       ],
     },
     // {
@@ -89,9 +94,11 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+      <PersistLogin>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </PersistLogin>
     </>
   );
 }

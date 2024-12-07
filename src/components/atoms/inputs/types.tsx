@@ -16,6 +16,14 @@ export interface INumberInput {
   onchange(e: ChangeEvent<HTMLInputElement>): void,
 }
 
+export interface IDateInput {
+  id: string,
+  label?: string,
+  placeHolder: string,
+  icon?: React.ReactNode,
+  onchange(e: ChangeEvent<HTMLInputElement>): void,
+}
+
 
 export interface IPasswordInput {
   id: string;

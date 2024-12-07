@@ -90,10 +90,9 @@
 import React, { FC, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
-import { FiCalendar } from "react-icons/fi";
-import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
-import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
+import NumberInput from "../../../atoms/inputs/NumberInput";
+import DateInput from "../../../atoms/inputs/DateInput";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
     const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
@@ -104,7 +103,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                 {/* Progress bar dynamically changes length */}
                 <ProgressBar
                     height={8}
-                    length={isTrackEnabled ? 3 : 2} // Adjust progress bar length based on state
+                    length={3} // Adjust progress bar length based on state
                     page={1}
                     absolute={true}
                     gap
@@ -117,31 +116,26 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                     </span>
                 </div>
 
-                <div className="d-flex flex-column gap-2">
-                    <div>
-                        <p>Cohort Number</p>
-                        <span className="rounded-5 px-4 py-2 border">1</span>
+                <div className="d-flex flex-column gap-3">
+                    <div className="w-25">
+                        {/* <p>Cohort Number</p> */}
+                        <NumberInput id="number" onchange={() => { }} placeHolder="" label="Cohort Number" />
                     </div>
 
+                    <div className="d-flex flex-row align-items-end gap-3">
+                        <DateInput id="start" onchange={() => { }} placeHolder="" label="Set Cohort Duration" />
+                        <h2>-</h2>
+                        <DateInput id="end" onchange={() => { }} placeHolder="" />
+                    </div>
+                    {/* Checkbox to toggle track */}
                     <div>
-                        <p>Set Cohort Duration</p>
-                        <div className="d-flex flex-row gap-3">
-                            <p className="rounded-5 px-2 py-2 border gap-4">
-                                01/10/2024 <FiCalendar />
-                            </p>
-                            <span>-</span>
-                            <p className="rounded-5 px-2 py-2 border">
-                                01/10/2024 <FiCalendar />
-                            </p>
-                        </div>
-                        {/* Checkbox to toggle track */}
+                        <label className="d-flex gap-2 manrope-500" htmlFor="enable-track">
                         <input
                             type="checkbox"
                             id="enable-track"
                             checked={isTrackEnabled}
                             onChange={(e) => setIsTrackEnabled(e.target.checked)} // Update state
-                        />{" "}
-                        <label className="manrope-500" htmlFor="enable-track">
+                        />
                             Enable Tracks
                         </label>
                         <p className="fs-caption primary-400">
@@ -150,7 +144,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                     </div>
 
                     {/* Conditionally render DragNDropInput or TextInput */}
-                    {isTrackEnabled ? (
+                    {/* {isTrackEnabled ? (
                         <div>
                             <TextInput
                                 id="track"
@@ -178,7 +172,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                             </span>
                         </div>
 
-                    )}
+                    )} */}
 
                 </div>
 

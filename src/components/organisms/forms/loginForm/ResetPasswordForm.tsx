@@ -28,7 +28,7 @@ const ResetPasswordForm: FC<IResetPasswordForm> = ({ successful, token, id }) =>
       return
     }
     try {
-      const response = await axiosPublic.post(`/auth/reset-password?token=${token}&id=${id}`, {password})
+      const response = await axiosPublic.post(`/auth/reset-password?token=${token}&id=${id}`, {newPassword: password})
       if (!response.data.error) {
         console.log(response.data);
         

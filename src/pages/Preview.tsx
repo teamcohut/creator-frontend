@@ -11,6 +11,12 @@ import OnboardCohort from '../components/molecules/dashboard/OnboardCohort';
 import OnboardCohortModal from '../components/organisms/forms/Onboard/OnboardCohortModal';
 import SendEmail from '../components/organisms/forms/Onboard/SendEmail';
 import UploadParticipants from '../components/organisms/forms/Onboard/UploadParticipants';
+import SessionsDisplay from '../components/organisms/dashboard/Sessions/SessionsDisplay';
+import SessionDetails from '../components/organisms/dashboard/Sessions/SessionDetails';
+import AddSession from '../components/organisms/forms/Session/AddSession';
+import AdditionalSession from '../components/organisms/forms/Session/AdditionalSession';
+import CalendarComponent from '../components/organisms/dashboard/Calendar/Calendar';
+import ParticipantsPage from './dashboard/participants/Participants';
 
 const Preview = () => {
   return (
@@ -28,6 +34,12 @@ const Preview = () => {
       {/* <OnboardCohortModal /> */}
       {/* <SendEmail /> */}
       {/* <UploadParticipants /> */}
+      {/* <SessionsDisplay /> */}
+      {/* <SessionDetails /> */}
+      {/* <AddSession /> */}
+      {/* <AdditionalSession /> */}
+      {/* <CalendarComponent /> */}
+      {/* <ParticipantsPage /> */}
     </>
   );
 }
