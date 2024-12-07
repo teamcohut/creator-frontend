@@ -16,6 +16,7 @@ import SessionDetails from '../components/organisms/dashboard/Sessions/SessionDe
 import AddSession from '../components/organisms/forms/Session/AddSession';
 import AdditionalSession from '../components/organisms/forms/Session/AdditionalSession';
 import CalendarComponent from '../components/organisms/dashboard/Calendar/Calendar';
+import ParticipantsPage from './dashboard/participants/Participants';
 
 const Preview = () => {
   return (
@@ -37,7 +38,8 @@ const Preview = () => {
       {/* <SessionDetails /> */}
       {/* <AddSession /> */}
       {/* <AdditionalSession /> */}
-      <CalendarComponent />
+      {/* <CalendarComponent /> */}
+      {/* <ParticipantsPage /> */}
     </>
   );
 }
