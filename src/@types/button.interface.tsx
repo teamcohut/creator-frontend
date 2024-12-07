@@ -8,7 +8,9 @@ export interface IButton {
     outline?: 'white' | 'primary',
     border?: boolean,
     gap?: boolean,
-    width?: number
+    width?: number,
+    disabled?: boolean;
+    loading?: boolean;
   }
 
 export interface IFilterButton {
