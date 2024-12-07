@@ -6,7 +6,7 @@ import LoginPage from '../../components/organisms/forms/loginForm/LoginPage'
 const Login = () => {
   return (
     <>
-        <AuthTemplate title='Teach what you know, share what you love.' author='Unknown' >
+        <AuthTemplate title='Teach what you know, share what you love.'>
             <LoginPage />
         </AuthTemplate>
     </>

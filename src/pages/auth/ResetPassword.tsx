@@ -19,7 +19,7 @@ const ResetPassword = () => {
 
     if (token == null || id == null) {
         return (
-          <AuthTemplate title='The simplest solution is often the best solution.' author='William of Ockham'>
+          <AuthTemplate title='The simplest solution is often the best solution.'>
               <Navigate to={'/login'} />
           </AuthTemplate>
       )
@@ -27,7 +27,7 @@ const ResetPassword = () => {
 
     if (!successful) {
         return (
-            <AuthTemplate title='The simplest solution is often the best solution.' author='William of Ockham'>
+            <AuthTemplate title='The simplest solution is often the best solution.'>
                 <ResetPasswordForm successful={success} token={token} id={id} />
             </AuthTemplate>
         )
@@ -35,7 +35,7 @@ const ResetPassword = () => {
     
   return (
     <>
-        <AuthTemplate title='The simplest solution is often the best solution.' author='William of Ockham'>
+        <AuthTemplate title='The simplest solution is often the best solution.'>
           <SuccessCard icon={<FiCheckCircle className='fs-icon success-600' />} title='Successful' description='You have succeeded in resetting your password. You can now sign in to your account'>
             <div>
               <Button fill children='Sign In' action={()=>{navigate('/login')}} type='button' width={192} />

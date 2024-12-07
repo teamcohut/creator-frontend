@@ -2,12 +2,10 @@ import React from "react";
 import { IParticipant } from "../../../@types/participants.interface";
 import "./index.css";
 import Table from "../../../components/organisms/dashboard/Table";
-import { FiPlus, FiUsers } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
 import Overview from "../../../components/organisms/dashboard/Overview";
 import Header from "../../../components/organisms/dashboard/Header";
-import OverviewCard from "../../../components/molecules/dashboard/OverviewCard";
-import PercentageBar from "../../../components/atoms/dashboard/PercentageBar";
 const ParticipantsPage: React.FC = () => {
   const participants: IParticipant[] = [
     {
@@ -46,15 +44,7 @@ const ParticipantsPage: React.FC = () => {
             Invite Learner
           </Button>
       </Header>
-      {/* <Overview /> */}
-      <div className="overview-container d-flex">
-        <OverviewCard icon={<FiUsers className="fs-h1 primary-300" />} title="Total Participants" iconBgColor="#ECF1FF4D" iconBorderColor="#ECF1FF" subtitle={50} />
-        <OverviewCard icon={<FiUsers className="fs-h1 primary-300" />} title="Enrolled Participants" iconBgColor="#ECF1FF4D" iconBorderColor="#ECF1FF" subtitle={0} >
-          <PercentageBar progress={0} />
-        </OverviewCard>
-        <OverviewCard icon={<FiUsers className="fs-h1 success-300" />} title="Active Participants" iconBgColor="#E9FFF74D" iconBorderColor="#E9FFF7" subtitle={0} />
-        <OverviewCard icon={<FiUsers className="fs-h1 error-300" />} title="Inactive Participants" iconBgColor="#FFF1F14D" iconBorderColor="#FFF1F14D" subtitle={50} />
-      </div>
+      <Overview />
       <Table header={header} body={participants} />
     </>
   );

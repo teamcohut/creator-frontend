@@ -1,4 +1,4 @@
-import { FiBell, FiBookOpen, FiCalendar, FiCheckCircle, FiCheckSquare, FiHeadphones, FiLayers, FiLayout, FiMoon, FiTool, FiUser, FiUsers, FiVideo } from "react-icons/fi";
+import { FiBell, FiCalendar, FiCheckCircle, FiCheckSquare, FiHeadphones, FiLayers, FiLayout, FiMoon, FiTool, FiUser, FiUsers, FiVideo } from "react-icons/fi";
 
 export const NavList = [
     {
@@ -6,27 +6,26 @@ export const NavList = [
         title: "Dashboard",
         path: "/dashboard"
     }, {
+        icon: <FiLayers className="nav-icon" />,
+        title: "Curriculum",
+        path: "curriculum"
+    }, {
         icon: <FiUsers className="nav-icon" />,
         title: "Participants",
         path: "participants"
     }, {
-        icon: <FiBookOpen className="nav-icon" />,
-        title: "Learning",
-        path: "learning"
-    }, 
-    //  {
-    //     icon: <FiVideo className="nav-icon" />,
-    //     title: "Sessions",
-    //     path: "sessions"
-    // }, {
-    //     icon: <FiCheckSquare className="nav-icon" />,
-    //     title: "Assessments",
-    //     path: "assessments"
-    // }, {
-    //     icon: <FiCalendar className="nav-icon" />,
-    //     title: "Calendar",
-    //     path: "calendar"
-    // }
+        icon: <FiVideo className="nav-icon" />,
+        title: "Sessions",
+        path: "sessions"
+    }, {
+        icon: <FiCheckSquare className="nav-icon" />,
+        title: "Assessments",
+        path: "assessments"
+    }, {
+        icon: <FiCalendar className="nav-icon" />,
+        title: "Calendar",
+        path: "calendar"
+    }
 ]
 
 export const SettingsList = [

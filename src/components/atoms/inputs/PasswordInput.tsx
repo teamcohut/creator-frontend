@@ -12,7 +12,6 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
     const [isInvalid, setIsInvalid] = useState(false);
     const [strength, setStrength] = useState(0);
     const [status, setStatus] = useState('Weak');
-    const [error, setError] = useState('');
     const [password, setPassword] = useState("")
 
     useEffect(() => {
@@ -50,8 +49,6 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
 
         if (value.length < 8 || !valid) {
             setIsInvalid(true);
-            value.length < 8 && setError('Password must be at least 8 characters long.')
-            !valid && setError('Passwords do not match.')
         } else if (value.length >= 8 && valid) {
             setIsInvalid(false);
         }
@@ -97,9 +94,9 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
                     )
                 }
                 {isInvalid && (
-                    <span className="validation-message text-danger fs-footer">
-                        {error}
-                    </span>
+                    <div className="validation-message text-danger">
+                        {password.length < 8 ? "Password must be at least 8 characters long." : "Passwords do not match."}
+                    </div>
                 )}
             </div>
         </>

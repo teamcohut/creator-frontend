@@ -15,7 +15,6 @@ import SessionsDisplay from '../components/organisms/dashboard/Sessions/Sessions
 import SessionDetails from '../components/organisms/dashboard/Sessions/SessionDetails';
 import AddSession from '../components/organisms/forms/Session/AddSession';
 import AdditionalSession from '../components/organisms/forms/Session/AdditionalSession';
-import TimeInput from '../components/atoms/inputs/TimeInput';
 import CalendarComponent from '../components/organisms/dashboard/Calendar/Calendar';
 import ParticipantsPage from './dashboard/participants/Participants';
 
@@ -37,9 +36,8 @@ const Preview = () => {
       {/* <UploadParticipants /> */}
       {/* <SessionsDisplay /> */}
       {/* <SessionDetails /> */}
-      <AddSession />
-      <AdditionalSession />
-      {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
+      {/* <AddSession /> */}
+      {/* <AdditionalSession /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
     </>

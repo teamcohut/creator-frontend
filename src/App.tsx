@@ -7,6 +7,8 @@ import VerifyMail from './pages/auth/VerifyMail';
 import ParticipantsPage from './pages/dashboard/participants/Participants';
 import DashboardTemplate from './components/templates/DashboardTemplate';
 import NotFound from './pages/NotFound';
+import Sessions from './pages/dashboard/sessions/Sessions';
+// import Calendar from './components/organisms/dashboard/Calendar/Calendar';
 import { AuthContextProvider } from './context/auth/AuthState';
 import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
 import RequireAuth from './components/utils/RequireAuth';
@@ -22,13 +24,11 @@ function App() {
     {
       path: "/",
       element: (
-        <PersistLogin>
-          <RequireAuth>
-            <ProgramContextProvider>
-              <DashboardTemplate />
-            </ProgramContextProvider>
-          </RequireAuth>
-        </PersistLogin>
+        <RequireAuth>
+          <ProgramContextProvider>
+            <DashboardTemplate />
+          </ProgramContextProvider>
+        </RequireAuth>
       ),
       children: [
         {
@@ -40,11 +40,19 @@ function App() {
           element: <ParticipantsPage />,
         },
         {
-          path: "learning",
+          path: "sessions",
           element: <SessionsDisplay />,
         },
+        // {
+        //   path: "sessions",
+        //   element: <Sessions />,
+        // },
       ],
     },
+    // {
+    //   path: "calendar",
+    //   element: <Calendar />
+    // },
     {
       path: "curriculum",
       element: <Curriculum />
@@ -86,9 +94,11 @@ function App() {
 
   return (
     <>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+      <PersistLogin>
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </PersistLogin>
     </>
   );
 }
