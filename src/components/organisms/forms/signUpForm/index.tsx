@@ -4,8 +4,8 @@ import EmailInput from "../../../atoms/inputs/EmailInput";
 import { Link } from "react-router-dom";
 import "../../style.css";
 import { useSignup } from "../../../../hooks/auth/useSignUp";
-import PasswordInput from "../../../atoms/inputs/PasswordInput";
 import { ISignupData } from "../../../../@types/auth.interface";
+import PasswordInput from "../../../atoms/inputs/PasswordInput";
 
 
 const SignUpForm: React.FC = () => {
