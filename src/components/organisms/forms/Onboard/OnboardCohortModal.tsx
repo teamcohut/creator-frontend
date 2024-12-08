@@ -97,14 +97,14 @@ import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
-    const { program } = useContext(ProgramContext)
+    const { activeProgram } = useContext(ProgramContext)
     const [form, setForm] = useState<ICohort>({
         number: 1,
         description: "",
         startDate: "",
         endDate: "",
         hasTrack: true,
-        program: program[0]._id
+        program: activeProgram._id
     })
     const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
 

@@ -9,16 +9,17 @@ import { ProgramContext } from '../../../../context/programs/ProgramContext'
 import SetupProgramModal from '../modals/SetupProgramModal'
 import SetupCohortModal from '../modals/SetupCohortModal'
 import CohortsDropdown from '../../../molecules/dashboard/CohortsDropdown'
+import { TActiveModal } from '../../../../@types/dashboard.interface'
 
 const SideNav: FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [activeModal, setActiveModal] = useState<ActiveModal>(null)
+  const [activeModal, setActiveModal] = useState<TActiveModal>(null)
   const { activeProgram } = useContext(ProgramContext)
   const location = useLocation()
   const { pathname } = location
   
 
-  const openModal = (modal: ActiveModal) => {
+  const openModal = (modal: TActiveModal) => {
     setActiveModal(modal)
     setModalOpen(true)
   }
@@ -102,7 +103,5 @@ const SideNav: FC = () => {
     </>
   )
 }
-
-type ActiveModal = 'program' | 'cohort' | null
 
 export default SideNav

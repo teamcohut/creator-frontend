@@ -75,3 +75,5 @@ export interface ISetupModal {
 }
 
 export type TModal = 'program' | 'cohort' | 'session' | 'task' | null
+
+export type TActiveModal = 'program' | 'cohort' | null

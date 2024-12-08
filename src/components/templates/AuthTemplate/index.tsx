@@ -1,14 +1,13 @@
 import "./index.css";
 import { FC } from "react";
 import { IAuthTemplate } from "../../../@types/authtemplate.interface";
-import Logo from "../../atoms/Logo/Logo";
 
 const AuthTemplate: FC<IAuthTemplate> = ({ children, title, author }) => {
   return (
     <>
       <div className="form-template container-fluid">
         <div className="left-div d-none d-lg-flex flex-column justify-content-between align-items-start">
-          <Logo logo="logo-white" width={88.91} />
+          <img width={88.91} src="/assets/logo/logo-white.svg" alt="Cohut" />
           <img width={400} src="/assets/images/auth-img.png" alt="Dashboard preview" />
           <div>
             <h1 className="manrope-300 fs-h1 text-white">{title}</h1>

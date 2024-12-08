@@ -9,17 +9,25 @@ import SetupProgramModal from "../../components/organisms/dashboard/modals/Setup
 import SetupCohortModal from "../../components/organisms/dashboard/modals/SetupCohortModal";
 import SessionModal from "../../components/organisms/dashboard/modals/SessionModal";
 import { Skeleton } from "antd";
+import { useGetCohorts } from "../../hooks/program/useGetCohorts";
 
 const Dashboard = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const { activeProgram } = useContext(ProgramContext)
+  const { getCohorts } = useGetCohorts()
+
   const { getProgram, error, isLoading } = useGetProgram()
 
   useEffect(() => {
     getProgram()
   }, [])
 
+  useEffect(() => {
+    if (activeProgram) {
+      getCohorts()
+    }
+  }, [activeProgram])
 
   const openModal = (modal: TModal) => {
     setActiveModal(modal)
