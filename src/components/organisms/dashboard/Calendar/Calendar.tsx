@@ -491,8 +491,8 @@
 
 
 import React, { useState } from "react";
-// import Calendar from "@toast-ui/react-calendar";
-// import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+import Calendar from "@toast-ui/react-calendar";
+import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 
 type Event = {
     id: string;
@@ -557,7 +557,7 @@ const CalendarComponent: React.FC = () => {
                     Day View
                 </button>
             </div>
-            {/* <Calendar
+            <Calendar
                 height="900px"
                 view={view}
                 events={events.map((event) => ({
@@ -565,10 +565,10 @@ const CalendarComponent: React.FC = () => {
                     isReadOnly: true, // Optional: makes events read-only
                 }))}
                 usageStatistics={false} // Disable analytics tracking
-                onClickSchedule={(event) => {
+                onClickSchedule={(event: any) => {
                     alert(`Event clicked: ${event.schedule.title}`);
                 }}
-            /> */}
+            />
         </div>
     );
 };

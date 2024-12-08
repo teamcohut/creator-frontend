@@ -6,7 +6,8 @@ import OverviewCard from '../../../molecules/dashboard/OverviewCard';
 import { cardData } from './DashBoardCard';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 import { TModal } from '../../../../@types/dashboard.interface';
-import { Calendar } from 'antd';
+import CalendarComponent from '../Calendar/Calendar';
+// import { Calendar } from 'antd';
 
 const DashBoard: FC<IDashboard> = ({ openModal }) => {
     const { activeProgram } = useContext(ProgramContext)
@@ -38,7 +39,7 @@ const DashBoard: FC<IDashboard> = ({ openModal }) => {
                     ))}
                 </div>
 
-                <Calendar />
+                <CalendarComponent />
             </div>
         </>
     )
