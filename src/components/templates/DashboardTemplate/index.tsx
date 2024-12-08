@@ -12,8 +12,10 @@ const DashboardTemplate: FC = () => {
             <SideNav />
             <div className='dashboard-body w-100'>
                 <TopNav />
-                <Outlet />
-                <Checklist />
+                <div className='h-100 outlet-div'>
+                  <Outlet />
+                </div>
+                {/* <Checklist /> */}
             </div>
         </div>
     </>

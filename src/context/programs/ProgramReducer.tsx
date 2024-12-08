@@ -2,10 +2,14 @@ import { IProgramState, TProgramAction } from "../../@types/program.interface"
 
 export const programReducer = (state: IProgramState, action: TProgramAction): IProgramState => {
     switch (action.type) {
-      case 'SETUP':
-        return { program: action.payload }
-    //   case 'LOGOUT':
-    //     return { user: null }
+      case 'PROGRAMS':
+        return { ...state, programs: action.payload }
+      case 'ACTIVE_PROGRAM':
+        return { ...state, activeProgram: action.payload }
+      case 'COHORTS':
+        return { ...state, cohorts: action.payload }
+        case 'ACTIVE_COHORT':
+          return { ...state, activeCohort: action.payload }
       default:
         return state
     }

@@ -169,7 +169,7 @@
 /* TOP NAV */
 
 .top-nav {
-    padding-block: 11px;
+    padding: 11px 36px;
 }
 
 .search-div {
@@ -270,6 +270,13 @@
     padding: 20px;
     border-radius: 8px;
     width: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .modal-div::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
   
   .close-btn {

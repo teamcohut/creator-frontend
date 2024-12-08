@@ -6,13 +6,10 @@ import OverviewCard from '../../../molecules/dashboard/OverviewCard';
 import { cardData } from './DashBoardCard';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 import { TModal } from '../../../../@types/dashboard.interface';
+import { Calendar } from 'antd';
 
 const DashBoard: FC<IDashboard> = ({ openModal }) => {
-    const { program } = useContext(ProgramContext)
-
-    console.log(program);
-    
-    const activeProgram = program[0]
+    const { activeProgram } = useContext(ProgramContext)
     
     return (
         <>
@@ -24,7 +21,7 @@ const DashBoard: FC<IDashboard> = ({ openModal }) => {
                             <Button action={()=>{}} fill={false} type='button' border outline='primary'>
                                 <FiPlus className='fs-body' /> Add Task
                             </Button>
-                            <Button action={()=>{}} fill type='button' border={false}>
+                            <Button action={()=> openModal('session')} fill type='button' border={false}>
                                 <FiPlus className='fs-body' /> Create New Session
                             </Button>
                         </div>:
@@ -41,7 +38,7 @@ const DashBoard: FC<IDashboard> = ({ openModal }) => {
                     ))}
                 </div>
 
-                {/* <Calendar /> */}
+                <Calendar />
             </div>
         </>
     )

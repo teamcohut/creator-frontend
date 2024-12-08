@@ -12,9 +12,8 @@ export const useGetProgram = () => {
         setError(null)
         try {
             const response = await axiosPrivate.get('/program')
-            console.log(response.data.data);
-            
-            dispatch({type: "SETUP", payload: response.data.data})
+            dispatch({type: "PROGRAMS", payload: response.data.data})
+            dispatch({type: "ACTIVE_PROGRAM", payload: response.data.data[0]})
             setIsLoading(false)
         } catch (error: any) {
             console.error(error)
