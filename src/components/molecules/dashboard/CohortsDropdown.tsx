@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { FiChevronDown, FiChevronUp, FiPlus, FiSettings } from 'react-icons/fi'
+import { FiChevronDown, FiChevronUp, FiPlus } from 'react-icons/fi'
 import '../style.css'
-import NavLink from '../../atoms/dashboard/NavLink'
-import Button from '../../atoms/Button'
 
 const CohortsDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -30,24 +28,9 @@ const CohortsDropdown = () => {
                 </div>
                 <div className='other-program d-flex align-items-center px-3 py-2 fs-body primary-700'>
                   <FiPlus />
-                  <span className='manrope-500'>Add New Program</span>
+                  <span className='manrope-500'>Onboard New Program</span>
                 </div>
               </div>
-              {/* <hr />
-              <NavLink type='link' path='#' dropdownList={[]}>
-                <FiSettings />
-                <span>Program Settings</span>
-              </NavLink>
-              <div className="d-flex flex-column align-items-start pt-3 pb-2 px-3">
-                <span className="manrope-500 primary-950 fs-body">Program Team</span>
-                <small className="manrope-500 fs-small dark-700">7 members</small>
-              </div>
-              <div className="py-2 px-3">
-                <Button type='button' fill={false} action={()=>{}}>
-                  <FiPlus className='primary-700' />
-                  <span className="primary-700">Add teammates</span>
-                </Button>
-              </div> */}
             </div>
         </div>
     </>

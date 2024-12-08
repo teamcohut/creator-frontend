@@ -26,11 +26,6 @@ const Dashboard = () => {
     setModalOpen(true)
   };
 
-  const closeModal = () => {
-    setActiveModal(null)
-    setModalOpen(false)
-  }
-
   if (isLoading) {
     return (
       <Skeleton loading />
