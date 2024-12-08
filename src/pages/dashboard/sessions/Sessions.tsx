@@ -8,7 +8,7 @@ const Sessions = () => {
     <>
       <Header
         title="Sessions"
-        subtitle={`View and manage your live program sessions here`}
+        subtitle={`View and manage your live program sessions here.`}
       >
         <></>
       </Header>
