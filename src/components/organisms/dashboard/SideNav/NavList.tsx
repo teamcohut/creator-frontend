@@ -14,7 +14,7 @@ export const NavList = [
   {
     icon: <FiLayout className="nav-icon" />,
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/",
   },
   {
     icon: <FiUsers className="nav-icon" />,
@@ -25,20 +25,7 @@ export const NavList = [
     icon: <FiBookOpen className="nav-icon" />,
     title: "Learning",
     path: "learning",
-  },
-  //  {
-  //     icon: <FiVideo className="nav-icon" />,
-  //     title: "Sessions",
-  //     path: "sessions"
-  // }, {
-  //     icon: <FiCheckSquare className="nav-icon" />,
-  //     title: "Assessments",
-  //     path: "assessments"
-  // }, {
-  //     icon: <FiCalendar className="nav-icon" />,
-  //     title: "Calendar",
-  //     path: "calendar"
-  // }
+  }
 ];
 
 export const SettingsList = [
