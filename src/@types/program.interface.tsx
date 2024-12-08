@@ -1,7 +1,10 @@
 import { ReactNode } from "react";
 
 export interface IProgramState {
-    program: Record<string, any> | null;
+    programs: Record<string, any> | null;
+    activeProgram: Record<string, any> | null;
+    cohorts: Record<string, any> | null;
+    activeCohort: Record<string, any> | null;
   }
   
   export interface IProgramProvider {
@@ -9,5 +12,7 @@ export interface IProgramState {
     }
   
   export type TProgramAction = 
-      | { type: 'SETUP'; payload: Record<string, any> } 
-    //   | { type: 'LOGOUT' };
+    | { type: 'PROGRAMS'; payload: Record<string, any> } 
+    | { type: 'ACTIVE_PROGRAM'; payload: Record<string, any> }
+    | { type: 'COHORTS'; payload: Record<string, any> }
+    | { type: 'ACTIVE_COHORT'; payload: Record<string, any> }

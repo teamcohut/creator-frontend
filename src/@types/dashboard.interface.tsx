@@ -69,4 +69,9 @@ export interface IModal {
   children: ReactNode;
 }
 
+export interface ISetupModal {
+  modalOpen: boolean;
+  setModalOpen: (open: boolean) => void;
+}
+
 export type TModal = 'program' | 'cohort' | 'session' | 'task' | null

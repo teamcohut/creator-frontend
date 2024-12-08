@@ -1,4 +1,4 @@
-import { FC, useReducer } from "react"
+import { FC, useReducer, useState } from "react"
 import { AuthContext } from "./AuthContext"
 import { authReducer } from "./AuthReducer"
 import { IAuthProvider } from "../../@types/auth.interface"

@@ -4,10 +4,10 @@ import ProgramDetail from '../../forms/CustomizeProgram/programdetails'
 import CustomizeProgram from '../../forms/CustomizeProgram/CustomizeProgram'
 import Congratulations from '../../../molecules/dashboard/Congratulations'
 import { axiosPrivate } from '../../../../api/axios'
-import { TModal } from '../../../../@types/dashboard.interface'
+import { ISetupModal, TModal } from '../../../../@types/dashboard.interface'
 import { useGetProgram } from '../../../../hooks/program/useGetProgram'
 
-const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) => {
+const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     const [currentStep, setCurrentStep] = useState<number>(1)
     const [programData, setProgramData] = useState<ProgramData>({
       title: "",
@@ -72,9 +72,7 @@ const SetupProgramModal: FC<ISetupProgramModal> = ({ modalOpen, setModalOpen }) 
         console.log(payload);
   
   
-        const response = await axiosPrivate.post("/program", payload, {
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await axiosPrivate.post("/program", payload);
   
         console.log("Program created:", response.data);
         getProgram()
@@ -116,11 +114,6 @@ interface ProgramData {
   format: string;
   communities: string[];
   certificates: string[];
-}
-
-interface ISetupProgramModal {
-  modalOpen: boolean;
-  setModalOpen: (open: boolean) => void;
 }
 
 export default SetupProgramModal

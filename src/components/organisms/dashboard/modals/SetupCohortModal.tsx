@@ -3,12 +3,12 @@ import Modal from '../Modal'
 import SendEmail from '../../forms/Onboard/SendEmail'
 import UploadParticipants from '../../forms/Onboard/UploadParticipants'
 import OnboardCohortModal from '../../forms/Onboard/OnboardCohortModal'
-import { ICohort } from '../../../../@types/dashboard.interface'
+import { ICohort, ISetupModal } from '../../../../@types/dashboard.interface'
 import { axiosPrivate } from '../../../../api/axios'
 import { notification } from 'antd'
 import { useGetProgram } from '../../../../hooks/program/useGetProgram'
 
-const SetupCohortModal: FC<ISetupCohortModal> = ({ modalOpen, setModalOpen }) => {
+const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1)
   const [api, contextHolder] = notification.useNotification()
   const { getProgram } = useGetProgram()
@@ -63,11 +63,6 @@ const SetupCohortModal: FC<ISetupCohortModal> = ({ modalOpen, setModalOpen }) =>
         </Modal>
     </>
   )
-}
-
-interface ISetupCohortModal {
-  modalOpen: boolean;
-  setModalOpen: (open: boolean) => void;
 }
 
 export default SetupCohortModal

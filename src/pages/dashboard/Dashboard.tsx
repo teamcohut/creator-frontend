@@ -7,11 +7,13 @@ import { useGetProgram } from "../../hooks/program/useGetProgram";
 import { TModal } from "../../@types/dashboard.interface";
 import SetupProgramModal from "../../components/organisms/dashboard/modals/SetupProgramModal";
 import SetupCohortModal from "../../components/organisms/dashboard/modals/SetupCohortModal";
+import SessionModal from "../../components/organisms/dashboard/modals/SessionModal";
+import { Skeleton } from "antd";
 
 const Dashboard = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null)
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const { program } = useContext(ProgramContext)
+  const { activeProgram } = useContext(ProgramContext)
   const { getProgram, error, isLoading } = useGetProgram()
 
   useEffect(() => {
@@ -29,11 +31,29 @@ const Dashboard = () => {
     setModalOpen(false)
   }
 
+  if (isLoading) {
+    return (
+      <Skeleton loading />
+    )
+  }
+
+  if (error) {
+    return (
+      <div>
+          <div>
+            <h3>Err...</h3>
+            <p>Something went wrong ...</p>
+          </div>
+        <Skeleton loading avatar active paragraph title />
+      </div>
+    )
+  }
+
   return (
     <>
 
       {
-        program?.length > 0 ?
+        activeProgram ?
           <DashBoard openModal={openModal} /> :
           <SetupProgram
             openModal={openModal}
@@ -48,6 +68,11 @@ const Dashboard = () => {
       {
         activeModal === 'cohort' &&
         <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      }
+
+      {
+        activeModal === 'session' &&
+        <SessionModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       }
 
     </>
