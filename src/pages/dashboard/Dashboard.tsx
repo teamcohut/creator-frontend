@@ -12,75 +12,66 @@ import { Skeleton } from "antd";
 import { useGetCohorts } from "../../hooks/program/useGetCohorts";
 
 const Dashboard = () => {
-  const [activeModal, setActiveModal] = useState<TModal>(null)
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const { activeProgram } = useContext(ProgramContext)
-  const { getCohorts } = useGetCohorts()
+  const [activeModal, setActiveModal] = useState<TModal>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const { activeProgram } = useContext(ProgramContext);
+  const { getCohorts } = useGetCohorts();
 
-  const { getProgram, error, isLoading } = useGetProgram()
+  const { getProgram, error, isLoading } = useGetProgram();
 
   useEffect(() => {
-    getProgram()
-  }, [])
+    getProgram();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (activeProgram) {
-      getCohorts()
+      getCohorts();
     }
-  }, [activeProgram])
+  }, [activeProgram, getCohorts]);
 
   const openModal = (modal: TModal) => {
-    setActiveModal(modal)
-    setModalOpen(true)
+    setActiveModal(modal);
+    setModalOpen(true);
   };
 
   if (isLoading) {
-    return (
-      <Skeleton loading />
-    )
+    return <Skeleton loading />;
   }
 
   if (error) {
     return (
       <div>
-          <div>
-            <h3>Err...</h3>
-            <p>Something went wrong ...</p>
-          </div>
+        <div>
+          <h3>Err...</h3>
+          <p>Something went wrong ...</p>
+        </div>
         <Skeleton loading avatar active paragraph title />
       </div>
-    )
+    );
   }
 
   return (
     <>
+      {activeProgram ? (
+        <DashBoard openModal={openModal} />
+      ) : (
+        <SetupProgram openModal={openModal} />
+      )}
 
-      {
-        activeProgram ?
-          <DashBoard openModal={openModal} /> :
-          <SetupProgram
-            openModal={openModal}
-          />
-      }
-
-      {
-        activeModal === 'program' &&
+      {activeModal === "program" && (
         <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      }
+      )}
 
-      {
-        activeModal === 'cohort' &&
+      {activeModal === "cohort" && (
         <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      }
+      )}
 
-      {
-        activeModal === 'session' &&
+      {activeModal === "session" && (
         <SessionModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      }
-
+      )}
     </>
   );
 };
 
 export default Dashboard;
-
