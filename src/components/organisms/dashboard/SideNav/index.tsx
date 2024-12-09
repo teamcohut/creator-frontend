@@ -85,7 +85,14 @@ const SideNav: FC = () => {
             </NavLink>
             <NavLink type={"logout"} dropdownList={[]} path={""}>
               <FiLogOut className="nav-icon" />
-              <span>Sign Out</span>
+              <span
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  window.location.href = "/login";
+                }}
+              >
+                Sign Out
+              </span>
             </NavLink>
           </div>
         </div>

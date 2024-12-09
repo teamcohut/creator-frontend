@@ -88,17 +88,17 @@ import NumberInput from "../../../atoms/inputs/NumberInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import TextInput from "../../../atoms/inputs/TextInput";
 import { notification } from "antd";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
   const { activeProgram, cohorts } = useContext(ProgramContext);
-  const [api, contextHolder] = notification.useNotification()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [api, contextHolder] = notification.useNotification();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
 
-  const number = cohorts.length > 0 ? +cohorts[cohorts.length-1].number+1: 1
-  
+  let number = cohorts.length > 0 ? +cohorts[cohorts.length - 1].number + 1 : 1;
+
   const [form, setForm] = useState<ICohort>({
     number,
     description: "",
@@ -120,18 +120,23 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setIsLoading(true)
-    if (form.number === null || form.number === undefined || form.endDate === '' || form.startDate === '') {
+    setIsLoading(true);
+    if (
+      form.number === null ||
+      form.number === undefined ||
+      form.endDate === "" ||
+      form.startDate === ""
+    ) {
       api.warning({
         message: "Please enter all input fields",
-        placement: 'top'
-      })
-      setIsLoading(false)
-      return
+        placement: "top",
+      });
+      setIsLoading(false);
+      return;
     }
     console.log(form);
     await onSubmit(form);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   return (
@@ -161,10 +166,10 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
         <div className="d-flex flex-column gap-3">
           <div className="w-25">
             <NumberInput
-              id="name"
+              id="number"
               onchange={(e) => handleInputChange(e.target.name, e.target.value)}
               placeHolder="1"
-              label="Cohort Name"
+              label="Cohort Number"
             />
           </div>
 
