@@ -1,41 +1,29 @@
-import React from "react";
-import { IParticipant } from "../../../@types/participants.interface";
-import "./index.css";
-import Table from "../../../components/organisms/dashboard/Table";
+import React, { useEffect } from "react";
 import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
 import Header from "../../../components/organisms/dashboard/Header";
 import OverviewCard from "../../../components/molecules/dashboard/OverviewCard";
 import PercentageBar from "../../../components/atoms/dashboard/PercentageBar";
-const ParticipantsPage: React.FC = () => {
-  const participants: IParticipant[] = [
-    {
-      id: "1",
-      fullName: "Temitope Aiyegbusi",
-      email: "aiyegbusto@pe@gmail.com",
-      status: "active",
-      enrollmentDate: "Apr 12, 2023 | 09:32AM",
-      progress: 10,
-    },
-    {
-      id: "2",
-      fullName: "Ijeoma Odiaka",
-      email: "ijeomaodiaka@gmail.com",
-      status: "active",
-      enrollmentDate: "Apr 12, 2023 | 09:32AM",
-      progress: 15,
-    },
-    {
-      id: "3",
-      fullName: "Sodiq Akinjobi",
-      email: "sodiqakinjobi@gmail.com",
-      status: "inactive",
-      enrollmentDate: "Apr 12, 2023 | 09:32AM",
-      progress: 30,
-    },
-  ];
+import Table from "../../../components/organisms/dashboard/Table";
+import { useGetParticipants } from "../../../hooks/program/useGetParticipant";
+import "./index.css";
 
-  const header = ["Full Name", "Email address", "Status", "Time enrolled", ""];
+const ParticipantsPage: React.FC = () => {
+  const { getParticipants, participants, isLoading, error } =
+    useGetParticipants();
+
+  useEffect(() => {
+    getParticipants();
+  }, [getParticipants]);
+
+  const header = [
+    "Full Name",
+    "Email address",
+    "Track",
+    "Status",
+    "Time enrolled",
+    "",
+  ];
 
   return (
     <>
@@ -43,44 +31,51 @@ const ParticipantsPage: React.FC = () => {
         title="Participants"
         subtitle="View and manage your learners here"
       >
-        <Button action={() => {}} fill gap type="button" border={false}>
+        <Button action={() => { }} fill gap type="button" border={false}>
           <FiPlus className="fs-body" />
           Invite Learner
         </Button>
       </Header>
-      {/* <Overview /> */}
+
       <div className="overview-container d-flex">
         <OverviewCard
           icon={<FiUsers className="fs-h1 primary-300" />}
           title="Total Participants"
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF"
-          subtitle={50}
+          subtitle={participants.length}
         />
         <OverviewCard
           icon={<FiUsers className="fs-h1 primary-300" />}
           title="Enrolled Participants"
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF"
-          subtitle={0}
+        // subtitle={participants.filter((p) => p.status === "active").length}
         >
-          <PercentageBar progress={0} />
+          <PercentageBar progress={50} />
         </OverviewCard>
         <OverviewCard
           icon={<FiUsers className="fs-h1 success-300" />}
           title="Active Participants"
           iconBgColor="#E9FFF74D"
           iconBorderColor="#E9FFF7"
-          subtitle={0}
+        // subtitle={participants.filter((p) => p.status === "active").length}
         />
         <OverviewCard
           icon={<FiUsers className="fs-h1 error-300" />}
           title="Inactive Participants"
           iconBgColor="#FFF1F14D"
           iconBorderColor="#FFF1F14D"
-          subtitle={50}
+        // subtitle={participants.filter((p) => p.status === "inactive").length}
         />
       </div>
+
+      {isLoading && <p>Loading participants...</p>}
+      {error && <p className="text-danger">{error}</p>}
+      {!isLoading && participants.length === 0 && !error && (
+        <p>No participants available at the moment.</p>
+      )}
+
       <Table header={header} body={participants} />
     </>
   );
