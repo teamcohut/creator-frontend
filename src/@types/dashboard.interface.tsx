@@ -63,13 +63,13 @@ export interface ICohort {
 
 export interface IModal {
   open: boolean;
-  setModalOpen: (open: boolean) => void;
+  setModalOpen: any;
   children: ReactNode;
 }
 
 export interface ISetupModal {
   modalOpen: boolean;
-  setModalOpen: (open: boolean) => void;
+  setModalOpen: (open: boolean, name: string) => void;
 }
 
 export type TModal = "program" | "cohort" | "session" | "task" | null;

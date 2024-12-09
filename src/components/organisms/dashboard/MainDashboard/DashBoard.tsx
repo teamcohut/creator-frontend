@@ -5,19 +5,19 @@ import { FiPlus } from "react-icons/fi";
 import OverviewCard from "../../../molecules/dashboard/OverviewCard";
 import { cardData } from "./DashBoardCard";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import { TModal } from "../../../../@types/dashboard.interface";
 import CalendarComponent from "../Calendar/Calendar";
 import SetupCohortModal from "../modals/SetupCohortModal";
 import SessionModal from "../modals/SessionModal";
 
 const DashBoard: FC<IDashboard> = () => {
   const { activeProgram } = useContext(ProgramContext);
-  const [activeModal, setActiveModal] = useState<TModal>(null);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modal, setModal] = useState({ name: "", open: false } as {
+    name: string;
+    open: boolean;
+  });
 
-  const openModal = (modal: TModal) => {
-    setActiveModal(modal);
-    setModalOpen(true);
+  const setModalOpenState = (open: boolean, name: string) => {
+    setModal({ name, open });
   };
 
   return (
@@ -39,7 +39,9 @@ const DashBoard: FC<IDashboard> = () => {
                 <FiPlus className="fs-body" /> Add Task
               </Button>
               <Button
-                action={() => openModal("session")}
+                action={() =>
+                  setModal((prev) => ({ open: true, name: "session" }))
+                }
                 fill
                 type="button"
                 border={false}
@@ -49,7 +51,7 @@ const DashBoard: FC<IDashboard> = () => {
             </div>
           ) : (
             <Button
-              action={() => openModal("cohort")}
+              action={() => setModal((prev) => ({ ...prev, name: "cohort" }))}
               fill
               gap
               type="button"
@@ -70,12 +72,15 @@ const DashBoard: FC<IDashboard> = () => {
         <CalendarComponent />
       </div>
 
-      {activeModal === "cohort" && (
-        <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {modal.name === "cohort" && (
+        <SetupCohortModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
       )}
 
-      {activeModal === "session" && (
-        <SessionModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {modal.name === "session" && (
+        <SessionModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
       )}
     </>
   );
