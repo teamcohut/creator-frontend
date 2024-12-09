@@ -1,31 +1,46 @@
-import axios from "axios"
-
-const BASE_URL = process.env.REACT_APP_COHUT_API_URL
+import axios from "axios";
+import Auth from "./Auth";
 
 export const axiosPublic = axios.create({
-    baseURL: BASE_URL,
-})
+  baseURL: "http://localhost:5003/v1",
+});
 
 export const axiosPrivate = axios.create({
-    baseURL: BASE_URL,
-    headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': `Bearer ${Token}`,
-    },
-    // withCredentials: true
-})
+  baseURL: "http://localhost:5003/v1",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 
 axiosPrivate.interceptors.request.use(
-    (config) => {
-        let token = localStorage.getItem("auth-token")
-        if (!config.headers["Authorization"]) {
-            config.headers["Authorization"] = `Bearer ${token}`;
-        }
+  function (config) {
+    const user = JSON.parse(localStorage.getItem("user") as any);
 
-        return config;
-    },
-    (error) => Promise.reject(error)
+    config.headers.authorization = `Bearer ${user.authToken}`;
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
 );
 
+axiosPrivate.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    console.log(error.response);
+    if (error.response.status === 403) {
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
-export default axiosPublic;
+const api = {
+  auth: new Auth(axiosPublic),
+};
+
+export default api;
