@@ -1,34 +1,53 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
+import { axiosPrivate } from "../../../../api/axios";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { notification } from "antd";
 
 const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => {
-  const [tracks, setTracks] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [currentTrack, setCurrentTrack] = useState<string>("");
+  const { activeCohort } = useContext(ProgramContext)
+  const [api, contextHolder] = notification.useNotification()
 
-  // const handleTrackAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === "Enter" && currentTrack.trim() !== "") {
-  //     e.preventDefault();
-  //     if (!tracks.includes(currentTrack.trim())) {
-  //       setTracks((prevTracks) => [...prevTracks, currentTrack.trim()]);
-  //       setCurrentTrack("");
-  //     }
-  //   }
-  // };
+  const handleFileInput = async (file: any) => {
+    setIsLoading(true)
+    try {
+      if (!hasTrack) {
+        const response = await axiosPrivate.post(`/v1/cohort/${activeCohort.id}/upload-participants-csv`, file)
+        console.log(response);
+        setIsLoading(false)
+      } else {
+        if (currentTrack === '') {
+          api.warning({
+            message: 'Enter a track name',
+            placement: 'top'
+          })
+          setIsLoading(false)
+          return
+        }
+        const response = await axiosPrivate.post(`/v1/cohort/${activeCohort.id}/upload-participants-csv/${currentTrack}`, file)
+        console.log(response);
+        setIsLoading(false)
+        onSubmit()
+      }
 
-  // const handleTrackRemove = (index: number) => {
-  //   setTracks((prevTracks) => prevTracks.filter((_, i) => i !== index));
-  // };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentTrack(e.target.value); // Update current input value
-  };
+    } catch (error: any) {
+      console.log(error);
+      api.error({
+        message: error.message
+      })
+      setIsLoading(false)
+    }
+  }
 
   return (
     <>
+      {contextHolder}
       <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
         <ProgressBar
           height={8}
@@ -57,7 +76,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
               id="track"
               label="Tracks"
               placeHolder="Type a track and press Enter"
-              onchange={handleInputChange}
+              onchange={(e)=>setCurrentTrack(e.target.value)}
               // onKeyDown={handleTrackAdd}
               value={currentTrack}
               // tracks={tracks}
@@ -70,7 +89,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             label=""
             id="thumbnail-upload"
             detail="Cohort's list of Participants"
-            onchange={(file) => console.log("Uploaded file:", file)}
+            onchange={(file: any) => handleFileInput(file)}
           />
           <span className="fs-caption primary-400">
             A csv (Comma separated Values) File containing First names, Last
@@ -84,6 +103,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             action={onSubmit}
             type="button"
             fill={true}
+            loading={isLoading}
           />
         </div>
       </form>
