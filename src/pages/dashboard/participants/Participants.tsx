@@ -7,14 +7,24 @@ import PercentageBar from "../../../components/atoms/dashboard/PercentageBar";
 import Table from "../../../components/organisms/dashboard/Table";
 import { useGetParticipants } from "../../../hooks/program/useGetParticipant";
 import "./index.css";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../../api/axios";
 
 const ParticipantsPage: React.FC = () => {
   const { getParticipants, participants, isLoading, error } =
     useGetParticipants();
 
+  const { isPending, isError, data, refetch } = useQuery({
+    queryKey: ["participants"],
+    queryFn: () => api.participant.getParticipants("67573b6904cacee5b183a31f"),
+  });
+
+  console.log(data);
+
   useEffect(() => {
     getParticipants();
-  }, [getParticipants]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const header = [
     "Full Name",
@@ -31,7 +41,7 @@ const ParticipantsPage: React.FC = () => {
         title="Participants"
         subtitle="View and manage your learners here"
       >
-        <Button action={() => { }} fill gap type="button" border={false}>
+        <Button action={() => {}} fill gap type="button" border={false}>
           <FiPlus className="fs-body" />
           Invite Learner
         </Button>
@@ -50,7 +60,7 @@ const ParticipantsPage: React.FC = () => {
           title="Enrolled Participants"
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF"
-        // subtitle={participants.filter((p) => p.status === "active").length}
+          // subtitle={participants.filter((p) => p.status === "active").length}
         >
           <PercentageBar progress={50} />
         </OverviewCard>
@@ -59,14 +69,14 @@ const ParticipantsPage: React.FC = () => {
           title="Active Participants"
           iconBgColor="#E9FFF74D"
           iconBorderColor="#E9FFF7"
-        // subtitle={participants.filter((p) => p.status === "active").length}
+          // subtitle={participants.filter((p) => p.status === "active").length}
         />
         <OverviewCard
           icon={<FiUsers className="fs-h1 error-300" />}
           title="Inactive Participants"
           iconBgColor="#FFF1F14D"
           iconBorderColor="#FFF1F14D"
-        // subtitle={participants.filter((p) => p.status === "inactive").length}
+          // subtitle={participants.filter((p) => p.status === "inactive").length}
         />
       </div>
 
