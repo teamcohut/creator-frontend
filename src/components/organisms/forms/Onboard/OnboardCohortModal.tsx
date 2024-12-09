@@ -96,8 +96,11 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
   const [api, contextHolder] = notification.useNotification()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
+
+  const number = cohorts.length > 0 ? +cohorts[cohorts.length-1].number+1: 1
+  
   const [form, setForm] = useState<ICohort>({
-    number: +cohorts[cohorts.length-1].number+1,
+    number,
     description: "",
     startDate: "",
     endDate: "",

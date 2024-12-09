@@ -22,7 +22,7 @@ const CalendarComponent: React.FC = () => {
         const data = await fetchSchedules();
         setEvents(data);
       } catch (error) {
-        console.error("Failed to fetch events", error);
+        console.log("Failed to fetch events", error);
       }
     };
 
