@@ -46,21 +46,19 @@ export interface IinfoCardProps {
   isProgressBar?: boolean;
   infoCardIcon: ReactElement<any>;
   infoCardIconBgColor: string;
-  isOngoing?: boolean
-  dateOfSession?: string
+  isOngoing?: boolean;
+  dateOfSession?: string;
 }
 
-export interface ISetupProgram {
-  openModal: (modal: TModal)=> void;
-}
+export interface ISetupProgram {}
 
 export interface ICohort {
-  number: number,
-  description: string,
-  startDate: string,
-  endDate: string,
-  hasTrack: boolean,
-  program: string
+  number: number;
+  description: string;
+  startDate: string;
+  endDate: string;
+  hasTrack: boolean;
+  program: string;
 }
 
 export interface IModal {
@@ -74,6 +72,6 @@ export interface ISetupModal {
   setModalOpen: (open: boolean) => void;
 }
 
-export type TModal = 'program' | 'cohort' | 'session' | 'task' | null
+export type TModal = "program" | "cohort" | "session" | "task" | null;
 
-export type TActiveModal = 'program' | 'cohort' | null
+export type TActiveModal = "program" | "cohort" | null;
