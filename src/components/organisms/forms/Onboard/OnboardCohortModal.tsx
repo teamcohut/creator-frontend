@@ -88,7 +88,6 @@ import NumberInput from "../../../atoms/inputs/NumberInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import TextInput from "../../../atoms/inputs/TextInput";
 import { notification } from "antd";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
@@ -97,7 +96,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
 
-  const number = cohorts.length > 0 ? +cohorts[cohorts.length-1].number+1: 1
+  let number = cohorts.length > 0 ? +cohorts[cohorts.length-1].number+1: 1
   
   const [form, setForm] = useState<ICohort>({
     number,
@@ -161,10 +160,10 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
         <div className="d-flex flex-column gap-3">
           <div className="w-25">
             <NumberInput
-              id="name"
+              id="number"
               onchange={(e) => handleInputChange(e.target.name, e.target.value)}
               placeHolder="1"
-              label="Cohort Name"
+              label="Cohort Number"
             />
           </div>
 

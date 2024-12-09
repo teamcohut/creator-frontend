@@ -28,7 +28,7 @@ const Dashboard = () => {
     if (activeProgram) {
       getCohorts();
     }
-  }, [activeProgram, getCohorts]);
+  }, [activeProgram]);
 
   const openModal = (modal: TModal) => {
     setActiveModal(modal);

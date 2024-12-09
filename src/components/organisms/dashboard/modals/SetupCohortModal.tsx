@@ -20,6 +20,8 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   }
 
   const createCohort = async (cohort: ICohort) => {
+    // console.log(cohort);
+    
     try {
       setHasTrack(cohort.hasTrack)
       const response = await axiosPrivate.post('/cohort', cohort)
@@ -33,7 +35,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         let message = error.response.data.errors[0]
         console.log(message);
         if (!message && error.response.data.message.includes('duplicate key error')) {
-          message = 'Cohort name already exists'
+          message = 'Cohort number already exists'
         }
         api.error({
           message,
