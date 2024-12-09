@@ -1,5 +1,6 @@
 import axios from "axios";
 import Auth from "./Auth";
+import Program from "./Program";
 
 export const axiosPublic = axios.create({
   baseURL: "http://localhost:5003/v1",
@@ -10,7 +11,7 @@ export const axiosPrivate = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  //   withCredentials: true,
 });
 
 axiosPrivate.interceptors.request.use(
@@ -41,6 +42,7 @@ axiosPrivate.interceptors.response.use(
 
 const api = {
   auth: new Auth(axiosPublic),
+  program: new Program(axiosPrivate),
 };
 
 export default api;

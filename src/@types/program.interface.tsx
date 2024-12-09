@@ -10,13 +10,22 @@ export interface IProgramState {
 }
 
 export interface IProgramProvider {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export type TProgramAction =
-  | { type: 'PROGRAMS'; payload: Record<string, any> }
-  | { type: 'ACTIVE_PROGRAM'; payload: Record<string, any> }
-  | { type: 'COHORTS'; payload: Record<string, any> }
-  | { type: 'ACTIVE_COHORT'; payload: Record<string, any> }
-  | { type: 'SESSIONS'; payload: Record<string, any> }
-  | { type: 'PARTICIPANTS'; payload: Record<string, any> }
+  | { type: "PROGRAMS"; payload: Record<string, any> }
+  | { type: "ACTIVE_PROGRAM"; payload: Record<string, any> }
+  | { type: "COHORTS"; payload: Record<string, any> }
+  | { type: "ACTIVE_COHORT"; payload: Record<string, any> }
+  | { type: "SESSIONS"; payload: Record<string, any> }
+  | { type: "PARTICIPANTS"; payload: Record<string, any> };
+
+export interface IProgramDTO {
+  title: string;
+  description: string;
+  logo: string;
+  startDate: Date;
+  endDate: Date;
+  status: string;
+}

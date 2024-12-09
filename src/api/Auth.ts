@@ -1,15 +1,17 @@
 class Auth {
   client;
+  secondaryClient;
 
-  constructor(client) {
+  constructor(client: any, secondaryClient?: any) {
     this.client = client;
+    this.secondaryClient = secondaryClient;
   }
 
-  login(payload) {
+  login(payload: any) {
     return this.client.post("/auth/login", payload);
   }
 
-  signup(payload) {
+  signup(payload: any) {
     return this.client.post("/auth/signup", payload);
   }
 }

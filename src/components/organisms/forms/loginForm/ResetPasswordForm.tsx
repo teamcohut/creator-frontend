@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
 import Button from "../../../atoms/Button";
 import { IResetPasswordForm } from "../../../../@types/auth.interface";
-import axiosPublic from "../../../../api/axios";
+import { axiosPublic } from "../../../../api/axios";
 import { notification } from "antd";
 
 const ResetPasswordForm: FC<IResetPasswordForm> = ({
