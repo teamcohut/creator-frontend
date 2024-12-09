@@ -1,18 +1,27 @@
 import axios from "axios";
 import Auth from "./Auth";
 import Program from "./Program";
+import Participant from "./Participants";
+
+const BaseURL = process.env.REACT_APP_COHUT_API_URL;
 
 export const axiosPublic = axios.create({
-  baseURL: "http://localhost:5003/v1",
+  baseURL: BaseURL,
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: "http://localhost:5003/v1",
+  baseURL: BaseURL,
   headers: {
     "Content-Type": "application/json",
   },
-  //   withCredentials: true,
+  // withCredentials: true,
 });
+
+const api = {
+  auth: new Auth(axiosPublic),
+  program: new Program(axiosPrivate),
+  participant: new Participant(axiosPrivate),
+};
 
 axiosPrivate.interceptors.request.use(
   function (config) {
@@ -39,10 +48,5 @@ axiosPrivate.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-const api = {
-  auth: new Auth(axiosPublic),
-  program: new Program(axiosPrivate),
-};
 
 export default api;
