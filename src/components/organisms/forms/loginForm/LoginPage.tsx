@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
-import { useLogin } from "../../../../hooks/auth/useLogin";
 import "../../style.css";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
@@ -29,11 +28,10 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     const payload = { email, password };
     try {
-      const response: any = loginMutation.mutate(payload);
-      console.log("login response", response);
-      if (response.code === "ERR_BAD_RESPONSE") {
-        const message = response.response.data.errors[0];
-        console.log(message);
+      await loginMutation.mutate(payload);
+      const error = loginMutation.error as any;
+      if (error?.code === "ERR_BAD_RESPONSE") {
+        const message = error.response.data.errors[0];
 
         api.error({
           message,
@@ -41,8 +39,8 @@ const LoginPage: React.FC = () => {
             message === "Your account is not activated" && "Check your mail",
         });
       }
-      if (response.code === "ERR_NETWORK") {
-        const message = response.message;
+      if (error.code === "ERR_NETWORK") {
+        const message = error.message;
         api.error({
           message,
         });

@@ -10,58 +10,54 @@ import SetupCohortModal from "../../components/organisms/dashboard/modals/SetupC
 import SessionModal from "../../components/organisms/dashboard/modals/SessionModal";
 import { Skeleton } from "antd";
 import { useGetCohorts } from "../../hooks/program/useGetCohorts";
-import { useQuery } from "@tanstack/react-query";
-import api from "../../api/axios";
 
 const Dashboard = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  // const { activeProgram } = useContext(ProgramContext);
+  const { activeProgram } = useContext(ProgramContext);
+  const { getCohorts } = useGetCohorts();
 
-  // const { getProgram, error, isLoading } = useGetProgram();
-  const { isPending, isError, data, error } = useQuery({
-    queryKey: ["programs"],
-    queryFn: () => api.program.getPrograms(),
-  });
+  const { getProgram, error, isLoading } = useGetProgram();
 
-  // console.log("programs", programs.data);
   useEffect(() => {
-    // getProgram();
+    getProgram();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   if (activeProgram) {
-  //     getCohorts();
-  //   }
-  // }, [activeProgram]);
+  useEffect(() => {
+    if (activeProgram) {
+      getCohorts();
+    }
+  }, [activeProgram]);
 
   const openModal = (modal: TModal) => {
     setActiveModal(modal);
     setModalOpen(true);
   };
 
-  if (isPending) {
+  if (isLoading) {
     return <Skeleton loading />;
   }
 
-  if (isError) {
+  if (error) {
     return (
       <div>
-        <h3>Err...</h3>
-        <p>Error: {error.message}</p>
+        <div>
+          <h3>Err...</h3>
+          <p>Something went wrong ...</p>
+        </div>
+        <Skeleton loading avatar active paragraph title />
       </div>
     );
   }
 
   return (
     <>
-      <>Hello</>
-      {/* {data?.data ? (
+      {activeProgram ? (
         <DashBoard openModal={openModal} />
       ) : (
         <SetupProgram openModal={openModal} />
-      )} */}
+      )}
 
       {activeModal === "program" && (
         <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
