@@ -2,6 +2,7 @@ export interface IParticipant {
   id: string;
   fullName: string;
   email: string;
+  track: string;
   status: "active" | "inactive";
   enrollmentDate: string;
   progress: number;

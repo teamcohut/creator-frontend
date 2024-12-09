@@ -56,18 +56,9 @@
 
 import React from "react";
 import "../style.css";
+import { ITextInput } from "./types";
 
-const TextInput: React.FC<{
-    label?: string;
-    id: string;
-    icon?: React.ReactNode;
-    placeHolder?: string;
-    onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
-    value?: string;
-    tracks?: string[];
-    onRemove?: (index: number) => void;
-}> = ({ label, id, icon, placeHolder, onchange, onKeyDown, value, tracks = [], onRemove }) => {
+const TextInput: React.FC<ITextInput> = ({ label, id, icon, placeHolder, onchange, onKeyDown, value, tracks = [], onRemove }) => {
     return (
         <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
             {label && (
@@ -88,6 +79,7 @@ const TextInput: React.FC<{
                         </button>
                     </span>
                 ))}
+                {icon && icon}
                 <input
                     id={id}
                     className="input bg-transparent w-100 h-100 border-none"
