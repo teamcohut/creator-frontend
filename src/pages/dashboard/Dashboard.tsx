@@ -28,6 +28,7 @@ const Dashboard = () => {
     if (activeProgram) {
       getCohorts();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProgram]);
 
   const openModal = (modal: TModal) => {
