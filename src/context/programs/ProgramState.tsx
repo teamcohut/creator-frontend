@@ -4,11 +4,13 @@ import { programReducer } from "./ProgramReducer"
 import { IProgramProvider } from "../../@types/program.interface"
 
 export const ProgramContextProvider: FC<IProgramProvider> = ({ children }) => {
-  const programDefault = { 
-    programs: null, 
-    activeProgram: null, 
-    cohorts: null, 
-    activeCohort: null
+  const programDefault = {
+    programs: null,
+    activeProgram: null,
+    cohorts: null,
+    activeCohort: null,
+    sessions: null,
+    participants: null,
   }
   const [state, dispatch] = useReducer(programReducer, programDefault)
 
