@@ -4,7 +4,7 @@ import EmailInput from "../../components/atoms/inputs/EmailInput";
 import Button from "../../components/atoms/Button";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
 import { FiMail } from "react-icons/fi";
-import axiosPublic from "../../api/axios";
+import { axiosPublic } from "../../api/axios";
 import { notification } from "antd";
 
 const ResendMail = () => {

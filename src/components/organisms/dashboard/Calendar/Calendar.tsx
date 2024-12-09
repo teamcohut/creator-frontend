@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import { fetchSchedules } from "./api";
+import "./calendar.css";
 
 type Event = {
   id: string;
