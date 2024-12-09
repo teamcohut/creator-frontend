@@ -10,6 +10,7 @@ export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json",
+        // 'Authorization': `Bearer ${Token}`,
     },
     // withCredentials: true
 })
@@ -20,7 +21,7 @@ axiosPrivate.interceptors.request.use(
         if (!config.headers["Authorization"]) {
             config.headers["Authorization"] = `Bearer ${token}`;
         }
-        
+
         return config;
     },
     (error) => Promise.reject(error)
