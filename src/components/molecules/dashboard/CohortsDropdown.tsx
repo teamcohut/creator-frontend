@@ -40,7 +40,7 @@ const CohortsDropdown = () => {
                                 <div className='other-program d-flex align-items-center px-3 py-2'>
                                     <img className='rounded-circle' src={activeProgram.logo} width={24} height={24} alt="" />
                                     <span className='manrope-500 fs-body primary-950 d-flex flex-column align-items-start'>{activeProgram.title}
-                                        <small className="fs-footer">Cohort {activeCohort?.number}</small>
+                                        <small className="fs-footer">Cohort {el.number}</small>
                                     </span>
                                 </div>
                             ))

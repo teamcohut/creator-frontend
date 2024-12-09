@@ -98,11 +98,15 @@ export interface ITextAreaInput {
 }
 
 export interface ITextInput {
-  id: string,
-  placeHolder: string,
-  icon?: React.ReactNode,
-  label?: string,
-  onchange(e: ChangeEvent<HTMLInputElement>): void,
+  label?: string;
+  id: string;
+  icon?: React.ReactNode;
+  placeHolder?: string;
+  onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  value?: string;
+  tracks?: string[];
+  onRemove?: (index: number) => void;
 }
 
 export interface ISearchInput {

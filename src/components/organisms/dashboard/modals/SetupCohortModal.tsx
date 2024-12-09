@@ -10,6 +10,7 @@ import { useGetProgram } from '../../../../hooks/program/useGetProgram'
 
 const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1)
+  const [hasTrack, setHasTrack] = useState<boolean>(false)
   const [api, contextHolder] = notification.useNotification()
   const { getProgram } = useGetProgram()
   
@@ -20,16 +21,18 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
 
   const createCohort = async (cohort: ICohort) => {
     try {
+      setHasTrack(cohort.hasTrack)
       const response = await axiosPrivate.post('/cohort', cohort)
       console.log(response);
       getProgram()
       setCurrentStep(currentStep + 1)
+      return true
     } catch (error: any) {
       console.log(error);
       if (error.code === "ERR_BAD_RESPONSE" ) {
         let message = error.response.data.errors[0]
         console.log(message);
-        if (!message && error.response.data.error.includes('duplicate key error')) {
+        if (!message && error.response.data.message.includes('duplicate key error')) {
           message = 'Cohort name already exists'
         }
         api.error({
@@ -42,6 +45,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
           message
         })
       }
+      return false
     }
   }
   return (
@@ -52,7 +56,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
             currentStep === 1 ?
               <OnboardCohortModal onSubmit={createCohort} /> :
               currentStep === 2 ?
-                <UploadParticipants onSubmit={nextStep} /> :
+                <UploadParticipants onSubmit={nextStep} hasTrack={hasTrack} /> :
                 currentStep === 3 ?
                   <SendEmail onSubmit={() => {
                     setCurrentStep(1)

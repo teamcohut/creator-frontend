@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { FiChevronDown, FiChevronUp, FiPlus, FiSettings } from 'react-icons/fi'
 import '../style.css'
-import NavLink from '../../atoms/dashboard/NavLink'
-import Button from '../../atoms/Button'
+import NavLink from '../atoms/dashboard/NavLink'
+import Button from '../atoms/Button'
 
 const ProgramDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false)

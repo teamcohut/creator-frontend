@@ -5,23 +5,23 @@ import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 
-const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
+const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => {
   const [tracks, setTracks] = useState<string[]>([]);
   const [currentTrack, setCurrentTrack] = useState<string>("");
 
-  const handleTrackAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && currentTrack.trim() !== "") {
-      e.preventDefault();
-      if (!tracks.includes(currentTrack.trim())) {
-        setTracks((prevTracks) => [...prevTracks, currentTrack.trim()]);
-        setCurrentTrack("");
-      }
-    }
-  };
+  // const handleTrackAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === "Enter" && currentTrack.trim() !== "") {
+  //     e.preventDefault();
+  //     if (!tracks.includes(currentTrack.trim())) {
+  //       setTracks((prevTracks) => [...prevTracks, currentTrack.trim()]);
+  //       setCurrentTrack("");
+  //     }
+  //   }
+  // };
 
-  const handleTrackRemove = (index: number) => {
-    setTracks((prevTracks) => prevTracks.filter((_, i) => i !== index));
-  };
+  // const handleTrackRemove = (index: number) => {
+  //   setTracks((prevTracks) => prevTracks.filter((_, i) => i !== index));
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentTrack(e.target.value); // Update current input value
@@ -50,18 +50,21 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
         <div className="d-flex flex-column gap-4">
           {/* <TextInput id='track' label='Upload Participants List' placeHolder='Pick track' onchange={() => { }} /> */}
 
-          <div>
+          {
+            hasTrack &&
+            <div>
             <TextInput
               id="track"
               label="Tracks"
               placeHolder="Type a track and press Enter"
               onchange={handleInputChange}
-              onKeyDown={handleTrackAdd}
+              // onKeyDown={handleTrackAdd}
               value={currentTrack}
-              tracks={tracks}
-              onRemove={handleTrackRemove} // Handle item removal
+              // tracks={tracks}
+              // onRemove={handleTrackRemove} // Handle item removal
             />
           </div>
+          }
 
           <DragNDropInput
             label=""
@@ -90,6 +93,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
 
 interface IUploadParticipants {
   onSubmit: () => void;
+  hasTrack: boolean;
 }
 
 export default UploadParticipants;
