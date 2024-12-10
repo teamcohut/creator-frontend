@@ -1,6 +1,7 @@
 import React from "react";
 import AddSession from "../components/organisms/forms/Session/AddSession";
 import AdditionalSession from "../components/organisms/forms/Session/AdditionalSession";
+import InviteParticipants from "../components/organisms/forms/Participants/InviteParticipants";
 
 const Preview = () => {
   return (
@@ -20,11 +21,12 @@ const Preview = () => {
       {/* <UploadParticipants /> */}
       {/* <SessionsDisplay /> */}
       {/* <SessionDetails /> */}
-      <AddSession />
-      <AdditionalSession />
+      {/* <AddSession /> */}
+      {/* <AdditionalSession /> */}
       {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
+      <InviteParticipants />
     </>
   );
 };

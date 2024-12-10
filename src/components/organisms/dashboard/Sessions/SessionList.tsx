@@ -70,7 +70,7 @@ const SessionList = () => {
                         isActive={session.isActive}
                         dateOfSession={session.dateOfSession || "Date not available"}
                         isOngoing
-                        infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon" />}
+                        infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon fs-h2" />}
                         infoCardIconBgColor="#FEF1FA"
                     />
                 ))}
