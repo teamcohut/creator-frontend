@@ -16,6 +16,7 @@ import SessionsDisplay from "./components/organisms/dashboard/Sessions/SessionsD
 import { ProgramContextProvider } from "./context/programs/ProgramState";
 import { ProtectedRoute } from "./components/utils/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import GeneralSettings from "./pages/dashboard/settings/GeneralSettings";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
         {
           path: "learning",
           element: <SessionsDisplay />,
+        },
+        {
+          path: "generalSetting",
+          element: <GeneralSettings />,
         },
       ],
     },
