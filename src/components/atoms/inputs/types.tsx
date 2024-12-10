@@ -113,6 +113,7 @@ export interface ISearchInput {
   id: string,
   placeHolder: string,
   label?: string,
+  width?: number,
   onchange(e: ChangeEvent<HTMLInputElement>): void
 }
 

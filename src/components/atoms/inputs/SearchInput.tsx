@@ -4,11 +4,11 @@ import { ISearchInput } from './types';
 import "../style.css";
 
 const SearchInput: FC<ISearchInput> = (props) => {
-    const { id, label, onchange, placeHolder } = props
+    const { id, label, onchange, placeHolder, width } = props
 
     return (
         <>
-            <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
+            <div className={`input-cont d-flex flex-column align-items-stretch ${width ? '' : 'w-100'} gap-2`} style={{width: `${width}%`}}>
                 <label className='manrope-600 fs-body' htmlFor={id}>{label}
                     <div className='input-div d-flex align-items-center gap-2 rounded-pill'>
                         <input 

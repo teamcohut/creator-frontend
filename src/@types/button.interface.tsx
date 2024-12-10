@@ -5,7 +5,7 @@ export interface IButton {
     action: ()=> void,
     type:  "submit" | "reset" | "button",
     fill: boolean,
-    outline?: 'white' | 'primary',
+    outline?: 'white' | 'primary' | 'primary-700',
     border?: boolean,
     gap?: boolean,
     width?: number,

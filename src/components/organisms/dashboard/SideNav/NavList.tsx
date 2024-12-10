@@ -31,24 +31,24 @@ export const NavList = [
 export const SettingsList = [
   {
     icon: <FiTool className="nav-icon" />,
-    title: "Manage Program",
-    path: "/#",
+    title: "General",
+    path: "generalSetting",
   },
-  {
-    icon: <FiUser className="nav-icon" />,
-    title: "Account Settings",
-    path: "/#",
-  },
+  // {
+  //   icon: <FiUser className="nav-icon" />,
+  //   title: "Account Settings",
+  //   path: "/#",
+  // },
   {
     icon: <FiBell className="nav-icon" />,
     title: "Notifications",
     path: "/#",
   },
-  {
-    icon: <FiMoon className="nav-icon" />,
-    title: "Appearance",
-    path: "/#",
-  },
+  // {
+  //   icon: <FiMoon className="nav-icon" />,
+  //   title: "Appearance",
+  //   path: "/#",
+  // },
 ];
 
 export const HelpList = [
