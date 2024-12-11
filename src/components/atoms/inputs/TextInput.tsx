@@ -80,6 +80,7 @@ const TextInput: React.FC<ITextInput> = ({ label, id, icon, placeHolder, onchang
                 {icon && icon}
                 <input
                     id={id}
+                    name={id}
                     className="input bg-transparent w-100 h-100 border-none"
                     type="text"
                     placeholder={placeHolder}

@@ -1,6 +1,6 @@
 import { notification } from "antd";
 import { FC, useState } from "react";
-import Modal from "../Modal";
+import Modal from "../../../templates/Modal";
 import { ISetupModal } from "../../../../@types/dashboard.interface";
 import AddSession from "../../forms/Session/AddSession";
 import AdditionalSession from "../../forms/Session/AdditionalSession";

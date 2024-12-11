@@ -1,6 +1,6 @@
 import React from "react";
 import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import { FiEdit, FiEdit3, FiMail, FiUser } from "react-icons/fi";
+import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
 import Header from "../../../components/organisms/dashboard/Header";
 
@@ -10,7 +10,7 @@ const AccountSettings = () => {
       <div className="d-flex gap-133 align-items-start">
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
-            <TextInput2 id="" label="Full Name" icon={<FiUser/>} />
+            <TextInput2 id="" label="First Name" icon={<FiUser/>} />
             <TextInput2 id="" label="Last Name" icon={<FiUser/>} />
           </div>
           <TextInput2 id="" label="Email" icon={<FiMail/>} />
@@ -21,19 +21,15 @@ const AccountSettings = () => {
         </Button>
         </div>
         <div>
-        <Header
-        title="Role"
-        subtitle="Owner"
-      >
-        <></>
-      </Header>
+        <div>
+          <h3 className="manrope-600 fs-h4 primary-950 pb-1">Role</h3>
+          <p className="manrope-500 fs-body dark-700 pb-4">Owner</p>
+        </div>
 
-      <Header
-        title="Danger Zone"
-        subtitle="Deactivate Account"
-      >
-        <></>
-      </Header>
+      
+          <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
+          <span className="d-flex align-items-center gap-1 manrope-700 fs-body error-300">Deactivate Account <FiTrash2 /></span>
+        
         </div>
       </div>
     </>

@@ -27,6 +27,13 @@
     gap: 8px;
 }
 
+.min-width-button {
+    min-width: 60px; 
+    text-align: center; 
+  }
+
+
+
 /* INPUTS */
 /* ================= */
 
@@ -318,3 +325,5 @@
 .dropdown-link:hover {
     color: var(--primary-950);
 }
+
+

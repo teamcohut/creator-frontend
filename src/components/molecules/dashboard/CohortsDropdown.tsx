@@ -59,7 +59,7 @@ const CohortsDropdown = () => {
                   alt=""
                 />
                 <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
-                  Cohort {el.number}
+                  {el.name}
                 </span>
               </div>
             ))}

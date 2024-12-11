@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react";
-import Modal from "../Modal";
-import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
+import { FC, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
+import ProgramDetail from "../../forms/CustomizeProgram/Programdetails";
 import { axiosPrivate } from "../../../../api/axios";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
 import { useGetProgram } from "../../../../hooks/program/useGetProgram";
+import Modal from "../../../templates/Modal";
 
 const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);

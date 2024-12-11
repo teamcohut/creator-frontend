@@ -2,6 +2,7 @@ import axios from "axios";
 import Auth from "./Auth";
 import Program from "./Program";
 import Participant from "./Participants";
+import Task from "./Task";
 import Session from "./Session";
 
 const BaseURL = process.env.REACT_APP_COHUT_API_URL;
@@ -22,6 +23,7 @@ const api = {
   auth: new Auth(axiosPublic),
   program: new Program(axiosPrivate),
   participant: new Participant(axiosPrivate),
+  task: new Task(axiosPrivate),
   session: new Session(axiosPrivate)
 };
 
@@ -42,8 +44,8 @@ axiosPrivate.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error.response);
-    if (error.response.status === 403) {
+    console.log(error);
+    if (error?.response?.status === 403) {
       localStorage.removeItem("user");
       window.location.href = "/login";
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import AddSession from "../components/organisms/forms/Session/AddSession";
 import AdditionalSession from "../components/organisms/forms/Session/AdditionalSession";
+import AddTask from "../components/organisms/forms/Task/AddTask";
 import InviteParticipants from "../components/organisms/forms/Participants/InviteParticipants";
 
 const Preview = () => {
@@ -26,7 +27,9 @@ const Preview = () => {
       {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
-      <InviteParticipants />
+      <div className="bg-primary">
+        <InviteParticipants />
+      </div>
     </>
   );
 };

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from '../../../components/organisms/dashboard/participants/Table'
 import api from '../../../api/axios';
 import { useQuery } from '@tanstack/react-query';
 import Button from '../../../components/atoms/Button';
 import { FiPlus } from 'react-icons/fi';
 import SearchInput from '../../../components/atoms/inputs/SearchInput';
+import GroupButton from '../../../components/atoms/Button/GroupButton';
 
 const PermissionsSettings = () => {
+  const [activeView, setActiveView] = useState("All");
 
   const header = [
     "Full Name",
@@ -15,6 +17,18 @@ const PermissionsSettings = () => {
     "Status",
     "Last Login",
     "",
+  ];
+
+  const handleButtonClick = (view: string) => {
+    setActiveView(view);
+
+  };
+
+
+  const buttonOptions = [
+    { label: "All", onClick: () => handleButtonClick("All"), active: activeView === "All" },
+    { label: "Active", onClick: () => handleButtonClick("Active"), active: activeView === "Active" },
+    { label: "Inactive", onClick: () => handleButtonClick("Inactive"), active: activeView === "Inactive" },
   ];
 
   return (
@@ -50,9 +64,13 @@ const PermissionsSettings = () => {
           </button>
         </div>
 
+        <GroupButton buttons={buttonOptions} />
       </div>
       <Table header={header} body={[]} />
+
     </div>
+    // </div>
+
   )
 }
 
