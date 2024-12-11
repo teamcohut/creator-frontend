@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from '../../../components/organisms/dashboard/Table'
 import api from '../../../api/axios';
 import { useQuery } from '@tanstack/react-query';
 import Button from '../../../components/atoms/Button';
 import { FiPlus } from 'react-icons/fi';
 import SearchInput from '../../../components/atoms/inputs/SearchInput';
+import GroupButton from '../../../components/atoms/Button/GroupButton';
 
 const PermissionsSettings = () => {
-
+  const [activeView, setActiveView] = useState("All");
+  
   const header = [
     "Full Name",
     "Email Address",
@@ -15,6 +17,18 @@ const PermissionsSettings = () => {
     "Status",
     "Last Login",
     "",
+  ];
+
+  const handleButtonClick = (view: string) => {
+    setActiveView(view);
+    
+  };
+
+
+  const buttonOptions = [
+    { label: "All", onClick: () => handleButtonClick("All"), active: activeView === "All" },
+    { label: "Active", onClick: () => handleButtonClick("Active"), active: activeView === "Active" },
+    { label: "Inactive", onClick: () => handleButtonClick("Inactive"), active: activeView === "Inactive" },
   ];
 
   return (
@@ -30,25 +44,8 @@ const PermissionsSettings = () => {
         
         <SearchInput id="" placeHolder='Search by name' onchange={()=>{}} width={18}/>
         <div>
-        <button
-            className="btn rounded-pill bg-secondary-450 manrope-500 primary-950"
-            onClick={()=> {}}
-          >
-            All
-          </button>
-          <button
-            className="btn rounded-pill border-secondary manrope-500 dark-400"
-            onClick={()=> {}}
-          >
-            Active
-          </button>
-          <button
-            className="btn rounded-pill border-secondary manrope-500 dark-400"
-            onClick={()=> {}}
-          >
-            Inactive
-          </button>  
-          </div>    
+          <GroupButton buttons={buttonOptions}/>
+        </div>    
         
       </div>
       <Table header={header} body={[]} />
