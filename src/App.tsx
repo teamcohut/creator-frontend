@@ -4,7 +4,7 @@ import Login from "./pages/auth/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Preview from "./pages/Preview";
 import VerifyMail from "./pages/auth/VerifyMail";
-import ParticipantsPage from "./pages/dashboard/participants/Participants";
+import ParticipantsPage from "./components/organisms/dashboard/participants/Participants";
 import DashboardTemplate from "./components/templates/DashboardTemplate";
 import NotFound from "./pages/NotFound";
 import { AuthContextProvider } from "./context/auth/AuthState";

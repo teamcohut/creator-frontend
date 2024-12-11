@@ -202,9 +202,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     location: { name: locationType },
   });
 
-  console.log("Cohort", cohorts);
-  console.log("Program", activeProgram.cohorts);
-  console.log("ProgramDetails", activeProgram);
+
 
 
 
