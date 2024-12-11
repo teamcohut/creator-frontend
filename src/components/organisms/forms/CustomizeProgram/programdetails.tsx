@@ -31,7 +31,7 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue }) => {
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Program Details</h1>
         <span className="manrope-500 dark-700 fs-body">
-          Let’s input what makes your learning program special
+          Let&apos;s input what makes your learning program special
         </span>
       </div>
       <div className="d-flex flex-column gap-4">

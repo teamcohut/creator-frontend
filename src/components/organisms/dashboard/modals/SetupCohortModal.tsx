@@ -19,7 +19,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   };
 
   const createCohort = async (cohort: ICohort) => {
-    // console.log(cohort);
+    console.log(cohort);
 
     try {
       setHasTrack(cohort.hasTrack);
@@ -37,10 +37,11 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
           !message &&
           error.response.data.message.includes("duplicate key error")
         ) {
-          message = "Cohort number already exists";
+          message = "Cohort already exists";
         }
         api.error({
           message,
+          placement: 'top'
         });
       }
       if (error.code === "ERR_NETWORK") {
@@ -49,6 +50,10 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
           message,
         });
       }
+      api.warning({
+        message: error.response.data.message,
+        placement: 'top'
+      })
       return false;
     }
   };

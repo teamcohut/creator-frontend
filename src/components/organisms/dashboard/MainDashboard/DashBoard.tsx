@@ -8,6 +8,7 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import CalendarComponent from "../Calendar/Calendar";
 import SetupCohortModal from "../modals/SetupCohortModal";
 import SessionModal from "../modals/SessionModal";
+import TaskModal from "../modals/TaskModal";
 
 const DashBoard: FC<IDashboard> = () => {
   const { activeProgram } = useContext(ProgramContext);
@@ -30,7 +31,9 @@ const DashBoard: FC<IDashboard> = () => {
           {activeProgram.cohorts.length > 0 ? (
             <div className="d-flex gap-4">
               <Button
-                action={() => {}}
+                action={() => 
+                  setModal({ open: true, name: 'task' })
+                }
                 fill={false}
                 type="button"
                 border
@@ -81,6 +84,10 @@ const DashBoard: FC<IDashboard> = () => {
 
       {modal.name === "session" && (
         <SessionModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
+      )}
+
+      {modal.name === "task" && (
+        <TaskModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
       )}
     </>
   );

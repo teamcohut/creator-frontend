@@ -10,40 +10,64 @@ import { notification } from "antd";
 
 const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [tracks, setTracks] = useState<Array<ITracks>>([])
   const [currentTrack, setCurrentTrack] = useState<string>("");
   const { activeCohort } = useContext(ProgramContext)
   const [api, contextHolder] = notification.useNotification()
 
-  const handleFileInput = async (file: any) => {
-    setIsLoading(true)
+  const handleFileInput = async (file: File) => {
+    setIsLoading(true);
+  
     try {
-      if (!hasTrack) {
-        const response = await axiosPrivate.post(`/v1/cohort/${activeCohort.id}/upload-participants-csv`, file)
-        console.log(response);
-        setIsLoading(false)
-      } else {
-        if (currentTrack === '') {
-          api.warning({
-            message: 'Enter a track name',
-            placement: 'top'
-          })
-          setIsLoading(false)
-          return
-        }
-        const response = await axiosPrivate.post(`/v1/cohort/${activeCohort.id}/upload-participants-csv/${currentTrack}`, file)
-        console.log(response);
-        setIsLoading(false)
-        onSubmit()
+      // Construct the endpoint dynamically
+      const endpoint = hasTrack
+        ? `/cohort/${activeCohort.id}/upload-participants-csv?track=${currentTrack}`
+        : `/cohort/${activeCohort.id}/upload-participants-csv?track=General`;
+  
+      // Validate track name if `hasTrack` is true
+      if (hasTrack && currentTrack.trim() === '') {
+        api.warning({
+          message: 'Track name is required when adding participants to a track.',
+          placement: 'top',
+        });
+        setIsLoading(false);
+        return;
       }
+  
+      // Send the file to the endpoint
+      const response = await axiosPrivate.put(endpoint, file);
+      console.log('Upload response:', response);
+  
+      // Update state with the track name and CSV file name
+      if (hasTrack && currentTrack.trim() !== '') {
+        setTracks([
+          ...tracks,
+          { name: currentTrack, file: file.name },
+        ]);
 
+      }
+  
+      // Notify user of success
+      api.success({
+        message: 'File uploaded successfully!',
+        placement: 'top',
+      });
+  
+      // Trigger additional action if required
+      onSubmit();
     } catch (error: any) {
-      console.log(error);
+      console.error('Error uploading file:', error);
+  
       api.error({
-        message: error.message
-      })
-      setIsLoading(false)
+        message: "Error uploading file",
+        placement: 'topRight',
+      });
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
+  
+  
 
   return (
     <>
@@ -114,6 +138,11 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
 interface IUploadParticipants {
   onSubmit: () => void;
   hasTrack: boolean;
+}
+
+interface ITracks {
+  name: string,
+  file: string
 }
 
 export default UploadParticipants;
