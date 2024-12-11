@@ -1,8 +1,27 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "../style.css";
 import { IModal } from "../../../@types/dashboard.interface";
 
 const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
+
+  useEffect(() => {  
+    const handleKeyDown = (event: any) => {  
+      if (event.key === 'Escape') {  
+        setModalOpen(false, '');  
+      }  
+    };  
+
+    if (open) {  
+      document.addEventListener('keydown', handleKeyDown);  
+    }  
+
+    return () => {  
+      document.removeEventListener('keydown', handleKeyDown);  
+    };  
+  }, [open, setModalOpen]);  
+
+  if (!open) return null;  
+
   return (
     <>
       <div

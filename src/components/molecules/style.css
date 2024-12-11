@@ -111,7 +111,7 @@
   /* INFO CARD */
 
   .info-card {
-      border: 1px dashed var(--primary-50);
+      border: 3px solid var(--primary-50);
       background-color: var(--dark-50);
     }
     

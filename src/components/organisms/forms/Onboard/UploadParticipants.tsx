@@ -1,34 +1,77 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
+import { axiosPrivate } from "../../../../api/axios";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { notification } from "antd";
 
 const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => {
-  const [tracks, setTracks] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [tracks, setTracks] = useState<Array<ITracks>>([])
   const [currentTrack, setCurrentTrack] = useState<string>("");
+  const { activeCohort } = useContext(ProgramContext)
+  const [api, contextHolder] = notification.useNotification()
 
-  // const handleTrackAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === "Enter" && currentTrack.trim() !== "") {
-  //     e.preventDefault();
-  //     if (!tracks.includes(currentTrack.trim())) {
-  //       setTracks((prevTracks) => [...prevTracks, currentTrack.trim()]);
-  //       setCurrentTrack("");
-  //     }
-  //   }
-  // };
+  const handleFileInput = async (file: File) => {
+    setIsLoading(true);
+  
+    try {
+      // Construct the endpoint dynamically
+      const endpoint = hasTrack
+        ? `/cohort/${activeCohort.id}/upload-participants-csv?track=${currentTrack}`
+        : `/cohort/${activeCohort.id}/upload-participants-csv?track=General`;
+  
+      // Validate track name if `hasTrack` is true
+      if (hasTrack && currentTrack.trim() === '') {
+        api.warning({
+          message: 'Track name is required when adding participants to a track.',
+          placement: 'top',
+        });
+        setIsLoading(false);
+        return;
+      }
+  
+      // Send the file to the endpoint
+      const response = await axiosPrivate.put(endpoint, file);
+      console.log('Upload response:', response);
+  
+      // Update state with the track name and CSV file name
+      if (hasTrack && currentTrack.trim() !== '') {
+        setTracks([
+          ...tracks,
+          { name: currentTrack, file: file.name },
+        ]);
 
-  // const handleTrackRemove = (index: number) => {
-  //   setTracks((prevTracks) => prevTracks.filter((_, i) => i !== index));
-  // };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentTrack(e.target.value); // Update current input value
+      }
+  
+      // Notify user of success
+      api.success({
+        message: 'File uploaded successfully!',
+        placement: 'top',
+      });
+  
+      // Trigger additional action if required
+      onSubmit();
+    } catch (error: any) {
+      console.error('Error uploading file:', error);
+  
+      api.error({
+        message: "Error uploading file",
+        placement: 'topRight',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+  
+  
 
   return (
     <>
+      {contextHolder}
       <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
         <ProgressBar
           height={8}
@@ -57,7 +100,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
               id="track"
               label="Tracks"
               placeHolder="Type a track and press Enter"
-              onchange={handleInputChange}
+              onchange={(e)=>setCurrentTrack(e.target.value)}
               // onKeyDown={handleTrackAdd}
               value={currentTrack}
               // tracks={tracks}
@@ -70,7 +113,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             label=""
             id="thumbnail-upload"
             detail="Cohort's list of Participants"
-            onchange={(file) => console.log("Uploaded file:", file)}
+            onchange={(file: any) => handleFileInput(file)}
           />
           <span className="fs-caption primary-400">
             A csv (Comma separated Values) File containing First names, Last
@@ -84,6 +127,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             action={onSubmit}
             type="button"
             fill={true}
+            loading={isLoading}
           />
         </div>
       </form>
@@ -94,6 +138,11 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
 interface IUploadParticipants {
   onSubmit: () => void;
   hasTrack: boolean;
+}
+
+interface ITracks {
+  name: string,
+  file: string
 }
 
 export default UploadParticipants;

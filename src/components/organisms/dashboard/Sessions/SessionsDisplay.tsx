@@ -9,13 +9,13 @@ const SessionsDisplay = () => {
       <Header title="Learning" subtitle="View and Manage your Cohort's learning activities here">
         <div></div>
       </Header>
-      <div className='d-flex flex-row gap-2'>
-        <div className='w-75'>
+      <div className=''>
+        <div className=''>
           <SessionList />
         </div>
-        <div className='w-25 px-3'>
+        {/* <div className='w-35 px-3'>
           <SessionResource />
-        </div>
+        </div> */}
       </div>
     </div>
   )

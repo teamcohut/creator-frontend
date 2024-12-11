@@ -53,7 +53,7 @@ export interface IinfoCardProps {
 export interface ISetupProgram {}
 
 export interface ICohort {
-  number: number;
+  name: string;
   description: string;
   startDate: string;
   endDate: string;

@@ -11,6 +11,7 @@ import axiosAPI from "../../../../api/axios";
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
   const loginMutation = useMutation({
@@ -22,7 +23,6 @@ const LoginPage: React.FC = () => {
       navigate("/");
     },
   });
-  const [api, contextHolder] = notification.useNotification();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

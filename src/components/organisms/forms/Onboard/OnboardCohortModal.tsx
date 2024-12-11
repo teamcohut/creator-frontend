@@ -84,23 +84,20 @@ import { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import "../../style.css";
-import NumberInput from "../../../atoms/inputs/NumberInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
+import TextInput from "../../../atoms/inputs/TextInput";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
-  const { activeProgram, cohorts } = useContext(ProgramContext);
+  const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isTrackEnabled, setIsTrackEnabled] = useState(false); // State for checkbox
-
-  let number = cohorts.length > 0 ? +cohorts[cohorts.length - 1].number + 1 : 1;
 
   const [form, setForm] = useState<ICohort>({
-    number,
+    name: "",
     description: "",
     startDate: "",
     endDate: "",
@@ -113,7 +110,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
     name: string,
     value: string | boolean | number
   ) => {
-    console.log(name, value);
+    console.log(name, " : ", value);
 
     setForm({ ...form, [name]: value });
   };
@@ -122,8 +119,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
     e.preventDefault();
     setIsLoading(true);
     if (
-      form.number === null ||
-      form.number === undefined ||
+      form.name === "" ||
       form.endDate === "" ||
       form.startDate === ""
     ) {
@@ -164,12 +160,12 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
         </div>
 
         <div className="d-flex flex-column gap-3">
-          <div className="w-25">
-            <NumberInput
-              id="number"
+          <div className="">
+            <TextInput
+              id="name"
               onchange={(e) => handleInputChange(e.target.name, e.target.value)}
-              placeHolder="1"
-              label="Cohort Number"
+              placeHolder="Cohort 1"
+              label="Cohort Name"
             />
           </div>
 
@@ -194,7 +190,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
                 type="checkbox"
                 id="hasTrack"
                 name="hasTrack"
-                defaultChecked={isTrackEnabled}
+                defaultChecked={form.hasTrack}
                 onChange={(e) =>
                   handleInputChange(e.target.name, e.target.checked)
                 } // Update state
@@ -205,37 +201,6 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
               (E.g Data Analysis, Software Engineering, Product Design)
             </p>
           </div>
-
-          {/* Conditionally render DragNDropInput or TextInput */}
-          {/* {isTrackEnabled ? (
-                        <div>
-                            <TextInput
-                                id="track"
-                                label="Track"
-                                placeHolder="Input track"
-                                onchange={() => { }}
-                            />
-
-                            <span className="fs-caption primary-400">
-                                Enter track and press 'Enter' to add a track
-                            </span>
-                        </div>
-
-                    ) : (
-                        <div>
-                            <DragNDropInput
-                                label="Upload Participants List"
-                                id="thumbnail-upload"
-                                detail="Cohort's list of Participants"
-                                onchange={(file) => console.log("Uploaded file:", file)}
-                            />
-                            <span className="fs-caption primary-400">
-                                A csv (Comma separated Values) File containing First names, Last names and Emails of
-                                Participants
-                            </span>
-                        </div>
-
-                    )} */}
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">
