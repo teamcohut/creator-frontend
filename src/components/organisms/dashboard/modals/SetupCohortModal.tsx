@@ -1,5 +1,4 @@
-import React, { FC, useState } from "react";
-import Modal from "../Modal";
+import { FC, useState } from "react";
 import SendEmail from "../../forms/Onboard/SendEmail";
 import UploadParticipants from "../../forms/Onboard/UploadParticipants";
 import OnboardCohortModal from "../../forms/Onboard/OnboardCohortModal";
@@ -7,6 +6,7 @@ import { ICohort, ISetupModal } from "../../../../@types/dashboard.interface";
 import { axiosPrivate } from "../../../../api/axios";
 import { notification } from "antd";
 import { useGetProgram } from "../../../../hooks/program/useGetProgram";
+import Modal from "../../../templates/Modal";
 
 const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
