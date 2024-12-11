@@ -1,0 +1,34 @@
+/* Change the color, size, and font of the tab labels */
+.ant-tabs-tab {
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--dark-700) !important; /* Custom text color */
+}
+
+/* Change the active tab label's color */
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--primary-400) !important; /* Active tab text color */
+  font-size: clamp(14px, 1.5vw, 16px);
+}
+
+/* Change the underline color for the active tab */
+.ant-tabs-ink-bar {
+  background-color: green;
+}
+
+.w-60
+ {
+  width: 65%;
+ }
+
+ .gap-133 {
+  gap: 133px;
+ }

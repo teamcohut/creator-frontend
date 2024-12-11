@@ -11,6 +11,7 @@ const TextAreaInput: React.FC<ITextAreaInput> = (props) => {
         <div className='d-flex align-items-center gap-2 rounded px-2'>
           <textarea
             id={id}
+            name={id}
             rows={5}
             className="input bg-transparent w-100 border border-1 rounded-4 px-3 py-2"
             placeholder={placeHolder}

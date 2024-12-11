@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../style.css";
 import InfoCard from "../../../molecules/dashboard/InfoCard";
 import { FiVideo } from "react-icons/fi";
@@ -7,10 +7,22 @@ import { useGetSession } from "../../../../hooks/program/useGetSession";
 
 const SessionList = () => {
     const { getSessions, sessions, isLoading, error } = useGetSession();
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredSessions, setFilteredSessions] = useState([]);
 
     useEffect(() => {
-        getSessions(); // Fetch sessions only on first mount
+        getSessions();
     }, [getSessions]);
+
+    useEffect(() => {
+        const lowerCaseQuery = searchQuery.toLowerCase();
+        setFilteredSessions(
+            sessions.filter((session: any) =>
+                session.title?.toLowerCase().includes(lowerCaseQuery) ||
+                session.subtitle?.toLowerCase().includes(lowerCaseQuery)
+            )
+        );
+    }, [sessions, searchQuery]);
 
     return (
         <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
@@ -18,7 +30,7 @@ const SessionList = () => {
                 <div className="d-flex align-items-center gap-2">
                     <h4 className="manrope-600 fs-h4 primary-950">Sessions</h4>
                     <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-                        {sessions.length}
+                        {filteredSessions.length}
                     </span>
                 </div>
 
@@ -27,7 +39,7 @@ const SessionList = () => {
                         id="session"
                         label=""
                         placeHolder="Search"
-                        onchange={(e) => console.log(e.target.value)}
+                        onchange={(e) => setSearchQuery(e.target.value)}
                     />
                 </div>
 
@@ -46,19 +58,23 @@ const SessionList = () => {
 
             {isLoading && <p>Loading sessions...</p>}
             {error && <p className="error-text">{error}</p>}
-            {!isLoading && sessions.length === 0 && <p>No sessions available.</p>}
-            {sessions.map((session: any, i: any) => (
-                <InfoCard
-                    key={i}
-                    title={session.title || "No title available"}
-                    subtitle={session.subtitle || "No subtitle available"}
-                    isActive={session.isActive}
-                    dateOfSession={session.dateOfSession || "Date not available"}
-                    isOngoing
-                    infoCardIcon={<FiVideo color="#FF63CD" />}
-                    infoCardIconBgColor="#FEF1FA"
-                />
-            ))}
+            {!isLoading && filteredSessions.length === 0 && (
+                <p>No sessions found for your search query.</p>
+            )}
+            <div className="session-grid">
+                {filteredSessions.map((session: any, i: any) => (
+                    <InfoCard
+                        key={i}
+                        title={session.title || "No title available"}
+                        subtitle={session.subtitle || "No subtitle available"}
+                        isActive={session.isActive}
+                        dateOfSession={session.dateOfSession || "Date not available"}
+                        isOngoing
+                        infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon fs-h2" />}
+                        infoCardIconBgColor="#FEF1FA"
+                    />
+                ))}
+            </div>
         </div>
     );
 };

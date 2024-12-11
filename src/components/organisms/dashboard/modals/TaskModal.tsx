@@ -8,11 +8,15 @@ const TaskModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [api, contextHolder] = notification.useNotification();
 
+  const closeModal = () => {
+    setModalOpen(false, '')
+  }
+
   return (
     <>
       {contextHolder}
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
-          <AddTask />
+          <AddTask closeModal={closeModal} />
       </Modal>
     </>
   );

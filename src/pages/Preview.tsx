@@ -2,6 +2,7 @@ import React from "react";
 import AddSession from "../components/organisms/forms/Session/AddSession";
 import AdditionalSession from "../components/organisms/forms/Session/AdditionalSession";
 import AddTask from "../components/organisms/forms/Task/AddTask";
+import InviteParticipants from "../components/organisms/forms/Participants/InviteParticipants";
 
 const Preview = () => {
   return (
@@ -9,7 +10,7 @@ const Preview = () => {
       {/* <h1 className='fs-h3 manrope-700 primary-800'>This page is for previewing components <br /> Preview your component below</h1>
       <DeadlineCalendar deadlines={[]} /> */}
 
-      <AddTask />
+      {/* <AddTask /> */}
       {/* <SetupProgram />   */}
       {/* <ProgramDetail /> */}
       {/* <CustomizeProgram /> */}
@@ -21,11 +22,12 @@ const Preview = () => {
       {/* <UploadParticipants /> */}
       {/* <SessionsDisplay /> */}
       {/* <SessionDetails /> */}
-      {/* <AddSession />
-      <AdditionalSession /> */}
+      {/* <AddSession /> */}
+      {/* <AdditionalSession /> */}
       {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
+      <InviteParticipants />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
@@ -6,9 +6,15 @@ import "../../style.css";
 import DateInput from "../../../atoms/inputs/DateInput";
 import TimeInput from "../../../atoms/inputs/TimeInput";
 import { ITask } from "../../../../@types/task.interface";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { useMutation } from "@tanstack/react-query";
+import axiosAPI from "../../../../api/axios";
+import { notification } from "antd";
 
 
-const AddTask = () => {
+const AddTask: FC<IAddTask> = ({ closeModal }) => {
+    const { activeCohort } = useContext(ProgramContext)
+    const [api, contextHolder] = notification.useNotification()
     const [track, setTrack] = useState<string>("Online");
     const [form, setForm] = useState<ITask>({
         title: "",
@@ -17,17 +23,25 @@ const AddTask = () => {
         dueDate: "",
         assignedToTracks: [],
         assignedToAll: false,
-        cohortId: ""
+        cohortId: activeCohort.id
     })
 
   const handleDropdownChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setTrack(event.target.value);
-    if (event.target.value === 'All') {
-        setForm({ ...form, assignedToAll: true });
+    const value = event.target.value
+    setTrack(value);
+    if (value === 'All') {
+        setForm({ 
+            ...form, 
+            assignedToAll: true 
+        });
     } else {
-
+        setForm({
+            ...form, 
+            assignedToAll: false, 
+            assignedToTracks: [...form.assignedToTracks, value]
+        })
     }
   };
 
@@ -35,9 +49,59 @@ const AddTask = () => {
     setForm({...form, [name]: value})
   }
 
+  const taskMutation = useMutation({
+    mutationFn: (payload: any) => {
+        return axiosAPI.task.createTask(payload)
+    },
+    onSuccess(data) {
+        console.log(data);
+        api.success({
+            message: 'Successful'
+        })
+        closeModal()
+    },
+  })
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (form.title === ""
+        || form.description === ""
+        || form.dueTime === ""
+        || form.dueDate === ""
+    ) {
+        api.warning({
+            message: "Missing required fields.",
+            placement: 'top'
+        })
+    }
+    const payload = form
+    console.log(payload);
+    
+    try {
+        await taskMutation.mutate(payload)
+        const error = taskMutation.error as any
+        let message = error.response.data.errors[0];
+
+        if (error.code === "ERR_NETWORK") {
+            message = error.message;
+            api.error({
+              message,
+            });
+        } else {
+            api.error({
+                message,
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        
+    }
+  }
+
     return (
         <>
-            <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
+            {contextHolder}
+            <form onSubmit={handleSubmit} className="form bg-white d-flex flex-column rounded-5 mx-auto">
                 <div className="d-flex flex-column gap-2">
                     <h1 className="manrope-600 primary-950 fs-h2">Add New Task</h1>
                     <span className="manrope-500 dark-700 fs-body">
@@ -76,23 +140,27 @@ const AddTask = () => {
                          />
                     </div>
                     <div>
-                        <label htmlFor="track" className="manrope-600 fs-body pb-2">Assign Task</label>
-                        <div className="location-input-wrapper">
+                        <label htmlFor="track" className="manrope-600 fs-body pb-2">Assign Task (Optional)</label>
+                        {/* <div className=""> */}
                             <select
                                 id="track"
                                 value={track}
                                 onChange={handleDropdownChange}
-                                className="location-dropdown"
+                                className="location-input-wrapper py-2 px-3 w-50"
                               >
-                                <option value="Online">Online</option>
-                                <option value="Physical">Physical</option>
+                                <option value="All">All</option>
+                                {
+                                    activeCohort.tracks.map((el: any, i: number) => (
+                                        <option key={i} value={el.id}>{el.name}</option>
+                                    ))
+                                }
                               </select>
-                              <input
+                              {/* <input
                                 type="text"
                                 placeholder={track === "Online" ? "Link" : "Address"}
                                 className="location-text"
-                            />
-                        </div>
+                            /> */}
+                        {/* </div> */}
                     </div>
                 </div>
 
@@ -100,13 +168,18 @@ const AddTask = () => {
                     <Button
                         children="Save"
                         action={() => { }}
-                        type="button"
+                        type="submit"
                         fill={true}
+                        loading={taskMutation.isPending}
                     />
                 </div>
             </form>
         </>
     );
 };
+
+interface IAddTask {
+    closeModal: () => void
+}
 
 export default AddTask;

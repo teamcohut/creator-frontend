@@ -25,11 +25,13 @@ export interface IDateInput {
 }
 
 export interface ITimeInput {
-  id: string,
-  label?: string,
-  placeHolder: string,
-  icon?: React.ReactNode,
-  onchange(e: ChangeEvent<HTMLInputElement>): void,
+  id: string;
+  label?: string;
+  icon?: React.ReactNode;
+  placeHolder?: string;
+  defaultValue?: string;
+  onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: string;
 }
 
 
@@ -113,6 +115,7 @@ export interface ISearchInput {
   id: string,
   placeHolder: string,
   label?: string,
+  width?: number,
   onchange(e: ChangeEvent<HTMLInputElement>): void
 }
 
