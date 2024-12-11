@@ -27,7 +27,9 @@ const Preview = () => {
       {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
-      <InviteParticipants />
+      <div className="bg-primary">
+        <InviteParticipants />
+      </div>
     </>
   );
 };
