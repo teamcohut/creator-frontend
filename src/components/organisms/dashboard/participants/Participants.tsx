@@ -11,27 +11,20 @@ import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
-  const { activeProgram, activeCohort } = useContext(ProgramContext);
-  const userData = JSON.parse(localStorage.getItem("user") || "");
+  const { activeCohort } = useContext(ProgramContext);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
 
-  console.log("active program", activeProgram)
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
-
-  // const cohortId = activeProgram?.cohorts?.[0]?.id;
-  // const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
 
   const { isPending, isError, data } = useQuery({
     queryKey: ["participants"],
     queryFn: () => api.participant.getParticipants(activeCohort._id),
   });
-
-  console.log("I am data", data);
 
   const header = [
     "Full Name",
@@ -81,7 +74,7 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-            // subtitle={participants.filter((p) => p.status === "active").length}
+              // subtitle={participants.filter((p) => p.status === "active").length}
             >
               <PercentageBar
                 progress={
