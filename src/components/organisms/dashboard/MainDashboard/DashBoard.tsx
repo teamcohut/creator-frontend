@@ -28,12 +28,10 @@ const DashBoard: FC<IDashboard> = () => {
           title="Good morning Admin,"
           subtitle="A Cohort is a group of individuals learning together through a shared program over a set period"
         >
-          {activeProgram.cohorts.length > 0 ? (
+          {activeProgram.cohorts?.length > 0 ? (
             <div className="d-flex gap-4">
               <Button
-                action={() => 
-                  setModal({ open: true, name: 'task' })
-                }
+                action={() => setModal({ open: true, name: "task" })}
                 fill={false}
                 type="button"
                 border
@@ -93,6 +91,6 @@ const DashBoard: FC<IDashboard> = () => {
   );
 };
 
-interface IDashboard { }
+interface IDashboard {}
 
 export default DashBoard;

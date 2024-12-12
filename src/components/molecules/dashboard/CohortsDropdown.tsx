@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { FiChevronDown, FiChevronUp, FiPlus } from "react-icons/fi";
 import "../style.css";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
@@ -9,14 +9,13 @@ const CohortsDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
-  const { activeProgram, cohorts } = useContext(ProgramContext);
-
-  console.log(cohorts);
+  const { activeProgram } = useContext(ProgramContext);
 
   const openModal = (modal: TActiveModal) => {
     setActiveModal(modal);
     setModalOpen(true);
   };
+
   return (
     <>
       {activeModal === "cohort" && (
@@ -49,7 +48,7 @@ const CohortsDropdown = () => {
           }`}
         >
           <div className="d-flex flex-column gap-3 py-2">
-            {cohorts?.map((el: any, i: number) => (
+            {activeProgram.cohorts?.map((el: any, i: number) => (
               <div className="other-program d-flex align-items-center px-3 py-2">
                 <img
                   className="rounded-circle"

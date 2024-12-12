@@ -34,7 +34,7 @@ const SideNav: FC = () => {
         </button>
       );
     } else {
-      if (activeProgram.cohorts.length < 1) {
+      if (activeProgram.cohorts?.length < 1) {
         return (
           <button
             onClick={() => openModal("cohort")}
