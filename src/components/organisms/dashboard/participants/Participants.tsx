@@ -77,7 +77,7 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-              // subtitle={participants.filter((p) => p.status === "active").length}
+            // subtitle={participants.filter((p) => p.status === "active").length}
             >
               <PercentageBar
                 progress={
@@ -104,7 +104,7 @@ const ParticipantsPage: React.FC = () => {
             />
           </div>
 
-          <Table header={header} body={data?.data.data} />
+          <Table header={header} body={data?.data.data.participants} />
         </>
       )}
 
