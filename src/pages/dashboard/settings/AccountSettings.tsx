@@ -1,8 +1,7 @@
 import React from "react";
-import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
+import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
+import { FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
-import Header from "../../../components/organisms/dashboard/Header";
 
 const AccountSettings = () => {
   return (

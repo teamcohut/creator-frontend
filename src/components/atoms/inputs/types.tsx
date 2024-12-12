@@ -6,6 +6,7 @@ export interface IEmailInput {
   placeholder: string,
   onchange(e: ChangeEvent<HTMLInputElement>): void,
   icon?: React.ReactNode,
+  value?: string,
 }
 
 export interface INumberInput {
@@ -110,6 +111,8 @@ export interface ITextInput {
   tracks?: string[];
   onRemove?: (index: number) => void;
 }
+
+
 
 export interface ISearchInput {
   id: string,

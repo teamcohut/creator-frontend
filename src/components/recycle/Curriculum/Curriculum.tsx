@@ -1,10 +1,10 @@
 import React from 'react'
-import Button from "../../../atoms/Button";
-import Header from '../Header';
+import Button from "../../atoms/Button";
+import Header from '../../organisms/dashboard/Header';
 import { FiPlus } from 'react-icons/fi';
-import OverviewCard from '../../../molecules/dashboard/OverviewCard';
+import OverviewCard from '../../molecules/dashboard/OverviewCard';
 import { cardData } from './CurriculumCard';
-import Title from '../Title';
+import Title from '../../organisms/dashboard/Title';
 
 const Curriculum = () => {
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../Header'
 import SessionList from './SessionList'
-import SessionResource from './SessionResource'
 
 const SessionsDisplay = () => {
   return (
