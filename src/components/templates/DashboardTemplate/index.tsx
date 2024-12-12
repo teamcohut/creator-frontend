@@ -21,6 +21,15 @@ const DashboardTemplate: FC = () => {
       if (response.data.data?.length > 0) {
         dispatch({ type: "ACTIVE_PROGRAM", payload: response.data.data[0] });
       }
+      if (
+        response.data.data?.length > 0 &&
+        response.data.data[0]?.cohorts.length > 0
+      ) {
+        dispatch({
+          type: "ACTIVE_COHORT",
+          payload: response.data.data[0].cohorts[0],
+        });
+      }
       return response;
     },
   });
