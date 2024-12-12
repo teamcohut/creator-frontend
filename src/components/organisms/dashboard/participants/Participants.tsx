@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
@@ -8,23 +8,27 @@ import Table from "./Table";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
+  const { activeProgram, activeCohort } = useContext(ProgramContext);
   const userData = JSON.parse(localStorage.getItem("user") || "");
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
 
+  console.log("active program", activeProgram)
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
 
-  const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
+  // const cohortId = activeProgram?.cohorts?.[0]?.id;
+  // const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
 
   const { isPending, isError, data } = useQuery({
     queryKey: ["participants"],
-    queryFn: () => api.participant.getParticipants(cohortId),
+    queryFn: () => api.participant.getParticipants(activeCohort._id),
   });
 
   console.log("I am data", data);
@@ -77,7 +81,7 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-              // subtitle={participants.filter((p) => p.status === "active").length}
+            // subtitle={participants.filter((p) => p.status === "active").length}
             >
               <PercentageBar
                 progress={
@@ -104,7 +108,7 @@ const ParticipantsPage: React.FC = () => {
             />
           </div>
 
-          <Table header={header} body={data?.data.data} />
+          <Table header={header} body={data?.data.data.participants} />
         </>
       )}
 
