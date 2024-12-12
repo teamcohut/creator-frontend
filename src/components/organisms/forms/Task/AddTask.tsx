@@ -13,7 +13,7 @@ import { notification } from "antd";
 
 
 const AddTask: FC<IAddTask> = ({ closeModal }) => {
-    const { activeCohort, programs } = useContext(ProgramContext)
+    const { activeCohort } = useContext(ProgramContext)
     const [api, contextHolder] = notification.useNotification()
     const [track, setTrack] = useState<string>("Online");
     const [form, setForm] = useState<ITask>({

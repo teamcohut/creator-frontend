@@ -1,18 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
 import OverviewCard from "../../../molecules/dashboard/OverviewCard";
 import PercentageBar from "../../../atoms/dashboard/PercentageBar";
 import Table from "./Table";
-import { useGetParticipants } from "../../../../hooks/program/useGetParticipant";
-import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
 
 const ParticipantsPage: React.FC = () => {
-  const { activeProgram } = useContext(ProgramContext);
   const userData = JSON.parse(localStorage.getItem('user') || '')
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
@@ -95,7 +92,7 @@ const ParticipantsPage: React.FC = () => {
               />
             </div>
 
-            <Table header={header} body={data?.data.data.participants} />
+            <Table header={header} body={data?.data.data} />
           </>}
 
       {modal.name === "participant" && (

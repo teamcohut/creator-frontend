@@ -86,7 +86,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
                         <option value="" disabled>
                             Select a Track (Optional)
                         </option>
-                        {tracks.map((track: Track) => (
+                        {tracks?.map((track: Track) => (
                             <option key={track.id} value={track.id}>
                                 {track.title}
                             </option>

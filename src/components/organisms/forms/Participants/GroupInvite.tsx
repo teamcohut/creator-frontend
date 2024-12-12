@@ -69,7 +69,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
                     <option value="" disabled>
                         Select a Track
                     </option>
-                    {tracks.map((track) => (
+                    {tracks?.map((track) => (
                         <option key={track.id} value={track.id}>
                             {track.title}
                         </option>

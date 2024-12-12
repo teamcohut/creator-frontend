@@ -81,7 +81,6 @@
 
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
-import FullName from "../../../atoms/dashboard/FullName";
 import StatusBadge from "../../../atoms/dashboard/StatusBadge";
 import { ITable } from "../../../../@types/participants.interface";
 import "../../style.css";
