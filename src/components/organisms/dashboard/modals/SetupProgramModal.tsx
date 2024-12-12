@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
-import ProgramDetail from "../../forms/CustomizeProgram/Programdetails";
+import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
 import { axiosPrivate } from "../../../../api/axios";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
 import { useGetProgram } from "../../../../hooks/program/useGetProgram";

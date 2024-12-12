@@ -10,7 +10,7 @@ import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
 
 const ParticipantsPage: React.FC = () => {
-  const userData = JSON.parse(localStorage.getItem('user') || '')
+  const userData = JSON.parse(localStorage.getItem("user") || "");
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
@@ -20,11 +20,9 @@ const ParticipantsPage: React.FC = () => {
     setModal({ name, open });
   };
 
-
   const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
 
-
-  const { isPending, isError, data, refetch } = useQuery({
+  const { isPending, isError, data } = useQuery({
     queryKey: ["participants"],
     queryFn: () => api.participant.getParticipants(cohortId),
   });
@@ -49,54 +47,72 @@ const ParticipantsPage: React.FC = () => {
         <Button
           action={() =>
             setModal((prev) => ({ open: true, name: "participant" }))
-          } fill gap type="button" border={false}>
+          }
+          fill
+          gap
+          type="button"
+          border={false}
+        >
           <FiPlus className="fs-body" />
           Invite Learner
         </Button>
       </Header>
 
-      {isPending ? <p>Loading participants...</p>
-        : isError ? <p className="text-danger">Error T austin sparks</p>
-          : <>
-            <div className="overview-container d-flex">
-              <OverviewCard
-                icon={<FiUsers className="fs-h1 primary-300" />}
-                title="Total Participants"
-                iconBgColor="#ECF1FF4D"
-                iconBorderColor="#ECF1FF"
-                subtitle={data?.data.data.noOfParticipants}
-              />
-              <OverviewCard
-                icon={<FiUsers className="fs-h1 primary-300" />}
-                title="Enrolled Participants"
-                iconBgColor="#ECF1FF4D"
-                iconBorderColor="#ECF1FF"
+      {isPending ? (
+        <p>Loading participants...</p>
+      ) : isError ? (
+        <p className="text-danger">Error T austin sparks</p>
+      ) : (
+        <>
+          <div className="overview-container d-flex">
+            <OverviewCard
+              icon={<FiUsers className="fs-h1 primary-300" />}
+              title="Total Participants"
+              iconBgColor="#ECF1FF4D"
+              iconBorderColor="#ECF1FF"
+              subtitle={data?.data.data.noOfParticipants}
+            />
+            <OverviewCard
+              icon={<FiUsers className="fs-h1 primary-300" />}
+              title="Enrolled Participants"
+              iconBgColor="#ECF1FF4D"
+              iconBorderColor="#ECF1FF"
               // subtitle={participants.filter((p) => p.status === "active").length}
-              >
-                <PercentageBar progress={(data?.data.data.noOfActiveParticipants / data?.data.data.noOfParticipants) * 100} />
-              </OverviewCard>
-
-              <OverviewCard
-                icon={<FiUsers className="fs-h1 success-300" />}
-                title="Active Participants"
-                iconBgColor="#E9FFF74D"
-                iconBorderColor="#E9FFF7"
-                subtitle={data?.data.data.noOfActiveParticipants}
+            >
+              <PercentageBar
+                progress={
+                  (data?.data.data.noOfActiveParticipants /
+                    data?.data.data.noOfParticipants) *
+                  100
+                }
               />
-              <OverviewCard
-                icon={<FiUsers className="fs-h1 error-300" />}
-                title="Inactive Participants"
-                iconBgColor="#FFF1F14D"
-                iconBorderColor="#FFF1F14D"
-                subtitle={data?.data.data.noInactiveParticipants}
-              />
-            </div>
+            </OverviewCard>
 
-            <Table header={header} body={data?.data.data} />
-          </>}
+            <OverviewCard
+              icon={<FiUsers className="fs-h1 success-300" />}
+              title="Active Participants"
+              iconBgColor="#E9FFF74D"
+              iconBorderColor="#E9FFF7"
+              subtitle={data?.data.data.noOfActiveParticipants}
+            />
+            <OverviewCard
+              icon={<FiUsers className="fs-h1 error-300" />}
+              title="Inactive Participants"
+              iconBgColor="#FFF1F14D"
+              iconBorderColor="#FFF1F14D"
+              subtitle={data?.data.data.noInactiveParticipants}
+            />
+          </div>
+
+          <Table header={header} body={data?.data.data} />
+        </>
+      )}
 
       {modal.name === "participant" && (
-        <ParticipantModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
+        <ParticipantModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
       )}
     </>
   );
