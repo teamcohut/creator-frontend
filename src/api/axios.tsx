@@ -4,6 +4,7 @@ import Program from "./Program";
 import Participant from "./Participants";
 import Task from "./Task";
 import Session from "./Session";
+import Cohort from "./Cohort";
 
 const BaseURL = process.env.REACT_APP_COHUT_API_URL;
 
@@ -24,7 +25,8 @@ const api = {
   program: new Program(axiosPrivate),
   participant: new Participant(axiosPrivate),
   task: new Task(axiosPrivate),
-  session: new Session(axiosPrivate)
+  session: new Session(axiosPrivate),
+  cohort: new Cohort(axiosPrivate),
 };
 
 axiosPrivate.interceptors.request.use(
