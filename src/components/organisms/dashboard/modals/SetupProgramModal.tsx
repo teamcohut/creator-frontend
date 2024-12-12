@@ -1,11 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
 import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
-import { axiosPrivate } from "../../../../api/axios";
+import api, { axiosPrivate } from "../../../../api/axios";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
 import { useGetProgram } from "../../../../hooks/program/useGetProgram";
 import Modal from "../../../templates/Modal";
+import { useMutation } from "@tanstack/react-query";
+import { notification } from "antd";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -18,7 +21,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     communities: [],
     certificates: [],
   });
-  const { getProgram } = useGetProgram();
+  const { dispatch } = useContext(ProgramContext)
 
   const updateProgramData = (data: Partial<ProgramData>) => {
     setProgramData((prev) => ({ ...prev, ...data }));
@@ -65,37 +68,34 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     setCurrentStep(2);
   };
 
-  const handleProgramSubmit = async () => {
-    try {
-      if (!programData.cover || !programData.logo) {
-        alert("Cover and logo must be uploaded before submission.");
-        return;
-      }
-      const payload = {
-        ...programData,
-        cover: programData.cover,
-        logo: programData.logo
-
-        // cover: programData
-        //   ? await programData.cover
-        // ,
-        // logo: programData
-        //   ? await programData.logo
-        //  
-      };
-      console.log("payback load", payload);
-
-      const response = await axiosPrivate.post("/program", payload);
-
-      console.log("Program created:", response.data);
-      getProgram();
-
+  const createProgramMutation = useMutation({
+    mutationFn: (payload: any) =>
+      api.program.createProgram(payload),
+    onSuccess: (data: any) => {
+      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data })
       setCurrentStep(3);
-    } catch (error) {
-      console.error("Error submitting program:", error);
-      alert("Failed to create the program. Please try again.");
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: "Failed to create program. Please try again.",
+      });
+    },
+  });
+
+  const handleProgramSubmit = async () => {
+    if (!programData.cover || !programData.logo) {
+      alert("Cover and logo must be uploaded before submission.");
+      return;
     }
+    const payload = {
+      ...programData,
+      cover: programData.cover,
+      logo: programData.logo
+    };
+
+    createProgramMutation.mutate(payload)
   };
+
   return (
     <>
       <Modal open={modalOpen} setModalOpen={setModalOpen}>

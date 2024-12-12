@@ -11,7 +11,7 @@ import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
-  const { activeProgram } = useContext(ProgramContext)
+  const { activeProgram, activeCohort } = useContext(ProgramContext);
   const userData = JSON.parse(localStorage.getItem("user") || "");
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
@@ -23,12 +23,12 @@ const ParticipantsPage: React.FC = () => {
     setModal({ name, open });
   };
 
-  const cohortId = activeProgram?.cohorts?.[0]?.id;
+  // const cohortId = activeProgram?.cohorts?.[0]?.id;
   // const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
 
   const { isPending, isError, data } = useQuery({
     queryKey: ["participants"],
-    queryFn: () => api.participant.getParticipants(cohortId),
+    queryFn: () => api.participant.getParticipants(activeCohort._id),
   });
 
   console.log("I am data", data);
