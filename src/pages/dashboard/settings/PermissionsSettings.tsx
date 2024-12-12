@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Table from '../../../components/organisms/dashboard/Table'
+import Table from '../../../components/organisms/dashboard/participants/Table'
 import api from '../../../api/axios';
 import { useQuery } from '@tanstack/react-query';
 import Button from '../../../components/atoms/Button';
@@ -9,7 +9,7 @@ import GroupButton from '../../../components/atoms/Button/GroupButton';
 
 const PermissionsSettings = () => {
   const [activeView, setActiveView] = useState("All");
-  
+
   const header = [
     "Full Name",
     "Email Address",
@@ -21,7 +21,7 @@ const PermissionsSettings = () => {
 
   const handleButtonClick = (view: string) => {
     setActiveView(view);
-    
+
   };
 
 
@@ -35,21 +35,42 @@ const PermissionsSettings = () => {
     <div>
       <div className='d-flex w-100 justify-content-between align-items-center pb-5'>
         <h5>Admin Accounts</h5>
-        <Button action={()=>{}} type="button" fill={false} outline='primary' gap={true} width={177} border={true}>
-          <FiPlus/>
+        <Button action={() => { }} type="button" fill={false} outline='primary' gap={true} width={177} border={true}>
+          <FiPlus />
           <span>Add New Admin</span>
         </Button>
       </div>
       <div className='d-flex justify-content-between pb-4'>
-        
-        <SearchInput id="" placeHolder='Search by name' onchange={()=>{}} width={18}/>
+
+        <SearchInput id="" placeHolder='Search by name' onchange={() => { }} width={18} />
         <div>
-          <GroupButton buttons={buttonOptions}/>
-        </div>    
-        
+          <button
+            className="btn rounded-pill bg-secondary-450 manrope-500 primary-950"
+            onClick={() => { }}
+          >
+            All
+          </button>
+          <button
+            className="btn rounded-pill border-secondary manrope-500 dark-400"
+            onClick={() => { }}
+          >
+            Active
+          </button>
+          <button
+            className="btn rounded-pill border-secondary manrope-500 dark-400"
+            onClick={() => { }}
+          >
+            Inactive
+          </button>
+        </div>
+
+        <GroupButton buttons={buttonOptions} />
       </div>
       <Table header={header} body={[]} />
+
     </div>
+    // </div>
+
   )
 }
 

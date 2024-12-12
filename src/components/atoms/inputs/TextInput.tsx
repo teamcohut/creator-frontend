@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "../style.css";
 import { ITextInput } from "./types";
@@ -8,13 +9,13 @@ export const TextInput2: React.FC<ITextInput> = (props) => {
     const [isInvalid, setIsInvalid] = useState(false);
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onchange?.(e); 
-        setIsInvalid(false); 
+        onchange?.(e);
+        setIsInvalid(false);
     };
 
     const handleOnInvalid = (e: React.InvalidEvent<HTMLInputElement>) => {
-        e.preventDefault(); 
-        setIsInvalid(true); 
+        e.preventDefault();
+        setIsInvalid(true);
     };
 
     return (
