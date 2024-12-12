@@ -38,12 +38,7 @@ const SignUpForm: React.FC = () => {
 
   const handleSubmit = async () => {
     const { email, password } = form;
-
-    try {
-      await signupMutation.mutate({ email, password });
-    } catch (error) {
-      console.log(error);
-    }
+    await signupMutation.mutate({ email, password });
   };
 
   return (
