@@ -192,7 +192,9 @@ const Table: React.FC<ITable> = ({ header, body }) => {
               <td>{participant.email}</td>
               <td>{trackTitle}</td>
               <td>
-                <StatusBadge status={participant.status}></StatusBadge>
+                <StatusBadge
+                  status={participant.isActive ? "active" : "inactive"}
+                ></StatusBadge>
               </td>
               <td>{participant.createdAt}</td>
               <td>
