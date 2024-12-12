@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '../../../atoms/Button'
 import TextInput from '../../../atoms/inputs/TextInput'
 import EmailInput from '../../../atoms/inputs/EmailInput'
 

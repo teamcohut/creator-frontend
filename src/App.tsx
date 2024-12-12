@@ -8,7 +8,7 @@ import ParticipantsPage from "./pages/dashboard/participants/Participants";
 import DashboardTemplate from "./components/templates/DashboardTemplate";
 import NotFound from "./pages/NotFound";
 import { AuthContextProvider } from "./context/auth/AuthState";
-import Curriculum from "./components/organisms/dashboard/Curriculum/Curriculum";
+import Curriculum from "./components/recycle/Curriculum/Curriculum";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ResendMail from "./pages/auth/ResendMail";

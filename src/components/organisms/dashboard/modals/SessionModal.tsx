@@ -65,9 +65,9 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     setFormData({});
   };
 
-  const handleError = (error: string) => {
-    api.error({ message: "Error", description: error });
-  };
+  // const handleError = (error: string) => {
+  //   api.error({ message: "Error", description: error });
+  // };
 
   return (
     <>
