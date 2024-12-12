@@ -50,13 +50,13 @@ const CohortsDropdown = () => {
           <div className="d-flex flex-column gap-3 py-2">
             {activeProgram.cohorts?.map((el: any, i: number) => (
               <div className="other-program d-flex align-items-center px-3 py-2">
-                <img
+                {/* <img
                   className="rounded-circle"
                   src={activeProgram.logo}
                   width={24}
                   height={24}
                   alt=""
-                />
+                /> */}
                 <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
                   {el.name}
                 </span>

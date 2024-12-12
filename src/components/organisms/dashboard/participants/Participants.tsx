@@ -92,7 +92,7 @@ const ParticipantsPage: React.FC = () => {
               />
             </div>
 
-            <Table header={header} body={data?.data.data} />
+            <Table header={header} body={data?.data.data.participants} />
           </>}
 
       {modal.name === "participant" && (

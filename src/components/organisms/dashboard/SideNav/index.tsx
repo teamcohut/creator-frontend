@@ -22,7 +22,7 @@ const SideNav: FC = () => {
   };
 
   const ActionButton = () => {
-    if (!activeProgram) {
+    if (activeProgram.length < 1) {
       return (
         <button
           onClick={() => openModal("program")}
