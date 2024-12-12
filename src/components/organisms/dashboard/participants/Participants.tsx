@@ -21,9 +21,10 @@ const ParticipantsPage: React.FC = () => {
     setModal({ name, open });
   };
 
-  const { isPending, isError, data } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ["participants"],
     queryFn: () => api.participant.getParticipants(activeCohort._id),
+    enabled: !!activeCohort._id,
   });
 
   const header = [
@@ -55,7 +56,9 @@ const ParticipantsPage: React.FC = () => {
         </Button>
       </Header>
 
-      {isPending ? (
+      {!activeCohort._id ? (
+        <p>There is no active cohort yet.</p>
+      ) : isLoading ? (
         <p>Loading participants...</p>
       ) : isError ? (
         <p className="text-danger">Error T austin sparks</p>
