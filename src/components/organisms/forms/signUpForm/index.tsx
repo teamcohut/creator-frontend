@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../style.css";
 import { ISignupData } from "../../../../@types/auth.interface";
 import { notification } from "antd";
@@ -10,7 +10,6 @@ import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 
 const SignUpForm: React.FC = () => {
-  const navigate = useNavigate();
   const [form, setForm] = useState<ISignupData>({
     email: "",
     password: "",
@@ -20,9 +19,6 @@ const SignUpForm: React.FC = () => {
   const signupMutation = useMutation({
     mutationFn: (payload: any) => {
       return axiosAPI.auth.signup(payload);
-    },
-    onSuccess: (data: any) => {
-      localStorage.setItem("user", JSON.stringify(data?.data?.data || ""));
     },
     onError: (error: any) => {
       notification.error({
