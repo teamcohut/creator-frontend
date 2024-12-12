@@ -4,8 +4,8 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import './index.css'
 import AccountSettings from "./AccountSettings";
-import Permissions from "./PermissionsSettings";
 import PermissionsSettings from "./PermissionsSettings";
+import ProgramSettings from "./ProgramSettings";
 
 const GeneralSettings = () => {
   const onChange = (key: string) => {
@@ -21,7 +21,7 @@ const GeneralSettings = () => {
     {
       key: '2',
       label: 'Program',
-      children: 'Program',
+      children: <ProgramSettings />,
     },
     {
       key: '3',
@@ -44,7 +44,13 @@ const GeneralSettings = () => {
         <></>
       </Header>
 
-      <Tabs items={items} onChange={onChange} />
+      <Tabs items={items} 
+      onChange={onChange} 
+      animated={{
+        tabPane: true, // Enable tab pane animation
+      }}
+      className="custom-tabs"
+      />
     </>
   );
 };

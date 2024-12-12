@@ -4,7 +4,7 @@
   position: relative;
   width: clamp(342px, 45vw, 660px);
   height: fit-content;
-  min-height: 636px;
+  /* min-height: 636px; */
   padding-inline: clamp(24px, 6vw, 60px);
   padding-block: clamp(24px, 6vw, 64px);
   gap: 36px;

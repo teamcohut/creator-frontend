@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
 import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
 import Header from "../../../components/organisms/dashboard/Header";
+import EmailInput from "../../../components/atoms/inputs/EmailInput";
+import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 
 const AccountSettings = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const hoverStyle = isHovered ? {
+    color: 'var(--primary-800) !important',
+    borderColor: 'var(--primary-800) !important',
+  } : {};
   return (
     <>
       <div className="d-flex gap-133 align-items-start">
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
-            <TextInput2 id="" label="First Name" icon={<FiUser/>} />
-            <TextInput2 id="" label="Last Name" icon={<FiUser/>} />
+            <TextInput2 id="" label="First Name" icon={<FiUser className="dark-300"/>} />
+            <TextInput2 id="" label="Last Name" icon={<FiUser className="dark-300"/>} />
           </div>
-          <TextInput2 id="" label="Email" icon={<FiMail/>} />
+          <EmailInput id="" label="Email" placeholder="Email" onchange={() => {}} />
 
-          <Button action={()=>{}} type="button" fill={false} outline='primary' gap={true} width={200} border={true}>
+          <OutlineButton 
+            action={()=>{}} 
+            type="button" 
+            fill={false} 
+            outline='primary' 
+            gap={true} width={200} 
+            border={true}
+            customStyle={hoverStyle}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}>
           <FiEdit3/>
           <span>Change Password</span>
-        </Button>
+        </OutlineButton>
         </div>
         <div>
         <div>

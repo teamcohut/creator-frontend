@@ -45,6 +45,10 @@
   --success-700: #008f6c;
 
   --error-300: #ff9d9f;
+  --error-500: #FF484B;
+
+
+  --warning-500: #ECD906;
 
   --fushia-500: #c848ff;
   --fushia-600: #aa16e3;
@@ -257,6 +261,13 @@ body {
 
 .error-300 {
   color: var(--error-300);
+}
+.error-500 {
+  color: var(--error-500);
+}
+
+.warning-500 {
+  color: var(--warning-500)
 }
 
 .fushia-500 {

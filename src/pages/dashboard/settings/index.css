@@ -7,26 +7,44 @@
   font-size: clamp(14px, 1.5vw, 16px);
   color: var(--dark-700) !important; /* Custom text color */
 }
+.ant-tabs-tab:hover {
+  color: var(--primary-400) !important; /* Hover effect for Tabs */
+}
 
 /* Change the active tab label's color */
 .ant-tabs-tab-active .ant-tabs-tab-btn {
   font-family: "Manrope", sans-serif !important;
-  font-optical-sizing: auto !important;
-  font-weight: 600 !important;
-  font-style: normal !important;
   font-size: clamp(14px, 1.5vw, 16px);
   color: var(--primary-400) !important; /* Active tab text color */
-  font-size: clamp(14px, 1.5vw, 16px);
 }
+
+.custom-tabs .ant-tabs-tab .ant-tabs-tab-btn{
+  font-size: clamp(12px, 1.5vw, 14px); /* Adjust font size */
+}
+
+/* .custom-tabs .ant-tabs-tab-active {
+  font-size: clamp(14px, 1.5vw, 16px);
+} */
 
 /* Change the underline color for the active tab */
 .ant-tabs-ink-bar {
-  background-color: green;
+  background-color: var(--primary-400) !important;
 }
 
 .w-60
  {
   width: 65%;
+ }
+
+ .w-78
+ {
+  width: 78px;
+ }
+ .h-48 {
+  height: 48px;
+ }
+ .w-12 {
+  width: 12px;
  }
 
  .gap-133 {
