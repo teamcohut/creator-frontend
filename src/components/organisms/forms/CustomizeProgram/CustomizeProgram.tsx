@@ -42,7 +42,7 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
             </div>
             <div className="d-flex flex-column gap-2">
                 <DragNDropInput
-                    label="Upload Image"
+                    label="Upload Logo"
                     id="thumbnail-upload"
                     detail="Program's Logo"
                     onchange={(file) => setThumbnail(file)}

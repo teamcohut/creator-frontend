@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import Button from '../../../atoms/Button';
 import IndividualInvite from './IndividualInvite';
+import GroupInvite from './GroupInvite';
 
 const InviteParticipants = () => {
     // State to manage the active tab
+    const userData = JSON.parse(localStorage.getItem('user') || '')
+    const tracks = userData?.programs?.[0]?.cohorts?.[0]?.tracks;
+    const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
+
+
+    console.log("I am the", tracks);
+
+
     const [activeTab, setActiveTab] = useState('individual');
 
     // Handler to switch tabs
@@ -41,43 +50,15 @@ const InviteParticipants = () => {
                 {/* Conditional Rendering of Forms */}
                 <div className="mt-4">
                     {activeTab === 'individual' ? (
-                        <IndividualInvite />
+                        <IndividualInvite tracks={tracks} cohortId={cohortId} />
 
                     ) : (
-                        <div>
-                            {/* Add Group Form */}
-                            <div className="d-flex flex-column gap-4">
-                                <label htmlFor="groupName" className="manrope-500 dark-700 fs-body">
-                                    Group Name
-                                </label>
-                                <input
-                                    id="groupName"
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Enter group name"
-                                />
-                                <label htmlFor="uploadList" className="manrope-500 dark-700 fs-body">
-                                    Upload Participant List
-                                </label>
-                                <input
-                                    id="uploadList"
-                                    type="file"
-                                    className="form-control"
-                                />
-                            </div>
-                        </div>
+                        <GroupInvite tracks={tracks} cohortId={cohortId} />
                     )}
                 </div>
 
                 {/* Submit Button */}
-                <div className="d-flex flex-column align-items-center gap-3 mt-4">
-                    <Button
-                        children="Invite"
-                        action={() => { }}
-                        type="button"
-                        fill={true}
-                    />
-                </div>
+
             </form>
         </div>
     );
