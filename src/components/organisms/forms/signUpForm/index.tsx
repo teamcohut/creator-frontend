@@ -23,7 +23,6 @@ const SignUpForm: React.FC = () => {
     },
     onSuccess: (data: any) => {
       localStorage.setItem("user", JSON.stringify(data?.data?.data || ""));
-      navigate("/login");
     },
     onError: (error: any) => {
       notification.error({
