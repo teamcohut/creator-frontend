@@ -4,9 +4,7 @@ import {
   FiCheckCircle,
   FiHeadphones,
   FiLayout,
-  FiMoon,
   FiTool,
-  FiUser,
   FiUsers,
 } from "react-icons/fi";
 

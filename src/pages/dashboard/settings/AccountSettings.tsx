@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
 import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
@@ -5,6 +6,12 @@ import Button from "../../../components/atoms/Button";
 import Header from "../../../components/organisms/dashboard/Header";
 import EmailInput from "../../../components/atoms/inputs/EmailInput";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
+=======
+import React from "react";
+import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
+import { FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
+import Button from "../../../components/atoms/Button";
+>>>>>>> cea1cdbb31d849c0e28c41880c31b57bd1463c19
 
 const AccountSettings = () => {
   const [isHovered, setIsHovered] = useState(false);

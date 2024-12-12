@@ -90,7 +90,6 @@ import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import TimeInput from "../../../atoms/inputs/TimeInput";
-import { FiClock } from "react-icons/fi";
 import "../../style.css";
 
 

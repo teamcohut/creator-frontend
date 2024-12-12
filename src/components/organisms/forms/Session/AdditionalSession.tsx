@@ -180,7 +180,6 @@ import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import { useMutation } from "@tanstack/react-query";
-import Session from "../../../../api/Session";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
@@ -202,9 +201,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     location: { name: locationType },
   });
 
-  console.log("Cohort", cohorts);
-  console.log("Program", activeProgram.cohorts);
-  console.log("ProgramDetails", activeProgram);
+
 
 
 

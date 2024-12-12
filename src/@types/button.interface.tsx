@@ -18,5 +18,5 @@ export interface IButton {
   }
 
 export interface IFilterButton {
-  text: 'All' | 'Active' | 'Inactive' | 'Closed',
+  text: "All" | "Active" | "Inactive" | "Closed";
 }

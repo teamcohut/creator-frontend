@@ -5,8 +5,7 @@ import SignUpForm from "../../components/organisms/forms/signUpForm";
 import { AuthContext } from "../../context/auth/AuthContext";
 
 const SignUp = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { dispatch, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <>

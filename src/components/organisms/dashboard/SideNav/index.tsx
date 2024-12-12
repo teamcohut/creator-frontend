@@ -1,9 +1,9 @@
 import { FC, useContext, useState } from "react";
 import NavLink from "../../../atoms/dashboard/NavLink";
-import { HelpList, NavList, SettingsList } from "./NavList";
+import { NavList, SettingsList } from "./NavList";
 import Icon from "../../../atoms/Icon";
 import { Link } from "react-router-dom";
-import { FiHelpCircle, FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
+import { FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
 import "../../style.css";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SetupProgramModal from "../modals/SetupProgramModal";
@@ -22,7 +22,7 @@ const SideNav: FC = () => {
   };
 
   const ActionButton = () => {
-    if (!activeProgram) {
+    if (!activeProgram.title) {
       return (
         <button
           onClick={() => openModal("program")}
@@ -34,7 +34,7 @@ const SideNav: FC = () => {
         </button>
       );
     } else {
-      if (activeProgram.cohorts.length < 1) {
+      if (activeProgram.cohorts?.length < 1) {
         return (
           <button
             onClick={() => openModal("cohort")}
@@ -78,10 +78,6 @@ const SideNav: FC = () => {
             <NavLink type={"dropdown"} dropdownList={SettingsList} path={""}>
               <FiSettings className="nav-icon" />
               <span>Settings</span>
-            </NavLink>
-            <NavLink type={"dropdown"} dropdownList={HelpList} path={""}>
-              <FiHelpCircle className="nav-icon" />
-              <span>Help</span>
             </NavLink>
             <NavLink type={"logout"} dropdownList={[]} path={""}>
               <FiLogOut className="nav-icon" />

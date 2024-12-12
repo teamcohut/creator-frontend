@@ -11,6 +11,16 @@ class Program {
     return this.client.post("/program", payload);
   }
 
+  uploadProgramImage(data: any) {
+    return this.client.post("/upload", {
+      image:data
+    }, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  }
+
   getPrograms() {
     return this.client.get("/program");
   }

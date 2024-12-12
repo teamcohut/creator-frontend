@@ -11,7 +11,6 @@ import axiosAPI from "../../../../api/axios";
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
   const loginMutation = useMutation({
@@ -22,40 +21,21 @@ const LoginPage: React.FC = () => {
       localStorage.setItem("user", JSON.stringify(data?.data?.data || ""));
       navigate("/");
     },
+    onError: (error: any) => {
+      notification.error({
+        message: error.response.data.errors[0] ?? error.response.data.message,
+      });
+    },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const payload = { email, password };
-    try {
-      await loginMutation.mutate(payload);
-      const error = loginMutation.error as any;
-      if (error?.code === "ERR_BAD_RESPONSE") {
-        const message = error.response.data.errors[0];
-
-        api.error({
-          message,
-          description:
-            message === "Your account is not activated" && "Check your mail",
-        });
-      }
-      if (error.code === "ERR_NETWORK") {
-        const message = error.message;
-        api.error({
-          message,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    await loginMutation.mutate(payload);
   };
+
   return (
     <>
-      {contextHolder}
-      <form
-        className="form bg-white d-flex flex-column rounded-5"
-        onSubmit={handleSubmit}
-      >
+      <div className="form bg-white d-flex flex-column rounded-5">
         <Link
           className="primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none"
           to={"/"}
@@ -106,7 +86,7 @@ const LoginPage: React.FC = () => {
             children="Sign in"
             type="submit"
             fill={true}
-            action={() => {}}
+            action={handleSubmit}
             loading={loginMutation.isPending}
           />
           <span>
@@ -116,7 +96,7 @@ const LoginPage: React.FC = () => {
             </Link>
           </span>
         </div>
-      </form>
+      </div>
     </>
   );
 };

@@ -26,6 +26,9 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         cohortId: activeCohort.id
     })
 
+    console.log(activeCohort);
+    
+
   const handleDropdownChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
