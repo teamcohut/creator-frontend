@@ -12,7 +12,7 @@ class Auth {
   }
 
   signup(payload: any) {
-    return this.client.post("/auth/signup", payload);
+    return this.client.post("/auth/register", payload);
   }
 }
 
