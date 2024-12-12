@@ -2,9 +2,8 @@ import { FC, useContext, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
 import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
-import api, { axiosPrivate } from "../../../../api/axios";
+import api from "../../../../api/axios";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
-import { useGetProgram } from "../../../../hooks/program/useGetProgram";
 import Modal from "../../../templates/Modal";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
@@ -21,23 +20,11 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     communities: [],
     certificates: [],
   });
-  const { dispatch } = useContext(ProgramContext)
+  const { dispatch } = useContext(ProgramContext);
 
   const updateProgramData = (data: Partial<ProgramData>) => {
     setProgramData((prev) => ({ ...prev, ...data }));
   };
-
-  console.log("program data", programData);
-
-
-  // Helper function to convert File to Base64
-  const fileToBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
 
   const openModal = (modal: TModal) => {
     setCurrentStep(1);
@@ -69,10 +56,9 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   };
 
   const createProgramMutation = useMutation({
-    mutationFn: (payload: any) =>
-      api.program.createProgram(payload),
+    mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
-      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data })
+      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
       setCurrentStep(3);
     },
     onError: (error: any) => {
@@ -90,10 +76,10 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     const payload = {
       ...programData,
       cover: programData.cover,
-      logo: programData.logo
+      logo: programData.logo,
     };
 
-    createProgramMutation.mutate(payload)
+    createProgramMutation.mutate(payload);
   };
 
   return (
@@ -128,23 +114,6 @@ interface ProgramData {
 }
 
 export default SetupProgramModal;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { FC, useState } from "react";
 // import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
