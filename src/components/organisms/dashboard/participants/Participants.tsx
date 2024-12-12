@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
@@ -8,19 +8,23 @@ import Table from "./Table";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
+  const { activeProgram } = useContext(ProgramContext)
   const userData = JSON.parse(localStorage.getItem("user") || "");
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
 
+  console.log("active program", activeProgram)
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
 
-  const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
+  const cohortId = activeProgram?.cohorts?.[0]?.id;
+  // const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
 
   const { isPending, isError, data } = useQuery({
     queryKey: ["participants"],
