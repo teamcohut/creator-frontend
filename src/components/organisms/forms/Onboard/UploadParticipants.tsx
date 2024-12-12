@@ -1,77 +1,64 @@
-import React, { FC, useContext, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
-import { axiosPrivate } from "../../../../api/axios";
+import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
+import { useMutation } from "@tanstack/react-query";
 
-const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [tracks, setTracks] = useState<Array<ITracks>>([])
-  const [currentTrack, setCurrentTrack] = useState<string>("");
-  const { activeCohort } = useContext(ProgramContext)
-  const [api, contextHolder] = notification.useNotification()
+const UploadParticipants: FC<IUploadParticipants> = ({
+  onSubmit,
+  hasTrack,
+}) => {
+  const [track, setTrack] = useState("");
+  const { activeCohort } = useContext(ProgramContext);
+
+  console.log("activeCohort", activeCohort);
+
+  const inviteParticipantsMutation = useMutation({
+    mutationFn: (payload: File) =>
+      api.participant.inviteGroupParticipant(activeCohort?._id, track, payload),
+    onSuccess: () => {
+      notification.success({ message: "Participants invited successfully!" });
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: "Failed to invite participants. Please try again.",
+      });
+    },
+  });
 
   const handleFileInput = async (file: File) => {
-    setIsLoading(true);
-  
-    try {
-      // Construct the endpoint dynamically
-      const endpoint = hasTrack
-        ? `/cohort/${activeCohort.id}/upload-participants-csv?track=${currentTrack}`
-        : `/cohort/${activeCohort.id}/upload-participants-csv?track=General`;
-  
-      // Validate track name if `hasTrack` is true
-      if (hasTrack && currentTrack.trim() === '') {
-        api.warning({
-          message: 'Track name is required when adding participants to a track.',
-          placement: 'top',
-        });
-        setIsLoading(false);
-        return;
-      }
-  
-      // Send the file to the endpoint
-      const response = await axiosPrivate.put(endpoint, file);
-      console.log('Upload response:', response);
-  
-      // Update state with the track name and CSV file name
-      if (hasTrack && currentTrack.trim() !== '') {
-        setTracks([
-          ...tracks,
-          { name: currentTrack, file: file.name },
-        ]);
-
-      }
-  
-      // Notify user of success
-      api.success({
-        message: 'File uploaded successfully!',
-        placement: 'top',
+    if (file.type !== "text/csv") {
+      notification.warning({
+        message: "File type not supported",
+        description: "Please upload a CSV file.",
       });
-  
-      // Trigger additional action if required
-      onSubmit();
-    } catch (error: any) {
-      console.error('Error uploading file:', error);
-  
-      api.error({
-        message: "Error uploading file",
-        placement: 'topRight',
-      });
-    } finally {
-      setIsLoading(false);
+      return;
     }
+
+    if (!activeCohort?._id) {
+      notification.warning({ message: "No active cohort detected." });
+    }
+
+    if (
+      (activeCohort.hasTrack && !track) ||
+      (activeCohort.hasTrack && track === "")
+    ) {
+      notification.warning({
+        message: "You are required to specify a track to add participants",
+      });
+      return;
+    }
+
+    inviteParticipantsMutation.mutate(file);
   };
-  
-  
 
   return (
     <>
-      {contextHolder}
       <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
         <ProgressBar
           height={8}
@@ -91,23 +78,17 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
         </div>
 
         <div className="d-flex flex-column gap-4">
-          {/* <TextInput id='track' label='Upload Participants List' placeHolder='Pick track' onchange={() => { }} /> */}
-
-          {
-            hasTrack &&
+          {activeCohort.hasTrack && (
             <div>
-            <TextInput
-              id="track"
-              label="Tracks"
-              placeHolder="Type a track and press Enter"
-              onchange={(e)=>setCurrentTrack(e.target.value)}
-              // onKeyDown={handleTrackAdd}
-              value={currentTrack}
-              // tracks={tracks}
-              // onRemove={handleTrackRemove} // Handle item removal
-            />
-          </div>
-          }
+              <TextInput
+                id="track"
+                label="Tracks"
+                placeHolder="Type a track and press Enter"
+                onchange={(e) => setTrack(e.target.value)}
+                value={track}
+              />
+            </div>
+          )}
 
           <DragNDropInput
             label=""
@@ -115,10 +96,14 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             detail="Cohort's list of Participants"
             onchange={(file: any) => handleFileInput(file)}
           />
-          <span className="fs-caption primary-400">
-            A csv (Comma separated Values) File containing First names, Last
-            names and Emails of Participants
-          </span>
+          {inviteParticipantsMutation.isPending ? (
+            <>Uploading file...</>
+          ) : (
+            <span className="fs-caption primary-400">
+              A csv (Comma separated Values) File containing First names, Last
+              names and Emails of Participants
+            </span>
+          )}
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">
@@ -127,7 +112,6 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit, hasTrack }) => 
             action={onSubmit}
             type="button"
             fill={true}
-            loading={isLoading}
           />
         </div>
       </form>
@@ -140,9 +124,9 @@ interface IUploadParticipants {
   hasTrack: boolean;
 }
 
-interface ITracks {
-  name: string,
-  file: string
-}
+// interface ITracks {
+//   name: string;
+//   file: string;
+// }
 
 export default UploadParticipants;
