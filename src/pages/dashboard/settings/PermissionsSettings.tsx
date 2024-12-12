@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-import Table from '../../../components/organisms/dashboard/Table'
 import { FiPlus } from 'react-icons/fi';
 import SearchInput from '../../../components/atoms/inputs/SearchInput';
 import GroupButton from '../../../components/atoms/Button/GroupButton';
 import OutlineButton from '../../../components/atoms/Button/OutlineButton';
 import { useState } from 'react';
+import Table from '../../../components/organisms/dashboard/participants/Table';
 
 const PermissionsSettings = () => {
   const [activeView, setActiveView] = useState("All");
@@ -18,18 +17,6 @@ const PermissionsSettings = () => {
     borderColor: 'var(--primary-800) !important',
   } : {};
   
-=======
-import React, { useState } from "react";
-import Button from "../../../components/atoms/Button";
-import { FiPlus } from "react-icons/fi";
-import SearchInput from "../../../components/atoms/inputs/SearchInput";
-import GroupButton from "../../../components/atoms/Button/GroupButton";
-import Table from "../../../components/organisms/dashboard/participants/Table";
-
-const PermissionsSettings = () => {
-  const [activeView, setActiveView] = useState("All");
-
->>>>>>> cea1cdbb31d849c0e28c41880c31b57bd1463c19
   const header = [
     "Full Name",
     "Email Address",
@@ -65,7 +52,6 @@ const PermissionsSettings = () => {
     <div>
       <div className="d-flex w-100 justify-content-between align-items-center pb-5">
         <h5>Admin Accounts</h5>
-<<<<<<< HEAD
         <OutlineButton action={()=>{}} 
           type="button" fill={false} 
           outline='primary' 
@@ -77,18 +63,6 @@ const PermissionsSettings = () => {
           handleMouseLeave={handleMouseLeave}
           >
           <FiPlus/>
-=======
-        <Button
-          action={() => {}}
-          type="button"
-          fill={false}
-          outline="primary"
-          gap={true}
-          width={177}
-          border={true}
-        >
-          <FiPlus />
->>>>>>> cea1cdbb31d849c0e28c41880c31b57bd1463c19
           <span>Add New Admin</span>
         </OutlineButton>
       </div>

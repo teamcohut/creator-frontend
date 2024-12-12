@@ -1,11 +1,6 @@
 import { FC, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
-<<<<<<< HEAD
-import { axiosPrivate } from "../../../../api/axios";
-=======
-import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
->>>>>>> cea1cdbb31d849c0e28c41880c31b57bd1463c19
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
 import Modal from "../../../templates/Modal";
 import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
