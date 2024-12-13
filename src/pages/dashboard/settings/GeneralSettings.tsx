@@ -36,11 +36,11 @@ const GeneralSettings = () => {
       label: 'Permissions',
       children: <PermissionsSettings header={header} body={[]} />,
     },
-    {
-      key: '4',
-      label: 'Payment',
-      children: 'Payment',
-    },
+    // {
+    //   key: '4',
+    //   label: 'Payment',
+    //   children: 'Payment',
+    // },
   ];
 
   return (

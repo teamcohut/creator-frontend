@@ -40,6 +40,11 @@
 .min-width-button {
     min-width: 60px; 
     text-align: center; 
+    height: 40px;
+    border-color: var(--primary-50) !important;
+  }
+  .min-width-button:hover {
+    color: var(--primary-800);
   }
 
   
