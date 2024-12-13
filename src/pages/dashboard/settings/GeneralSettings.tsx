@@ -8,9 +8,19 @@ import PermissionsSettings from "./PermissionsSettings";
 import ProgramSettings from "./ProgramSettings";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import { FiEdit3 } from "react-icons/fi";
+import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
+
 
 const GeneralSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: "", open: false } as {
+    name: string;
+    open: boolean;
+  });
+
+  const setModalOpenState = (open: boolean, name: string) => {
+    setModal({ name, open });
+  };
 
   const header = [
     "Full Name",
@@ -20,7 +30,7 @@ const GeneralSettings = () => {
     "Last Login",
     "",
   ];
-  
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
@@ -61,28 +71,35 @@ const GeneralSettings = () => {
         title="General Settings"
         subtitle="View and manage your account information here."
       >
-        <OutlineButton 
-            action={()=>{}} 
-            type="button" 
-            fill={false} 
-            outline='primary' 
-            gap={true} width={200} 
-            border={true}
-            customStyle={hoverStyle}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}>
-          <FiEdit3/>
+        <OutlineButton
+          action={() => setModal((prev) => ({ open: true, name: "changePasswordModal" }))}
+          type="button"
+          fill={false}
+          outline='primary'
+          gap={true} width={200}
+          border={true}
+          customStyle={hoverStyle}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}>
+          <FiEdit3 />
           <span>Change Password</span>
         </OutlineButton>
       </Header>
 
-      <Tabs items={items} 
-      onChange={onChange} 
-      animated={{
-        tabPane: true, // Enable tab pane animation
-      }}
-      className="custom-tabs"
+      <Tabs items={items}
+        onChange={onChange}
+        animated={{
+          tabPane: true, // Enable tab pane animation
+        }}
+        className="custom-tabs"
       />
+
+      {modal.name === "changePasswordModal" && (
+        <ChangePasswordModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
     </>
   );
 };
