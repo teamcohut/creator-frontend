@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import DragNDropInput from '../../../components/atoms/inputs/DragNDropInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
 import { FiSave, FiTrash2 } from 'react-icons/fi'
 import GroupButton from '../../../components/atoms/Button/GroupButton'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
+import DeleteProgramModal from '../../../components/organisms/dashboard/modals/DeleteProgramModal'
 
 const ProgramGeneralSettings = () => {
 
   const [activeView, setActiveView] = useState("Hybrid");
   const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: "", open: false } as {
+    name: string;
+    open: boolean;
+  });
+
+  const setModalOpenState = (open: boolean, name: string) => {
+    setModal({ name, open });
+  };
 
   
   const handleMouseEnter = () => setIsHovered(true);
@@ -84,8 +93,18 @@ const ProgramGeneralSettings = () => {
 
 
       <h4 className="manrope-600 fs-h4 primary-950 pb-1 pt-5">Danger Zone</h4>
-      <span className="d-flex align-items-center gap-1 manrope-700 fs-body error-300">Deactivate Account <FiTrash2 /></span>
+      <span style={{cursor: 'pointer'}} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+        onClick={() => setModal((prev) => ({ open: true, name: "deleteProgramModal" }))}>
+          Delete Program <FiTrash2 />
+      </span>
+
       </div>
+      {modal.name === "deleteProgramModal" && (
+        <DeleteProgramModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
     </div>
   )
 }

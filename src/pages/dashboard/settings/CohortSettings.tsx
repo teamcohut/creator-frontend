@@ -1,13 +1,21 @@
-import { FiLink, FiSave, FiTrash2, FiX } from 'react-icons/fi'
+import { FiSave, FiTrash2, FiX } from 'react-icons/fi'
 import DateInput from '../../../components/atoms/inputs/DateInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import { useState } from 'react'
+import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: "", open: false } as {
+    name: string;
+    open: boolean;
+  });
 
+  const setModalOpenState = (open: boolean, name: string) => {
+    setModal({ name, open });
+  };
   
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -31,6 +39,7 @@ const CohortSettings = () => {
     "Baking",
   ]
   return (
+    <>
     <div className='d-flex gap-133 align-items-start pt-4'>
       <div className='w-60'>
         <div className='d-flex gap-2'>
@@ -105,9 +114,20 @@ const CohortSettings = () => {
       </div>
       <div>  
         <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-        <span className="d-flex align-items-center gap-1 manrope-700 fs-body error-300">Delete Cohort <FiTrash2 /></span>
+        <span onClick={() => setModal((prev) => ({ open: true, name: "deleteCohortModal" }))} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+        style={{cursor: 'pointer'}}
+        >
+          Delete Cohort <FiTrash2 />
+          </span>
       </div>
     </div>
+    {modal.name === "deleteCohortModal" && (
+        <DeleteCohortModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
+    </> 
   )
 }
 

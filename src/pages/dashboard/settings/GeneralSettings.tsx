@@ -1,5 +1,5 @@
 import Header from "../../../components/organisms/dashboard/Header";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import './index.css'
@@ -30,6 +30,7 @@ const GeneralSettings = () => {
     "Last Login",
     "",
   ];
+  
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -56,7 +57,7 @@ const GeneralSettings = () => {
     {
       key: '3',
       label: 'Permissions',
-      children: <PermissionsSettings header={header} body={[]} />,
+      children: <PermissionsSettings />,
     },
     // {
     //   key: '4',

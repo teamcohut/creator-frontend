@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react';
 import { FiX } from 'react-icons/fi'
 import { ISuccessCard } from '../../../../@types/auth.interface'
 

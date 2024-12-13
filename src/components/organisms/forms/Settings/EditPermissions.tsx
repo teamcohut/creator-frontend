@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import Button from '../../../atoms/Button';
 import { Switch } from 'antd';
 import { FiX } from 'react-icons/fi';

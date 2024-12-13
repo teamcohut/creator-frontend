@@ -4,7 +4,7 @@ import "../style.css";
 import { ITextInput } from "./types";
 
 export const TextInput2: React.FC<ITextInput> = (props) => {
-    const { label, id, icon, placeHolder, onchange } = props;
+    const { label, id, icon, placeHolder, value, onchange } = props;
 
     const [isInvalid, setIsInvalid] = useState(false);
 
@@ -33,6 +33,7 @@ export const TextInput2: React.FC<ITextInput> = (props) => {
                         className="input bg-transparent w-100 h-100 border-none"
                         type="text"
                         placeholder={placeHolder}
+                        value={value}
                         onChange={handleOnChange}
                         onInvalid={handleOnInvalid}
                         required

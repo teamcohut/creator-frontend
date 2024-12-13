@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import { FiEdit, FiEdit3, FiMail, FiSave, FiTrash2, FiUser } from "react-icons/fi";
-import Button from "../../../components/atoms/Button";
-import Header from "../../../components/organisms/dashboard/Header";
+import { useState } from "react";
+import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
+import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
 import EmailInput from "../../../components/atoms/inputs/EmailInput";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
+import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 
 const AccountSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: "", open: false } as {
+    name: string;
+    open: boolean;
+  });
+
+  const setModalOpenState = (open: boolean, name: string) => {
+    setModal({ name, open });
+  };
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -21,8 +28,8 @@ const AccountSettings = () => {
       <div className="d-flex gap-133 align-items-start">
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
-            <TextInput2 id="" label="First Name" icon={<FiUser className="dark-300"/>} />
-            <TextInput2 id="" label="Last Name" icon={<FiUser className="dark-300"/>} />
+            <TextInput2 id="firstname" label="First Name" icon={<FiUser className="dark-300"/>} />
+            <TextInput2 id="lastname" label="Last Name" icon={<FiUser className="dark-300"/>} />
           </div>
           <EmailInput id="" label="Email" placeholder="Email" onchange={() => {}} />
 
@@ -48,10 +55,19 @@ const AccountSettings = () => {
 
       
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span className="d-flex align-items-center gap-1 manrope-700 fs-body error-300">Deactivate Account <FiTrash2 /></span>
+          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+            onClick={() => setModal((prev) => ({ open: true, name: "deactivateAccountModal" }))}>
+              Deactivate Account <FiTrash2 />
+          </span>
         
         </div>
       </div>
+      {modal.name === "deactivateAccountModal" && (
+        <DeactivateAccountModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
     </>
   );
 };
