@@ -24,10 +24,6 @@ const SessionList = () => {
         enabled: !!activeCohort._id,
     });
 
-    console.log("ta da data", data);
-
-
-
 
     useEffect(() => {
         const lowerCaseQuery = searchQuery.toLowerCase();
