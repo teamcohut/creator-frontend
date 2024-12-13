@@ -312,4 +312,6 @@
   height: 10rem;
 }
 
-
+.dropdown .dropdown-menu {
+  z-index: 2;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import Button from '../../../atoms/Button';
 import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';

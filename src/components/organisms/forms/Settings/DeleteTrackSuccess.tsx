@@ -1,4 +1,3 @@
-import React from 'react'
 import SettingsStatusCard from './SettingsStatusCard'
 import { FiTrash } from 'react-icons/fi'
 

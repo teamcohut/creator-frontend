@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';
 import Button from '../../../atoms/Button';
@@ -24,7 +24,7 @@ const ConfirmTrackDelete = () => {
       <SettingsStatusCard
         title="Confirm"
         description="Are you sure you want to delete this track?"
-        icon={<FiAlertCircle style={{ fontSize: "70px", color: "var(--warning-500)" }} />}
+        icon={<FiAlertCircle className="warning-500 fs-icon" />}
       >
         <span className='manrope-500 dark-700 fs-body'>Deleting a track will delete all track participants.</span>
           <div style={{ textAlign: "start", fontSize: "fs-body"}}>

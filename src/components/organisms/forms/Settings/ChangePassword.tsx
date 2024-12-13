@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from '../../../atoms/Button';
-import IndividualInvite from '../Participants/IndividualInvite';
 import PasswordInput from '../../../atoms/inputs/PasswordInput';
 import { FiX } from 'react-icons/fi';
 
@@ -24,7 +23,7 @@ const ChangePassword = () => {
               </div>
               
                 <div className="d-flex flex-column gap-4">
-                   
+
                         <PasswordInput  id='old-password' placeHolder='password' label='Old Password' onchange={()=> {}} />
                         <PasswordInput  id='new-password' placeHolder='password' label='New Password' onchange={()=> {}} />
                     

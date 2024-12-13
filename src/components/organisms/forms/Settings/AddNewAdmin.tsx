@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FiUser, FiX } from 'react-icons/fi';
 import {TextInput2} from '../../../atoms/inputs/TextInput';
 import EmailInput from '../../../atoms/inputs/EmailInput';

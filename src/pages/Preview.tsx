@@ -62,7 +62,7 @@ const Preview = () => {
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
       
-      {/* <ChangePassword /> */}
+      <ChangePassword />
       {/* <ChangePasswordSuccess /> */}
       {/* <RemoveParticipantSuccess /> */}
       {/* <EditPermissionSaved /> */}
@@ -77,7 +77,7 @@ const Preview = () => {
       {/* <DangerDeleteProgram /> */}
       {/* <DangerDeleteAccount /> */}
       {/* <AddNewAdmin /> */}
-      <EditPermissions />
+      {/* <EditPermissions /> */}
       
 
     </>

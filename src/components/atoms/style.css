@@ -8,7 +8,12 @@
     white-space: nowrap;
 }
 .button:hover {
-    background-color: var(--primary-800) !important;
+    border-color: var(--primary-800) !important;
+    color: var(--primary-800);
+}
+
+.button:hover .spinner-border {
+    color: var(--primary-800);
 }
 
 .outline-btn {

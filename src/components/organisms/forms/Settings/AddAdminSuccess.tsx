@@ -1,6 +1,5 @@
-import React from 'react'
 import SettingsStatusCard from './SettingsStatusCard'
-import { FiUser, FiUserPlus } from 'react-icons/fi'
+import { FiUserPlus } from 'react-icons/fi';
 
 const AddAdminSuccess = () => {
   return (

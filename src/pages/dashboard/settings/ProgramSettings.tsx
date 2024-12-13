@@ -1,5 +1,3 @@
-import React from 'react'
-import AccountSettings from './AccountSettings';
 import { Tabs, TabsProps } from 'antd';
 import CohortSettings from './CohortSettings';
 import ProgramGeneralSettings from './ProgramGeneralSettings';
