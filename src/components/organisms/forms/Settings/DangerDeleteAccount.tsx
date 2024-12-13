@@ -3,8 +3,13 @@ import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';
 import OutlineButton from '../../../atoms/Button/OutlineButton';
 import Button from '../../../atoms/Button';
+import { useMutation } from '@tanstack/react-query';
+import api from '../../../../api/axios';
+import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const DangerDeleteAccount = () => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => setIsHovered(true);
@@ -15,6 +20,19 @@ const DangerDeleteAccount = () => {
     borderColor: 'var(--primary-800) !important',
   } : {};
 
+  const deactivateAccountMutation = useMutation({
+    mutationFn: () => api.user.deactivate(),
+    onSuccess: (data: any) => {
+      notification.success({message: data.data.message});
+      localStorage.removeItem("user");
+      navigate("/login")
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: error.response.data.errors[0] ?? error.response.data.message,
+      });
+    },
+  });
 
   return (
     
@@ -42,7 +60,7 @@ const DangerDeleteAccount = () => {
               outlineColor = 'error-500'
               width={184}
               border={true}
-              action={() => {}}
+              action={() => deactivateAccountMutation.mutate()}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}

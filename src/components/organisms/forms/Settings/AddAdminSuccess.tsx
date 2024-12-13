@@ -1,7 +1,12 @@
+import { FC } from 'react';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
 import SettingsStatusCard from './SettingsStatusCard'
 import { FiUserPlus } from 'react-icons/fi';
 
-const AddAdminSuccess = () => {
+const AddAdminSuccess: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   return (
     <div className='d-flex align-items-center justify-content-center' style={{ height: "100vh"}}>
       <SettingsStatusCard title="New Admin Added!" 

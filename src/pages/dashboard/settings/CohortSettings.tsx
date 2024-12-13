@@ -3,15 +3,21 @@ import DateInput from '../../../components/atoms/inputs/DateInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
+import { ProgramContext } from '../../../context/programs/ProgramContext'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { activeCohort } = useContext(ProgramContext);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
+  console.log(activeCohort)
+
+
+  
 
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });

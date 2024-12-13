@@ -4,13 +4,22 @@ import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
 import EmailInput from "../../../components/atoms/inputs/EmailInput";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
+import { useMutation } from "@tanstack/react-query";
+import api from "../../../api/axios";
+import { notification } from "antd";
+import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
 
 const AccountSettings = () => {
+  const user = JSON.parse(localStorage.getItem("user") || "");
+  console.log(user)
   const [isHovered, setIsHovered] = useState(false);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
+  const [firstName, setFirstName] = useState(user?.firstName)
+  const [lastName, setLastName] = useState(user?.lastName)
+  const [email, setEmail] = useState(user?.email)
 
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
@@ -26,6 +35,18 @@ const AccountSettings = () => {
       }
     : {};
 
+    const updateAccountInfoMutation = useMutation({
+      mutationFn: (payload: any) => api.user.update(payload),
+      onSuccess: (data: any) => {
+        notification.success({message: "Account updated successfully"})
+      },
+      onError: (error: any) => {
+        notification.error({
+          message: error.response.data.errors[0] ?? error.response.data.message,
+        });
+      },
+    });
+
   return (
     <>
       <div className="d-flex gap-133 align-items-start">
@@ -35,24 +56,31 @@ const AccountSettings = () => {
               id="first_name"
               label="First Name"
               placeHolder="First Name"
+              value={firstName}
+              onchange={(e) => setFirstName(e.target.value)}
               icon={<FiUser className="dark-300" />}
             />
             <TextInput2
               id="first_name"
               label="Last Name"
               placeHolder="Last Name"
+              value={lastName}
+              onchange={(e) => setLastName(e.target.value)}
               icon={<FiUser className="dark-300" />}
             />
           </div>
-          <EmailInput
-            id=""
+          <EmailInput2
+            id="email"
             label="Email"
-            placeholder="Email"
-            onchange={() => {}}
+            value={email}
+            placeholder={email}
+            onchange={(e) => setEmail(e.target.value)}
           />
 
           <OutlineButton
-            action={() => {}}
+            action={() => {
+              updateAccountInfoMutation.mutate({firstName, lastName, email})
+            }}
             type="button"
             fill={false}
             outline="primary"

@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import Button from '../../../atoms/Button';
 import { Switch } from 'antd';
 import { FiX } from 'react-icons/fi';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
 
-const EditPermissions = () => {
+const EditPermissions: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   type CheckedStates = {
     participant: boolean;
     program: boolean;
@@ -29,7 +33,7 @@ const EditPermissions = () => {
     <div className="form bg-white d-flex flex-column rounded-5 mx-auto gap-1">
       <div className="d-flex justify-content-between">
         <h1 className="manrope-600 primary-950 fs-h2">Edit Permissions</h1>
-        <FiX style={{ fontSize: '24px' }} />
+        <FiX style={{ fontSize: '24px' }} onClick={handleClose}/>
       </div>
       <p className='pb-4 dark-700 manrope-500 fs-body'>
       Control what your admin can do on your program

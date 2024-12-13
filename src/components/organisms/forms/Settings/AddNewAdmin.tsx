@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { FiUser, FiX } from 'react-icons/fi';
 import {TextInput2} from '../../../atoms/inputs/TextInput';
 import EmailInput from '../../../atoms/inputs/EmailInput';
 import Button from '../../../atoms/Button';
 import { Switch } from 'antd';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
 
-const AddNewAdmin = () => {
+const AddNewAdmin: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   type CheckedStates = {
     participant: boolean;
     program: boolean;
@@ -32,7 +36,7 @@ const AddNewAdmin = () => {
       <div className="form bg-white d-flex flex-column rounded-5 mx-auto gap-1">
         <div className="d-flex justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Add New Admin</h1>
-          <FiX style={{ fontSize: '24px' }} />
+          <FiX style={{ fontSize: '24px', cursor: 'pointer' }} onClick={handleClose} />
         </div>
         <p className='pb-4 dark-700 manrope-500 fs-body'>
           Invite a New User to Manage your Learning Program

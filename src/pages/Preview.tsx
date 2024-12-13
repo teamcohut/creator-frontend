@@ -62,7 +62,7 @@ const Preview = () => {
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
       
-      <ChangePassword />
+      {/* <ChangePassword /> */}
       {/* <ChangePasswordSuccess /> */}
       {/* <RemoveParticipantSuccess /> */}
       {/* <EditPermissionSaved /> */}

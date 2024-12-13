@@ -82,7 +82,10 @@ const ProgramGeneralSettings = () => {
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
+        
+        <div className='p-4'></div>
       </div>
+      
 
       <div>
 
