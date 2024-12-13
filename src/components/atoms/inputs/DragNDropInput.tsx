@@ -7,12 +7,16 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
   const { label, id, onchange, detail } = props;
 
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
-    onchange?.(selectedFile);
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreviewUrl(URL.createObjectURL(selectedFile)); // Generate preview URL
+      onchange?.(selectedFile);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -32,6 +36,7 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const droppedFile = e.dataTransfer.files[0];
       setFile(droppedFile);
+      setPreviewUrl(URL.createObjectURL(droppedFile)); // Generate preview URL
       onchange?.(droppedFile);
     }
   };
@@ -44,14 +49,22 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
         </label>
       )}
       <div
-        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${
-          dragActive ? "drag-active" : ""
-        }`}
+        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${dragActive ? "drag-active" : ""
+          }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <FiImage className="h1 dark-400" />
+        {previewUrl ? (
+          <img
+            src={previewUrl}
+            alt="Preview"
+            className="img-preview"
+            style={{ maxWidth: "100%", maxHeight: "200px", marginBottom: "1rem" }}
+          />
+        ) : (
+          <FiImage className="h1 dark-400" />
+        )}
         <p className="fs-caption">
           {file ? (
             <>
@@ -80,3 +93,4 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
 };
 
 export default DragNDropInput;
+
