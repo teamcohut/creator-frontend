@@ -24,7 +24,6 @@ const SessionList = () => {
         enabled: !!activeCohort._id,
     });
 
-    console.log("ta da data", data);
 
 
 

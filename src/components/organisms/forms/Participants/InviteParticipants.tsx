@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-import Button from '../../../atoms/Button';
+import { useContext, useState } from 'react';
 import IndividualInvite from './IndividualInvite';
 import GroupInvite from './GroupInvite';
+import { ProgramContext } from '../../../../context/programs/ProgramContext';
 
 const InviteParticipants = () => {
     // State to manage the active tab
     const userData = JSON.parse(localStorage.getItem('user') || '')
-    const tracks = userData?.programs?.[0]?.cohorts?.[0]?.tracks;
-    const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
-
+    const { activeCohort } = useContext(ProgramContext)
+    const tracks = userData?.programs?.[0]?.cohorts?.[0]?.tracks ?? activeCohort.tracks;
+    const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id ?? activeCohort._id;
 
     console.log("I am the", tracks);
+    console.log(activeCohort);
+    
 
 
     const [activeTab, setActiveTab] = useState('individual');

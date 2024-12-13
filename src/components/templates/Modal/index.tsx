@@ -20,6 +20,13 @@ const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
     };
   }, [open, setModalOpen]);
 
+  useEffect(() => {
+    if (children === <></>) {
+      setModalOpen(false, '');
+    }
+  }, [children])
+  
+
   if (!open) return null;
 
   return (

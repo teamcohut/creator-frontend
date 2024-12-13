@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IButton } from '../../../@types/button.interface'
 import '../style.css'
 
-const Button: React.FC<IButton> = ({ children, type, action, fill, outline, border, gap, width, disabled, loading, outlineColor, customStyle }) => {
-  
-
+const Button: React.FC<IButton> = ({ 
+  children, 
+  type, 
+  action, 
+  fill, 
+  outline, 
+  border, 
+  gap, 
+  width, 
+  disabled, 
+  loading, 
+  outlineColor, 
+  customStyle 
+}) => {
   
   return (
     <>
