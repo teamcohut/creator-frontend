@@ -23,6 +23,7 @@ export interface IDateInput {
   placeHolder: string,
   icon?: React.ReactNode,
   onchange(e: ChangeEvent<HTMLInputElement>): void,
+  value?: string
 }
 
 export interface ITimeInput {

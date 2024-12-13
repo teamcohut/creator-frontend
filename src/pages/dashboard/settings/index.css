@@ -31,6 +31,17 @@
   background-color: var(--primary-400) !important;
 }
 
+.custom-tag {
+  border-radius: 20px;
+  background-color: var(--primary-50);
+  color: var(--dark-400);
+  padding: 4px 12px;
+  margin: 2px;
+  display: inline-block;
+
+}
+
+
 .w-60 {
   width: 65%;
 }

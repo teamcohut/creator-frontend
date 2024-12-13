@@ -82,7 +82,7 @@ const PermissionsSettings = () => {
       </div>
       <div className="p-table w-100">
   
-      <Table header={[]} body={[]}  />
+      {/* <Table header={[]} body={[]}  /> */}
     </div>
     {modal.name === "addNewAdminModal" && (
         <AddNewAdminModal
