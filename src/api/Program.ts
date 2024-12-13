@@ -12,13 +12,17 @@ class Program {
   }
 
   uploadProgramImage(data: any) {
-    return this.client.post("/upload", {
-      image:data
-    }, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+    return this.client.post(
+      "/upload",
+      {
+        image: data,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }
-    });
+    );
   }
 
   getPrograms() {

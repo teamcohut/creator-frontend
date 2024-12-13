@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
+import { FiEdit, FiEdit3, FiMail, FiSave, FiTrash2, FiUser } from "react-icons/fi";
 import Button from "../../../components/atoms/Button";
 import Header from "../../../components/organisms/dashboard/Header";
 import EmailInput from "../../../components/atoms/inputs/EmailInput";
@@ -31,13 +31,13 @@ const AccountSettings = () => {
             type="button" 
             fill={false} 
             outline='primary' 
-            gap={true} width={200} 
+            gap={true} width={120} 
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}>
-          <FiEdit3/>
-          <span>Change Password</span>
+          <FiSave/>
+          <span>Save</span>
         </OutlineButton>
         </div>
         <div>
