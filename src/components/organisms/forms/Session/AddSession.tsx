@@ -133,7 +133,9 @@ const AddSession: React.FC<ISessionModal> = ({ onSubmit }) => {
         <div>
           <h2>Set a time</h2>
           <div className="d-flex flex-row">
-            <DateInput id="date" onchange={handleChange} placeHolder="Select date" label="" />
+            <div className="w-35">
+              <DateInput id="date" onchange={handleChange} placeHolder="Select date" label="" />
+            </div>
             <TimeInput id="start" onchange={handleChange} placeHolder="Start Time" label="" />
             <TimeInput id="end" onchange={handleChange} placeHolder="End Time" label="" />
           </div>
