@@ -11,7 +11,7 @@ class Session {
         return this.client.post("/session", payload);
     }
 
-    getSession(cohortId: string, trackId: string) {
+    getSession(cohortId: string, trackId?: string) {
         return this.client.get(
             `/session/cohort/${cohortId}`
         );

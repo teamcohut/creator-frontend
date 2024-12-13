@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
-import { fetchSchedules } from "./api";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../../../api/axios";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import "./calendar.css";
 
-type Event = {
-  id: string;
-  calendarId: string;
-  title: string;
-  category: "time" | "allday";
-  start: string;
-  end: string;
-};
-
 const CalendarComponent: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const { activeCohort } = useContext(ProgramContext);
   const [view, setView] = useState<"month" | "week" | "day">("month");
 
-  useEffect(() => {
-    const loadEvents = async () => {
-      try {
-        const data = await fetchSchedules();
-        setEvents(data);
-      } catch (error) {
-        console.log("Failed to fetch events", error);
-      }
-    };
 
-    loadEvents();
-  }, []);
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ["session"],
+    queryFn: async () => {
+      const response = await api.session.getSession(activeCohort._id);
+      return response.data.data.map((item: any) => {
+        return {
+          id: item.cohort,
+          calendarId: item._id,
+          title: item.title,
+          category: "time",
+          start: "2024-12-06T12:00:00",
+          end: "2024-12-06T13:00:00"
+        }
+      })
+    },
+    enabled: !!activeCohort._id,
+  });
 
+  console.log("ta da data", data);
+  if (isLoading) return <p>Loading calendar...</p>
+  if (isError) return <p>Failed to load calendar data.</p>
   return (
     <div>
       <div className="d-flex flex-row justify-content-between py-5">
@@ -58,10 +60,11 @@ const CalendarComponent: React.FC = () => {
       <Calendar
         height="900px"
         view={view}
-        events={events.map((event) => ({
+        events={data?.map((event: any) => ({
           ...event,
           isReadOnly: true, // Optional: makes events read-only
-        }))}
+        })) || []
+        }
         usageStatistics={false}
         onClickSchedule={(event: any) => {
           alert(`Event clicked: ${event.schedule.title}`);
