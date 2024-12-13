@@ -3,16 +3,15 @@ import "../../style.css";
 import InfoCard from "../../../molecules/dashboard/InfoCard";
 import { FiVideo } from "react-icons/fi";
 import SearchInput from "../../../atoms/inputs/SearchInput";
-import { useGetSession } from "../../../../hooks/program/useGetSession";
 import api from "../../../../api/axios";
 import { useQuery } from "@tanstack/react-query";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { useNavigate } from "react-router-dom";
 
 
 const SessionList = () => {
     const { activeCohort } = useContext(ProgramContext);
-
-    const { getSessions, sessions, error } = useGetSession();
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredSessions, setFilteredSessions] = useState([]);
 
@@ -38,7 +37,7 @@ const SessionList = () => {
                 session.subtitle?.toLowerCase().includes(lowerCaseQuery)
             )
         );
-    }, [data]);
+    }, [data, searchQuery]);
 
     return (
         <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
@@ -73,22 +72,27 @@ const SessionList = () => {
             </div>
 
             {isLoading && <p>Loading sessions...</p>}
-            {error && <p className="error-text">{error}</p>}
+            {isError && <p className="error-text">{isError}</p>}
             {!isLoading && filteredSessions?.length === 0 && (
                 <p>No sessions found for your search query.</p>
             )}
             <div className="session-grid">
                 {filteredSessions?.map((session: any, i: any) => (
-                    <InfoCard
+                    <div
                         key={i}
-                        title={session.title || "No title available"}
-                        subtitle={session.subtitle || "No subtitle available"}
-                        isActive={session.isActive}
-                        dateOfSession={session.dateOfSession || "Date not available"}
-                        isOngoing
-                        infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon fs-h2" />}
-                        infoCardIconBgColor="#FEF1FA"
-                    />
+                        onClick={() => navigate(`/learning/${session._id}`)}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <InfoCard
+                            title={session.title || "No title available"}
+                            subtitle={session.subtitle || "No subtitle available"}
+                            isActive={session.isActive}
+                            dateOfSession={session.dateOfSession || "Date not available"}
+                            isOngoing
+                            infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon fs-h2" />}
+                            infoCardIconBgColor="#FEF1FA"
+                        />
+                    </div>
                 ))}
             </div>
         </div>
