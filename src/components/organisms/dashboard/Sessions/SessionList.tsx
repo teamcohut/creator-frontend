@@ -25,9 +25,6 @@ const SessionList = () => {
     });
 
 
-
-
-
     useEffect(() => {
         const lowerCaseQuery = searchQuery.toLowerCase();
         setFilteredSessions(
