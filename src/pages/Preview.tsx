@@ -62,21 +62,21 @@ const Preview = () => {
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
       
-      {/* <ChangePassword /> */}
-      {/* <ChangePasswordSuccess /> */}
-      {/* <RemoveParticipantSuccess /> */}
-      {/* <EditPermissionSaved /> */}
-      {/* <AddAdminSuccess/> */}
-      {/* <OwnerTransferSuccess/> */}
-      {/* <ConfirmAdminRemoval /> */}
-      {/* <ConfirmOwnerTransfer/> */}
+      <ChangePassword />
+      <ChangePasswordSuccess />
+      <RemoveParticipantSuccess />
+      <EditPermissionSaved />
+      <AddAdminSuccess/>
+      <OwnerTransferSuccess/>
+      <ConfirmAdminRemoval />
+      <ConfirmOwnerTransfer/>
       {/* <ConfirmTrackDelete/> */}
-      {/* <DeleteTrackSuccess /> */}
-      {/* <DangerDeleteCohort/> */}
-      {/* <RemoveAdminSuccess /> */}
-      {/* <DangerDeleteProgram /> */}
-      {/* <DangerDeleteAccount /> */}
-      {/* <AddNewAdmin /> */}
+      <DeleteTrackSuccess />
+      <DangerDeleteCohort/>
+      <RemoveAdminSuccess />
+      <DangerDeleteProgram />
+      <DangerDeleteAccount />
+      <AddNewAdmin />
       <EditPermissions />
       
 

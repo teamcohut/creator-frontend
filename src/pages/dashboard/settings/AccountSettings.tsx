@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import TextInput, { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import { FiEdit, FiEdit3, FiMail, FiTrash2, FiUser } from "react-icons/fi";
-import Button from "../../../components/atoms/Button";
-import Header from "../../../components/organisms/dashboard/Header";
+import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
+import { FiEdit3, FiTrash2, FiUser } from "react-icons/fi";
 import EmailInput from "../../../components/atoms/inputs/EmailInput";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 

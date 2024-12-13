@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
@@ -11,7 +11,7 @@ import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
-  const { activeProgram, activeCohort } = useContext(ProgramContext);
+  const { activeCohort } = useContext(ProgramContext);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
@@ -21,11 +21,17 @@ const ParticipantsPage: React.FC = () => {
     setModal({ name, open });
   };
 
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["participants"],
     queryFn: () => api.participant.getParticipants(activeCohort._id),
     enabled: !!activeCohort._id,
   });
+
+  useEffect(() => {
+    refetch()
+  }, [activeCohort, refetch])
+  
+  
 
   const header = [
     "Full Name",
@@ -104,7 +110,7 @@ const ParticipantsPage: React.FC = () => {
             />
           </div>
 
-          <Table header={header} body={data?.data.data.participants} />
+          <Table header={header} body={data?.data.data.participants} refresh={refetch} />
         </>
       )}
 

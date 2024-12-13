@@ -15,6 +15,7 @@ export interface IBadge {
 export interface ITable {
   header: Array<string>,
   body: Array<any>;
+  refresh?: () => void;
 }
 
 
