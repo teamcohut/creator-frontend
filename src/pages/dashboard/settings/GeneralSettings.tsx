@@ -8,6 +8,14 @@ import PermissionsSettings from "./PermissionsSettings";
 import ProgramSettings from "./ProgramSettings";
 
 const GeneralSettings = () => {
+  const header = [
+    "Full Name",
+    "Email Address",
+    "Role",
+    "Status",
+    "Last Login",
+    "",
+  ];
   const onChange = (key: string) => {
     console.log(`Active Tab Key: ${key}`);
   };
@@ -26,7 +34,7 @@ const GeneralSettings = () => {
     {
       key: '3',
       label: 'Permissions',
-      children: <PermissionsSettings />,
+      children: <PermissionsSettings header={header} body={[]} />,
     },
     {
       key: '4',
