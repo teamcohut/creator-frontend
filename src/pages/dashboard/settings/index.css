@@ -31,22 +31,23 @@
   background-color: var(--primary-400) !important;
 }
 
-.w-60
- {
+.w-60 {
   width: 65%;
- }
+}
+.w-45 {
+  width: 47%;
+}
 
- .w-78
- {
+.w-78 {
   width: 78px;
- }
- .h-48 {
+}
+.h-48 {
   height: 48px;
- }
- .w-12 {
+}
+.w-12 {
   width: 12px;
- }
+}
 
- .gap-133 {
+.gap-133 {
   gap: 133px;
- }
+}

@@ -1,13 +1,17 @@
 import Header from "../../../components/organisms/dashboard/Header";
-import React from "react";
+import React, { useState } from "react";
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import './index.css'
 import AccountSettings from "./AccountSettings";
 import PermissionsSettings from "./PermissionsSettings";
 import ProgramSettings from "./ProgramSettings";
+import OutlineButton from "../../../components/atoms/Button/OutlineButton";
+import { FiEdit3 } from "react-icons/fi";
 
 const GeneralSettings = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const header = [
     "Full Name",
     "Email Address",
@@ -16,6 +20,14 @@ const GeneralSettings = () => {
     "Last Login",
     "",
   ];
+  
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const hoverStyle = isHovered ? {
+    color: 'var(--primary-800) !important',
+    borderColor: 'var(--primary-800) !important',
+  } : {};
   const onChange = (key: string) => {
     console.log(`Active Tab Key: ${key}`);
   };
@@ -49,7 +61,19 @@ const GeneralSettings = () => {
         title="General Settings"
         subtitle="View and manage your account information here."
       >
-        <></>
+        <OutlineButton 
+            action={()=>{}} 
+            type="button" 
+            fill={false} 
+            outline='primary' 
+            gap={true} width={200} 
+            border={true}
+            customStyle={hoverStyle}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}>
+          <FiEdit3/>
+          <span>Change Password</span>
+        </OutlineButton>
       </Header>
 
       <Tabs items={items} 
