@@ -2,12 +2,23 @@ import React, { useState } from 'react'
 import DragNDropInput from '../../../components/atoms/inputs/DragNDropInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
-import { FiTrash2 } from 'react-icons/fi'
+import { FiSave, FiTrash2 } from 'react-icons/fi'
 import GroupButton from '../../../components/atoms/Button/GroupButton'
+import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 
 const ProgramGeneralSettings = () => {
 
   const [activeView, setActiveView] = useState("Hybrid");
+  const [isHovered, setIsHovered] = useState(false);
+
+  
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const hoverStyle = isHovered ? {
+    color: 'var(--primary-800) !important',
+    borderColor: 'var(--primary-800) !important',
+  } : {};
 
   const handleButtonClick = (view: string) => {
     setActiveView(view);
@@ -38,7 +49,7 @@ const ProgramGeneralSettings = () => {
 
         <DragNDropInput id='banner' label='Banner Image' detail='Program’s Cover Image' />
         <p className='fs-small manrope-500 primary-400 pb-4'>
-           Banner image will be displayed across your Program (png, jpg, jpeg)
+          Banner image will be displayed across your Program (png, jpg, jpeg)
           </p>
 
         <TextInput2 id='program-title' label='Program Title'/>
@@ -47,7 +58,21 @@ const ProgramGeneralSettings = () => {
 
         <TextAreaInput id='description' label= 'Description' placeHolder='' onchange={() => {}}/>
 
-        <div className='pb-5'></div>
+        <div className='pb-4'></div>
+
+        <OutlineButton 
+            action={()=>{}} 
+            type="button" 
+            fill={false} 
+            outline='primary' 
+            gap={true} width={120} 
+            border={true}
+            customStyle={hoverStyle}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}>
+          <FiSave/>
+          <span>Save</span>
+        </OutlineButton>
       </div>
 
       <div>

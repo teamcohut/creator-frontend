@@ -1,9 +1,21 @@
-import { FiLink, FiTrash2, FiX } from 'react-icons/fi'
+import { FiLink, FiSave, FiTrash2, FiX } from 'react-icons/fi'
 import DateInput from '../../../components/atoms/inputs/DateInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
+import OutlineButton from '../../../components/atoms/Button/OutlineButton'
+import { useState } from 'react'
 
 const CohortSettings = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const hoverStyle = isHovered ? {
+    color: 'var(--primary-800) !important',
+    borderColor: 'var(--primary-800) !important',
+  } : {};
   const tracks = [
     "Software Engineering",
     "Design",
@@ -22,8 +34,9 @@ const CohortSettings = () => {
     <div className='d-flex gap-133 align-items-start pt-4'>
       <div className='w-60'>
         <div className='d-flex gap-2'>
-          <span className='fs-body manrope-600 primary-950 pt-2'>Cohort Number</span>
-          <p className='d-flex justify-content-center align-items-center rounded-pill border w-78 h-48'> 1 </p>
+          <p className='d-flex justify-content-center align-items-center w-45'> 
+          <TextInput2 id='cohort-number' placeHolder='Cohut123' label='Cohort Name'/>
+          </p>
         </div>
         <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
             <DateInput
@@ -52,11 +65,11 @@ const CohortSettings = () => {
 
         <div className='pb-4'></div>
 
-        <TextInput2 id='link' 
+        {/* <TextInput2 id='link' 
           label='Link to Generate Certificate' 
           placeHolder='Unique link for learners to access their certificates' 
           icon={<FiLink/>} 
-        />
+        /> */}
         
         <span className='fs-small manrope-500 primary-700'>
           You'll need to have created digital certificates on an external platform
@@ -70,7 +83,23 @@ const CohortSettings = () => {
           Once you graduate a learner, this message will automatically get sent to them
         </span>
 
-        <div className='pb-5'></div>
+        <div className='pb-4'></div>
+
+        <OutlineButton 
+            action={()=>{}} 
+            type="button" 
+            fill={false} 
+            outline='primary' 
+            gap={true} width={120} 
+            border={true}
+            customStyle={hoverStyle}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}>
+          <FiSave/>
+          <span>Save</span>
+        </OutlineButton>
+
+        
         <div className='pb-5'></div>
 
       </div>

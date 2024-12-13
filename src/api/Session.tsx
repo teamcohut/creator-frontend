@@ -13,7 +13,19 @@ class Session {
 
     getSession(cohortId: string, trackId: string) {
         return this.client.get(
-            `/session/${cohortId}`
+            `/session/cohort/${cohortId}`
+        );
+    }
+
+    findSession(sessionId: string) {
+        return this.client.get(
+            `/session/${sessionId}`
+        );
+    }
+
+    deleteSession(sessionId: string) {
+        return this.client.delete(
+            `/session/${sessionId}`
         );
     }
 
