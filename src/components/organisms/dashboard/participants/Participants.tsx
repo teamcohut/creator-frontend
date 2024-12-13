@@ -12,7 +12,6 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 const ParticipantsPage: React.FC = () => {
   const { activeProgram, activeCohort } = useContext(ProgramContext);
-  const userData = JSON.parse(localStorage.getItem("user") || "");
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;

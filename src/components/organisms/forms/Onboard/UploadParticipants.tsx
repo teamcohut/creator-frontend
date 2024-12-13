@@ -32,7 +32,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
   });
 
   const handleFileInput = async (file: File) => {
-    if (file.type !== "text/csv") {
+    if (file?.type !== "text/csv") {
       notification.warning({
         message: "File type not supported",
         description: "Please upload a CSV file.",
@@ -62,7 +62,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
       <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
         <ProgressBar
           height={8}
-          length={3}
+          length={2}
           page={2}
           absolute={true}
           gap

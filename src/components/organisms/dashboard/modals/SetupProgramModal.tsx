@@ -2,9 +2,8 @@ import { FC, useContext, useState } from "react";
 import CustomizeProgram from "../../forms/CustomizeProgram/CustomizeProgram";
 import Congratulations from "../../../molecules/dashboard/Congratulations";
 import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
-import api, { axiosPrivate } from "../../../../api/axios";
+import api from "../../../../api/axios";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
-import { useGetProgram } from "../../../../hooks/program/useGetProgram";
 import Modal from "../../../templates/Modal";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
@@ -31,13 +30,13 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
 
 
   // Helper function to convert File to Base64
-  const fileToBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+  // const fileToBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  //   new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = reject;
+  //     reader.readAsDataURL(file);
+  //   });
 
   const openModal = (modal: TModal) => {
     setCurrentStep(1);

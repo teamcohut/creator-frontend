@@ -60,7 +60,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
         {/* Progress bar dynamically changes length */}
         <ProgressBar
           height={8}
-          length={3} // Adjust progress bar length based on state
+          length={2} // Adjust progress bar length based on state
           page={1}
           absolute={true}
           gap

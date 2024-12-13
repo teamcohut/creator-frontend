@@ -1,5 +1,4 @@
 import { FC, useContext, useState } from "react";
-import SendEmail from "../../forms/Onboard/SendEmail";
 import UploadParticipants from "../../forms/Onboard/UploadParticipants";
 import OnboardCohortModal from "../../forms/Onboard/OnboardCohortModal";
 import { ICohort, ISetupModal } from "../../../../@types/dashboard.interface";
@@ -28,10 +27,6 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     },
   });
 
-  const nextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
   const createCohort = async (cohort: ICohort) => {
     console.log("Cohort: Setup Cohort Modal", cohort);
     createCohortMutation.mutate(cohort);
@@ -43,15 +38,12 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         {currentStep === 1 ? (
           <OnboardCohortModal onSubmit={createCohort} />
         ) : currentStep === 2 ? (
-          <UploadParticipants onSubmit={nextStep} hasTrack={hasTrack} />
-        ) : currentStep === 3 ? (
-          <SendEmail
-            onSubmit={() => {
-              setCurrentStep(1);
-              setModalOpen(false, "");
-            }}
-          />
-        ) : (
+          <UploadParticipants onSubmit={() => {
+                  setCurrentStep(1);
+                  setModalOpen(false, "");
+          }} hasTrack={hasTrack} />
+        ) : 
+        (
           <></>
         )}
       </Modal>

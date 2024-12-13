@@ -4,17 +4,23 @@ import "../style.css";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { TActiveModal } from "../../../@types/dashboard.interface";
 import SetupCohortModal from "../../organisms/dashboard/modals/SetupCohortModal";
+import { useProgramContext } from "../../../hooks/program/useProgramContext";
 
 const CohortsDropdown = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
-  const { activeProgram } = useContext(ProgramContext);
+  const { activeProgram, activeCohort } = useContext(ProgramContext);
+  const { dispatch } = useProgramContext()
 
   const openModal = (modal: TActiveModal) => {
     setActiveModal(modal);
     setModalOpen(true);
   };
+
+  const setActiveCohort = (cohort: any) => {
+    dispatch({ type: 'ACTIVE_COHORT', payload: cohort})
+  }
 
   return (
     <>
@@ -33,8 +39,9 @@ const CohortsDropdown = () => {
             height={36}
             alt=""
           />
-          <span className="manrope-500 fs-body primary-950">
+          <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
             {activeProgram.title}
+            <small className="fs-small">{activeCohort.name}</small>
           </span>
           {dropdownOpen ? (
             <FiChevronUp className="manrope-500 fs-body primary-950" />
@@ -49,7 +56,7 @@ const CohortsDropdown = () => {
         >
           <div className="d-flex flex-column gap-3 py-2">
             {activeProgram.cohorts?.map((el: any, i: number) => (
-              <div className="other-program d-flex align-items-center px-3 py-2">
+              <button onClick={()=> setActiveCohort(el)} className="border-none bg-transparent other-program d-flex align-items-center px-3 py-2">
                 {/* <img
                   className="rounded-circle"
                   src={activeProgram.logo}
@@ -60,7 +67,7 @@ const CohortsDropdown = () => {
                 <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
                   {el.name}
                 </span>
-              </div>
+              </button>
             ))}
             <button
               onClick={() => openModal("cohort")}

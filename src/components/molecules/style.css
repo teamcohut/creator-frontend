@@ -68,7 +68,7 @@
 }
 
 .other-program:hover {
-    background-color: var(--primary-50);
+    background-color: var(--primary-50) !important;
 }
 
 /* OVERVIEW COMPONENTS */
