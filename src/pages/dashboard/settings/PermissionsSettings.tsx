@@ -99,91 +99,15 @@ const PermissionsSettings: React.FC<ITable> = ({ header, body }) => {
           onchange={() => {}}
           width={18}
         />
-        <div>
-          <button
-            className="btn rounded-pill bg-secondary-450 manrope-500 primary-950"
-            onClick={() => {}}
-          >
-            All
-          </button>
-          <button
-            className="btn rounded-pill border-secondary manrope-500 dark-400"
-            onClick={() => {}}
-          >
-            Active
-          </button>
-          <button
-            className="btn rounded-pill border-secondary manrope-500 dark-400"
-            onClick={() => {}}
-          >
-            Inactive
-          </button>
-        </div>
 
         <GroupButton buttons={buttonOptions} />
 
       </div>
       <div className="p-table w-100">
-      <div className="d-flex align-items-center justify-content-between py-3">
-        <div className="d-flex align-items-center gap-2">
-          <h4 className="manrope-600 fs-h4 primary-950 align-content-center">
-            Participants
-            <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-              {body.length}
-            </span>
-          </h4>
-        </div>
-
-        <div>
-          <SearchInput
-            id="session"
-            label=""
-            placeHolder="Search"
-            onchange={(e) => {}}
-          />
-        </div>
-
-        <div className="d-flex align-items-center gap-2">
-          <input
-            type="checkbox"
-            checked={selectAll}
-            onChange={toggleSelectAll}
-          />
-          <label> Select All</label>
-          <div className="dropdown">
-            <FiMoreVertical
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{ cursor: "pointer" }}
-            />
-            <ul className="dropdown-menu">
-              <li
-                onClick={() => handleDropdownAction("Send Mail")}
-                className="dropdown-item"
-              >
-                Send Mail
-              </li>
-              <li
-                onClick={() => handleDropdownAction("Remove")}
-                className="dropdown-item"
-              >
-                Remove
-              </li>
-              <li
-                onClick={() => handleDropdownAction("Graduate")}
-                className="dropdown-item"
-              >
-                Graduate
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+  
       <table className="table-div w-100">
         <thead>
           <tr className="manrope-600 fs-body primary-950">
-            <th>Select</th>
             {header.map((el, i) => (
               <th key={i}>{el}</th>
             ))}
