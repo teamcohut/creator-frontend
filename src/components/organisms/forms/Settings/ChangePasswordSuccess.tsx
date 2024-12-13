@@ -1,4 +1,3 @@
-import React from 'react'
 import SettingsStatusCard from './SettingsStatusCard'
 import { FiCheckCircle } from 'react-icons/fi'
 

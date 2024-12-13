@@ -63,21 +63,21 @@ const Preview = () => {
       {/* <ParticipantsPage /> */}
       
       <ChangePassword />
-      <ChangePasswordSuccess />
-      <RemoveParticipantSuccess />
-      <EditPermissionSaved />
-      <AddAdminSuccess/>
-      <OwnerTransferSuccess/>
-      <ConfirmAdminRemoval />
-      <ConfirmOwnerTransfer/>
+      {/* <ChangePasswordSuccess /> */}
+      {/* <RemoveParticipantSuccess /> */}
+      {/* <EditPermissionSaved /> */}
+      {/* <AddAdminSuccess/> */}
+      {/* <OwnerTransferSuccess/> */}
+      {/* <ConfirmAdminRemoval /> */}
+      {/* <ConfirmOwnerTransfer/> */}
       {/* <ConfirmTrackDelete/> */}
-      <DeleteTrackSuccess />
-      <DangerDeleteCohort/>
-      <RemoveAdminSuccess />
-      <DangerDeleteProgram />
-      <DangerDeleteAccount />
-      <AddNewAdmin />
-      <EditPermissions />
+      {/* <DeleteTrackSuccess /> */}
+      {/* <DangerDeleteCohort/> */}
+      {/* <RemoveAdminSuccess /> */}
+      {/* <DangerDeleteProgram /> */}
+      {/* <DangerDeleteAccount /> */}
+      {/* <AddNewAdmin /> */}
+      {/* <EditPermissions /> */}
       
 
     </>

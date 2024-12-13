@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChangePassword = () => {
+const SettingsTable = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword
+export default SettingsTable

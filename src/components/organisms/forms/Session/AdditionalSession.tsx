@@ -7,6 +7,7 @@ import "../../style.css";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { notification } from "antd";
 
 
 interface IAdditionalSessionProps {
@@ -59,6 +60,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   const sessionMutation = useMutation({
     mutationFn: (payload: any) => axiosAPI.session.createSession(payload),
     onSuccess: () => {
+      notification.success({ message: "Session created successfully!" });
       alert("Session created successfully!");
       onSuccess();
     },

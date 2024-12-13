@@ -8,8 +8,28 @@ class Session {
     }
 
     createSession(payload: ISessionDTO) {
-        return this.client.post("/sessions/create-session", payload);
+        return this.client.post("/session", payload);
     }
+
+    getSession(cohortId: string, trackId: string) {
+        return this.client.get(
+            `/session/cohort/${cohortId}`
+        );
+    }
+
+    findSession(sessionId: string) {
+        return this.client.get(
+            `/session/${sessionId}`
+        );
+    }
+
+    deleteSession(sessionId: string) {
+        return this.client.delete(
+            `/session/${sessionId}`
+        );
+    }
+
+
 }
 
 export default Session;
