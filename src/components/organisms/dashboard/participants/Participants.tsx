@@ -17,20 +17,15 @@ const ParticipantsPage: React.FC = () => {
     open: boolean;
   });
 
-  console.log("active program", activeProgram)
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
 
-  // const cohortId = activeProgram?.cohorts?.[0]?.id;
-  // const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id;
-
-  const { isPending, isError, data } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ["participants"],
     queryFn: () => api.participant.getParticipants(activeCohort._id),
+    enabled: !!activeCohort._id,
   });
-
-  console.log("I am data", data);
 
   const header = [
     "Full Name",
@@ -61,7 +56,9 @@ const ParticipantsPage: React.FC = () => {
         </Button>
       </Header>
 
-      {isPending ? (
+      {!activeCohort._id ? (
+        <p>There is no active cohort yet.</p>
+      ) : isLoading ? (
         <p>Loading participants...</p>
       ) : isError ? (
         <p className="text-danger">Error T austin sparks</p>
@@ -80,7 +77,7 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-            // subtitle={participants.filter((p) => p.status === "active").length}
+              // subtitle={participants.filter((p) => p.status === "active").length}
             >
               <PercentageBar
                 progress={

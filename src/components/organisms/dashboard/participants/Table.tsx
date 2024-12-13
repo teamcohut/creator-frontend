@@ -36,7 +36,6 @@
 //         </div>
 //       </div>
 
-
 //       <table className="table-div w-100">
 //         <thead>
 //           <tr className="manrope-600 fs-body primary-950">
@@ -71,14 +70,6 @@
 
 // export default Table;
 
-
-
-
-
-
-
-
-
 import React, { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import StatusBadge from "../../../atoms/dashboard/StatusBadge";
@@ -87,7 +78,9 @@ import "../../style.css";
 import SearchInput from "../../../atoms/inputs/SearchInput";
 
 const Table: React.FC<ITable> = ({ header, body }) => {
-  const [selectedParticipants, setSelectedParticipants] = useState<string[]>([]);
+  const [selectedParticipants, setSelectedParticipants] = useState<string[]>(
+    []
+  );
   const [selectAll, setSelectAll] = useState(false);
 
   const toggleSelectAll = () => {
@@ -134,7 +127,7 @@ const Table: React.FC<ITable> = ({ header, body }) => {
             id="session"
             label=""
             placeHolder="Search"
-            onchange={(e) => { }}
+            onchange={(e) => {}}
           />
         </div>
 
@@ -195,13 +188,13 @@ const Table: React.FC<ITable> = ({ header, body }) => {
                   onChange={() => toggleSelectIndividual(participant.email)}
                 />
               </td>
-              <td>
-                {`${participant.firstName} ${participant.lastName}`}
-              </td>
+              <td>{`${participant.firstName} ${participant.lastName}`}</td>
               <td>{participant.email}</td>
               <td>{trackTitle}</td>
               <td>
-                <StatusBadge status={participant.status}></StatusBadge>
+                <StatusBadge
+                  status={participant.isActive ? "active" : "inactive"}
+                ></StatusBadge>
               </td>
               <td>{participant.createdAt}</td>
               <td>
@@ -248,4 +241,3 @@ const Table: React.FC<ITable> = ({ header, body }) => {
 };
 
 export default Table;
-

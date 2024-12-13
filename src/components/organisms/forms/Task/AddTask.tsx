@@ -13,6 +13,7 @@ import { notification } from "antd";
 
 
 const AddTask: FC<IAddTask> = ({ closeModal }) => {
+    const [selectedTrackId, setSelectedTrackId] = useState('');
     const { activeCohort } = useContext(ProgramContext)
     const [api, contextHolder] = notification.useNotification()
     const [track, setTrack] = useState<string>("Online");
@@ -26,80 +27,83 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         cohortId: activeCohort.id
     })
 
-    console.log(activeCohort);
-    
+    const tracks = activeCohort?.tracks;
 
-  const handleDropdownChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const value = event.target.value
-    setTrack(value);
-    if (value === 'All') {
-        setForm({ 
-            ...form, 
-            assignedToAll: true 
-        });
-    } else {
-        setForm({
-            ...form, 
-            assignedToAll: false, 
-            assignedToTracks: [...form.assignedToTracks, value]
-        })
-    }
-  };
-
-  const handleInputChange = (name: string, value: string) => {
-    setForm({...form, [name]: value})
-  }
-
-  const taskMutation = useMutation({
-    mutationFn: (payload: any) => {
-        return axiosAPI.task.createTask(payload)
-    },
-    onSuccess(data) {
-        console.log(data);
-        api.success({
-            message: 'Successful'
-        })
-        closeModal()
-    },
-  })
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (form.title === ""
-        || form.description === ""
-        || form.dueTime === ""
-        || form.dueDate === ""
-    ) {
-        api.warning({
-            message: "Missing required fields.",
-            placement: 'top'
-        })
-    }
-    const payload = form
-    console.log(payload);
-    
-    try {
-        await taskMutation.mutate(payload)
-        const error = taskMutation.error as any
-        let message = error.response.data.errors[0];
-
-        if (error.code === "ERR_NETWORK") {
-            message = error.message;
-            api.error({
-              message,
+    const handleDropdownChange = (
+        event: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        const value = event.target.value
+        setTrack(value);
+        if (value === 'All') {
+            setForm({
+                ...form,
+                assignedToAll: true
             });
         } else {
-            api.error({
-                message,
-            });
+            setForm({
+                ...form,
+                assignedToAll: false,
+                assignedToTracks: [...form.assignedToTracks, value]
+            })
         }
-    } catch (error) {
-        console.error(error);
-        
+    };
+
+    const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedTrackId(e.target.value);
+    };
+
+    const handleInputChange = (name: string, value: string) => {
+        setForm({ ...form, [name]: value })
     }
-  }
+
+    const taskMutation = useMutation({
+        mutationFn: (payload: any) => {
+            return axiosAPI.task.createTask(payload)
+        },
+        onSuccess(data) {
+            console.log(data);
+            api.success({
+                message: 'Successful'
+            })
+            closeModal()
+        },
+    })
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (form.title === ""
+            || form.description === ""
+            || form.dueTime === ""
+            || form.dueDate === ""
+        ) {
+            api.warning({
+                message: "Missing required fields.",
+                placement: 'top'
+            })
+        }
+        const payload = form
+        console.log(payload);
+
+        try {
+            await taskMutation.mutate(payload)
+            const error = taskMutation.error as any
+            let message = error.response.data.errors[0];
+
+            if (error.code === "ERR_NETWORK") {
+                message = error.message;
+                api.error({
+                    message,
+                });
+            } else {
+                api.error({
+                    message,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+
+        }
+    }
 
     return (
         <>
@@ -114,10 +118,10 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
 
                 <div className="d-flex flex-column gap-4">
                     <TextInput
-                     id='title'
-                     label='Task Title' 
-                     placeHolder='Enter title' 
-                     onchange={(e) => handleInputChange(e.target.name, e.target.value)} 
+                        id='title'
+                        label='Task Title'
+                        placeHolder='Enter title'
+                        onchange={(e) => handleInputChange(e.target.name, e.target.value)}
                     />
 
                     <TextAreaInput
@@ -128,43 +132,41 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
                     />
 
                     <div className="d-flex align-items-end gap-4 w-75">
-                        <div className="w-50">
+                        <div className="">
                             <TimeInput
-                             id="dueTime" 
-                             onchange={(e) => handleInputChange(e.target.name, e.target.value)} 
-                             placeHolder="" 
-                             label="Task Due" 
-                             />
+                                id="dueTime"
+                                onchange={(e) => handleInputChange(e.target.name, e.target.value)}
+                                placeHolder=""
+                                label="Task Due"
+                            />
                         </div>
                         <DateInput
-                         id="dueDate" 
-                         onchange={(e) => handleInputChange(e.target.name, e.target.value)} 
-                         placeHolder="" 
-                         />
+                            id="dueDate"
+                            onchange={(e) => handleInputChange(e.target.name, e.target.value)}
+                            placeHolder=""
+                        />
                     </div>
+
                     <div>
-                        <label htmlFor="track" className="manrope-600 fs-body pb-2">Assign Task (Optional)</label>
-                        {/* <div className=""> */}
-                            <select
-                                id="track"
-                                value={track}
-                                onChange={handleDropdownChange}
-                                className="location-input-wrapper py-2 px-3 w-50"
-                              >
-                                <option value="All">All</option>
-                                {
-                                    activeCohort.tracks.map((el: any, i: number) => (
-                                        <option key={i} value={el.id}>{el.name}</option>
-                                    ))
-                                }
-                              </select>
-                              {/* <input
-                                type="text"
-                                placeholder={track === "Online" ? "Link" : "Address"}
-                                className="location-text"
-                            /> */}
-                        {/* </div> */}
+                        <label htmlFor="trackId">Tracks</label>
+                        <select
+                            id="trackId"
+                            name="trackId"
+                            className="form-select"
+                            value={selectedTrackId}
+                            onChange={handleDropdownChange}
+                        >
+                            <option value="" disabled>
+                                Select a Track
+                            </option>
+                            {tracks?.map((track: any) => (
+                                <option key={track.id} value={track.id}>
+                                    {track.title}
+                                </option>
+                            ))}
+                        </select>
                     </div>
+
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-3">
