@@ -1,53 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../../../../api/axios';
-import { useNavigate } from "react-router-dom";
-import { useQuery } from '@tanstack/react-query';
-import { FiCalendar, FiCamera, FiClock, FiEdit } from 'react-icons/fi';
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { FiCalendar, FiClock, FiEdit, FiVideo } from 'react-icons/fi';
 import Button from '../../../atoms/Button';
-
+import { notification } from 'antd';
+import api from '../../../../api/axios';
 
 const SessionDetails = () => {
     const { sessionId } = useParams();
     const navigate = useNavigate();
 
     const { isLoading, isError, data } = useQuery({
-        queryKey: ["session"],
+        queryKey: ["session", sessionId],
         queryFn: () => api.session.findSession(sessionId!),
         enabled: !!sessionId,
     });
 
+    const deleteSessionMutation = useMutation({
+        mutationFn: () => api.session.deleteSession(sessionId!),
+        onSuccess: () => {
+            notification.success({ message: "Session deleted successfully!" });
+            navigate(-1);
+        },
+        onError: () => {
+            notification.error({
+                message: "Failed to delete session. Please try again.",
+            });
+        },
+    });
+
     if (isLoading) return <p>Loading session details...</p>;
-    if (isError) return <p>Error: {isError}</p>;
+    if (isError) return <p>Error loading session details.</p>;
+
+    const session = data?.data.data;
+    const sessionLink = session?.sessionLink;
 
     return (
         <div>
-            <p>Back to Learning</p>
+            <p
+                onClick={() => navigate(-1)}
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+            >
+                Back to Learning
+            </p>
             <div className="d-flex flex-row gap-2">
                 <div className="w-75">
                     <div>
-                        <h2>{data?.data.data.title} <FiEdit /> </h2>
-                        <p>{data?.data.data.description}</p>
+                        <h2>{session?.title} <FiEdit /></h2>
+                        <p>{session?.description}</p>
                     </div>
-                    <div className='border px-3 py-3 rounded-4 w-50'>
+                    <div className="border px-3 py-3 rounded-4 w-50">
                         <h3>Session Details</h3>
-                        <p><FiClock /> {data?.data.data.start} - {data?.data.data.end}</p>
-                        <p><FiCalendar /> {data?.data.data.date}</p>
-                        <a href={data?.data.data.sessionLink}><FiCamera /> {data?.data.data.sessionLink}</a>
+                        <p><FiClock /> {session?.start} - {session?.end}</p>
+                        <p><FiCalendar /> {session?.date}</p>
+                        <a href={sessionLink} target="_blank" rel="noopener noreferrer">
+                            <FiVideo /> {sessionLink}
+                        </a>
                         <Button
-                            action={() => { }}
+                            action={() => window.open(sessionLink, '_blank')}
                             fill={true}
                             type="button"
                             border
                             outline="primary"
-                        ><FiCamera /> Join Session</Button>
+                        >
+                            <FiVideo /> Join Session
+                        </Button>
                     </div>
-
                 </div>
 
                 <div className="w-25 px-3">
                     <h5>Danger Zone</h5>
-                    <p className='error-300'>Delete Session</p>
+                    <p className="error-300"
+                        onClick={() => deleteSessionMutation.mutate()}
+                        style={{ cursor: 'pointer', color: 'red', textDecoration: 'underline' }}> Delete Session
+                    </p>
                 </div>
             </div>
         </div>
@@ -55,3 +81,4 @@ const SessionDetails = () => {
 };
 
 export default SessionDetails;
+
