@@ -1,110 +1,138 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
-import axiosAPI from "../../../../api/axios";
+import { useMutation } from "@tanstack/react-query";
+import api from "../../../../api/axios";
+import { notification } from "antd";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 type ProgramData = {
-    title: string;
-    description: string;
-    cover: any;
-    logo: any;
-    format: string;
-    communities: string[];
-    certificates: string[];
+  title: string;
+  description: string;
+  cover: any;
+  logo: any;
+  format: string;
+  communities: string[];
+  certificates: string[];
 };
 
 interface CustomizeProgramProps {
-    programData: ProgramData;
-    onSubmit: () => void;
-    updateProgramData: (data: Partial<ProgramData>) => void;
+  programData: ProgramData;
+  setCurrentStep: (step: number) => void;
 }
 
 const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
-    programData,
-    onSubmit,
-    updateProgramData,
+  programData,
+  setCurrentStep,
 }) => {
-    const [thumbnail, setThumbnail] = useState<string>(programData.cover);
-    const [banner, setBanner] = useState<string>(programData.logo);
-    const [uploading, setUploading] = useState(false);
+  const [thumbnail, setThumbnail] = useState<string>("");
+  const [banner, setBanner] = useState<string>("");
+  const { dispatch } = useContext(ProgramContext);
 
-    const uploadImage = async (file: File): Promise<string> => {
-        // const formData = new FormData();
-        // formData.append("file", file);
-        setUploading(true);
-        console.log("I am response file", file);
+  const uploadImageMutation = useMutation({
+    mutationFn: (data: any) => api.program.uploadProgramImage(data.file),
+    onSuccess: (data: any, variables) => {
+      if (variables.type === "thumbnail") {
+        setThumbnail(data.data.data.url);
+      }
+      if (variables.type === "banner") {
+        setBanner(data.data.data.url);
+      }
+    },
+    onError: (error: any) => {
+      notification.error({
+        message:
+          error.response?.data?.message ||
+          "An error occured while uploading file",
+      });
+    },
+  });
 
-        try {
-            const response = await axiosAPI.program.uploadProgramImage(file);
+  const handleThumbnailChange = async (file: any) => {
+    uploadImageMutation.mutate({ type: "thumbnail", file });
+  };
 
-            setUploading(false);
-            return response?.data.data.url;
-        } catch (error) {
-            console.error("Image upload failed:", error);
-            setUploading(false);
-            throw error;
-        }
+  const handleBannerChange = async (file: any) => {
+    uploadImageMutation.mutate({ type: "banner", file });
+  };
+
+  console.log({
+    thumbnail,
+    banner,
+  });
+
+  const createProgramMutation = useMutation({
+    mutationFn: (payload: any) => api.program.createProgram(payload),
+    onSuccess: (data: any) => {
+      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
+      setCurrentStep(3);
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: "Failed to create program. Please try again.",
+      });
+    },
+  });
+
+  const handleProgramSubmit = async () => {
+    if (!thumbnail || !banner) {
+      notification.warning({
+        message: "Cover and logo must be uploaded before submission.",
+      });
+      return;
+    }
+
+    const payload = {
+      ...programData,
+      cover: banner,
+      logo: thumbnail,
     };
 
-    const handleThumbnailChange = async (file: any) => {
-        try {
-            const imageUrl = await uploadImage(file);
-            setThumbnail(imageUrl);
-        } catch {
+    createProgramMutation.mutate(payload);
+  };
 
-            alert("Failed to upload thumbnail.");
-        }
-    };
-
-    const handleBannerChange = async (file: any) => {
-        try {
-            const imageUrl = await uploadImage(file);
-            setBanner(imageUrl);
-        } catch {
-            alert("Failed to upload banner.");
-        }
-    };
-
-    const handleCompleteSetup = () => {
-        console.log("tubu", thumbnail);
-        console.log("logo", banner);
-
-
-        updateProgramData({ cover: thumbnail, logo: banner });
-        onSubmit();
-    };
-
-    return (
-        <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
-            <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
-            <div className="d-flex flex-column gap-2">
-                <h1 className="manrope-600 primary-950 fs-h2">Customize Program</h1>
-                <span className="manrope-500 dark-700 fs-body">
-                    Customize your program's timing to fit your learner's needs.
-                </span>
-            </div>
-            <div className="d-flex flex-column gap-2">
-                <DragNDropInput
-                    label="Upload Logo"
-                    id="thumbnail-upload"
-                    detail="Program's Logo"
-                    onchange={(file) => handleThumbnailChange(file)}
-                />
-                <DragNDropInput
-                    label="Banner Image"
-                    id="banner-upload"
-                    detail="Program's Cover Image"
-                    onchange={(file) => handleBannerChange(file)}
-                />
-            </div>
-            {uploading && <p>Uploading image...</p>}
-            <div className="d-flex flex-column align-items-center gap-3">
-                <Button children="Complete Setup" action={handleCompleteSetup} type="button" fill={true} />
-            </div>
-        </form>
-    );
+  return (
+    <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
+      <ProgressBar
+        height={8}
+        length={2}
+        page={2}
+        absolute={true}
+        gap
+        rounded={false}
+      />
+      <div className="d-flex flex-column gap-2">
+        <h1 className="manrope-600 primary-950 fs-h2">Customize Program</h1>
+        <span className="manrope-500 dark-700 fs-body">
+          Customize your program's timing to fit your learner's needs.
+        </span>
+      </div>
+      <div className="d-flex flex-column gap-2">
+        <DragNDropInput
+          label="Upload Logo"
+          id="thumbnail-upload"
+          detail="Program's Logo"
+          onchange={(file) => handleThumbnailChange(file)}
+        />
+        <DragNDropInput
+          label="Banner Image"
+          id="banner-upload"
+          detail="Program's Cover Image"
+          onchange={(file) => handleBannerChange(file)}
+        />
+      </div>
+      {uploadImageMutation.isPending && <p>Uploading image...</p>}
+      <div className="d-flex flex-column align-items-center gap-3">
+        <Button
+          children="Complete Setup"
+          action={handleProgramSubmit}
+          type="button"
+          fill={true}
+        />
+      </div>
+    </form>
+  );
 };
 
 export default CustomizeProgram;
-

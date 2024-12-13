@@ -10,6 +10,7 @@ const SuccessCard: FC<ISuccessCard> = ({ title, description, icon, children }) =
             <div className="w-100 d-flex justify-content-start">
                 <Link className='primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none' to={'/'}>Cohut</Link>
             </div>
+            
             <div className="d-flex flex-column align-items-center gap-2 w-75 head">
                 {icon}
                 <h1 className='manrope-600 primary-950 fs-h2'>{title}</h1>
