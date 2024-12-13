@@ -19,41 +19,60 @@ const AccountSettings = () => {
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  const hoverStyle = isHovered ? {
-    color: 'var(--primary-800) !important',
-    borderColor: 'var(--primary-800) !important',
-  } : {};
+  const hoverStyle = isHovered
+    ? {
+        color: "var(--primary-800) !important",
+        borderColor: "var(--primary-800) !important",
+      }
+    : {};
+
   return (
     <>
       <div className="d-flex gap-133 align-items-start">
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
-            <TextInput2 id="firstname" label="First Name" icon={<FiUser className="dark-300"/>} />
-            <TextInput2 id="lastname" label="Last Name" icon={<FiUser className="dark-300"/>} />
+            <TextInput2
+              id="first_name"
+              label="First Name"
+              placeHolder="First Name"
+              icon={<FiUser className="dark-300" />}
+            />
+            <TextInput2
+              id="first_name"
+              label="Last Name"
+              placeHolder="Last Name"
+              icon={<FiUser className="dark-300" />}
+            />
           </div>
-          <EmailInput id="" label="Email" placeholder="Email" onchange={() => {}} />
+          <EmailInput
+            id=""
+            label="Email"
+            placeholder="Email"
+            onchange={() => {}}
+          />
 
-          <OutlineButton 
-            action={()=>{}} 
-            type="button" 
-            fill={false} 
-            outline='primary' 
-            gap={true} width={120} 
+          <OutlineButton
+            action={() => {}}
+            type="button"
+            fill={false}
+            outline="primary"
+            gap={true}
+            width={120}
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}>
-          <FiSave/>
-          <span>Save</span>
-        </OutlineButton>
+            handleMouseLeave={handleMouseLeave}
+          >
+            <FiSave />
+            <span>Save</span>
+          </OutlineButton>
         </div>
         <div>
-        <div>
-          <h3 className="manrope-600 fs-h4 primary-950 pb-1">Role</h3>
-          <p className="manrope-500 fs-body dark-700 pb-4">Owner</p>
-        </div>
+          <div>
+            <h3 className="manrope-600 fs-h4 primary-950 pb-1">Role</h3>
+            <p className="manrope-500 fs-body dark-700 pb-4">Owner</p>
+          </div>
 
-      
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
           <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
             onClick={() => setModal((prev) => ({ open: true, name: "deactivateAccountModal" }))}>

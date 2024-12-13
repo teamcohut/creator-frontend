@@ -23,6 +23,12 @@ class Session {
         );
     }
 
+    deleteSession(sessionId: string) {
+        return this.client.delete(
+            `/session/${sessionId}`
+        );
+    }
+
 
 }
 
