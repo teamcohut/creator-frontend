@@ -14,6 +14,10 @@ class Auth {
   signup(payload: any) {
     return this.client.post("/auth/register", payload);
   }
+
+  changePassword(payload: any) {
+    return this.secondaryClient.put("/auth/change-password", payload);
+  }
 }
 
 export default Auth;

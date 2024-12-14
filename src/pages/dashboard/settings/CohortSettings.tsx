@@ -18,13 +18,13 @@ const CohortSettings = () => {
   const [cohortName, setCohortName] = useState(activeCohort?.name);
   const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
-  const [tracks, setTracks] = useState<ITrack[]>([]);
+  const [tracks, setTracks] = useState<ITrack[]>(activeCohort?.tracks);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
   const [tags, setTags] = useState<string[]>([]);
-  const user = JSON.parse(localStorage.getItem("user") || "");
+
 
   console.log(activeCohort?.startDate?.split("T")[0])
   console.log(activeCohort)
