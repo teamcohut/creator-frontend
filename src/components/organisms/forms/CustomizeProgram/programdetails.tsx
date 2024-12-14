@@ -3,6 +3,7 @@ import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
+import { notification } from "antd";
 
 interface ProgramDetailProps {
   onContinue: (data: {
@@ -23,7 +24,7 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue }) => {
 
   const handleContinue = () => {
     if (!title || !description || !format) {
-      alert("Please fill in all fields, including selecting a format.");
+      notification.error({ message: "Please fill in all fields, including selecting a format." });
       return;
     }
     onContinue({ title, description, format });

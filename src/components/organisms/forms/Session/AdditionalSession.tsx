@@ -61,12 +61,11 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     mutationFn: (payload: any) => axiosAPI.session.createSession(payload),
     onSuccess: () => {
       notification.success({ message: "Session created successfully!" });
-      alert("Session created successfully!");
       onSuccess();
     },
     onError: (error: any) => {
       console.error(error);
-      alert("Failed to create session. Please try again.");
+      notification.error({ message: "Failed to create session. Please try again." });
     },
   });
 
