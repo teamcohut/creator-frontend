@@ -32,6 +32,11 @@ const CohortSettings = () => {
     setTags(value);
     console.log(tags)
   };
+
+  const handleChange = (e: any) => {
+    setCohortName(e.target.value)
+    console.log(cohortName)
+  }
   
 
   const tagRender = (props: CustomTagProps) => {
@@ -121,7 +126,7 @@ const CohortSettings = () => {
         <div className='d-flex gap-2'>
           <p className='d-flex justify-content-center align-items-center w-45'> 
           <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
-          onchange={(e) => setCohortName(e.target.value) } 
+          onchange={handleChange } 
           value={cohortName}/>
           </p>
         </div>
@@ -152,8 +157,8 @@ const CohortSettings = () => {
       value={tags}
       onChange={handleTagsChange}
       >
-      {tracks.map((option) => (
-        <Option key={option.id} value={option.title}>
+      {tracks.map((option, i) => (
+        <Option value={option.title}>
           {option.title}
         </Option>
       ))}
@@ -184,7 +189,7 @@ const CohortSettings = () => {
 
         <OutlineButton 
             action={()=>{updateCohortInfoMutation.mutate({
-              cohortName,
+              name: cohortName,
               startDate,
               endDate,
               tracks:tags
