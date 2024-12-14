@@ -67,7 +67,7 @@ const ParticipantsPage: React.FC = () => {
       ) : isLoading ? (
         <p>Loading participants...</p>
       ) : isError ? (
-        <p className="text-danger">Error T austin sparks</p>
+        <p className="text-danger">Err... <br /> Something went wrong</p>
       ) : (
         <>
           <div className="overview-container d-flex">

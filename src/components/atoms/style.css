@@ -302,6 +302,11 @@
   /* NAVIGATION */
 /* ================= */
 
+  .nav-link.active {
+    background-color: var(--hover-40) !important;
+    border: none !important;
+  }
+
   .nav-link {
     color: var(--primary-950) !important;
     padding: 16px !important;

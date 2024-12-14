@@ -1,8 +1,8 @@
 import { FC, useContext, useState } from "react";
 import NavLink from "../../../atoms/dashboard/NavLink";
-import { NavList, SettingsList } from "./NavList";
+import { NavList } from "./NavList";
 import Icon from "../../../atoms/Icon";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
 import "../../style.css";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
@@ -15,6 +15,9 @@ const SideNav: FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
   const { activeProgram } = useContext(ProgramContext);
+  const location = useLocation()
+  console.log(location);
+  
 
   const openModal = (modal: TActiveModal) => {
     setActiveModal(modal);
@@ -75,7 +78,7 @@ const SideNav: FC = () => {
           </div>
           <div className="w-100 d-flex flex-column gap-2 nav-tools">
             <hr />
-            <NavLink type={"dropdown"} dropdownList={SettingsList} path={""}>
+            <NavLink type={"link"} dropdownList={[]} path={"settings"}>
               <FiSettings className="nav-icon" />
               <span>Settings</span>
             </NavLink>

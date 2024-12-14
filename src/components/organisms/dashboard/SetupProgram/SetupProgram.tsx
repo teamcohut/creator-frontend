@@ -4,6 +4,7 @@ import Button from "../../../atoms/Button";
 import "./SetupProgram.css";
 import { ISetupProgram, TModal } from "../../../../@types/dashboard.interface";
 import SetupProgramModal from "../modals/SetupProgramModal";
+import SetupCohortModal from "../modals/SetupCohortModal";
 
 const SetupProgram: FC<ISetupProgram> = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null);
@@ -38,6 +39,9 @@ const SetupProgram: FC<ISetupProgram> = () => {
 
       {activeModal === "program" && (
         <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      )}
+      {activeModal === "cohort" && (
+        <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
     </>
   );
