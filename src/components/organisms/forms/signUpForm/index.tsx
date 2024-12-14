@@ -8,9 +8,12 @@ import { notification } from "antd";
 import PasswordInput from "../../../atoms/inputs/PasswordInput";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
+import { TextInput2 } from "../../../atoms/inputs/TextInput";
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
   const [form, setForm] = useState<ISignupData>({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -19,6 +22,9 @@ const SignUpForm: React.FC = () => {
   const signupMutation = useMutation({
     mutationFn: (payload: any) => {
       return axiosAPI.auth.signup(payload);
+    },
+    onSuccess: () => {
+      setSignupSuccess(true);
     },
     onError: (error: any) => {
       notification.error({
@@ -32,8 +38,8 @@ const SignUpForm: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { email, password } = form;
-    await signupMutation.mutate({ email, password });
+    const { email, password, firstName, lastName } = form;
+    await signupMutation.mutate({ firstName, lastName, email, password });
   };
 
   return (
@@ -53,6 +59,25 @@ const SignUpForm: React.FC = () => {
       </div>
 
       <div className="d-flex flex-column gap-4">
+        <div className="d-flex gap-4">
+          <TextInput2
+            label="FirstName"
+            id="firstname"
+            onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleInputChange("firstName", e.target.value)
+            }
+            placeHolder="First name"
+          />
+          <TextInput2
+            label="LastName"
+            id="lastname"
+            onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleInputChange("lastName", e.target.value)
+            }
+            placeHolder="Last name"
+          />
+        </div>
+
         <EmailInput
           label="Email"
           id="email"
@@ -73,7 +98,7 @@ const SignUpForm: React.FC = () => {
           placeHolder="password"
         />
 
-        <PasswordInput
+        {/* <PasswordInput
           label="Confirm Password"
           id="cpassword"
           valid={form.password === form.confirmPassword}
@@ -82,7 +107,7 @@ const SignUpForm: React.FC = () => {
             handleInputChange("confirmPassword", e.target.value)
           }
           placeHolder="confirm password"
-        />
+        /> */}
       </div>
 
       {/* {error && <div>{error}</div>} */}
@@ -106,5 +131,9 @@ const SignUpForm: React.FC = () => {
     </div>
   );
 };
+
+interface ISignupForm {
+  setSignupSuccess: (value: any) => void;
+}
 
 export default SignUpForm;

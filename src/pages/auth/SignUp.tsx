@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useState } from "react";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import SignupSuccess from "../../components/organisms/forms/signUpForm/SignupSuccess";
 import SignUpForm from "../../components/organisms/forms/signUpForm";
-import { AuthContext } from "../../context/auth/AuthContext";
 
 const SignUp = () => {
-  const { user } = useContext(AuthContext);
+  const [signUpSuccess, setSignupSuccess] = useState(false);
 
   return (
     <>
@@ -13,7 +12,11 @@ const SignUp = () => {
         title={`Launch Your Learning Program In 5 Minutes`}
         author="Cohut"
       >
-        {user ? <SignupSuccess /> : <SignUpForm />}
+        {signUpSuccess ? (
+          <SignupSuccess />
+        ) : (
+          <SignUpForm setSignupSuccess={setSignupSuccess} />
+        )}
       </AuthTemplate>
     </>
   );
