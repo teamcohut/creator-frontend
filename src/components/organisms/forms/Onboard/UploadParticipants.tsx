@@ -112,6 +112,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
             action={onSubmit}
             type="button"
             fill={true}
+            loading={inviteParticipantsMutation.isPending}
           />
         </div>
       </form>

@@ -11,7 +11,7 @@ const ParticipantModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <>
       <Modal
         open={modalOpen}
-        setModalOpen={(open: boolean) => setModalOpen(open, "participantModal")}
+        setModalOpen={(open: boolean) => setModalOpen(open, "participant")}
       >
         {currentStep === 1 ? <InviteParticipants /> : null}
         {/* currentStep === 2 ? (

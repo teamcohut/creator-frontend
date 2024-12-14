@@ -247,6 +247,10 @@
     color: #333;
     background-color: transparent; 
   }
+
+  textarea {
+    max-height: 150px;
+  }
   
   
 

@@ -69,7 +69,7 @@ const DashBoard: FC<IDashboard> = () => {
             </div>
           ) : (
             <Button
-              action={() => setModal((prev) => ({ ...prev, name: "cohort" }))}
+              action={() => setModal((prev) => ({ open: true, name: "cohort" }))}
               fill
               gap
               type="button"
