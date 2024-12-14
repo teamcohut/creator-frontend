@@ -14,7 +14,7 @@ import { useMutation } from '@tanstack/react-query'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const { activeCohort } = useContext(ProgramContext);
+  const {dispatch, activeCohort } = useContext(ProgramContext);
   const [cohortName, setCohortName] = useState(activeCohort?.name);
   const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
@@ -23,14 +23,14 @@ const CohortSettings = () => {
     name: string;
     open: boolean;
   });
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<ITrack[]>(activeCohort?.tracks);
 
 
-  console.log(activeCohort?.startDate?.split("T")[0])
-  console.log(activeCohort)
+  
 
-  const handleTagsChange = (value: string[]) => {
+  const handleTagsChange = (value: ITrack[]) => {
     setTags(value);
+    console.log(tags)
   };
   
 
@@ -70,6 +70,7 @@ const CohortSettings = () => {
     mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
     onSuccess: (data: any) => {
       notification.success({message: "Account updated successfully"})
+      dispatch({ type: "ACTIVE_COHORT", payload: data.data.data });
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";
@@ -137,7 +138,7 @@ const CohortSettings = () => {
               id="endDate"
               onchange={(e) => {setEndDate(e.target.value)}}
               placeHolder="mm/dd/yy"
-              value={activeCohort?.endDate ? endDate : ""}
+              value={endDate}
             />
           </div>
 
@@ -186,6 +187,7 @@ const CohortSettings = () => {
               cohortName,
               startDate,
               endDate,
+              tracks:tags
             })}} 
             type="button"
             fill={false} 

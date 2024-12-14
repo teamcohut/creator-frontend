@@ -12,8 +12,8 @@ import { useMutation } from '@tanstack/react-query';
 
 
 const ProgramGeneralSettings = () => {
-  const [isHovered, setIsHovered] = useState(false);
   const {dispatch, activeProgram} = useContext(ProgramContext)
+  const [isHovered, setIsHovered] = useState(false);
   const [title, setTitle] = useState(activeProgram?.title);
   const [description, setDescription] = useState(activeProgram?.description);
   const [format, setFormat] = useState(activeProgram?.format)
@@ -34,9 +34,7 @@ const ProgramGeneralSettings = () => {
     },
     onError: (error: any) => {
       notification.error({
-        message:
-          error.response?.data?.message ||
-          "An error occured while uploading file",
+        message: error.response.data.errors[0] ?? error.response.data.message,
       });
     },
   });
@@ -77,12 +75,13 @@ const ProgramGeneralSettings = () => {
   const updateProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.updateProgram(activeProgram?.id, payload),
     onSuccess: (data: any) => {
+      notification.success({message: data.data.message});
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
 
     },
     onError: (error: any) => {
       notification.error({
-        message: "Failed to edit program. Please try again.",
+        message: error.response.data.errors[0] ?? error.response.data.message,
       });
     },
   });
@@ -101,6 +100,9 @@ const ProgramGeneralSettings = () => {
       description,
       cover: banner,
       logo: thumbnail,
+      communities: [],
+      certificates: [],
+      
     };
 
     updateProgramMutation.mutate(payload);
@@ -135,7 +137,8 @@ const ProgramGeneralSettings = () => {
           icon={<img width={50} src={activeProgram.logo} alt='Logo' />}
           onchange={(file) => handleThumbnailChange(file)}
         />
-        <p className='fs-small manrope-500 primary-400 pb-4'>(png, jpg, jpeg)</p>
+        {uploadImageMutation.isPending ? <p>Uploading image...</p> :
+        <p className='fs-small manrope-500 primary-400 pb-4'>(png, jpg, jpeg)</p>}
 
         <DragNDropInput
           id='banner' 
