@@ -187,14 +187,17 @@ const CohortSettings = () => {
               startDate,
               endDate,
             })}} 
-            type="button" 
+            type="button"
             fill={false} 
             outline='primary' 
             gap={true} width={120} 
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}>
+            handleMouseLeave={handleMouseLeave}
+            loading={updateCohortInfoMutation.isPending}
+            disabled={updateCohortInfoMutation.isPending}
+            >
           <FiSave/>
           <span>Save</span>
         </OutlineButton>

@@ -10,6 +10,9 @@ class Program {
   createProgram(payload: IProgramDTO) {
     return this.client.post("/program", payload);
   }
+  updateProgram(id: string, payload: IProgramDTO) {
+    return this.client.put(`/program/edit/${id}`, payload);
+  }
 
   uploadProgramImage(data: any) {
     return this.client.post(
