@@ -3,6 +3,8 @@ import { IDragnDrop } from "./types";
 import "../style.css";
 import { FiImage } from "react-icons/fi";
 
+const allowedImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
   const { label, id, onchange, detail } = props;
 
@@ -87,20 +89,9 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
             </>
           )}
         </p>
-        {/* <input
-          type="file"
-          id={id}
-          className="file-input"
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
-        <label htmlFor={id} className="btn-upload primary-600 mt-2">
-          {file ? "Change File" : "Browse File"}
-        </label> */}
       </div>
     </div>
   );
 };
 
 export default DragNDropInput;
-
