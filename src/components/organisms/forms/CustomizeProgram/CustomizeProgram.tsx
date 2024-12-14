@@ -129,6 +129,8 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
           action={handleProgramSubmit}
           type="button"
           fill={true}
+          loading={createProgramMutation.isPending}
+          disabled={uploadImageMutation.isPending || createProgramMutation.isPending}
         />
       </div>
     </form>
