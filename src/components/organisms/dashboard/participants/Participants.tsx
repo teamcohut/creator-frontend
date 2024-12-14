@@ -58,7 +58,7 @@ const ParticipantsPage: React.FC = () => {
           border={false}
         >
           <FiPlus className="fs-body" />
-          Invite Learner
+          Invite Participant
         </Button>
       </Header>
 
