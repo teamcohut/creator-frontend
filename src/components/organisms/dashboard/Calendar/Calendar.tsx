@@ -4,6 +4,7 @@ import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import convertTimeToDate from "../../../utils/convertTimeToData"
 import "./calendar.css";
 
 const CalendarComponent: React.FC = () => {
@@ -21,8 +22,8 @@ const CalendarComponent: React.FC = () => {
           calendarId: item._id,
           title: item.title,
           category: "time",
-          start: "2024-12-06T12:00:00",
-          end: "2024-12-06T13:00:00"
+          start: convertTimeToDate(item.start),
+          end: convertTimeToDate(item.end),
         }
       })
     },
