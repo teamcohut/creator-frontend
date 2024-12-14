@@ -16,7 +16,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
     const [selectedTrackId, setSelectedTrackId] = useState('');
     const { activeCohort } = useContext(ProgramContext)
     const [api, contextHolder] = notification.useNotification()
-    const [track, setTrack] = useState<string>("Online");
     const [form, setForm] = useState<ITask>({
         title: "",
         description: "",
@@ -33,7 +32,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
         const value = event.target.value
-        setTrack(value);
         if (value === 'All') {
             setForm({
                 ...form,
@@ -65,7 +63,9 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
             api.success({
                 message: 'Successful'
             })
-            closeModal()
+            setTimeout(() => {
+                closeModal()
+            }, 5000);
         },
     })
 
@@ -101,7 +101,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
             }
         } catch (error) {
             console.error(error);
-
         }
     }
 

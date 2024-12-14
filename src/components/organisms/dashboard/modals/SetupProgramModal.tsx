@@ -4,8 +4,10 @@ import Congratulations from "../../../molecules/dashboard/Congratulations";
 import { ISetupModal, TModal } from "../../../../@types/dashboard.interface";
 import Modal from "../../../templates/Modal";
 import ProgramDetail from "../../forms/CustomizeProgram/programdetails";
+import { notification } from "antd";
 
 const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const [api, contextHolder] = notification.useNotification()
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [programData, setProgramData] = useState<ProgramData>({
     title: "",
@@ -20,7 +22,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const openModal = (modal: TModal) => {
     setCurrentStep(1);
     // setActiveModal(modal)
-    setModalOpen(true, "program");
+    setModalOpen(true, "cohort");
   };
 
   // Helper function to reset state
@@ -36,6 +38,9 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       certificates: [],
     });
     setCurrentStep(0);
+    api.success({
+      message: "Program setup successfully",
+    })
   };
 
   const handleProgramDetailContinue = (data: {
@@ -48,6 +53,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
 
   return (
     <>
+      {contextHolder}
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 && (
           <ProgramDetail onContinue={handleProgramDetailContinue} />
