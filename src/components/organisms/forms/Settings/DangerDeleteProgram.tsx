@@ -9,8 +9,10 @@ import api from '../../../../api/axios';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
+import { useProgramContext } from '../../../../hooks/program/useProgramContext';
 
 const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const { dispatch } = useProgramContext()
   const handleClose = () => {
     setModalOpen(false, '');
   };
@@ -31,7 +33,7 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     mutationFn: () => api.program.deleteProgram(activeProgram.id),
     onSuccess: (data: any) => {
       notification.success({message: "Program deleted"})
-
+      dispatch({type: 'ACTIVE_PROGRAM', payload: {}})
       navigate("/")
     },
     onError: (error: any) => {
@@ -67,6 +69,10 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     }
   });
 
+  const deleteProgram = () => {
+    deleteProgramInfoMutation.mutate(activeProgram?.id)
+  }
+
 
   return (
     
@@ -94,10 +100,11 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
               outlineColor = 'error-500'
               width={184}
               border={true}
-              action={() => {deleteProgramInfoMutation.mutate(activeProgram?.id)}}
+              action={deleteProgram}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
+              loading={deleteProgramInfoMutation.isPending}
             >
 
               <span className={isHovered ? 'white' : 'error-500'}> Delete Program </span>

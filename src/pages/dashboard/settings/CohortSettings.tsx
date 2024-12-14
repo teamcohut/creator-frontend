@@ -24,7 +24,7 @@ const CohortSettings = () => {
     open: boolean;
   });
   const [tags, setTags] = useState<string[]>([]);
-  const user = JSON.parse(localStorage.getItem("user") || "");
+
 
   console.log(activeCohort?.startDate?.split("T")[0])
   console.log(activeCohort)

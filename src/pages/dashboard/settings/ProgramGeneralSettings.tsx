@@ -6,6 +6,7 @@ import { FiSave, FiTrash2 } from 'react-icons/fi'
 import GroupButton from '../../../components/atoms/Button/GroupButton'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import DeleteProgramModal from '../../../components/organisms/dashboard/modals/DeleteProgramModal'
+import { Select, Space } from 'antd';
 
 
 const ProgramGeneralSettings = () => {
@@ -36,6 +37,10 @@ const ProgramGeneralSettings = () => {
 
   const handleButtonClick = (view: string) => {
     setActiveView(view);
+  };
+
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
   };
 
 
@@ -75,6 +80,18 @@ const ProgramGeneralSettings = () => {
         <TextAreaInput id='description' label= 'Description' placeHolder='' onchange={() => {}}/>
 
         <div className='pb-4'></div>
+        
+      <Select
+      defaultValue=""
+      size='large'
+      style={{ width: '50%', marginBottom: '50px', borderRadius: '12px' }}
+      onChange={handleChange}
+      options={[
+        { value: 'hybrid', label: 'Hybrid' },
+        { value: 'virtual', label: 'Virtual' },
+        { value: 'physical', label: 'Physical' },
+      ]}
+    />
 
         <OutlineButton 
             action={()=>{}} 
@@ -89,20 +106,11 @@ const ProgramGeneralSettings = () => {
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
-        
-        <div className='p-4'></div>
       </div>
       
 
       <div>
-
-      <p className='manrope-600 primary-950 fs-body'>Program Format</p>
-
-      <GroupButton buttons={buttonOptions}/>
-
-
-
-      <h4 className="manrope-600 fs-h4 primary-950 pb-1 pt-5">Danger Zone</h4>
+      <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
       <span style={{cursor: 'pointer'}} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
         onClick={() => setModal((prev) => ({ open: true, name: "deleteProgramModal" }))}>
           Delete Program <FiTrash2 />
