@@ -41,7 +41,7 @@ export interface IOverviewCard {
 export interface IinfoCardProps {
   title: string;
   subtitle: string;
-  isActive: boolean;
+  isActive?: boolean;
   progress?: number;
   isProgressBar?: boolean;
   infoCardIcon: ReactElement<any>;
@@ -50,7 +50,7 @@ export interface IinfoCardProps {
   dateOfSession?: string;
 }
 
-export interface ISetupProgram {}
+export interface ISetupProgram { }
 
 export interface ICohort {
   name: string;
