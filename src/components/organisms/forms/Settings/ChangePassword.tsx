@@ -31,9 +31,31 @@ const ChangePassword: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     },
   });
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    if (oldPassword === '') {
+      notification.info({
+        message: 'Enter old password',
+        placement: 'top'
+      });
+      return
+    }
+    if (newPassword === '') {
+      notification.info({
+        message: 'Enter new password',
+        placement: 'top'
+      });
+      return
+    }
+    changePasswordMutation.mutate({
+      oldPassword,
+      newPassword
+    })
+  }
+
   return (
     <div className="modal-container">
-      <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
+      <form className="form bg-white d-flex flex-column rounded-5 mx-auto" onSubmit={handleSubmit}>
         <div className="d-flex justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Change Password</h1>
           <FiX
@@ -52,12 +74,10 @@ const ChangePassword: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         <div className="d-flex flex-column align-items-center gap-3 mt-4">
           <Button
             children="Change Password"
-            action={() => {changePasswordMutation.mutate({
-              oldPassword,
-              newPassword
-            })}}
-            type="button"
+            action={()=>{}}
+            type="submit"
             fill={true}
+            loading={changePasswordMutation.isPending}
           />
         </div>
       </form>
