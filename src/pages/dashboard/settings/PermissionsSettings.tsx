@@ -4,7 +4,6 @@ import GroupButton from '../../../components/atoms/Button/GroupButton';
 import OutlineButton from '../../../components/atoms/Button/OutlineButton';
 import { useState } from 'react';
 import AddNewAdminModal from '../../../components/organisms/dashboard/modals/AddNewAdminModal';
-import Table from '../../../components/organisms/dashboard/participants/Table';
 
 const PermissionsSettings = () => {
   const [activeView, setActiveView] = useState("All");
@@ -20,6 +19,7 @@ const PermissionsSettings = () => {
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+  
 
 
   const hoverStyle = isHovered ? {
@@ -81,8 +81,10 @@ const PermissionsSettings = () => {
 
       </div>
       <div className="p-table w-100">
+    
+    
   
-      {/* <Table header={[]} body={[]}  /> */}
+      
     </div>
     {modal.name === "addNewAdminModal" && (
         <AddNewAdminModal

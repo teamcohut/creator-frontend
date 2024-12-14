@@ -11,7 +11,7 @@ const DeleteProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         open={modalOpen}
         setModalOpen={(open: boolean) => setModalOpen(open, "deleteProgramModal")}
       >
-        {currentStep === 1 ? <DangerDeleteProgram /> :''}
+        {currentStep === 1 ? <DangerDeleteProgram modalOpen={modalOpen} setModalOpen={setModalOpen}/> :''}
       </Modal>
     </>
   );

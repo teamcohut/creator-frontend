@@ -5,23 +5,34 @@ import { useContext, useState } from 'react'
 import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
 import { ProgramContext } from '../../../context/programs/ProgramContext'
 import DateInput2 from '../../../components/atoms/inputs/DateInput2'
-import { Select } from 'antd'
+import { notification, Select } from 'antd'
 import { Option } from 'antd/es/mentions'
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
+import { ITrack } from '../../../@types/settings.interface'
+import api from '../../../api/axios'
+import { useMutation } from '@tanstack/react-query'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { activeCohort } = useContext(ProgramContext);
+  const [cohortName, setCohortName] = useState(activeCohort?.name);
+  const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
+  const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
+  const [tracks, setTracks] = useState<ITrack[]>(activeCohort?.tracks);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
   const [tags, setTags] = useState<string[]>([]);
 
+
+  console.log(activeCohort?.startDate?.split("T")[0])
+  console.log(activeCohort)
+
   const handleTagsChange = (value: string[]) => {
     setTags(value);
   };
-  console.log(activeCohort)
+  
 
   const tagRender = (props: CustomTagProps) => {
     const { label, closable, onClose } = props;
@@ -55,7 +66,37 @@ const CohortSettings = () => {
     );
   };
   
-
+  const updateCohortInfoMutation = useMutation({
+    mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
+    onSuccess: (data: any) => {
+      notification.success({message: "Account updated successfully"})
+    },
+    onError: (error: any) => {
+      let errorMessage = "An unexpected error occurred.";
+    
+      if (error.response?.data) {
+        // Handle backend-provided error messages
+        if (Array.isArray(error.response.data.errors) && error.response.data.errors.length > 0) {
+          errorMessage = error.response.data.errors[0];
+        } else if (error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+      } else if (error.message) {
+        // Handle JavaScript errors or other network issues
+        errorMessage = error.message;
+      }
+    
+      // Special case for ObjectId casting error
+      if (errorMessage.includes("Cast to ObjectId failed")) {
+        errorMessage = "No cohort found, setup your program and onboard new cohort.";
+      }
+    
+      // Display the notification
+      notification.error({
+        message: errorMessage,
+      });
+    }
+  });
 
   
 
@@ -70,30 +111,33 @@ const CohortSettings = () => {
     color: 'var(--primary-800) !important',
     borderColor: 'var(--primary-800) !important',
   } : {};
-  const tracks: Array<string>= []
+  
+  
   return (
     <>
     <div className='d-flex gap-133 align-items-start pt-4'>
       <div className='w-60'>
         <div className='d-flex gap-2'>
           <p className='d-flex justify-content-center align-items-center w-45'> 
-          <TextInput2 id='cohort-number' placeHolder='Cohut123' label='Cohort Name' value={activeCohort?.name}/>
+          <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
+          onchange={(e) => setCohortName(e.target.value) } 
+          value={cohortName}/>
           </p>
         </div>
         <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
             <DateInput2
               id="startDate"
-              onchange={() => {}}
+              onchange={(e) => setStartDate(e.target.value)}
               placeHolder=""
               label="Set Cohort Duration"
-              value={activeCohort?.startDate ? activeCohort.startDate.split("T")[0] : ""}
+              value={startDate }
             />
             <h3 className='dark-700'>-</h3>
             <DateInput2
               id="endDate"
-              onchange={() => {}}
+              onchange={(e) => {setEndDate(e.target.value)}}
               placeHolder="mm/dd/yy"
-              value={activeCohort?.endDate ? activeCohort.endDate.split("T")[0] : ""}
+              value={activeCohort?.endDate ? endDate : ""}
             />
           </div>
 
@@ -108,8 +152,8 @@ const CohortSettings = () => {
       onChange={handleTagsChange}
       >
       {tracks.map((option) => (
-        <Option key={option} value={option}>
-          {option}
+        <Option key={option.id} value={option.title}>
+          {option.title}
         </Option>
       ))}
     </Select>
@@ -138,21 +182,26 @@ const CohortSettings = () => {
         <div className='pb-4'></div> */}
 
         <OutlineButton 
-            action={()=>{}} 
-            type="button" 
+            action={()=>{updateCohortInfoMutation.mutate({
+              cohortName,
+              startDate,
+              endDate,
+            })}} 
+            type="button"
             fill={false} 
             outline='primary' 
             gap={true} width={120} 
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}>
+            handleMouseLeave={handleMouseLeave}
+            loading={updateCohortInfoMutation.isPending}
+            disabled={updateCohortInfoMutation.isPending}
+            >
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
 
-        
-        <div className='pb-5'></div>
 
       </div>
       <div>  

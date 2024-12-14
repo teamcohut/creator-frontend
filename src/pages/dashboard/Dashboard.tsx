@@ -5,9 +5,9 @@ import DashBoard from "../../components/organisms/dashboard/MainDashboard/DashBo
 import { ProgramContext } from "../../context/programs/ProgramContext";
 
 const Dashboard = () => {
-  const { programs } = useContext(ProgramContext);
+  const { activeProgram } = useContext(ProgramContext);
 
-  return <>{programs[0] ? <DashBoard /> : <SetupProgram />}</>;
+  return <>{activeProgram.title ? <DashBoard /> : <SetupProgram />}</>;
 };
 
 export default Dashboard;

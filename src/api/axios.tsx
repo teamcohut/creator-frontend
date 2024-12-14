@@ -22,7 +22,7 @@ export const axiosPrivate = axios.create({
 });
 
 const api = {
-  auth: new Auth(axiosPublic),
+  auth: new Auth(axiosPublic, axiosPrivate),
   program: new Program(axiosPrivate),
   participant: new Participant(axiosPrivate),
   task: new Task(axiosPrivate),

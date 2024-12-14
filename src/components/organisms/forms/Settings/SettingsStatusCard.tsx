@@ -7,7 +7,7 @@ const SettingsStatusCard: FC<ISuccessCard> = ({ title, description, icon, email,
     <>
         <form className='form bg-white d-flex flex-column align-items-center gap-3 text-center rounded-5' action="">
             <div className="w-100 d-flex justify-content-end">
-                <FiX style={{fontSize: '24px'}}/>
+                {/* <FiX style={{fontSize: '24px'}}/> */}
             </div>
             
             <div className="d-flex flex-column align-items-center gap-2 head">

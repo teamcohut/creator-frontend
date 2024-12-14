@@ -65,7 +65,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
   return (
     <>
       <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
-        <label className="manrope-600 fs-body" htmlFor={id}>
+        <label className="manrope-600 fs-body d-flex flex-column gap-2" htmlFor={id}>
           {label}
           <div className="input-div d-flex align-items-center gap-2 rounded-pill px-3">
             <FiLock className="icon" />
@@ -103,12 +103,11 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
               gap
               rounded={false}
             />
-            <span className="manrope-500 dark-600">
+            <span className="manrope-500 fs-footer dark-600">
               Password strength: &nbsp;{" "}
               <span
-                className={`${
-                  status === "Weak" ? "text-danger" : "success-600"
-                }`}
+                className={`${status === "Weak" ? "text-danger" : "success-600"
+                  }`}
               >
                 {status}
               </span>

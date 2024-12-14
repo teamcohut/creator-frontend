@@ -16,7 +16,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
     const [selectedTrackId, setSelectedTrackId] = useState('');
     const { activeCohort } = useContext(ProgramContext)
     const [api, contextHolder] = notification.useNotification()
-    const [track, setTrack] = useState<string>("Online");
     const [form, setForm] = useState<ITask>({
         title: "",
         description: "",
@@ -33,7 +32,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
         const value = event.target.value
-        setTrack(value);
         if (value === 'All') {
             setForm({
                 ...form,
@@ -62,10 +60,14 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         },
         onSuccess(data) {
             console.log(data);
+            notification.success({ message: "Task Added successfully!" })
+
             api.success({
                 message: 'Successful'
             })
-            closeModal()
+            setTimeout(() => {
+                closeModal()
+            }, 3000);
         },
     })
 
@@ -101,7 +103,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
             }
         } catch (error) {
             console.error(error);
-
         }
     }
 
@@ -148,12 +149,12 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
                     </div>
 
                     <div>
-                        <label htmlFor="trackId">Tracks</label>
+                        <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
                         <select
                             id="trackId"
                             name="trackId"
-                            className="form-select"
-                            value={selectedTrackId}
+                            className="form-select rounded-4"
+                            defaultValue={selectedTrackId}
                             onChange={handleDropdownChange}
                         >
                             <option value="" disabled>

@@ -24,6 +24,7 @@ const SessionList = () => {
         enabled: !!activeCohort._id,
     });
 
+    console.log("I am datad", data);
 
     useEffect(() => {
         const lowerCaseQuery = searchQuery.toLowerCase();
@@ -70,7 +71,7 @@ const SessionList = () => {
             {isLoading && <p>Loading sessions...</p>}
             {isError && <p className="error-text">{isError}</p>}
             {!isLoading && filteredSessions?.length === 0 && (
-                <p>No sessions found for your search query.</p>
+                <p>You do not have a session</p>
             )}
             <div className="session-grid">
                 {filteredSessions?.map((session: any, i: any) => (
@@ -81,10 +82,8 @@ const SessionList = () => {
                     >
                         <InfoCard
                             title={session.title || "No title available"}
-                            subtitle={session.subtitle || "No subtitle available"}
-                            isActive={session.isActive}
-                            dateOfSession={session.dateOfSession || "Date not available"}
-                            isOngoing
+                            subtitle={session.location.address || "No Link available yet"}
+                            dateOfSession={session.date || "Date not available"}
                             infoCardIcon={<FiVideo color="#FF63CD" className="infoIcon fs-h2" />}
                             infoCardIconBgColor="#FEF1FA"
                         />

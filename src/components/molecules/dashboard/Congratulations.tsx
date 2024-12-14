@@ -17,7 +17,7 @@ const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
                     <p className='manrope-500 dark-700 fs-body'>Create your first Cohort to launch your program</p>
                 </div>
                 <div className="footer w-100 d-flex flex-row align-items-center gap-2">
-                    <Button children='Go to Dashboard' type='button' action={clear} fill={true} />
+                    <Button children='Go to Dashboard' type='button' action={clear} fill={false} outline='primary' border />
                     <Button children='Onboard New Cohort' type='button' action={()=>openModal('cohort')} fill={true} />
                 </div>
                 <div>

@@ -52,6 +52,15 @@
     color: var(--primary-800);
   }
 
+
+  .btn-loading {
+    opacity: 0.6; 
+    pointer-events: none; 
+    cursor: not-allowed; 
+    transition: opacity 0.3s ease; 
+  }
+  
+
   
 
 
@@ -238,6 +247,10 @@
     color: #333;
     background-color: transparent; 
   }
+
+  textarea {
+    max-height: 150px;
+  }
   
   
 
@@ -288,6 +301,11 @@
   
   /* NAVIGATION */
 /* ================= */
+
+  .nav-link.active {
+    background-color: var(--hover-40) !important;
+    border: none !important;
+  }
 
   .nav-link {
     color: var(--primary-950) !important;

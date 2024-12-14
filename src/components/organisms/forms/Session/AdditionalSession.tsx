@@ -17,6 +17,8 @@ interface IAdditionalSessionProps {
 
 const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess }) => {
   const { activeProgram, activeCohort } = useContext(ProgramContext);
+  const [selectedTrackId, setSelectedTrackId] = useState('');
+
   const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
     // track: "",
@@ -28,6 +30,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   });
 
 
+  const tracks = activeCohort?.tracks;
 
 
 
@@ -39,12 +42,6 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       location: { ...prev.location, name: value, },
     }));
   };
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | any>) => {
-  //   const { id, value } = e.target;
-  //   setFormData((prev) => ({ ...prev, [id]: value }));
-  // };
 
   const handleChange = (
     id: string,
@@ -61,12 +58,11 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     mutationFn: (payload: any) => axiosAPI.session.createSession(payload),
     onSuccess: () => {
       notification.success({ message: "Session created successfully!" });
-      alert("Session created successfully!");
       onSuccess();
     },
     onError: (error: any) => {
       console.error(error);
-      alert("Failed to create session. Please try again.");
+      notification.error({ message: "Failed to create session. Please try again." });
     },
   });
 
@@ -112,12 +108,25 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
           </div>
         </div>
 
-        <TextInput
-          id="track"
-          label="Add Session to Track"
-          placeHolder="ALL"
-          onchange={(e) => handleChange("track", e.target.value)}
-        />
+        <div>
+          <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
+          <select
+            id="trackId"
+            name="trackId"
+            className="form-select rounded-4"
+            defaultValue={selectedTrackId}
+            onChange={(e) => handleChange("track", e.target.value)}
+          >
+            <option value="" disabled>
+              Select a Track
+            </option>
+            {tracks?.map((track: any) => (
+              <option key={track.id} value={track.id}>
+                {track.title}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <TextAreaInput
           id="resources"
@@ -129,7 +138,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       </div>
 
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button children="Create Session" action={handleSubmit} type="button" fill={true} />
+        <Button children="Create Session" action={handleSubmit} loading={sessionMutation.isPending} type="button" fill={true} />
       </div>
     </form>
   );

@@ -58,7 +58,7 @@ const ParticipantsPage: React.FC = () => {
           border={false}
         >
           <FiPlus className="fs-body" />
-          Invite Learner
+          Invite Participant
         </Button>
       </Header>
 
@@ -67,7 +67,7 @@ const ParticipantsPage: React.FC = () => {
       ) : isLoading ? (
         <p>Loading participants...</p>
       ) : isError ? (
-        <p className="text-danger">Error T austin sparks</p>
+        <p className="text-danger">Err... <br /> Something went wrong</p>
       ) : (
         <>
           <div className="overview-container d-flex">
@@ -83,15 +83,9 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-              // subtitle={participants.filter((p) => p.status === "active").length}
+              subtitle={(data?.data.data.noOfParticipants)}
             >
-              <PercentageBar
-                progress={
-                  (data?.data.data.noOfActiveParticipants /
-                    data?.data.data.noOfParticipants) *
-                  100
-                }
-              />
+  
             </OverviewCard>
 
             <OverviewCard

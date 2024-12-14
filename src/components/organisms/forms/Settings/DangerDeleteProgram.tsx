@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';
 import OutlineButton from '../../../atoms/Button/OutlineButton';
 import Button from '../../../atoms/Button';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
+import { useMutation } from '@tanstack/react-query';
+import api from '../../../../api/axios';
+import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { ProgramContext } from '../../../../context/programs/ProgramContext';
+import { useProgramContext } from '../../../../hooks/program/useProgramContext';
 
-const DangerDeleteProgram = () => {
+const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const { dispatch } = useProgramContext()
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   const [isHovered, setIsHovered] = useState(false);
+  const {activeProgram} = useContext(ProgramContext)
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -14,6 +26,52 @@ const DangerDeleteProgram = () => {
     color: 'var(--primary-800) !important',
     borderColor: 'var(--primary-800) !important',
   } : {};
+
+  const navigate = useNavigate()
+
+  const deleteProgramInfoMutation = useMutation({
+    mutationFn: () => api.program.deleteProgram(activeProgram.id),
+    onSuccess: (data: any) => {
+      notification.success({message: "Program deleted"})
+      dispatch({type: 'ACTIVE_PROGRAM', payload: {}})
+      navigate("/")
+    },
+    onError: (error: any) => {
+      let errorMessage = "An unexpected error occurred.";
+
+      if (error.response?.data) {
+        // Handle backend-provided error messages
+        if (
+          Array.isArray(error.response.data.errors) &&
+          error.response.data.errors.length > 0
+        ) {
+          errorMessage = error.response.data.errors[0];
+        } else if (error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+      } else if (error.message) {
+        // Handle JavaScript errors or other network issues
+        errorMessage = error.message;
+      }
+  
+      // Special case for ObjectId casting error related to Program
+      if (
+        errorMessage.includes("Cast to ObjectId failed") &&
+        errorMessage.includes('model "Program"')
+      ) {
+        errorMessage = "No program created, create new program.";
+      }
+  
+      // Display the notification
+      notification.error({
+        message: errorMessage,
+      });
+    }
+  });
+
+  const deleteProgram = () => {
+    deleteProgramInfoMutation.mutate(activeProgram?.id)
+  }
 
 
   return (
@@ -42,10 +100,11 @@ const DangerDeleteProgram = () => {
               outlineColor = 'error-500'
               width={184}
               border={true}
-              action={() => {}}
+              action={deleteProgram}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
+              loading={deleteProgramInfoMutation.isPending}
             >
 
               <span className={isHovered ? 'white' : 'error-500'}> Delete Program </span>
@@ -58,7 +117,7 @@ const DangerDeleteProgram = () => {
               fill={true}
               width={184}
               border={true}
-              action={() => {}}
+              action={handleClose}
               
             >
               Cancel
