@@ -10,7 +10,6 @@ import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
-  console.log(user)
   const [isHovered, setIsHovered] = useState(false);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;

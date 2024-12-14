@@ -32,6 +32,10 @@ class Program {
   editProgram(id: string, payload: Partial<IProgramDTO>) {
     return this.client.put(`/program/${id}`, payload);
   }
+
+  deleteProgram(id: string) {
+    return this.client.delete(`/program/${id}`)
+  }
 }
 
 export default Program;

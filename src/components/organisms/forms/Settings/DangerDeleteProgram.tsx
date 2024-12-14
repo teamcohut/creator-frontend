@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';
 import OutlineButton from '../../../atoms/Button/OutlineButton';
 import Button from '../../../atoms/Button';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
+import { useMutation } from '@tanstack/react-query';
+import api from '../../../../api/axios';
+import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { ProgramContext } from '../../../../context/programs/ProgramContext';
 
-const DangerDeleteProgram = () => {
+const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   const [isHovered, setIsHovered] = useState(false);
+  const {activeProgram} = useContext(ProgramContext)
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -14,6 +24,22 @@ const DangerDeleteProgram = () => {
     color: 'var(--primary-800) !important',
     borderColor: 'var(--primary-800) !important',
   } : {};
+
+  const navigate = useNavigate()
+
+  const deleteProgramInfoMutation = useMutation({
+    mutationFn: () => api.program.deleteProgram(activeProgram.id),
+    onSuccess: (data: any) => {
+      notification.success({message: "Program deleted"})
+      handleClose()
+      navigate("/")
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: error.response.data.errors[0] ?? error.response.data.message,
+      });
+    },
+  });
 
 
   return (
@@ -42,7 +68,7 @@ const DangerDeleteProgram = () => {
               outlineColor = 'error-500'
               width={184}
               border={true}
-              action={() => {}}
+              action={() => {deleteProgramInfoMutation.mutate(activeProgram?.id)}}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
@@ -58,7 +84,7 @@ const DangerDeleteProgram = () => {
               fill={true}
               width={184}
               border={true}
-              action={() => {}}
+              action={handleClose}
               
             >
               Cancel
