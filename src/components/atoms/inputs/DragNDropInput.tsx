@@ -3,6 +3,8 @@ import { IDragnDrop } from "./types";
 import "../style.css";
 import { FiImage } from "react-icons/fi";
 
+const allowedImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
   const { label, id, onchange, detail } = props;
 
@@ -14,7 +16,7 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
     const selectedFile = e.target.files?.[0] || null;
     if (selectedFile) {
       setFile(selectedFile);
-      setPreviewUrl(URL.createObjectURL(selectedFile)); // Generate preview URL
+      setPreviewUrl(URL.createObjectURL(selectedFile));
       onchange?.(selectedFile);
     }
   };
@@ -36,7 +38,7 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const droppedFile = e.dataTransfer.files[0];
       setFile(droppedFile);
-      setPreviewUrl(URL.createObjectURL(droppedFile)); // Generate preview URL
+      setPreviewUrl(URL.createObjectURL(droppedFile));
       onchange?.(droppedFile);
     }
   };
@@ -60,7 +62,8 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
             src={previewUrl}
             alt="Preview"
             className="img-preview"
-            style={{ maxWidth: "100%", maxHeight: "200px", marginBottom: "1rem" }}
+            height={50}
+            width={50}
           />
         ) : (
           <FiImage className="h1 dark-400" />
@@ -68,29 +71,27 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
         <p className="fs-caption">
           {file ? (
             <>
-              File uploaded: <span className="primary-600">{file.name}</span>
+              <input type="file" id={id} className="file-input " onChange={handleFileChange} style={{ display: "none" }} />
+              <label htmlFor={id} className="btn-upload primary-600 mt-2 px-2">
+                {file ? "Change File" : "Upload"}:
+              </label>
+              <span className="primary-600 align-content-center">{file.name}</span>
             </>
           ) : (
             <>
-              Drag-n-drop or <span className="primary-600">Upload</span> your{" "}
+              Drag-n-drop or <span className="primary-600">
+                <input type="file" id={id} className="file-input" onChange={handleFileChange} style={{ display: "none" }} />
+                <label htmlFor={id} className="btn-upload primary-600 mt-2">
+                  {file ? "Change File" : "Upload"}
+                </label>
+              </span> your{" "}
               {detail}
             </>
           )}
         </p>
-        <input
-          type="file"
-          id={id}
-          className="file-input"
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
-        <label htmlFor={id} className="btn-upload primary-600 mt-2">
-          {file ? "Change File" : "Browse File"}
-        </label>
       </div>
     </div>
   );
 };
 
 export default DragNDropInput;
-
