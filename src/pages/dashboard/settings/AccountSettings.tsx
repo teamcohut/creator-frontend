@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
 import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
-import EmailInput from "../../../components/atoms/inputs/EmailInput";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 import { useMutation } from "@tanstack/react-query";
