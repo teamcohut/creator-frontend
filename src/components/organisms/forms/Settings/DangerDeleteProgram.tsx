@@ -31,14 +31,40 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     mutationFn: () => api.program.deleteProgram(activeProgram.id),
     onSuccess: (data: any) => {
       notification.success({message: "Program deleted"})
-      handleClose()
+
       navigate("/")
     },
     onError: (error: any) => {
+      let errorMessage = "An unexpected error occurred.";
+
+      if (error.response?.data) {
+        // Handle backend-provided error messages
+        if (
+          Array.isArray(error.response.data.errors) &&
+          error.response.data.errors.length > 0
+        ) {
+          errorMessage = error.response.data.errors[0];
+        } else if (error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+      } else if (error.message) {
+        // Handle JavaScript errors or other network issues
+        errorMessage = error.message;
+      }
+  
+      // Special case for ObjectId casting error related to Program
+      if (
+        errorMessage.includes("Cast to ObjectId failed") &&
+        errorMessage.includes('model "Program"')
+      ) {
+        errorMessage = "No program created, create new program.";
+      }
+  
+      // Display the notification
       notification.error({
-        message: error.response.data.errors[0] ?? error.response.data.message,
+        message: errorMessage,
       });
-    },
+    }
   });
 
 

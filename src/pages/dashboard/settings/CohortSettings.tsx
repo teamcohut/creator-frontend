@@ -199,8 +199,6 @@ const CohortSettings = () => {
           <span>Save</span>
         </OutlineButton>
 
-        
-        <div className='pb-5'></div>
 
       </div>
       <div>  

@@ -7,12 +7,12 @@ const TopNav = () => {
   return (
     <div className="top-nav w-100 d-flex justify-content-between">
       <div className="search-div">
-        <SearchInput
+        {/* <SearchInput
           id="search"
           onchange={() => {}}
           placeHolder="Search for anything"
           label=""
-        />
+        /> */}
       </div>
       <div className="d-flex align-items-center gap-2">
         <button className="btn">
