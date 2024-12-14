@@ -60,12 +60,14 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         },
         onSuccess(data) {
             console.log(data);
+            notification.success({ message: "Task Added successfully!" })
+
             api.success({
                 message: 'Successful'
             })
             setTimeout(() => {
                 closeModal()
-            }, 5000);
+            }, 3000);
         },
     })
 
@@ -147,12 +149,12 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
                     </div>
 
                     <div>
-                        <label htmlFor="trackId">Tracks</label>
+                        <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
                         <select
                             id="trackId"
                             name="trackId"
-                            className="form-select"
-                            value={selectedTrackId}
+                            className="form-select rounded-4"
+                            defaultValue={selectedTrackId}
                             onChange={handleDropdownChange}
                         >
                             <option value="" disabled>

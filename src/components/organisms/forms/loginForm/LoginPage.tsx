@@ -60,25 +60,27 @@ const LoginPage: React.FC = () => {
             placeholder="user@email.com"
           />
 
-          <PasswordInput
-            label="Password"
-            id="password"
-            valid={true}
-            showStrength={false}
-            onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-            placeHolder="password"
-          />
+          <div className="d-flex flex-column gap-2">
+            <PasswordInput
+              label="Password"
+              id="password"
+              valid={true}
+              showStrength={false}
+              onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
+              placeHolder="password"
+            />
 
-          <span>
-            <Link
-              className="primary-700 text-decoration-none"
-              to={"/forgot-password"}
-            >
-              Forgot password?
-            </Link>
-          </span>
+            <span>
+              <Link
+                className="primary-700 fs-footer text-decoration-none"
+                to={"/forgot-password"}
+              >
+                Forgot password?
+              </Link>
+            </span>
+          </div>
         </div>
         {/* {error && <div className="">{error}</div>} */}
         <div className="d-flex flex-column align-items-center gap-3">
@@ -89,7 +91,7 @@ const LoginPage: React.FC = () => {
             action={handleSubmit}
             loading={loginMutation.isPending}
           />
-          <span>
+          <span className="fs-footer">
             Don't have an account?{" "}
             <Link className="primary-700 text-decoration-none" to={"/signup"}>
               Create one here

@@ -20,7 +20,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   });
 
   const openModal = (modal: TModal) => {
-    setCurrentStep(1);
+    // setCurrentStep(1);
     // setActiveModal(modal)
     setModalOpen(true, "cohort");
   };

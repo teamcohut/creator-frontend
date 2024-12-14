@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, ReactNode } from "react"
 
 export interface IEmailInput {
   id: string,
@@ -128,4 +128,5 @@ export interface IDragnDrop {
   label?: string,
   detail: string,
   onchange?: (file: File | null) => void;
+  icon?: ReactNode;
 }

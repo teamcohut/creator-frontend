@@ -60,7 +60,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
             <h4 className="manrope-600 fs-h4 primary-950 align-content-center">
               Participants
               <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-                {body.length}
+                {body?.length}
               </span>
             </h4>
           </div>

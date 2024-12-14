@@ -108,19 +108,25 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
           Customize your program's timing to fit your learner's needs.
         </span>
       </div>
-      <div className="d-flex flex-column gap-2">
+      <div className="d-flex flex-column gap-4">
         <DragNDropInput
-          label="Upload Logo"
+          label="Program Logo"
           id="thumbnail-upload"
           detail="Program's Logo"
           onchange={(file) => handleThumbnailChange(file)}
         />
-        <DragNDropInput
-          label="Banner Image"
-          id="banner-upload"
-          detail="Program's Cover Image"
-          onchange={(file) => handleBannerChange(file)}
-        />
+        <div>
+          <DragNDropInput
+            label="Banner Image"
+            id="banner-upload"
+            detail="Program's Cover Image"
+            onchange={(file) => handleBannerChange(file)}
+          />
+          <span className="fs-caption primary-400">
+            Banner image will be displayed across your Program (png, jpg, jpeg)
+          </span>
+        </div>
+
       </div>
       {uploadImageMutation.isPending && <p>Uploading image...</p>}
       <div className="d-flex flex-column align-items-center gap-3">

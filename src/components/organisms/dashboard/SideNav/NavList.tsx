@@ -4,7 +4,9 @@ import {
   FiCheckCircle,
   FiHeadphones,
   FiLayout,
+  FiMoon,
   FiTool,
+  FiUser,
   FiUsers,
 } from "react-icons/fi";
 
@@ -30,23 +32,23 @@ export const SettingsList = [
   {
     icon: <FiTool className="nav-icon" />,
     title: "General",
-    path: "generalSetting",
+    path: "setting",
   },
-  // {
-  //   icon: <FiUser className="nav-icon" />,
-  //   title: "Account Settings",
-  //   path: "/#",
-  // },
+  {
+    icon: <FiUser className="nav-icon" />,
+    title: "Account Settings",
+    path: "/#",
+  },
   {
     icon: <FiBell className="nav-icon" />,
     title: "Notifications",
     path: "/#",
   },
-  // {
-  //   icon: <FiMoon className="nav-icon" />,
-  //   title: "Appearance",
-  //   path: "/#",
-  // },
+  {
+    icon: <FiMoon className="nav-icon" />,
+    title: "Appearance",
+    path: "/#",
+  },
 ];
 
 export const HelpList = [
