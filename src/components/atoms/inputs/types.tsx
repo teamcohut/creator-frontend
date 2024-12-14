@@ -6,6 +6,7 @@ export interface IEmailInput {
   placeholder: string,
   onchange(e: ChangeEvent<HTMLInputElement>): void,
   icon?: React.ReactNode,
+  value?: string,
 }
 
 export interface INumberInput {
@@ -22,14 +23,17 @@ export interface IDateInput {
   placeHolder: string,
   icon?: React.ReactNode,
   onchange(e: ChangeEvent<HTMLInputElement>): void,
+  value?: string
 }
 
 export interface ITimeInput {
-  id: string,
-  label?: string,
-  placeHolder: string,
-  icon?: React.ReactNode,
-  onchange(e: ChangeEvent<HTMLInputElement>): void,
+  id: string;
+  label?: string;
+  icon?: React.ReactNode;
+  placeHolder?: string;
+  defaultValue?: string;
+  onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: string;
 }
 
 
@@ -38,8 +42,8 @@ export interface IPasswordInput {
   placeHolder: string;
   icon?: React.ReactNode;
   label: string;
-  showStrength: Boolean;
-  valid: Boolean;
+  showStrength?: Boolean;
+  valid?: Boolean;
   onchange(e: ChangeEvent<HTMLInputElement>): void
 }
 
@@ -98,17 +102,24 @@ export interface ITextAreaInput {
 }
 
 export interface ITextInput {
-  id: string,
-  placeHolder: string,
-  icon?: React.ReactNode,
-  label?: string,
-  onchange(e: ChangeEvent<HTMLInputElement>): void,
+  label?: string;
+  id: string;
+  icon?: React.ReactNode;
+  placeHolder?: string;
+  onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  value?: string;
+  tracks?: string[];
+  onRemove?: (index: number) => void;
 }
+
+
 
 export interface ISearchInput {
   id: string,
   placeHolder: string,
   label?: string,
+  width?: number,
   onchange(e: ChangeEvent<HTMLInputElement>): void
 }
 

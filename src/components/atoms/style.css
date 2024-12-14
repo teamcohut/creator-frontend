@@ -7,6 +7,21 @@
     padding: 12px 16px;
     white-space: nowrap;
 }
+.button:hover {
+    border-color: var(--primary-800) !important;
+    color: var(--primary-800);
+}
+
+.button:hover .spinner-border {
+    color: var(--primary-800);
+}
+
+.outline-btn {
+    height: clamp(45px, 2vw, 48px);
+    border: 1px solid var(--primary-700);
+    padding: 12px 16px;
+    white-space: nowrap;
+}
 
 .fill {
     background-color: var(--primary-700) !important;
@@ -22,9 +37,23 @@
     color: var(--primary-700);
 }
 
+
 .gap {
     gap: 8px;
 }
+
+.min-width-button {
+    min-width: 60px; 
+    text-align: center; 
+    height: 40px;
+    border-color: var(--primary-50) !important;
+  }
+  .min-width-button:hover {
+    color: var(--primary-800);
+  }
+
+  
+
 
 /* INPUTS */
 /* ================= */
@@ -317,3 +346,5 @@
 .dropdown-link:hover {
     color: var(--primary-950);
 }
+
+

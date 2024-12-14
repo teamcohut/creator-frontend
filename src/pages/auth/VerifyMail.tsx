@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosPublic from "../../api/axios";
+import { axiosPublic } from "../../api/axios";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
 import Button from "../../components/atoms/Button";

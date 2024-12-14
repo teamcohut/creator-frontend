@@ -4,12 +4,9 @@ import { FiArrowRight, FiBookOpen, FiPlus } from "react-icons/fi";
 
 const SessionResource = () => {
   return (
-    <div>
+    <div className="border">
       <Header title="Resources" subtitle="">
-        <Button action={() => {}} fill={false} gap type="button" border={false}>
-          <FiPlus className="fs-body" />
-          Add Resource
-        </Button>
+        <></>
       </Header>
 
       <div className="d-flex flex-column position-relative">
@@ -28,7 +25,7 @@ const SessionResource = () => {
           </div>
           <FiArrowRight
             className="ms-auto primary-700"
-            onClick={() => {}}
+            onClick={() => { }}
             style={{ cursor: "pointer" }}
           />
         </div>

@@ -4,9 +4,7 @@ import {
   FiCheckCircle,
   FiHeadphones,
   FiLayout,
-  FiMoon,
   FiTool,
-  FiUser,
   FiUsers,
 } from "react-icons/fi";
 
@@ -14,7 +12,7 @@ export const NavList = [
   {
     icon: <FiLayout className="nav-icon" />,
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/",
   },
   {
     icon: <FiUsers className="nav-icon" />,
@@ -25,43 +23,30 @@ export const NavList = [
     icon: <FiBookOpen className="nav-icon" />,
     title: "Learning",
     path: "learning",
-  },
-  //  {
-  //     icon: <FiVideo className="nav-icon" />,
-  //     title: "Sessions",
-  //     path: "sessions"
-  // }, {
-  //     icon: <FiCheckSquare className="nav-icon" />,
-  //     title: "Assessments",
-  //     path: "assessments"
-  // }, {
-  //     icon: <FiCalendar className="nav-icon" />,
-  //     title: "Calendar",
-  //     path: "calendar"
-  // }
+  }
 ];
 
 export const SettingsList = [
   {
     icon: <FiTool className="nav-icon" />,
-    title: "Manage Program",
-    path: "/#",
+    title: "General",
+    path: "generalSetting",
   },
-  {
-    icon: <FiUser className="nav-icon" />,
-    title: "Account Settings",
-    path: "/#",
-  },
+  // {
+  //   icon: <FiUser className="nav-icon" />,
+  //   title: "Account Settings",
+  //   path: "/#",
+  // },
   {
     icon: <FiBell className="nav-icon" />,
     title: "Notifications",
     path: "/#",
   },
-  {
-    icon: <FiMoon className="nav-icon" />,
-    title: "Appearance",
-    path: "/#",
-  },
+  // {
+  //   icon: <FiMoon className="nav-icon" />,
+  //   title: "Appearance",
+  //   path: "/#",
+  // },
 ];
 
 export const HelpList = [

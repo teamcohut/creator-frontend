@@ -1,34 +1,34 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignUp from './pages/auth/SignUp';
-import Login from './pages/auth/Login';
-import Dashboard from './pages/dashboard/Dashboard';
-import Preview from './pages/Preview';
-import VerifyMail from './pages/auth/VerifyMail';
-import ParticipantsPage from './pages/dashboard/participants/Participants';
-import DashboardTemplate from './components/templates/DashboardTemplate';
-import NotFound from './pages/NotFound';
-import { AuthContextProvider } from './context/auth/AuthState';
-import Curriculum from './components/organisms/dashboard/Curriculum/Curriculum';
-import RequireAuth from './components/utils/RequireAuth';
-import ForgotPassword from './pages/auth/ForgotPassword';
-import ResetPassword from './pages/auth/ResetPassword';
-import ResendMail from './pages/auth/ResendMail';
-import PersistLogin from './components/utils/PersistLogin';
-import SessionsDisplay from './components/organisms/dashboard/Sessions/SessionsDisplay';
-import { ProgramContextProvider } from './context/programs/ProgramState';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUp from "./pages/auth/SignUp";
+import Login from "./pages/auth/Login";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Preview from "./pages/Preview";
+import VerifyMail from "./pages/auth/VerifyMail";
+import ParticipantsPage from "./components/organisms/dashboard/participants/Participants";
+import DashboardTemplate from "./components/templates/DashboardTemplate";
+import NotFound from "./pages/NotFound";
+import { AuthContextProvider } from "./context/auth/AuthState";
+import Curriculum from "./components/recycle/Curriculum/Curriculum";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
+import ResendMail from "./pages/auth/ResendMail";
+import SessionsDisplay from "./components/organisms/dashboard/Sessions/SessionsDisplay";
+import { ProgramContextProvider } from "./context/programs/ProgramState";
+import { ProtectedRoute } from "./components/utils/ProtectedRoute";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import GeneralSettings from "./pages/dashboard/settings/GeneralSettings";
+import SessionDetails from "./components/organisms/dashboard/Sessions/SessionDetails";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <PersistLogin>
-          <RequireAuth>
-            <ProgramContextProvider>
-              <DashboardTemplate />
-            </ProgramContextProvider>
-          </RequireAuth>
-        </PersistLogin>
+        <ProtectedRoute>
+          <ProgramContextProvider>
+            <DashboardTemplate />
+          </ProgramContextProvider>
+        </ProtectedRoute>
       ),
       children: [
         {
@@ -43,51 +43,62 @@ function App() {
           path: "learning",
           element: <SessionsDisplay />,
         },
+        {
+          path: "/learning/:sessionId",
+          element: <SessionDetails />
+        },
+        {
+          path: "generalSetting",
+          element: <GeneralSettings />,
+        },
       ],
     },
     {
       path: "curriculum",
-      element: <Curriculum />
+      element: <Curriculum />,
     },
     {
       path: "/signup",
-      element: <SignUp />
+      element: <SignUp />,
     },
     {
       path: "/login",
-      element: <Login />
+      element: <Login />,
     },
     {
       path: "/forgot-password",
-      element: <ForgotPassword />
+      element: <ForgotPassword />,
     },
     {
       path: "/reset-password",
-      element: <ResetPassword />
+      element: <ResetPassword />,
     },
     {
       path: "/resend-mail",
-      element: <ResendMail />
+      element: <ResendMail />,
     },
     {
       path: "/activate/:id",
-      element: <VerifyMail />
+      element: <VerifyMail />,
     },
     {
-      path: '/preview',
-      element: <Preview />
-    }, {
-      path: '*',
-      element: <NotFound />
-    }
-
-
+      path: "/preview",
+      element: <Preview />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
   ]);
+
+  const queryClient = new QueryClient();
 
   return (
     <>
       <AuthContextProvider>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </AuthContextProvider>
     </>
   );

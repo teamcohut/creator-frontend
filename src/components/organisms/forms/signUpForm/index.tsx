@@ -1,126 +1,139 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
 import { Link } from "react-router-dom";
 import "../../style.css";
-import { useSignup } from "../../../../hooks/auth/useSignUp";
-import PasswordInput from "../../../atoms/inputs/PasswordInput";
 import { ISignupData } from "../../../../@types/auth.interface";
 import { notification } from "antd";
+import PasswordInput from "../../../atoms/inputs/PasswordInput";
+import { useMutation } from "@tanstack/react-query";
+import axiosAPI from "../../../../api/axios";
+import { TextInput2 } from "../../../atoms/inputs/TextInput";
 
-
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
   const [form, setForm] = useState<ISignupData>({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-  const [isvalid, setIsvalid] = useState<boolean>(false);
-  const { signup, error, isLoading } = useSignup();
-  const [api, contextHolder] = notification.useNotification();
+
+  const signupMutation = useMutation({
+    mutationFn: (payload: any) => {
+      return axiosAPI.auth.signup(payload);
+    },
+    onSuccess: () => {
+      setSignupSuccess(true);
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: error.response.data.errors[0] ?? error.response.data.message,
+      });
+    },
+  });
 
   const handleInputChange = (name: string, value: string) => {
     setForm({ ...form, [name]: value });
   };
 
-  const confirmPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsvalid(e.target.value === form.password);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { email, password } = form;
-    if (isvalid) {
-      const response = await signup(email, password);
-      if (response.data.error) {
-        api.error({
-          message: response.data.errors[0],
-        })
-      }
-      console.log("Form values:", form);
-    } else {
-      console.log("Passwords do not match!");
-    }
+  const handleSubmit = async () => {
+    const { email, password, firstName, lastName } = form;
+    await signupMutation.mutate({ firstName, lastName, email, password });
   };
 
   return (
-    <>
-      {contextHolder}
-      <form
-        className="form bg-white d-flex flex-column rounded-5"
-        onSubmit={handleSubmit}
+    <div className="form bg-white d-flex flex-column rounded-5">
+      <Link
+        className="primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none"
+        to={"/"}
       >
+        Cohut
+      </Link>
 
-        <Link
-          className="primary-700 manrope-600 fs-h3 text-decoration-none d-flex d-lg-none"
-          to={"/"}
-        >
-          Cohut
-        </Link>
+      <div className="d-flex flex-column gap-2">
+        <h1 className="manrope-600 primary-950 fs-h2">Create your account</h1>
+        <span className="manrope-500 dark-700 fs-body">
+          Launch your program in no time just by creating an account with us.
+        </span>
+      </div>
 
-        <div className="d-flex flex-column gap-2">
-          <h1 className="manrope-600 primary-950 fs-h2">Create your account</h1>
-          <span className="manrope-500 dark-700 fs-body">
-            Launch your program in no time just by creating an account with us.
-          </span>
-        </div>
-
-        <div className="d-flex flex-column gap-4">
-
-          <EmailInput
-            label="Email"
-            id="email"
+      <div className="d-flex flex-column gap-4">
+        <div className="d-flex gap-4">
+          <TextInput2
+            label="FirstName"
+            id="firstname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleInputChange("email", e.target.value)
+              handleInputChange("firstName", e.target.value)
             }
-            placeholder="user@email.com"
+            placeHolder="First name"
           />
-
-          <PasswordInput
-            label="Password"
-            id="password"
-            valid={true}
-            showStrength={true}
+          <TextInput2
+            label="LastName"
+            id="lastname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleInputChange("password", e.target.value)
+              handleInputChange("lastName", e.target.value)
             }
-            placeHolder="password"
+            placeHolder="Last name"
           />
-
-          <PasswordInput
-            label="Confirm Password"
-            id="cpassword"
-            valid={isvalid}
-            showStrength={false}
-            onchange={confirmPassword}
-            placeHolder="password"
-          />
-
         </div>
 
-        {error && <div>{error}</div>}
+        <EmailInput
+          label="Email"
+          id="email"
+          onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleInputChange("email", e.target.value)
+          }
+          placeholder="user@email.com"
+        />
 
-        <div className="d-flex flex-column align-items-center gap-3">
+        <PasswordInput
+          label="Password"
+          id="password"
+          valid={true}
+          showStrength={true}
+          onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleInputChange("password", e.target.value)
+          }
+          placeHolder="password"
+        />
 
-          <Button
-            children="Create Account"
-            type="submit"
-            action={() => { }}
-            fill={true}
-            loading={isLoading}
-          />
+        {/* <PasswordInput
+          label="Confirm Password"
+          id="cpassword"
+          valid={form.password === form.confirmPassword}
+          showStrength={false}
+          onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleInputChange("confirmPassword", e.target.value)
+          }
+          placeHolder="confirm password"
+        /> */}
+      </div>
 
-          <span className="">
-            Already have an account?{" "}
-            <Link className="primary-700 text-decoration-none" to={"/login"}>
-              Sign in
-            </Link>
-          </span>
+      {/* {error && <div>{error}</div>} */}
 
-        </div>
+      <div className="d-flex flex-column align-items-center gap-3">
+        <Button
+          children="Create Account"
+          type="submit"
+          action={handleSubmit}
+          fill={true}
+          loading={signupMutation.isPending}
+        />
 
-      </form>
-    </>
+        <span className="">
+          Already have an account?{" "}
+          <Link className="primary-700 text-decoration-none" to={"/login"}>
+            Sign in
+          </Link>
+        </span>
+      </div>
+    </div>
   );
 };
+
+interface ISignupForm {
+  setSignupSuccess: (value: any) => void;
+}
 
 export default SignUpForm;

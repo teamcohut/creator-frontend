@@ -1,37 +1,26 @@
-import { FiClock, FiUsers, FiVideo } from "react-icons/fi";
-import PercentageBar from "../../../atoms/dashboard/PercentageBar";
+import { FiUsers, FiVideo } from "react-icons/fi";
 
-export const cardData = [
-  {
-    icon: <FiClock />,
-    title: "Cohort Duration",
-    subtitle: "0",
-    iconColor: "primary-300",
-    iconBgColor: "#ECF1FF",
-    children: <PercentageBar progress={25} />,
-  },
+export const generateCardData = (data: any) => [
   {
     icon: <FiUsers />,
     title: "Total Participants",
-    subtitle: "0",
+    subtitle: data?.noOfParticipants,
     iconColor: "primary-300",
     iconBgColor: "#ECF1FF",
-    children: <PercentageBar progress={25} />,
   },
   {
     icon: <FiUsers />,
     title: "Active Participants",
-    subtitle: "0",
+    subtitle: data?.noOfActiveParticipants,
     iconColor: "success-300",
     iconBgColor: "#E9FFF7",
-    children: <PercentageBar progress={25} />,
   },
   {
     icon: <FiVideo />,
     title: "Total Sessions",
-    subtitle: "0",
+    subtitle: data?.noOfSessions || 0,
     iconColor: "primary-300",
     iconBgColor: "#ECF1FF",
-    children: <PercentageBar progress={25} />,
   },
 ];
+

@@ -1,0 +1,64 @@
+/* Change the color, size, and font of the tab labels */
+.ant-tabs-tab {
+  font-family: "Manrope", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--dark-700) !important; /* Custom text color */
+}
+.ant-tabs-tab:hover {
+  color: var(--primary-400) !important; /* Hover effect for Tabs */
+}
+
+/* Change the active tab label's color */
+.ant-tabs-tab-active .ant-tabs-tab-btn {
+  font-family: "Manrope", sans-serif !important;
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--primary-400) !important; /* Active tab text color */
+}
+
+.custom-tabs .ant-tabs-tab .ant-tabs-tab-btn{
+  font-size: clamp(12px, 1.5vw, 14px); /* Adjust font size */
+}
+
+/* .custom-tabs .ant-tabs-tab-active {
+  font-size: clamp(14px, 1.5vw, 16px);
+} */
+
+/* Change the underline color for the active tab */
+.ant-tabs-ink-bar {
+  background-color: var(--primary-400) !important;
+}
+
+.custom-tag {
+  border-radius: 20px;
+  background-color: var(--primary-50);
+  color: var(--dark-400);
+  padding: 4px 12px;
+  margin: 2px;
+  display: inline-block;
+
+}
+
+
+.w-60 {
+  width: 65%;
+}
+.w-45 {
+  width: 47%;
+}
+
+.w-78 {
+  width: 78px;
+}
+.h-48 {
+  height: 48px;
+}
+.w-12 {
+  width: 12px;
+}
+
+.gap-133 {
+  gap: 133px;
+}

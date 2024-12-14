@@ -1,30 +1,60 @@
-import React, { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
+import api from "../../../../api/axios";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { notification } from "antd";
+import { useMutation } from "@tanstack/react-query";
 
-const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
-  const [tracks, setTracks] = useState<string[]>([]);
-  const [currentTrack, setCurrentTrack] = useState<string>("");
+const UploadParticipants: FC<IUploadParticipants> = ({
+  onSubmit,
+  hasTrack,
+}) => {
+  const [track, setTrack] = useState("");
+  const { activeCohort } = useContext(ProgramContext);
 
-  const handleTrackAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && currentTrack.trim() !== "") {
-      e.preventDefault();
-      if (!tracks.includes(currentTrack.trim())) {
-        setTracks((prevTracks) => [...prevTracks, currentTrack.trim()]);
-        setCurrentTrack("");
-      }
+  console.log("activeCohort", activeCohort);
+
+  const inviteParticipantsMutation = useMutation({
+    mutationFn: (payload: File) =>
+      api.participant.inviteGroupParticipant(activeCohort?._id, track, payload),
+    onSuccess: () => {
+      notification.success({ message: "Participants invited successfully!" });
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: "Failed to invite participants. Please try again.",
+      });
+    },
+  });
+
+  const handleFileInput = async (file: File) => {
+    if (file?.type !== "text/csv") {
+      notification.warning({
+        message: "File type not supported",
+        description: "Please upload a CSV file.",
+      });
+      return;
     }
-  };
 
-  const handleTrackRemove = (index: number) => {
-    setTracks((prevTracks) => prevTracks.filter((_, i) => i !== index));
-  };
+    if (!activeCohort?._id) {
+      notification.warning({ message: "No active cohort detected." });
+    }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentTrack(e.target.value); // Update current input value
+    if (
+      (activeCohort.hasTrack && !track) ||
+      (activeCohort.hasTrack && track === "")
+    ) {
+      notification.warning({
+        message: "You are required to specify a track to add participants",
+      });
+      return;
+    }
+
+    inviteParticipantsMutation.mutate(file);
   };
 
   return (
@@ -32,7 +62,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
       <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
         <ProgressBar
           height={8}
-          length={3}
+          length={2}
           page={2}
           absolute={true}
           gap
@@ -48,31 +78,32 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
         </div>
 
         <div className="d-flex flex-column gap-4">
-          {/* <TextInput id='track' label='Upload Participants List' placeHolder='Pick track' onchange={() => { }} /> */}
-
-          <div>
-            <TextInput
-              id="track"
-              label="Tracks"
-              placeHolder="Type a track and press Enter"
-              onchange={handleInputChange}
-              onKeyDown={handleTrackAdd}
-              value={currentTrack}
-              tracks={tracks}
-              onRemove={handleTrackRemove} // Handle item removal
-            />
-          </div>
+          {activeCohort.hasTrack && (
+            <div>
+              <TextInput
+                id="track"
+                label="Tracks"
+                placeHolder="Type a track and press Enter"
+                onchange={(e) => setTrack(e.target.value)}
+                value={track}
+              />
+            </div>
+          )}
 
           <DragNDropInput
             label=""
             id="thumbnail-upload"
             detail="Cohort's list of Participants"
-            onchange={(file) => console.log("Uploaded file:", file)}
+            onchange={(file: any) => handleFileInput(file)}
           />
-          <span className="fs-caption primary-400">
-            A csv (Comma separated Values) File containing First names, Last
-            names and Emails of Participants
-          </span>
+          {inviteParticipantsMutation.isPending ? (
+            <>Uploading file...</>
+          ) : (
+            <span className="fs-caption primary-400">
+              A csv (Comma separated Values) File containing First names, Last
+              names and Emails of Participants
+            </span>
+          )}
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">
@@ -90,6 +121,12 @@ const UploadParticipants: FC<IUploadParticipants> = ({ onSubmit }) => {
 
 interface IUploadParticipants {
   onSubmit: () => void;
+  hasTrack: boolean;
 }
+
+// interface ITracks {
+//   name: string;
+//   file: string;
+// }
 
 export default UploadParticipants;

@@ -5,7 +5,11 @@ export interface IButton {
     action: ()=> void,
     type:  "submit" | "reset" | "button",
     fill: boolean,
-    outline?: 'white' | 'primary',
+    outline?: 'white' | 'primary' | 'primary-700' | 'outlineColor' | string,
+    outlineColor?: string,
+    customStyle?: React.CSSProperties,
+    handleMouseLeave?: () => void,
+    handleMouseEnter?: () => void,
     border?: boolean,
     gap?: boolean,
     width?: number,
@@ -14,5 +18,5 @@ export interface IButton {
   }
 
 export interface IFilterButton {
-  text: 'All' | 'Active' | 'Inactive' | 'Closed',
+  text: "All" | "Active" | "Inactive" | "Closed";
 }

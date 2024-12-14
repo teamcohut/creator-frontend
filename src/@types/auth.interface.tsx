@@ -1,17 +1,19 @@
 import { ReactNode } from "react";
 
 export interface IAuthContext {
-    auth: Record<string, any> | null; 
-    setAuth: React.Dispatch<React.SetStateAction<Record<string, any>>>;
-    persist: boolean;
-    setPersist: React.Dispatch<React.SetStateAction<boolean>>;
-  }
+  auth: Record<string, any> | null;
+  setAuth: React.Dispatch<React.SetStateAction<Record<string, any>>>;
+  persist: boolean;
+  setPersist: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export interface ISuccessCard {
-    title: string,
-    description: string,
-    children?: ReactNode,
-    icon: ReactNode
+  title: string;
+  description: string;
+  email?: string;
+  width?: number;
+  children?: ReactNode;
+  icon: ReactNode;
 }
 
 export interface IAuthState {
@@ -19,15 +21,15 @@ export interface IAuthState {
 }
 
 export interface IAuthProvider {
-    children: ReactNode
-  }
+  children: ReactNode;
+}
 
-export type TAuthAction = 
-    | { type: 'LOGIN'; payload: Record<string, any> } 
-    | { type: 'LOGOUT' };
+export type TAuthAction =
+  | { type: "LOGIN"; payload: Record<string, any> }
+  | { type: "LOGOUT" };
 
 export interface IUserChoice {
-  onSubmit: (selected: string) => void
+  onSubmit: (selected: string) => void;
 }
 
 export interface ISignupForm {
@@ -35,8 +37,11 @@ export interface ISignupForm {
 }
 
 export interface ISignupData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface IForgotPassword {
