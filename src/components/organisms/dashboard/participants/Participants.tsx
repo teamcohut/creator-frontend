@@ -83,15 +83,9 @@ const ParticipantsPage: React.FC = () => {
               title="Enrolled Participants"
               iconBgColor="#ECF1FF4D"
               iconBorderColor="#ECF1FF"
-              // subtitle={participants.filter((p) => p.status === "active").length}
+              subtitle={(data?.data.data.noOfParticipants)}
             >
-              <PercentageBar
-                progress={
-                  (data?.data.data.noOfActiveParticipants /
-                    data?.data.data.noOfParticipants) *
-                  100
-                }
-              />
+  
             </OverviewCard>
 
             <OverviewCard
