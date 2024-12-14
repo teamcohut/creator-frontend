@@ -23,7 +23,7 @@ const ChangePassword: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         <div className="d-flex flex-column gap-4">
           <PasswordInput id="old-password" placeHolder="password" label="Old Password" onchange={() => {}} />
           <PasswordInput id="new-password" placeHolder="password" label="New Password" onchange={() => {}} />
-          <PasswordInput id="confirm-password" placeHolder="password" label="Confirm Password" onchange={() => {}} />
+          {/* <PasswordInput id="confirm-password" placeHolder="password" label="Confirm Password" onchange={() => {}} /> */}
         </div>
 
         {/* Change Password Button */}

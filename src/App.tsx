@@ -48,7 +48,7 @@ function App() {
           element: <SessionDetails />
         },
         {
-          path: "generalSetting",
+          path: "settings",
           element: <GeneralSettings />,
         },
       ],
