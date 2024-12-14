@@ -8,12 +8,12 @@ export interface IAuthContext {
 }
 
 export interface ISuccessCard {
-    title: string,
-    description: string,
-    email?: string,
-    width?: number,
-    children?: ReactNode,
-    icon: ReactNode
+  title: string;
+  description: string;
+  email?: string;
+  width?: number;
+  children?: ReactNode;
+  icon: ReactNode;
 }
 
 export interface IAuthState {
@@ -37,6 +37,8 @@ export interface ISignupForm {
 }
 
 export interface ISignupData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
