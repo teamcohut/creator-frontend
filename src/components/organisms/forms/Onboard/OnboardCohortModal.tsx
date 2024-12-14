@@ -73,12 +73,12 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
           </span>
         </div>
 
-        <div className="d-flex flex-column gap-3">
+        <div className="d-flex flex-column gap-4">
           <div className="">
             <TextInput
               id="name"
               onchange={(e) => handleInputChange(e.target.name, e.target.value)}
-              placeHolder="Cohort 1"
+              placeHolder="E.g; Cohort 1"
               label="Cohort Name"
             />
           </div>
@@ -98,7 +98,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
             />
           </div>
           {/* Checkbox to toggle track */}
-          <div>
+          <div className="d-flex flex-column gap-2">
             <label className="d-flex gap-2 manrope-500" htmlFor="hasTrack">
               <input
                 type="checkbox"
@@ -120,7 +120,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Continue"
-            action={() => {}}
+            action={() => { }}
             type="submit"
             fill={true}
             loading={isLoading}

@@ -6,7 +6,7 @@ import { FiImage } from "react-icons/fi";
 const allowedImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
 
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
-  const { label, id, onchange, detail } = props;
+  const { label, id, onchange, detail, icon } = props;
 
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -66,7 +66,11 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
             width={50}
           />
         ) : (
-          <FiImage className="h1 dark-400" />
+          <div>
+            {
+              icon ? icon : (<FiImage className="h1 dark-400" />)
+            }
+          </div>
         )}
         <p className="fs-caption">
           {file ? (

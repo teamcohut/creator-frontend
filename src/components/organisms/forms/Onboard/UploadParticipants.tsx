@@ -8,6 +8,7 @@ import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
+import { FiUpload, FiUploadCloud } from "react-icons/fi";
 
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,
@@ -82,28 +83,31 @@ const UploadParticipants: FC<IUploadParticipants> = ({
             <div>
               <TextInput
                 id="track"
-                label="Tracks"
-                placeHolder="Type a track and press Enter"
+                label="Learning Tracks"
+                placeHolder="Enter Learning Track"
                 onchange={(e) => setTrack(e.target.value)}
                 value={track}
               />
             </div>
           )}
 
-          <DragNDropInput
-            label=""
-            id="thumbnail-upload"
-            detail="Cohort's list of Participants"
-            onchange={(file: any) => handleFileInput(file)}
-          />
-          {inviteParticipantsMutation.isPending ? (
-            <>Uploading file...</>
-          ) : (
-            <span className="fs-caption primary-400">
-              A csv (Comma separated Values) File containing First names, Last
-              names and Emails of Participants
-            </span>
-          )}
+          <div>
+            <DragNDropInput
+              label="Upload Participants List"
+              icon={<FiUploadCloud className="fs-small-icon dark-300" />}
+              id="thumbnail-upload"
+              detail="Cohort's list of Participants"
+              onchange={(file: any) => handleFileInput(file)}
+            />
+            {inviteParticipantsMutation.isPending ? (
+              <>Uploading file...</>
+            ) : (
+              <span className="fs-caption primary-400">
+                A csv (Comma separated Values) File containing First names, Last
+                names and Emails of Participants
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">

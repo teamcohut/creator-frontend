@@ -61,7 +61,7 @@ const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
       <div className="d-flex flex-column gap-4">
         <div className="d-flex gap-4">
           <TextInput2
-            label="FirstName"
+            label="First Name"
             id="firstname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleInputChange("firstName", e.target.value)
@@ -69,7 +69,7 @@ const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
             placeHolder="First name"
           />
           <TextInput2
-            label="LastName"
+            label="Last Name"
             id="lastname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleInputChange("lastName", e.target.value)
@@ -121,7 +121,7 @@ const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
           loading={signupMutation.isPending}
         />
 
-        <span className="">
+        <span className="fs-footer">
           Already have an account?{" "}
           <Link className="primary-700 text-decoration-none" to={"/login"}>
             Sign in
