@@ -8,6 +8,10 @@ class Cohort {
   createCohort(payload: any) {
     return this.client.post("/cohort", payload);
   }
+
+  updateCohort(id: string, payload: any) {
+    return this.client.put(`/cohort/${id}`, payload);
+  }
 }
 
 export default Cohort;

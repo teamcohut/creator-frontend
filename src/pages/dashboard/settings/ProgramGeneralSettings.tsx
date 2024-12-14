@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import DragNDropInput from '../../../components/atoms/inputs/DragNDropInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
@@ -7,18 +7,23 @@ import GroupButton from '../../../components/atoms/Button/GroupButton'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import DeleteProgramModal from '../../../components/organisms/dashboard/modals/DeleteProgramModal'
 
+
 const ProgramGeneralSettings = () => {
 
   const [activeView, setActiveView] = useState("Hybrid");
   const [isHovered, setIsHovered] = useState(false);
+
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
+  
 
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
+
+
 
   
   const handleMouseEnter = () => setIsHovered(true);
@@ -32,6 +37,8 @@ const ProgramGeneralSettings = () => {
   const handleButtonClick = (view: string) => {
     setActiveView(view);
   };
+
+
 
   const buttonOptions = [
     {

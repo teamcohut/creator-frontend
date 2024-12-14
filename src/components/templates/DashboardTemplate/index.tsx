@@ -55,7 +55,7 @@ const DashboardTemplate: FC = () => {
       <div className="dashboard-template d-flex w-100">
         <SideNav />
         <div className="h-100 content-area dashboard-body w-100">
-          <TopNav />
+          {/* <TopNav /> */}
           <div className="content outlet-div">
             <Outlet />
           </div>
