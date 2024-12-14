@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { TextInput2 } from "../../../atoms/inputs/TextInput";
 
-const SignUpForm: React.FC = () => {
+const SignUpForm: React.FC<ISignupForm> = ({ setSignupSuccess }) => {
   const [form, setForm] = useState<ISignupData>({
     firstName: "",
     lastName: "",
@@ -22,6 +22,9 @@ const SignUpForm: React.FC = () => {
   const signupMutation = useMutation({
     mutationFn: (payload: any) => {
       return axiosAPI.auth.signup(payload);
+    },
+    onSuccess: () => {
+      setSignupSuccess(true);
     },
     onError: (error: any) => {
       notification.error({
@@ -61,7 +64,7 @@ const SignUpForm: React.FC = () => {
             label="FirstName"
             id="firstname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleInputChange("firstname", e.target.value)
+              handleInputChange("firstName", e.target.value)
             }
             placeHolder="First name"
           />
@@ -69,7 +72,7 @@ const SignUpForm: React.FC = () => {
             label="LastName"
             id="lastname"
             onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleInputChange("firstname", e.target.value)
+              handleInputChange("lastName", e.target.value)
             }
             placeHolder="Last name"
           />
@@ -128,5 +131,9 @@ const SignUpForm: React.FC = () => {
     </div>
   );
 };
+
+interface ISignupForm {
+  setSignupSuccess: (value: any) => void;
+}
 
 export default SignUpForm;
