@@ -1,88 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { axiosPublic } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
 import Button from "../../components/atoms/Button";
 import { FiLoader, FiShieldOff, FiUserCheck } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
 
 const VerifyMail = () => {
-  const [status, setstatus] = useState<status>("loading");
   const navigate = useNavigate();
 
-  const route = useParams();
-  const { id } = route;
+  // const route = useParams();
+  // const { id } = route;
+  const url = window.location.pathname; // e.g., "/users/123"
+  const id = url.split("/").pop() ?? ""; // Extract the last segment
 
-  useEffect(() => {
-    verifyMail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const verifyMail = async () => {
-    try {
-      const response = await axiosPublic.post(`/auth/activate-account/${id}`);
-      if (!response) {
-        navigate("/signup");
-      }
-      console.log(response);
+  const { isLoading, isError } = useQuery({
+    queryKey: ["activate-account"],
+    queryFn: async () => {
+      const response = await api.auth.activateAccount(id);
+      console.log("error from query", response.data);
       if (!response.data.error) {
-        setstatus("verified");
         setTimeout(() => {
           navigate("/login");
         }, 60000);
       }
-    } catch (error: any) {
-      console.log(error);
-      setstatus("error");
-    }
-  };
+      return response;
+    },
+  });
 
-  if (status === "loading") {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
+  return (
+    <AuthTemplate
+      title="Launch Your Learning Program In 5 Minutes"
+      author="Cohut"
+    >
+      {isLoading ? (
         <SuccessCard
           icon={<FiLoader className="spinner success-600 fs-icon " />}
           title="Verifying ..."
           description="Please wait a second while we verify your account"
         />
-        :
-      </AuthTemplate>
-    );
-  } else if (status === "verified") {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
-        <SuccessCard
-          icon={<FiUserCheck className="success-600 fs-icon" />}
-          title="Account Verified!"
-          description="Your account has been successfully verified. You can now proceed to sign up"
-        >
-          <div className="w-auto">
-            <Button
-              action={() => {
-                navigate("/login");
-              }}
-              children="Sign In"
-              type="button"
-              fill={false}
-              border
-              outline="primary"
-            />
-          </div>
-        </SuccessCard>
-      </AuthTemplate>
-    );
-  } else if (status === "error") {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
+      ) : isError ? (
         <SuccessCard
           icon={<FiShieldOff className="error-300 fs-icon" />}
           title="Verification Failed!"
@@ -101,13 +58,28 @@ const VerifyMail = () => {
             />
           </div>
         </SuccessCard>
-      </AuthTemplate>
-    );
-  }
-
-  return <></>;
+      ) : (
+        <SuccessCard
+          icon={<FiUserCheck className="success-600 fs-icon" />}
+          title="Account Verified!"
+          description="Your account has been successfully verified. You can now proceed to sign up"
+        >
+          <div className="w-auto">
+            <Button
+              action={() => {
+                navigate("/login");
+              }}
+              children="Sign In"
+              type="button"
+              fill={false}
+              border
+              outline="primary"
+            />
+          </div>
+        </SuccessCard>
+      )}
+    </AuthTemplate>
+  );
 };
-
-type status = "loading" | "verified" | "error";
 
 export default VerifyMail;
