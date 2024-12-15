@@ -85,7 +85,7 @@ const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
           </span>
           <div style={{ textAlign: "start", fontSize: "fs-body"}}>
 
-            {/* Transfer Ownership Button */}
+            
             <div className='d-flex gap-4'>
 
             <OutlineButton

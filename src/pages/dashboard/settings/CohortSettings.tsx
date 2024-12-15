@@ -208,6 +208,7 @@ const CohortSettings = () => {
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
+        
 
 
       </div>

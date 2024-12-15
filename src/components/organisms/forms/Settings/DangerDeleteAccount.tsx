@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import SettingsStatusCard from './SettingsStatusCard';
 import { FiAlertCircle } from 'react-icons/fi';
 import OutlineButton from '../../../atoms/Button/OutlineButton';
@@ -7,8 +7,12 @@ import { useMutation } from '@tanstack/react-query';
 import api from '../../../../api/axios';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { ISetupModal } from '../../../../@types/dashboard.interface';
 
-const DangerDeleteAccount = () => {
+const DangerDeleteAccount: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+  const handleClose = () => {
+    setModalOpen(false, '');
+  };
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -66,7 +70,7 @@ const DangerDeleteAccount = () => {
               handleMouseLeave={handleMouseLeave}
             >
 
-              <span className={isHovered ? 'white' : 'error-500'}> Delete Account </span>
+              <span className={isHovered ? 'white' : 'error-500'}> Deactivate Account </span>
               
             </OutlineButton>
 
@@ -76,7 +80,7 @@ const DangerDeleteAccount = () => {
               fill={true}
               width={184}
               border={true}
-              action={() => {}}
+              action={() => {handleClose()}}
               
             >
               Cancel
