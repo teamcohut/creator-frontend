@@ -1,8 +1,11 @@
 import { Tabs, TabsProps } from 'antd';
 import CohortSettings from './CohortSettings';
 import ProgramGeneralSettings from './ProgramGeneralSettings';
+import { useContext } from 'react';
+import { ProgramContext } from '../../../context/programs/ProgramContext';
 
 const ProgramSettings = () => {
+  const {activeCohort} = useContext(ProgramContext)
   const onChange = (key: string) => {
     console.log(`Active Tab Key: ${key}`);
   };
@@ -17,6 +20,7 @@ const ProgramSettings = () => {
       key: '2',
       label: 'Cohort',
       children: <CohortSettings />,
+      disabled: !activeCohort?.id,
     },
   ];
   return (

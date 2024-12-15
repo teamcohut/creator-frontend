@@ -1,14 +1,14 @@
 import Header from "../../../components/organisms/dashboard/Header";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import './index.css'
 import AccountSettings from "./AccountSettings";
-import PermissionsSettings from "./PermissionsSettings";
 import ProgramSettings from "./ProgramSettings";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import { FiEdit3 } from "react-icons/fi";
 import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
+import { ProgramContext } from "../../../context/programs/ProgramContext";
 
 
 const GeneralSettings = () => {
@@ -17,19 +17,12 @@ const GeneralSettings = () => {
     name: string;
     open: boolean;
   });
+const {activeProgram} = useContext(ProgramContext)
 
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
 
-  const header = [
-    "Full Name",
-    "Email Address",
-    "Role",
-    "Status",
-    "Last Login",
-    "",
-  ];
   
 
   const handleMouseEnter = () => setIsHovered(true);
@@ -53,6 +46,7 @@ const GeneralSettings = () => {
       key: '2',
       label: 'Program',
       children: <ProgramSettings />,
+      disabled: !activeProgram?.id,
     },
     // {
     //   key: '3',
