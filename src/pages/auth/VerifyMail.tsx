@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
@@ -9,8 +9,10 @@ import { useQuery } from "@tanstack/react-query";
 const VerifyMail = () => {
   const navigate = useNavigate();
 
-  const route = useParams();
-  const { id } = route;
+  // const route = useParams();
+  // const { id } = route;
+  const url = window.location.pathname; // e.g., "/users/123"
+  const id = url.split("/").pop() ?? ""; // Extract the last segment
 
   const { isLoading, isError } = useQuery({
     queryKey: ["activate-account"],
