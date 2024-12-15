@@ -54,11 +54,11 @@ const GeneralSettings = () => {
       label: 'Program',
       children: <ProgramSettings />,
     },
-    {
-      key: '3',
-      label: 'Permissions',
-      children: <PermissionsSettings />,
-    },
+    // {
+    //   key: '3',
+    //   label: 'Permissions',
+    //   children: <PermissionsSettings />,
+    // },
     // {
     //   key: '4',
     //   label: 'Payment',

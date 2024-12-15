@@ -147,7 +147,7 @@ const CohortSettings = () => {
             />
           </div>
 
-          <span className='fs-body manrope-600 primary-950'>Track</span>
+         {/* <span className='fs-body manrope-600 primary-950'>Track</span>
 
       <Select
       mode="tags"
@@ -163,7 +163,7 @@ const CohortSettings = () => {
         </Option>
       ))}
     </Select>
-    <div className='pb-4'></div>
+    <div className='pb-4'></div> */}
 
         
 
