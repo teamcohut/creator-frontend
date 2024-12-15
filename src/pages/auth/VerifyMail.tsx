@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import AuthTemplate from "../../components/templates/AuthTemplate";
@@ -8,20 +7,17 @@ import { FiLoader, FiShieldOff, FiUserCheck } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 
 const VerifyMail = () => {
-  const [status, setstatus] = useState<status>("loading");
   const navigate = useNavigate();
 
   const route = useParams();
   const { id } = route;
 
-  const { isLoading } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ["activate-account"],
     queryFn: async () => {
       const response = await api.auth.activateAccount(id);
-      if (response.data.error) {
-        setstatus("error");
-      } else {
-        setstatus("verified");
+      console.log("error from query", response.data);
+      if (!response.data.error) {
         setTimeout(() => {
           navigate("/login");
         }, 60000);
@@ -30,52 +26,18 @@ const VerifyMail = () => {
     },
   });
 
-  if (isLoading) {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
+  return (
+    <AuthTemplate
+      title="Launch Your Learning Program In 5 Minutes"
+      author="Cohut"
+    >
+      {isLoading ? (
         <SuccessCard
           icon={<FiLoader className="spinner success-600 fs-icon " />}
           title="Verifying ..."
           description="Please wait a second while we verify your account"
         />
-        :
-      </AuthTemplate>
-    );
-  } else if (status === "verified") {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
-        <SuccessCard
-          icon={<FiUserCheck className="success-600 fs-icon" />}
-          title="Account Verified!"
-          description="Your account has been successfully verified. You can now proceed to sign up"
-        >
-          <div className="w-auto">
-            <Button
-              action={() => {
-                navigate("/login");
-              }}
-              children="Sign In"
-              type="button"
-              fill={false}
-              border
-              outline="primary"
-            />
-          </div>
-        </SuccessCard>
-      </AuthTemplate>
-    );
-  } else if (status === "error") {
-    return (
-      <AuthTemplate
-        title="Launch Your Learning Program In 5 Minutes"
-        author="Cohut"
-      >
+      ) : isError ? (
         <SuccessCard
           icon={<FiShieldOff className="error-300 fs-icon" />}
           title="Verification Failed!"
@@ -94,13 +56,28 @@ const VerifyMail = () => {
             />
           </div>
         </SuccessCard>
-      </AuthTemplate>
-    );
-  }
-
-  return <></>;
+      ) : (
+        <SuccessCard
+          icon={<FiUserCheck className="success-600 fs-icon" />}
+          title="Account Verified!"
+          description="Your account has been successfully verified. You can now proceed to sign up"
+        >
+          <div className="w-auto">
+            <Button
+              action={() => {
+                navigate("/login");
+              }}
+              children="Sign In"
+              type="button"
+              fill={false}
+              border
+              outline="primary"
+            />
+          </div>
+        </SuccessCard>
+      )}
+    </AuthTemplate>
+  );
 };
-
-type status = "loading" | "verified" | "error";
 
 export default VerifyMail;
