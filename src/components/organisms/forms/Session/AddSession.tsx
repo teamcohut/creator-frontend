@@ -46,7 +46,6 @@ const AddSession: React.FC<ISessionModal> = ({ onSubmit }) => {
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <h2></h2>
           <div className="d-flex flex-row align-items-end">
             <div className="w-35">
               <DateInput id="date" onchange={handleChange} placeHolder="Select date" label="Set a time" />

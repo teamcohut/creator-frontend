@@ -2,7 +2,7 @@ import { FC, useContext } from "react";
 import SideNav from "../../organisms/dashboard/SideNav";
 import "./index.css";
 import { Outlet } from "react-router-dom";
-import TopNav from "../../organisms/dashboard/TopNav";
+import TopNav from "../../recycle/TopNav";
 import { Skeleton } from "antd";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { useQuery } from "@tanstack/react-query";

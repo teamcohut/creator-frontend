@@ -4,7 +4,7 @@ import { FiMail } from "react-icons/fi";
 import "../style.css";
 
 const EmailInput: FC<IEmailInput> = (props) => {
-  const { id, label, placeholder, onchange, icon } = props;
+  const { id, label, placeholder, onchange, icon, value } = props;
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +39,7 @@ const EmailInput: FC<IEmailInput> = (props) => {
           onChange={handleOnChange}
           onInvalid={handleOnInvalid}
           required
+          value={value}
         />
       </div>
 

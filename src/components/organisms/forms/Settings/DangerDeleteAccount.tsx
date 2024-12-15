@@ -61,6 +61,7 @@ const DangerDeleteAccount = () => {
               width={184}
               border={true}
               action={() => deactivateAccountMutation.mutate()}
+              loading={deactivateAccountMutation.isPending}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}

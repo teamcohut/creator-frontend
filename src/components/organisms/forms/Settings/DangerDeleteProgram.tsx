@@ -95,6 +95,7 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
               width={184}
               border={true}
               action={() => {deleteProgramInfoMutation.mutate(activeProgram?.id)}}
+              loading={deleteProgramInfoMutation.isPending}
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}

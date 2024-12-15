@@ -129,7 +129,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       </div>
 
       <div className="d-flex flex-column align-items-center gap-3">
-        <Button children="Create Session" action={handleSubmit} type="button" fill={true} />
+        <Button children="Create Session" action={handleSubmit} type="button" fill={true} loading={sessionMutation.isPending} />
       </div>
     </form>
   );

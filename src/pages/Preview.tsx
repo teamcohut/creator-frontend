@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiBell, FiCheckCircle, FiUser } from "react-icons/fi";
 import AddSession from "../components/organisms/forms/Session/AddSession";
 import AdditionalSession from "../components/organisms/forms/Session/AdditionalSession";
 import AddTask from "../components/organisms/forms/Task/AddTask";
@@ -6,7 +7,6 @@ import InviteParticipants from "../components/organisms/forms/Participants/Invit
 import TaskModal from "../components/organisms/dashboard/modals/TaskModal";
 import ChangePassword from "../components/organisms/forms/Settings/ChangePassword";
 import SuccessCard from "../components/molecules/auth/SuccessCard";
-import { FiBell, FiCheckCircle, FiUser } from "react-icons/fi";
 import StatusCard from "../components/organisms/forms/Settings/SettingsStatusCard";
 import SettingsStatusCard from "../components/organisms/forms/Settings/SettingsStatusCard";
 import ChangeSuccess from "../components/organisms/forms/Settings/ChangePasswordSuccess";
@@ -17,7 +17,7 @@ import EditPermissionSaved from "../components/organisms/forms/Settings/EditPerm
 import ChangePasswordSuccess from "../components/organisms/forms/Settings/ChangePasswordSuccess";
 import OwnerTransferSuccess from "../components/organisms/forms/Settings/OwnerTransferSuccess";
 import ConfirmAdminRemoval from "../components/organisms/forms/Settings/ConfirmAdminRemoval";
-import ConfirmOwnerTransfer from "../components/organisms/forms/Settings/ConfirmOwnerTransfer";
+import ConfirmOwnerTransfer from "../components/recycle/ConfirmOwnerTransfer";
 import ConfirmDelete from "../components/organisms/forms/Settings/ConfirmTrackDelete";
 import ConfirmTrackDelete from "../components/organisms/forms/Settings/ConfirmTrackDelete";
 import DeleteTrackSuccess from "../components/organisms/forms/Settings/DeleteTrackSuccess";
@@ -26,9 +26,10 @@ import RemoveParticipantSuccess from "../components/organisms/forms/Settings/Rem
 import DangerDeleteCohort from "../components/organisms/forms/Settings/DangerDeleteCohort";
 import DangerDeleteProgram from "../components/organisms/forms/Settings/DangerDeleteProgram";
 import DangerDeleteAccount from "../components/organisms/forms/Settings/DangerDeleteAccount";
-import AddNewAdmin from "../components/organisms/forms/Settings/AddNewAdmin";
+import AddNewAdmin from "../components/recycle/AddNewAdmin";
 import AccountSettings from "./dashboard/settings/AccountSettings";
 import EditPermissions from "../components/organisms/forms/Settings/EditPermissions";
+import SendEmail from "../components/recycle/SendEmail";
 
 const Preview = () => {
   const [modal, setModal] = useState({ name: "", open: false } as {
@@ -52,7 +53,7 @@ const Preview = () => {
       {/* <DashBoard /> */}
       {/* <OnboardCohort /> */}
       {/* <OnboardCohortModal /> */}
-      {/* <SendEmail /> */}
+      {/* <SendEmail onSubmit={()=>{}} /> */}
       {/* <UploadParticipants /> */}
       {/* <SessionsDisplay /> */}
       {/* <SessionDetails /> */}
@@ -61,7 +62,7 @@ const Preview = () => {
       {/* <TimeInput id='time' onchange={()=>{}} placeHolder=''  /> */}
       {/* <CalendarComponent /> */}
       {/* <ParticipantsPage /> */}
-      
+
       {/* <ChangePassword /> */}
       {/* <ChangePasswordSuccess /> */}
       {/* <RemoveParticipantSuccess /> */}
@@ -79,8 +80,8 @@ const Preview = () => {
       {/* <AddNewAdmin /> */}
       {/* <EditPermissions /> */}
 
-      
-      
+
+
 
     </>
   );

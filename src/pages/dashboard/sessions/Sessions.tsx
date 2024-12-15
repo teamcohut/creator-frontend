@@ -1,5 +1,5 @@
 import React from "react";
-import DeadlineDisplay from "../../../components/organisms/dashboard/upcomingDeadline/DeadlineDisplay";
+import DeadlineDisplay from "../../../components/recycle/upcomingDeadline/DeadlineDisplay";
 import Header from "../../../components/organisms/dashboard/Header";
 import SessionsDisplay from "../../../components/organisms/dashboard/Sessions/SessionsDisplay";
 

@@ -88,6 +88,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
                     action={handleSubmit}
                     type="button"
                     fill={true}
+                    loading={inviteGroupMutation.isPending}
                 />
             </div>
         </div>
