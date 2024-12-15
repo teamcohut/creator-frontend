@@ -1,32 +1,32 @@
-import { FiSave, FiTrash2 } from 'react-icons/fi';
-import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
-import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import { useContext, useState } from 'react'
-import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
-import { ProgramContext } from '../../../context/programs/ProgramContext'
-import DateInput2 from '../../../components/atoms/inputs/DateInput2'
+import { useMutation } from '@tanstack/react-query'
+import { FiSave, FiTrash2 } from 'react-icons/fi';
 import { notification, Select } from 'antd'
 import { Option } from 'antd/es/mentions'
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
-import { ITrack } from '../../../@types/settings.interface'
 import api from '../../../api/axios'
-import { useMutation } from '@tanstack/react-query'
+import { ITrack } from '../../../@types/settings.interface'
+import { ProgramContext } from '../../../context/programs/ProgramContext'
+import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
+import OutlineButton from '../../../components/atoms/Button/OutlineButton'
+import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
+import DateInput2 from '../../../components/atoms/inputs/DateInput2'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const {dispatch, activeCohort } = useContext(ProgramContext);
+  const { dispatch, activeCohort } = useContext(ProgramContext);
   const [cohortName, setCohortName] = useState(activeCohort?.name);
   const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
-  const [tracks, setTracks] = useState<ITrack[]>(activeCohort?.tracks);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
   const [tags, setTags] = useState<ITrack[]>(activeCohort?.tracks);
 
+  const tracks: ITrack[] = activeCohort?.tracks;
 
-  
+
 
   const handleTagsChange = (value: ITrack[]) => {
     setTags(value);
@@ -37,7 +37,7 @@ const CohortSettings = () => {
     setCohortName(e.target.value)
     console.log(cohortName)
   }
-  
+
 
   const tagRender = (props: CustomTagProps) => {
     const { label, closable, onClose } = props;
@@ -70,16 +70,16 @@ const CohortSettings = () => {
       </span>
     );
   };
-  
+
   const updateCohortInfoMutation = useMutation({
     mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
     onSuccess: (data: any) => {
-      notification.success({message: "Account updated successfully"})
+      notification.success({ message: "Account updated successfully" })
       dispatch({ type: "ACTIVE_COHORT", payload: data.data.data });
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";
-    
+
       if (error.response?.data) {
         // Handle backend-provided error messages
         if (Array.isArray(error.response.data.errors) && error.response.data.errors.length > 0) {
@@ -91,12 +91,12 @@ const CohortSettings = () => {
         // Handle JavaScript errors or other network issues
         errorMessage = error.message;
       }
-    
+
       // Special case for ObjectId casting error
       if (errorMessage.includes("Cast to ObjectId failed")) {
         errorMessage = "No cohort found, setup your program and onboard new cohort.";
       }
-    
+
       // Display the notification
       notification.error({
         message: errorMessage,
@@ -104,12 +104,12 @@ const CohortSettings = () => {
     }
   });
 
-  
+
 
   const setModalOpenState = (open: boolean, name: string) => {
     setModal({ name, open });
   };
-  
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
@@ -117,31 +117,31 @@ const CohortSettings = () => {
     color: 'var(--primary-800) !important',
     borderColor: 'var(--primary-800) !important',
   } : {};
-  
-  
+
+
   return (
     <>
-    <div className='d-flex gap-133 align-items-start pt-4'>
-      <div className='w-60'>
-        <div className='d-flex gap-2'>
-          <p className='d-flex justify-content-center align-items-center w-45'> 
-          <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
-          onchange={handleChange } 
-          value={cohortName}/>
-          </p>
-        </div>
-        <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
+      <div className='d-flex gap-133 align-items-start pt-4'>
+        <div className='w-60'>
+          <div className='d-flex gap-2'>
+            <p className='d-flex justify-content-center align-items-center w-45'>
+              <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
+                onchange={handleChange}
+                value={cohortName} />
+            </p>
+          </div>
+          <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
             <DateInput2
               id="startDate"
               onchange={(e) => setStartDate(e.target.value)}
               placeHolder=""
               label="Set Cohort Duration"
-              value={startDate }
+              value={startDate}
             />
             <h3 className='dark-700'>-</h3>
             <DateInput2
               id="endDate"
-              onchange={(e) => {setEndDate(e.target.value)}}
+              onchange={(e) => { setEndDate(e.target.value) }}
               placeHolder="mm/dd/yy"
               value={endDate}
             />
@@ -149,84 +149,64 @@ const CohortSettings = () => {
 
           <span className='fs-body manrope-600 primary-950'>Track</span>
 
-      <Select
-      mode="tags"
-      style={{ width: "100%" }}
-      tagRender={tagRender}
-      placeholder="Input and press 'Enter' to add a track or simply select one"
-      value={tags}
-      onChange={handleTagsChange}
-      >
-      {tracks.map((option, i) => (
-        <Option value={option.title}>
-          {option.title}
-        </Option>
-      ))}
-    </Select>
-    <div className='pb-4'></div>
+          <Select
+            mode="tags"
+            style={{ width: "100%" }}
+            tagRender={tagRender}
+            placeholder="Input and press 'Enter' to add a track or simply select one"
+            value={tags}
+            onChange={handleTagsChange}
+          >
+            {tracks.map((option, i) => (
+              <Option value={option.title}>
+                {option.title}
+              </Option>
+            ))}
+          </Select>
+          <div className='pb-4'></div>
 
-        
-
-        {/* <TextInput2 id='link' 
-          label='Link to Generate Certificate' 
-          placeHolder='Unique link for learners to access their certificates' 
-          icon={<FiLink/>} 
-        />
-        
-        <span className='fs-small manrope-500 primary-700'>
-          You'll need to have created digital certificates on an external platform
-        </span>
-
-        <div className='pb-4'></div> */}
-
-        {/* <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
-        
-        <span className='fs-small manrope-500 primary-700'>
-          Once you graduate a learner, this message will automatically get sent to them
-        </span>
-
-        <div className='pb-4'></div> */}
-
-        <OutlineButton 
-            action={()=>{updateCohortInfoMutation.mutate({
-              name: cohortName,
-              startDate,
-              endDate,
-              tracks:tags
-            })}} 
+          <OutlineButton
+            action={() => {
+              updateCohortInfoMutation.mutate({
+                name: cohortName,
+                startDate,
+                endDate,
+                tracks: tags
+              })
+            }}
             type="button"
-            fill={false} 
-            outline='primary' 
-            gap={true} width={120} 
+            fill={false}
+            outline='primary'
+            gap={true} width={120}
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             loading={updateCohortInfoMutation.isPending}
             disabled={updateCohortInfoMutation.isPending}
-            >
-          <FiSave/>
-          <span>Save</span>
-        </OutlineButton>
+          >
+            <FiSave />
+            <span>Save</span>
+          </OutlineButton>
 
 
-      </div>
-      <div>  
-        <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-        <span onClick={() => setModal((prev) => ({ open: true, name: "deleteCohortModal" }))} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
-        style={{cursor: 'pointer'}}
-        >
-          Delete Cohort <FiTrash2 />
+        </div>
+        <div>
+          <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
+          <span onClick={() => setModal((prev) => ({ open: true, name: "deleteCohortModal" }))} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+            style={{ cursor: 'pointer' }}
+          >
+            Delete Cohort <FiTrash2 />
           </span>
+        </div>
       </div>
-    </div>
-    {modal.name === "deleteCohortModal" && (
+      {modal.name === "deleteCohortModal" && (
         <DeleteCohortModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}
         />
       )}
-    </> 
+    </>
   )
 }
 

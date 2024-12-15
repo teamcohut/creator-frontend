@@ -20,14 +20,14 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
   const { activeProgram } = useContext(ProgramContext);
   
 
-  const handleDropdownAction = (action: Modal, email: string) => {
+  const handleDropdownAction = (action: TModal, email: string) => {
       // Action for a specific participant
       setEmail(email)
       setModal({open: true, modal: action})
       console.log(`Action: ${action} for ${email}`);
   };
 
-  const openModal = (open: boolean, modal: Modal) => {
+  const openModal = (open: boolean, modal: TModal) => {
     setModal({open, modal});
   };
 
@@ -159,8 +159,8 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
 
 interface IModal {
   open: boolean,
-  modal: Modal
+  modal: TModal
 }
-type Modal = 'remove' | 'mail' | ''
+type TModal = 'remove' | 'mail' | ''
 
 export default Table;

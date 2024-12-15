@@ -3,7 +3,6 @@ import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
 import OverviewCard from "../../../molecules/dashboard/OverviewCard";
-import PercentageBar from "../../../atoms/dashboard/PercentageBar";
 import Table from "./Table";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";

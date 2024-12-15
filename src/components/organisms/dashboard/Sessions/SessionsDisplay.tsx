@@ -12,9 +12,6 @@ const SessionsDisplay = () => {
         <div className=''>
           <SessionList />
         </div>
-        {/* <div className='w-35 px-3'>
-          <SessionResource />
-        </div> */}
       </div>
     </div>
   )

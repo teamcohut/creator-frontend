@@ -105,7 +105,6 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
-              loading={deleteProgramInfoMutation.isPending}
             >
 
               <span className={isHovered ? 'white' : 'error-500'}> Delete Program </span>

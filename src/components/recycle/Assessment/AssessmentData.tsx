@@ -1,4 +1,4 @@
-import { FiBookOpen, FiCheck, FiFile, FiUser, } from "react-icons/fi";
+import { FiCheck, FiFile, FiUser, } from "react-icons/fi";
 
 export const cardData = [
     {
@@ -22,10 +22,4 @@ export const cardData = [
         iconColor: "success-300",
         iconBgColor: "#E9FFF7",
     },
-    // {
-    //     icon: <FiBookOpen />,
-    //     title: "Closed Courses",
-    //     iconColor: "error-300",
-    //     iconBgColor: "#FFF1F1",
-    // },
 ];

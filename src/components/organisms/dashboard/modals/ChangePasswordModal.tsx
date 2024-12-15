@@ -15,13 +15,6 @@ const ChangePasswordModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       >
         {currentStep === 1 ? <ChangePassword modalOpen={modalOpen} setModalOpen={setModalOpen} /> :
           currentStep === 2 ? <ChangePasswordSuccess /> : null}
-        {/* currentStep === 2 ? (
-                    <AdditionalSession
-                        initialData={formData}
-                        onSuccess={handleSuccess}
-                    // onError={handleError}
-                    />
-                ) : null} */}
       </Modal>
     </>
   );

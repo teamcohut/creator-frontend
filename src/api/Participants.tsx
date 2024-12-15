@@ -37,7 +37,7 @@ class Participant {
   }
 
   sendParticipantMail(payload: any) {
-    return this.client.post('/participant/send-email', payload);
+    return this.client.post('/program/send-email', payload);
   }
 }
 

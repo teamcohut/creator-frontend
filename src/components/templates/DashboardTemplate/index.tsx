@@ -2,7 +2,6 @@ import { FC, useContext } from "react";
 import SideNav from "../../organisms/dashboard/SideNav";
 import "./index.css";
 import { Outlet } from "react-router-dom";
-import TopNav from "../../recycle/TopNav";
 import { Skeleton } from "antd";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { useQuery } from "@tanstack/react-query";
@@ -55,11 +54,9 @@ const DashboardTemplate: FC = () => {
       <div className="dashboard-template d-flex w-100">
         <SideNav />
         <div className="h-100 content-area dashboard-body w-100">
-          {/* <TopNav /> */}
           <div className="content outlet-div">
             <Outlet />
           </div>
-          {/* <Checklist /> */}
         </div>
       </div>
     </>
