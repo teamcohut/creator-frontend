@@ -11,6 +11,10 @@ class Auth {
     return this.client.post("/auth/login", payload);
   }
 
+  activateAccount(id: any) {
+    return this.client.post(`/auth/activate-account/${id}`);
+  }
+
   signup(payload: any) {
     return this.client.post("/auth/register", payload);
   }

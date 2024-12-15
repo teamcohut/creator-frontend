@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { axiosPublic } from "../../api/axios";
+import api from "../../api/axios";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
 import Button from "../../components/atoms/Button";
 import { FiLoader, FiShieldOff, FiUserCheck } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
 
 const VerifyMail = () => {
   const [status, setstatus] = useState<status>("loading");
@@ -13,31 +14,23 @@ const VerifyMail = () => {
   const route = useParams();
   const { id } = route;
 
-  useEffect(() => {
-    verifyMail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const verifyMail = async () => {
-    try {
-      const response = await axiosPublic.post(`/auth/activate-account/${id}`);
-      if (!response) {
-        navigate("/signup");
-      }
-      console.log(response);
-      if (!response.data.error) {
+  const { isLoading } = useQuery({
+    queryKey: ["activate-account"],
+    queryFn: async () => {
+      const response = await api.auth.activateAccount(id);
+      if (response.data.error) {
+        setstatus("error");
+      } else {
         setstatus("verified");
         setTimeout(() => {
           navigate("/login");
         }, 60000);
       }
-    } catch (error: any) {
-      console.log(error);
-      setstatus("error");
-    }
-  };
+      return response;
+    },
+  });
 
-  if (status === "loading") {
+  if (isLoading) {
     return (
       <AuthTemplate
         title="Launch Your Learning Program In 5 Minutes"
