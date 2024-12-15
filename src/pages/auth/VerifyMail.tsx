@@ -16,6 +16,7 @@ const VerifyMail = () => {
     queryKey: ["activate-account"],
     queryFn: async () => {
       const response = await api.auth.activateAccount(id);
+      console.log("error from query", response.data);
       if (!response.data.error) {
         setTimeout(() => {
           navigate("/login");
@@ -38,25 +39,6 @@ const VerifyMail = () => {
         />
       ) : isError ? (
         <SuccessCard
-          icon={<FiUserCheck className="success-600 fs-icon" />}
-          title="Account Verified!"
-          description="Your account has been successfully verified. You can now proceed to sign up"
-        >
-          <div className="w-auto">
-            <Button
-              action={() => {
-                navigate("/login");
-              }}
-              children="Sign In"
-              type="button"
-              fill={false}
-              border
-              outline="primary"
-            />
-          </div>
-        </SuccessCard>
-      ) : (
-        <SuccessCard
           icon={<FiShieldOff className="error-300 fs-icon" />}
           title="Verification Failed!"
           description={`Your account could not be verified. \n The verification link you used has expired. To proceed, you can request for a new link to be sent to your mail.`}
@@ -71,6 +53,25 @@ const VerifyMail = () => {
               outline="primary"
               gap
               width={192}
+            />
+          </div>
+        </SuccessCard>
+      ) : (
+        <SuccessCard
+          icon={<FiUserCheck className="success-600 fs-icon" />}
+          title="Account Verified!"
+          description="Your account has been successfully verified. You can now proceed to sign up"
+        >
+          <div className="w-auto">
+            <Button
+              action={() => {
+                navigate("/login");
+              }}
+              children="Sign In"
+              type="button"
+              fill={false}
+              border
+              outline="primary"
             />
           </div>
         </SuccessCard>
