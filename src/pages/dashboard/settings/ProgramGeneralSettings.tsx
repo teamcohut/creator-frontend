@@ -87,12 +87,6 @@ const ProgramGeneralSettings = () => {
   });
 
   const handleProgramSubmit = async () => {
-    if (!thumbnail || !banner) {
-      notification.warning({
-        message: "Cover and logo must be uploaded before submission.",
-      });
-      return;
-    }
 
     const payload = {
       title,
@@ -144,7 +138,7 @@ const ProgramGeneralSettings = () => {
           id='banner' 
           label='Banner Image' 
           detail='Program’s Cover Image' 
-          icon={<img width={50} src={activeProgram.logo} alt='Banner' />}
+          icon={<img width={50} src={activeProgram.cover} alt='Banner' />}
           onchange={(file) => handleBannerChange(file)}
         />
         {uploadImageMutation.isPending ? <p>Uploading image...</p> :
@@ -192,7 +186,7 @@ const ProgramGeneralSettings = () => {
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             loading={updateProgramMutation.isPending}
-          disabled={uploadImageMutation.isPending || updateProgramMutation.isPending}
+            disabled={uploadImageMutation.isPending || updateProgramMutation.isPending}
             >
           <FiSave/>
           <span>Save</span>
