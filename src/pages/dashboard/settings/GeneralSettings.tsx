@@ -2,11 +2,11 @@ import Header from "../../../components/organisms/dashboard/Header";
 import { useContext, useState } from "react";
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
-import { FiEdit3 } from "react-icons/fi";
 import './index.css'
 import AccountSettings from "./AccountSettings";
 import ProgramSettings from "./ProgramSettings";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
+import { FiEdit3 } from "react-icons/fi";
 import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 
