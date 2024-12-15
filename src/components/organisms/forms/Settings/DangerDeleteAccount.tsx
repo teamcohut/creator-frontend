@@ -68,6 +68,7 @@ const DangerDeleteAccount: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
               customStyle={hoverStyle}
               handleMouseEnter={handleMouseEnter}
               handleMouseLeave={handleMouseLeave}
+              loading={deactivateAccountMutation.isPending}
             >
 
               <span className={isHovered ? 'white' : 'error-500'}> Deactivate Account </span>
