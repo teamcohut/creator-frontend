@@ -16,7 +16,7 @@ const CalendarComponent: React.FC = () => {
     queryKey: ["session"],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
-      return response.data.data.map((item: any) => {
+      return response.data?.data?.map((item: any) => {
         return {
           id: item.cohort,
           calendarId: item._id,

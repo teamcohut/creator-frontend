@@ -29,8 +29,8 @@ const ParticipantsPage: React.FC = () => {
   useEffect(() => {
     refetch()
   }, [activeCohort, refetch])
-  
-  
+
+
 
   const header = [
     "Full Name",
@@ -84,7 +84,7 @@ const ParticipantsPage: React.FC = () => {
               iconBorderColor="#ECF1FF"
               subtitle={(data?.data.data.noOfParticipants)}
             >
-  
+
             </OverviewCard>
 
             <OverviewCard
@@ -102,7 +102,6 @@ const ParticipantsPage: React.FC = () => {
               subtitle={data?.data.data.noInactiveParticipants}
             />
           </div>
-
           <Table header={header} body={data?.data.data.participants} refresh={refetch} />
         </>
       )}
