@@ -1,5 +1,4 @@
 import React from 'react';
-import StatusBadge from "../../atoms/dashboard/StatusBadge";
 import PercentageBar from '../../atoms/dashboard/PercentageBar';
 import '../style.css';
 import { IinfoCardProps } from '../../../@types/dashboard.interface';
@@ -23,7 +22,6 @@ const InfoCard: React.FC<IinfoCardProps> = ({
             <p className="manrope-400 primary-500">
               {subtitle}
             </p>
-            {/* <StatusBadge status={isActive ? "active" : "inactive"} /> */}
           </div>
         </div>
       </div>

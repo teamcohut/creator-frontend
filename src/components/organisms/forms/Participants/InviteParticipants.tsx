@@ -4,20 +4,14 @@ import GroupInvite from './GroupInvite';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 
 const InviteParticipants = () => {
-    // State to manage the active tab
     const userData = JSON.parse(localStorage.getItem('user') || '')
     const { activeCohort } = useContext(ProgramContext)
     const tracks = userData?.programs?.[0]?.cohorts?.[0]?.tracks ?? activeCohort.tracks;
     const cohortId = userData?.programs?.[0]?.cohorts?.[0]?._id ?? activeCohort._id;
 
-    console.log("I am the", tracks);
-    console.log(activeCohort);
-    
-
 
     const [activeTab, setActiveTab] = useState('individual');
 
-    // Handler to switch tabs
     const handleTabClick = (tab: any) => {
         setActiveTab(tab);
     };
@@ -50,7 +44,7 @@ const InviteParticipants = () => {
                 </div>
 
                 {/* Conditional Rendering of Forms */}
-                <div className="mt-4">
+                <div className="">
                     {activeTab === 'individual' ? (
                         <IndividualInvite tracks={tracks} cohortId={cohortId} />
 

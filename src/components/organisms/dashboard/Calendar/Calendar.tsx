@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ const CalendarComponent: React.FC = () => {
     queryKey: ["session"],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
-      return response.data.data.map((item: any) => {
+      return response.data?.data?.map((item: any) => {
         return {
           id: item.cohort,
           calendarId: item._id,

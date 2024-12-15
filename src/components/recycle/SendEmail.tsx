@@ -1,8 +1,8 @@
 import { FC } from "react";
-import Button from "../../../atoms/Button";
-import ProgressBar from "../../../molecules/auth/PregressBar";
-import TextAreaInput from "../../../atoms/inputs/TextareaInput";
-import TextInput from "../../../atoms/inputs/TextInput";
+import Button from "../atoms/Button";
+import ProgressBar from "../molecules/auth/PregressBar";
+import TextAreaInput from "../atoms/inputs/TextareaInput";
+import TextInput from "../atoms/inputs/TextInput";
 import "../../style.css";
 
 const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
@@ -22,7 +22,7 @@ const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
             Send Participants Emails
           </h1>
           <span className="manrope-500 dark-700 fs-body">
-            Let’s invite and guide your Cohort to Success
+            Let&apos;s invite and guide your Cohort to Success
           </span>
         </div>
 
@@ -31,7 +31,7 @@ const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
             id="subject"
             label="Email Subject"
             placeHolder="Welcome to the Brave Redemptive, Cohort 2"
-            onchange={() => {}}
+            onchange={() => { }}
           />
 
           <TextAreaInput

@@ -14,13 +14,6 @@ const ParticipantModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         setModalOpen={(open: boolean) => setModalOpen(open, "participant")}
       >
         {currentStep === 1 ? <InviteParticipants /> : null}
-        {/* currentStep === 2 ? (
-                    <AdditionalSession
-                        initialData={formData}
-                        onSuccess={handleSuccess}
-                    // onError={handleError}
-                    />
-                ) : null} */}
       </Modal>
     </>
   );

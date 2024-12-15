@@ -11,7 +11,7 @@ class Program {
     return this.client.post("/program", payload);
   }
   updateProgram(id: string, payload: IProgramDTO) {
-    return this.client.put(`/program/edit/${id}`, payload);
+    return this.client.put(`/program/${id}`, payload);
   }
 
   uploadProgramImage(data: any) {

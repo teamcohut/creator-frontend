@@ -1,13 +1,8 @@
 
-import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import { ISuccessCard } from '../../@types/auth.interface'
-import { FiBookOpen, FiUser } from 'react-icons/fi'
+import { FiUser } from 'react-icons/fi'
 import Button from '../atoms/Button'
-import { useNavigate } from 'react-router-dom'
 
 const OnboardCohort = () => {
-    const navigate = useNavigate()
 
     return (
         <>

@@ -52,6 +52,7 @@ const DashBoard: FC<IDashboard> = () => {
                 fill={false}
                 type="button"
                 border
+                gap
                 outline="primary"
               >
                 <FiPlus className="fs-body" /> Add Task
@@ -60,6 +61,7 @@ const DashBoard: FC<IDashboard> = () => {
                 action={() =>
                   setModal((prev) => ({ open: true, name: "session" }))
                 }
+                gap
                 fill
                 type="button"
                 border={false}
@@ -87,7 +89,7 @@ const DashBoard: FC<IDashboard> = () => {
           ) : isError ? (
             <p>Error loading data</p>
           ) : (
-            cardData.map((card, index) => <OverviewCard key={index} {...card} />)
+            cardData?.map((card, index) => <OverviewCard key={index} {...card} />)
           )}
         </div>
 

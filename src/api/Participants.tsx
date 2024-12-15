@@ -35,6 +35,10 @@ class Participant {
       }
     );
   }
+
+  sendParticipantMail(payload: any) {
+    return this.client.post('/program/send-email', payload);
+  }
 }
 
 export default Participant;

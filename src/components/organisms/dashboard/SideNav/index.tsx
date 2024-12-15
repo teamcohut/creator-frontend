@@ -2,7 +2,7 @@ import { FC, useContext, useState } from "react";
 import NavLink from "../../../atoms/dashboard/NavLink";
 import { NavList } from "./NavList";
 import Icon from "../../../atoms/Icon";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
 import "../../style.css";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
@@ -15,9 +15,6 @@ const SideNav: FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
   const { activeProgram } = useContext(ProgramContext);
-  const location = useLocation()
-  console.log(location);
-  
 
   const openModal = (modal: TActiveModal) => {
     setActiveModal(modal);

@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react'
-import Button from '../../../atoms/Button'
+import Button from '../atoms/Button'
 import { Link } from 'react-router-dom'
-import RadioInput from '../../../atoms/inputs/RadioInput'
+import RadioInput from '../atoms/inputs/RadioInput'
 import { FiBookOpen, FiCalendar, FiStar, FiTool, FiUser } from 'react-icons/fi'
-import FormFooter from '../../../molecules/auth/FormFooter'
-import { IUserChoice } from '../../../../@types/auth.interface'
+import FormFooter from '../molecules/auth/FormFooter'
+import { IUserChoice } from '../../@types/auth.interface'
 
 const UserChoice: FC<IUserChoice> = ({ onSubmit }) => {
     const [selected, setSelected] = useState("")

@@ -82,7 +82,6 @@ const LoginPage: React.FC = () => {
             </span>
           </div>
         </div>
-        {/* {error && <div className="">{error}</div>} */}
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Sign in"

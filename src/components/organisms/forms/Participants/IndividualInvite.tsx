@@ -124,6 +124,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
                         action={handleSubmit}
                         type="button"
                         fill={true}
+                        loading={inviteIndividualMutation.isPending}
                     />
                 </div>
             </div>

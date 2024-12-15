@@ -11,23 +11,24 @@ import { useMutation } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { notification } from "antd";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import SendParticipantMail from "../../forms/Participants/SendParticipantMail";
 
 const Table: React.FC<ITable> = ({ header, body, refresh }) => {
-  const [modal, setModal] = useState<IModal>({open: false, modal: ''})
+  const [modal, setModal] = useState<IModal>({ open: false, modal: '' })
   const [email, setEmail] = useState('')
   const [partipantId, setPartipantId] = useState('')
   const { activeProgram } = useContext(ProgramContext);
-  
 
-  const handleDropdownAction = (action: 'remove' | '', email: string) => {
-      // Action for a specific participant
-      setEmail(email)
-      setModal({open: true, modal: action})
-      console.log(`Action: ${action} for ${email}`);
+
+  const handleDropdownAction = (action: TModal, email: string) => {
+    // Action for a specific participant
+    setEmail(email)
+    setModal({ open: true, modal: action })
+    console.log(`Action: ${action} for ${email}`);
   };
 
-  const openModal = (open: boolean, modal: 'remove' | '') => {
-    setModal({open, modal});
+  const openModal = (open: boolean, modal: TModal) => {
+    setModal({ open, modal });
   };
 
   const removeMutation = useMutation({
@@ -38,7 +39,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
       notification.open({
         message: "Participant removed",
       })
-      setModal({open: false, modal: ''})
+      setModal({ open: false, modal: '' })
       refresh && refresh()
     },
     onError: (error: any) => {
@@ -70,7 +71,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
               id="session"
               label=""
               placeHolder="Search"
-              onchange={(e) => {}}
+              onchange={(e) => { }}
             />
           </div>
         </div>
@@ -85,11 +86,12 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
           </thead>
 
           <tbody className="fs-body manrope-500 dark-700">
-            {body?.map(({ participant, trackTitle }, idx) => (
+            {body?.map((participant, idx) => (
+
               <tr key={idx}>
-                <td>{`${participant.firstName} ${participant.lastName}`}</td>
+                <td>{participant.firstName} {participant.lastName}</td>
                 <td>{participant.email}</td>
-                <td>{trackTitle}</td>
+                <td>{participant.trackTitle}</td>
                 <td>
                   <StatusBadge
                     status={participant.isActive ? "active" : "inactive"}
@@ -105,7 +107,16 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                     />
                     <ul className="dropdown-menu">
                       <button
-                        onClick={() =>{
+                        onClick={() => {
+                          setPartipantId(participant._id)
+                          handleDropdownAction("mail", participant.email)
+                        }}
+                        className="dropdown-item cursor-pointer"
+                      >
+                        Send Mail
+                      </button>
+                      <button
+                        onClick={() => {
                           setPartipantId(participant._id)
                           handleDropdownAction("remove", participant.email)
                         }}
@@ -122,18 +133,24 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
         </table>
       </div>
       {
-        modal.open && modal.modal === 'remove' && (
+        modal.open && (
           <Modal open={modal.open} setModalOpen={openModal}>
-            <SettingsStatusCard 
-              title="Confirm Removal"
-              description={`Are you sure you want to remove ${email}? You will not be able to undo this action.`}
-              icon={<FiAlertCircle className="warning-500 fs-icon" />}
-              >
+            {
+              modal.modal === 'remove' ?
+                <SettingsStatusCard
+                  title="Confirm Removal"
+                  description={`Are you sure you want to remove ${email}? You will not be able to undo this action.`}
+                  icon={<FiAlertCircle className="warning-500 fs-icon" />}
+                >
                   <div className="d-flex gap-4">
                     <Button action={removeParticipant} loading={removeMutation.isPending} children='Remove Participant' fill={false} type="button" border outline="primary" />
-                    <Button action={()=>setModal({open: false, modal: ''})} children='Cancel' fill type="button" />
+                    <Button action={() => setModal({ open: false, modal: '' })} children='Cancel' fill type="button" />
                   </div>
-              </SettingsStatusCard>
+                </SettingsStatusCard> :
+                modal.modal === 'mail' ?
+                  <SendParticipantMail email={email.split(',')} setModalOpen={openModal} /> :
+                  <></>
+            }
           </Modal>
         )
       }
@@ -143,7 +160,8 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
 
 interface IModal {
   open: boolean,
-  modal: 'remove' | ''
+  modal: TModal
 }
+type TModal = 'remove' | 'mail' | ''
 
 export default Table;

@@ -90,6 +90,7 @@ const ResendMail = () => {
               />
               <Button
                 action={resendMail}
+                loading={isLoading}
                 children="Resend Mail"
                 fill
                 type="button"

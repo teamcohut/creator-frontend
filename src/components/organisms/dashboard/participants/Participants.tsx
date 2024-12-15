@@ -3,7 +3,6 @@ import { FiPlus, FiUsers } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import Header from "../Header";
 import OverviewCard from "../../../molecules/dashboard/OverviewCard";
-import PercentageBar from "../../../atoms/dashboard/PercentageBar";
 import Table from "./Table";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
@@ -30,8 +29,8 @@ const ParticipantsPage: React.FC = () => {
   useEffect(() => {
     refetch()
   }, [activeCohort, refetch])
-  
-  
+
+
 
   const header = [
     "Full Name",
@@ -85,7 +84,7 @@ const ParticipantsPage: React.FC = () => {
               iconBorderColor="#ECF1FF"
               subtitle={(data?.data.data.noOfParticipants)}
             >
-  
+
             </OverviewCard>
 
             <OverviewCard
@@ -103,7 +102,6 @@ const ParticipantsPage: React.FC = () => {
               subtitle={data?.data.data.noInactiveParticipants}
             />
           </div>
-
           <Table header={header} body={data?.data.data.participants} refresh={refetch} />
         </>
       )}

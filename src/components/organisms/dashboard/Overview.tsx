@@ -1,7 +1,7 @@
 import React from "react";
 import OverviewCard from "../../molecules/dashboard/OverviewCard";
 import { FiClock, FiInfo, FiUsers } from "react-icons/fi";
-import WebsiteCard from "../../molecules/dashboard/WebsiteCard";
+import WebsiteCard from "../../recycle/WebsiteCard";
 import PercentageBar from "../../atoms/dashboard/PercentageBar";
 import "../style.css";
 
@@ -23,8 +23,8 @@ const Overview = () => {
           subtitle={"5 Weeks"}
           iconBgColor="#ECF1FF4D"
           iconBorderColor="#ECF1FF">
-            <PercentageBar progress={25} />
-          </OverviewCard>
+          <PercentageBar progress={25} />
+        </OverviewCard>
 
         <OverviewCard
           icon={<FiUsers />}
@@ -34,7 +34,7 @@ const Overview = () => {
           iconBorderColor="#ECF1FF"
         />
 
-        <WebsiteCard/>
+        <WebsiteCard />
       </div>
     </>
   );

@@ -80,7 +80,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
                 </select>
             </div>
             <DragNDropInput
-                label=""
+                label="Upload Participant List"
                 id="thumbnail-upload"
                 detail="Upload the cohort's list of participants (CSV)"
                 onchange={(file: any) => handleFileChange(file)}
@@ -91,6 +91,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
                     action={handleSubmit}
                     type="button"
                     fill={true}
+                    loading={inviteGroupMutation.isPending}
                 />
             </div>
         </div>
