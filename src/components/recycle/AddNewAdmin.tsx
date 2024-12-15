@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { FiUser, FiX } from 'react-icons/fi';
-import {TextInput2} from '../../../atoms/inputs/TextInput';
-import EmailInput from '../../../atoms/inputs/EmailInput';
-import Button from '../../../atoms/Button';
+import { TextInput2 } from '../atoms/inputs/TextInput';
+import EmailInput from '../atoms/inputs/EmailInput';
+import Button from '../atoms/Button';
 import { Switch } from 'antd';
-import { ISetupModal } from '../../../../@types/dashboard.interface';
+import { ISetupModal } from '../../@types/dashboard.interface';
 
 const AddNewAdmin: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => {
@@ -27,7 +27,7 @@ const AddNewAdmin: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleToggle = (key: keyof CheckedStates) => {
     setCheckedStates((prevState) => ({
       ...prevState,
-      [key]: !prevState[key], 
+      [key]: !prevState[key],
     }));
   };
 

@@ -7,7 +7,7 @@ import Button from '../../components/atoms/Button'
 import { FiMail } from 'react-icons/fi'
 
 const ForgotPassword = () => {
-  const [verified, setVerified] = useState<verified>(false)
+  const [verified, setVerified] = useState<boolean>(false)
   const route = useParams()
   console.log(route);
 
@@ -45,7 +45,5 @@ const ForgotPassword = () => {
     
   }
 }
-
-type verified = boolean
 
 export default ForgotPassword

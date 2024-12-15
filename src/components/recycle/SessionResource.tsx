@@ -1,6 +1,5 @@
-import Header from "../Header";
-import Button from "../../../atoms/Button";
-import { FiArrowRight, FiBookOpen, FiPlus } from "react-icons/fi";
+import Header from "../organisms/dashboard/Header";
+import { FiArrowRight, FiBookOpen } from "react-icons/fi";
 
 const SessionResource = () => {
   return (

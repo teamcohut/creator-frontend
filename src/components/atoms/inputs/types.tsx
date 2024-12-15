@@ -131,3 +131,11 @@ export interface IDragnDrop {
   onchange?: (file: File | null) => void;
   icon?: ReactNode;
 }
+
+
+export interface IRTEInput {
+  onChange: (e: ReactNode) => void;
+  id: string;
+  label: string;
+  placeholder: string;
+}

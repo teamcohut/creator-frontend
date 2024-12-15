@@ -112,7 +112,7 @@ const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
               fill={true}
               width={184}
               border={true}
-              action={() => {handleClose()}}
+              action={handleClose}
               
             >
               Cancel

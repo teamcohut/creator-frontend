@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IParticipant {
   id: string;
   fullName: string;
@@ -24,11 +26,6 @@ export interface IFullname {
   fullName: string;
 }
 
-// export interface IAssessmentCard {
-//   header: Array<string>,
-//   body: Array<any>;
-// }
-
 export interface IAssessmentCard {
   id: string;
   title: string;
@@ -36,4 +33,17 @@ export interface IAssessmentCard {
   date: string;
   status: "active" | "inactive";
   average: string;
+}
+
+export interface ISendMailDTO {
+  email: Array<string>,
+  setModalOpen: (open: boolean, modal: Modal) => void;
+}
+
+type Modal = 'remove' | 'mail' | ''
+
+export interface IDetails {
+  email: string[];
+  subject: string;
+  body: ReactNode;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../style.css";
-import InfoCard from "../../molecules/dashboard/InfoCard";
+import InfoCard from "../molecules/dashboard/InfoCard";
 import { courseDisplayList} from "./courseDisplayList";
 import { FiBookOpen } from "react-icons/fi";
 

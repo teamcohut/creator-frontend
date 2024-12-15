@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
-import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
@@ -16,8 +15,7 @@ interface IAdditionalSessionProps {
 }
 
 const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess }) => {
-  const { activeProgram, activeCohort } = useContext(ProgramContext);
-  const [selectedTrackId, setSelectedTrackId] = useState('');
+  const { activeCohort } = useContext(ProgramContext);
 
   const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
@@ -114,7 +112,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
             id="trackId"
             name="trackId"
             className="form-select rounded-4"
-            defaultValue={selectedTrackId}
+            defaultValue={''}
             onChange={(e) => handleChange("track", e.target.value)}
           >
             <option value="" disabled>
