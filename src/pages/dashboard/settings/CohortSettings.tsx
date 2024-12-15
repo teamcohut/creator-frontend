@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { FiSave, FiTrash2 } from 'react-icons/fi';
-import { notification, Select } from 'antd'
-import { Option } from 'antd/es/mentions'
+import { notification } from 'antd'
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import api from '../../../api/axios'
 import { ITrack } from '../../../@types/settings.interface'
@@ -24,52 +23,49 @@ const CohortSettings = () => {
   });
   const [tags, setTags] = useState<ITrack[]>(activeCohort?.tracks);
 
-  const tracks: ITrack[] = activeCohort?.tracks;
+  // const tracks: ITrack[] = activeCohort?.tracks;
 
-
-
-  const handleTagsChange = (value: ITrack[]) => {
-    setTags(value);
-    console.log(tags)
-  };
+  // const handleTagsChange = (value: ITrack[]) => {
+  //   setTags(value);
+  //   console.log(tags)
+  // };
 
   const handleChange = (e: any) => {
     setCohortName(e.target.value)
     console.log(cohortName)
   }
 
+  // const tagRender = (props: CustomTagProps) => {
+  //   const { label, closable, onClose } = props;
 
-  const tagRender = (props: CustomTagProps) => {
-    const { label, closable, onClose } = props;
-
-    return (
-      <span
-        style={{
-          borderRadius: "20px",
-          backgroundColor: "#ECF1FF",
-          color: "#888888",
-          padding: "4px 12px",
-          display: "inline-flex",
-          alignItems: "center",
-          margin: "8px",
-        }}
-      >
-        {label}
-        {closable && (
-          <span
-            onClick={onClose} // Call the default onClose to remove the tag
-            style={{
-              marginLeft: "8px",
-              cursor: "pointer",
-              fontWeight: "bold",
-            }}
-          >
-            ×
-          </span>
-        )}
-      </span>
-    );
-  };
+  //   return (
+  //     <span
+  //       style={{
+  //         borderRadius: "20px",
+  //         backgroundColor: "#ECF1FF",
+  //         color: "#888888",
+  //         padding: "4px 12px",
+  //         display: "inline-flex",
+  //         alignItems: "center",
+  //         margin: "8px",
+  //       }}
+  //     >
+  //       {label}
+  //       {closable && (
+  //         <span
+  //           onClick={onClose} // Call the default onClose to remove the tag
+  //           style={{
+  //             marginLeft: "8px",
+  //             cursor: "pointer",
+  //             fontWeight: "bold",
+  //           }}
+  //         >
+  //           &#x78;
+  //         </span>
+  //       )}
+  //     </span>
+  //   );
+  // };
 
   const updateCohortInfoMutation = useMutation({
     mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
@@ -147,24 +143,6 @@ const CohortSettings = () => {
             />
           </div>
 
-          <span className='fs-body manrope-600 primary-950'>Track</span>
-
-          <Select
-            mode="tags"
-            style={{ width: "100%" }}
-            tagRender={tagRender}
-            placeholder="Input and press 'Enter' to add a track or simply select one"
-            value={tags}
-            onChange={handleTagsChange}
-          >
-            {tracks.map((option, i) => (
-              <Option value={option.title}>
-                {option.title}
-              </Option>
-            ))}
-          </Select>
-          <div className='pb-4'></div>
-
           <OutlineButton
             action={() => {
               updateCohortInfoMutation.mutate({
@@ -188,7 +166,6 @@ const CohortSettings = () => {
             <FiSave />
             <span>Save</span>
           </OutlineButton>
-
 
         </div>
         <div>

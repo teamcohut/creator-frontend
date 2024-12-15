@@ -12,7 +12,7 @@ const DeactivateAccountModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) =>
         open={modalOpen}
         setModalOpen={(open: boolean) => setModalOpen(open, "deactivateAccountModal")}
       >
-        {currentStep === 1 ? <DangerDeleteAccount /> : ''}
+        {currentStep === 1 ? <DangerDeleteAccount modalOpen={modalOpen} setModalOpen={setModalOpen}/> : ''}
       </Modal>
     </>
   );
