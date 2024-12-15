@@ -4,6 +4,7 @@ import TextInput from '../../../atoms/inputs/TextInput';
 import EmailInput from '../../../atoms/inputs/EmailInput';
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
+import { notification } from 'antd';
 
 interface Track {
     id: string;
@@ -27,7 +28,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         mutationFn: (payload: any) =>
             axiosAPI.participant.inviteIndividualParticipant(cohortId, payload),
         onSuccess: () => {
-            alert("Invitation sent successfully!");
+            notification.success({ message: "Invitation sent successfully!" });
             setFormData({
                 firstName: '',
                 lastName: '',
@@ -37,7 +38,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         },
         onError: (error: any) => {
             console.error(error);
-            alert("Failed to send invitation. Please try again.");
+            notification.error({ message: "Failed to send invitation. Please try again." });
         },
     });
 
@@ -50,7 +51,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         // e.preventDefault();
 
         if (!formData.firstName || !formData.lastName || !formData.email) {
-            alert("Please fill in all required fields before submitting.");
+            notification.error({ message: "Please fill in all required fields before submitting." });
             return;
         }
 

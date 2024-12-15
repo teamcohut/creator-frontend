@@ -11,7 +11,7 @@ const DeleteCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         open={modalOpen}
         setModalOpen={(open: boolean) => setModalOpen(open, "deleteCohortModal")}
       >
-        {currentStep === 1 ? <DangerDeleteCohort /> :''}
+        {currentStep === 1 ? <DangerDeleteCohort modalOpen={modalOpen} setModalOpen={setModalOpen}/> :''}
       </Modal>
     </>
   );

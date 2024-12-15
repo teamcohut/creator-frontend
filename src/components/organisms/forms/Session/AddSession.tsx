@@ -6,6 +6,7 @@ import TextInput from "../../../atoms/inputs/TextInput";
 import DateInput from "../../../atoms/inputs/DateInput";
 import TimeInput from "../../../atoms/inputs/TimeInput";
 import "../../style.css";
+import { notification } from "antd";
 
 
 interface ISessionModal {
@@ -28,7 +29,7 @@ const AddSession: React.FC<ISessionModal> = ({ onSubmit }) => {
 
   const handleSubmit = () => {
     if (!formData.title || !formData.date || !formData.start || !formData.end) {
-      alert("Please fill all required fields.");
+      notification.error({ message: "Please fill all required fields." });
       return;
     }
     onSubmit(formData);

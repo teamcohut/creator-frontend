@@ -12,7 +12,7 @@ const OverviewCard: React.FC<IOverviewCard> = ({
 }) => {
   return (
     <>
-      <div className="overview-card d-flex align-items-start gap-3 p-3">
+      <div className="overview-card d-flex  align-items-start gap-3 p-3">
         <span
           className={`overview-icon p-3`}
           style={{

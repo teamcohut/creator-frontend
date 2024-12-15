@@ -3,6 +3,7 @@ import Button from '../../../atoms/Button';
 import DragNDropInput from '../../../atoms/inputs/DragNDropInput';
 import { useMutation } from '@tanstack/react-query';
 import axiosAPI from '../../../../api/axios';
+import { notification } from 'antd';
 
 interface Track {
     id: string;
@@ -22,13 +23,15 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
         mutationFn: (payload: File) =>
             axiosAPI.participant.inviteGroupParticipant(cohortId, selectedTrackId, payload),
         onSuccess: () => {
-            alert('Participants invited successfully!');
+            notification.success({ message: "Participants invited successfully!" });
+
             setSelectedTrackId('');
             setCsvFile(null);
         },
         onError: (error: any) => {
             console.error(error);
-            alert('Failed to invite participants. Please try again.');
+            notification.error({ message: "Failed to invite participants. Please try again." });
+
         },
     });
 
@@ -43,12 +46,12 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
 
     const handleSubmit = () => {
         if (!selectedTrackId) {
-            alert('Please select a track.');
+            notification.error({ message: "Please select a track." });
             return;
         }
 
         if (!csvFile) {
-            alert('Please upload a CSV file.');
+            notification.error({ message: "Please upload a CSV file" });
             return;
         }
 

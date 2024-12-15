@@ -8,15 +8,15 @@ const ProgramSettings = () => {
   };
 
   const items: TabsProps['items'] = [
-    {
-      key: '1',
+      {
+        key: '1',
+        label: 'General',
+        children: <ProgramGeneralSettings />,
+      },
+      {
+      key: '2',
       label: 'Cohort',
       children: <CohortSettings />,
-    },
-    {
-      key: '2',
-      label: 'General',
-      children: <ProgramGeneralSettings />,
     },
   ];
   return (

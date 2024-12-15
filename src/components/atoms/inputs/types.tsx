@@ -97,6 +97,7 @@ export interface Country {
 export interface ITextAreaInput {
   id: string
   label?: string,
+  value?: string,
   placeHolder: string,
   onchange(e: ChangeEvent<HTMLTextAreaElement>): void,
 }

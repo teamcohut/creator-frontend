@@ -32,7 +32,7 @@ const SessionDetails = () => {
     if (isError) return <p>Error loading session details.</p>;
 
     const session = data?.data.data;
-    const sessionLink = session?.sessionLink;
+    const sessionLink = session?.location.address;
 
     return (
         <div className='pt-5 d-flex flex-column gap-5'>
@@ -51,14 +51,18 @@ const SessionDetails = () => {
                         <p>{session?.description}</p>
                     </div>
                     <div className="border rounded-4 w-50 p-5 d-flex flex-column gap-5">
-                       <div className="d-flex flex-column gap-4">
-                        <h3>Session Details</h3>
+                        <div className="d-flex flex-column gap-4">
+                            <h3>Session Details</h3>
                             <p><FiClock /> {session?.start} - {session?.end}</p>
                             <p><FiCalendar /> {session?.date}</p>
-                            <a href={sessionLink} target="_blank" rel="noopener noreferrer">
-                                <FiVideo /> {sessionLink}
-                            </a>
-                       </div>
+                            <p className='d-flex flex-row gap-2 align-content-center align-items-center'>
+                                <FiVideo />
+                                <a href={sessionLink} target="_blank" rel="noopener noreferrer">
+                                    {sessionLink}
+                                </a>
+                            </p>
+
+                        </div>
                         <Button
                             action={() => window.open(sessionLink, '_blank')}
                             fill={true}
@@ -77,8 +81,8 @@ const SessionDetails = () => {
                     <p className="error-300 d-flex align-items-center gap-2"
                         onClick={() => deleteSessionMutation.mutate()}
                         style={{ cursor: 'pointer', color: 'red' }}>
-                             Delete Session
-                             <FiTrash />
+                        Delete Session
+                        <FiTrash />
                     </p>
                 </div>
             </div>

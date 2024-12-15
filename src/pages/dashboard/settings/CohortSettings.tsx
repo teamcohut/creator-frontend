@@ -14,24 +14,29 @@ import { useMutation } from '@tanstack/react-query'
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const { activeCohort } = useContext(ProgramContext);
+  const {dispatch, activeCohort } = useContext(ProgramContext);
   const [cohortName, setCohortName] = useState(activeCohort?.name);
   const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
-  const [tracks, setTracks] = useState<ITrack[]>([]);
+  const [tracks, setTracks] = useState<ITrack[]>(activeCohort?.tracks);
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
     open: boolean;
   });
-  const [tags, setTags] = useState<string[]>([]);
-  const user = JSON.parse(localStorage.getItem("user") || "");
+  const [tags, setTags] = useState<ITrack[]>(activeCohort?.tracks);
 
-  console.log(activeCohort?.startDate?.split("T")[0])
-  console.log(activeCohort)
 
-  const handleTagsChange = (value: string[]) => {
+  
+
+  const handleTagsChange = (value: ITrack[]) => {
     setTags(value);
+    console.log(tags)
   };
+
+  const handleChange = (e: any) => {
+    setCohortName(e.target.value)
+    console.log(cohortName)
+  }
   
 
   const tagRender = (props: CustomTagProps) => {
@@ -70,6 +75,7 @@ const CohortSettings = () => {
     mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
     onSuccess: (data: any) => {
       notification.success({message: "Account updated successfully"})
+      dispatch({ type: "ACTIVE_COHORT", payload: data.data.data });
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";
@@ -120,7 +126,7 @@ const CohortSettings = () => {
         <div className='d-flex gap-2'>
           <p className='d-flex justify-content-center align-items-center w-45'> 
           <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
-          onchange={(e) => setCohortName(e.target.value) } 
+          onchange={handleChange } 
           value={cohortName}/>
           </p>
         </div>
@@ -137,7 +143,7 @@ const CohortSettings = () => {
               id="endDate"
               onchange={(e) => {setEndDate(e.target.value)}}
               placeHolder="mm/dd/yy"
-              value={activeCohort?.endDate ? endDate : ""}
+              value={endDate}
             />
           </div>
 
@@ -151,8 +157,8 @@ const CohortSettings = () => {
       value={tags}
       onChange={handleTagsChange}
       >
-      {tracks.map((option) => (
-        <Option key={option.id} value={option.title}>
+      {tracks.map((option, i) => (
+        <Option value={option.title}>
           {option.title}
         </Option>
       ))}
@@ -183,18 +189,22 @@ const CohortSettings = () => {
 
         <OutlineButton 
             action={()=>{updateCohortInfoMutation.mutate({
-              cohortName,
+              name: cohortName,
               startDate,
               endDate,
+              tracks:tags
             })}} 
-            type="button" 
+            type="button"
             fill={false} 
             outline='primary' 
             gap={true} width={120} 
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}>
+            handleMouseLeave={handleMouseLeave}
+            loading={updateCohortInfoMutation.isPending}
+            disabled={updateCohortInfoMutation.isPending}
+            >
           <FiSave/>
           <span>Save</span>
         </OutlineButton>

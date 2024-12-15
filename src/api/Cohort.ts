@@ -12,6 +12,10 @@ class Cohort {
   updateCohort(id: string, payload: any) {
     return this.client.put(`/cohort/${id}`, payload);
   }
+
+  deleteCohort(id: string) {
+    return this.client.delete(`/cohort/${id}`)
+  }
 }
 
 export default Cohort;
