@@ -28,7 +28,7 @@ const ForgotPasswordForm: FC<IForgotPassword> = ({ verify }) => {
       if (response.data.error) {
         console.log(response.data);
       }
-      verify();
+      verify(email);
       setIsLoading(false);
     } catch (error: any) {
       console.log(error);
