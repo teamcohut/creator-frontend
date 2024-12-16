@@ -45,7 +45,7 @@ export interface ISignupData {
 }
 
 export interface IForgotPassword {
-  verify: () => void;
+  verify: (email: string) => void;
 }
 
 export interface IResetPasswordForm {
