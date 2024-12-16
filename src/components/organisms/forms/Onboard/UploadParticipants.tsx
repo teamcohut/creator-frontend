@@ -8,7 +8,7 @@ import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { FiUpload, FiUploadCloud } from "react-icons/fi";
+import { FiUploadCloud } from "react-icons/fi";
 
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,

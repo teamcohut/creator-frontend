@@ -1,31 +1,30 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import "./style.css";
 import { IModal } from "../../../@types/dashboard.interface";
 
 const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
-
   useEffect(() => {
     const handleKeyDown = (event: any) => {
-      if (event.key === 'Escape') {
-        setModalOpen(false, '');
+      if (event.key === "Escape") {
+        setModalOpen(false, "");
       }
     };
 
     if (open) {
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, setModalOpen]);
 
   useEffect(() => {
     if (children === <></>) {
-      setModalOpen(false, '');
+      setModalOpen(false, "");
     }
-  }, [children])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children]);
 
   if (!open) return null;
 
@@ -33,8 +32,9 @@ const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
     <>
       <div
         onClick={() => setModalOpen(false, "")}
-        className={`modal-bg align-items-center justify-content-center ${open ? "d-flex" : "hidden"
-          }`}
+        className={`modal-bg align-items-center justify-content-center ${
+          open ? "d-flex" : "hidden"
+        }`}
       >
         <div
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
