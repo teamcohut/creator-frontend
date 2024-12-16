@@ -12,9 +12,13 @@ const SignupSuccess = () => {
             title="You've got mail" 
             description='You have succeeded in creating your account. You can now click the link in your mail to verify your mail'
             icon={<FiMail className='fs-icon success-600' />}>
-              <div className="w-auto">
-                <Button action={()=>navigate('/resend-mail')} children='Resend Email' type='button' fill={false} border outline='primary' width={192} />
+              <div className="w-auto d-flex flex-column align-items-center gap-5">
+              <span className='manrope-500 dark-700 fs-body'>A verification link has been sent to <span className="primary-700"></span>. Please check your inbox and click the link to continue.</span>
+              <div className="d-flex flex-column align-items-center gap-2">
+                <small className='dark-500 manrope-500 fs-small'>Didn&apos;t get an email?</small>
+                <Button action={() => navigate('/resend-mail')} children='Resend Email' type='button' fill={false} border outline='primary' width={192} />
               </div>
+            </div>
         </SuccessCard>
     </>
   )
