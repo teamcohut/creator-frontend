@@ -83,7 +83,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <h2>Location</h2>
+          <p className="manrope-600 primary-950 fs-h4">Location</p>
           <div className="location-input-wrapper">
             <select
               value={locationType}

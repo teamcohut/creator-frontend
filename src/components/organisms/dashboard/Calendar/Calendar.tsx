@@ -16,16 +16,17 @@ const CalendarComponent: React.FC = () => {
     queryKey: ["session"],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
-      return response.data.data.map((item: any) => {
-        return {
+      console.log("API Response", response);
+      return response.data?.data && Array.isArray(response.data.data)
+        ? response.data.data.map((item: any) => ({
           id: item.cohort,
           calendarId: item._id,
           title: item.title,
           category: "time",
           start: convertTimeToDate(item.start),
           end: convertTimeToDate(item.end),
-        }
-      })
+        }))
+        : [];
     },
     enabled: !!activeCohort._id,
   });
@@ -61,11 +62,12 @@ const CalendarComponent: React.FC = () => {
       <Calendar
         height="900px"
         view={view}
-        events={data?.map((event: any) => ({
-          ...event,
-          isReadOnly: true, // Optional: makes events read-only
-        })) || []
-        }
+        events={Array.isArray(data)
+          ? data.map((event: any) => ({
+            ...event,
+            isReadOnly: true,
+          }))
+          : []}
         usageStatistics={false}
         onClickSchedule={(event: any) => {
           alert(`Event clicked: ${event.schedule.title}`);
