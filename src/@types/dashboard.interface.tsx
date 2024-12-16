@@ -1,5 +1,11 @@
 import { ReactElement, ReactNode } from "react";
 
+export interface IStatus {
+  status: TStatus;
+}
+
+export type TStatus = 'pending' | 'error' | 'success'
+
 export interface INavLink {
   path: string;
   children: ReactNode;

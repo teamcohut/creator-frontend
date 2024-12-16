@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
 import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
-import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../../api/axios";
 import { notification } from "antd";
 import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
+import Button from "../../../components/atoms/Button";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
@@ -75,23 +75,21 @@ const AccountSettings = () => {
             onchange={(e) => setEmail(e.target.value)}
           />
 
-          <OutlineButton
+          <Button
             action={() => {
               updateAccountInfoMutation.mutate({firstName, lastName, email})
             }}
+            loading={updateAccountInfoMutation.isPending}
             type="button"
-            fill={false}
             outline="primary"
-            gap={true}
+            fill={false}
             width={120}
-            border={true}
-            customStyle={hoverStyle}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}
+            gap
+            border
           >
             <FiSave />
             <span>Save</span>
-          </OutlineButton>
+          </Button>
         </div>
         <div>
           <div>
