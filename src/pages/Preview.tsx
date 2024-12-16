@@ -30,6 +30,7 @@ import AddNewAdmin from "../components/recycle/AddNewAdmin";
 import AccountSettings from "./dashboard/settings/AccountSettings";
 import EditPermissions from "../components/organisms/forms/Settings/EditPermissions";
 import SendEmail from "../components/recycle/SendEmail";
+import ErrorUI from "../helpers/ErrorUI";
 
 const Preview = () => {
   const [modal, setModal] = useState({ name: "", open: false } as {
@@ -79,7 +80,7 @@ const Preview = () => {
       {/* <DangerDeleteAccount /> */}
       {/* <AddNewAdmin /> */}
       {/* <EditPermissions /> */}
-
+      {/* <ErrorUI /> */}
 
 
 
