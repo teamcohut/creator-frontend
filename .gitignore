@@ -5,7 +5,11 @@
 /.pnp
 .pnp.js
 .env
-
+.txt
+*/.txt
+/.txt
+*.txt
+*/.txt
 # testing
 /coverage
 
