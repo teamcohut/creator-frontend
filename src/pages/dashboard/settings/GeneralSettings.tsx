@@ -66,28 +66,25 @@ const {activeProgram} = useContext(ProgramContext)
         title="General Settings"
         subtitle="View and manage your account information here."
       >
-        <OutlineButton
-          action={() => setModal((prev) => ({ open: true, name: "changePasswordModal" }))}
-          type="button"
-          fill={false}
-          outline='primary'
-          gap={true} width={200}
-          border={true}
-          customStyle={hoverStyle}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}>
-          <FiEdit3 />
-          <span>Change Password</span>
-        </OutlineButton>
+        <></>
       </Header>
 
+      <div style={{ maxWidth: '100%', height: '100vh' }}>
       <Tabs items={items}
         onChange={onChange}
         animated={{
           tabPane: true, // Enable tab pane animation
         }}
+        // tabBarStyle={{
+        //   backgroundColor: '#f0f2f5', // Background color for the tab bar
+        //   borderBottom: '2px solid #1890ff', // Border for the tab bar
+        //   padding: '10px 20px', // Padding inside the tab bar
+        // }}
+        
         className="custom-tabs"
       />
+
+      </div>
 
       {modal.name === "changePasswordModal" && (
         <ChangePasswordModal

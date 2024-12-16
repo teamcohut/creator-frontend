@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
+import {FiEdit3, FiSave, FiTrash2, FiUser } from "react-icons/fi";
 import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../../api/axios";
 import { notification } from "antd";
 import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
+import PasswordInput from "../../../components/atoms/inputs/PasswordInput";
+import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
@@ -48,6 +50,7 @@ const AccountSettings = () => {
   return (
     <>
       <div className="d-flex gap-133 align-items-start">
+  
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
             <TextInput2
@@ -67,6 +70,7 @@ const AccountSettings = () => {
               icon={<FiUser className="dark-300" />}
             />
           </div>
+          
           <EmailInput2
             id="email"
             label="Email"
@@ -74,6 +78,7 @@ const AccountSettings = () => {
             placeholder={email}
             onchange={(e) => setEmail(e.target.value)}
           />
+
 
           <OutlineButton
             action={() => {
@@ -92,6 +97,25 @@ const AccountSettings = () => {
             <FiSave />
             <span>Save</span>
           </OutlineButton>
+
+          {/* <div className="pb-4"></div> */}
+          <PasswordInput 
+            id="change-password" 
+            placeHolder=""
+            label="Password"
+            value="*********"
+            icon={
+              <span onClick={
+                (e) => setModal((prev) => ({ open: true, name: "changePasswordModal" }))}>
+                  <FiEdit3 color="#453BDB"/>
+              </span>
+            }
+            onchange={() => {}}
+            valid={true}
+
+            />
+        
+
         </div>
         <div>
           <div>
@@ -100,7 +124,7 @@ const AccountSettings = () => {
           </div>
 
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
             onClick={() => setModal((prev) => ({ open: true, name: "deactivateAccountModal" }))}>
               Deactivate Account <FiTrash2 />
           </span>
@@ -113,8 +137,15 @@ const AccountSettings = () => {
           setModalOpen={setModalOpenState}
         />
       )}
+      {modal.name === "changePasswordModal" && (
+        <ChangePasswordModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
     </>
   );
 };
 
 export default AccountSettings;
+

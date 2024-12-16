@@ -1,6 +1,7 @@
 .outlet-div {
   overflow-y: auto;
   padding-inline: 36px;
+  height: 100vh;
 }
 
 .outlet-div::-webkit-scrollbar {

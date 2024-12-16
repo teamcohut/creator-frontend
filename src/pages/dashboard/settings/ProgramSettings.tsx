@@ -25,10 +25,13 @@ const ProgramSettings = () => {
   ];
   return (
     <>
-      <div className='ml-5'>
-      <Tabs items={items} onChange={onChange} 
+      <div style={{height: '100vh'}}>
+      <Tabs items={items} 
+      onChange={onChange}
+      tabPosition="left" 
         tabBarStyle={{
-          marginLeft: 80, // Padding applied to tabs only
+          // marginBottom: 80, // Padding applied to tabs only
+      
         }}
         animated={{
           tabPane: true, // Enable tab pane animation

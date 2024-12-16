@@ -2,7 +2,7 @@ import React from "react";
 
 interface ButtonOption {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   active?: boolean; // Optional to mark the active button
 }
 

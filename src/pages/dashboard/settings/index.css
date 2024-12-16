@@ -29,6 +29,7 @@
 /* Change the underline color for the active tab */
 .ant-tabs-ink-bar {
   background-color: var(--primary-400) !important;
+  
 }
 
 .custom-tag {

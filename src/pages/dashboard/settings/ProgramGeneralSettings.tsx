@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react';
-import DragNDropInput from '../../../components/atoms/inputs/DragNDropInput'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import TextAreaInput from '../../../components/atoms/inputs/TextareaInput'
-import { FiSave, FiTrash2 } from 'react-icons/fi'
+import { FiEdit2, FiSave, FiTrash2 } from 'react-icons/fi';
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import DeleteProgramModal from '../../../components/organisms/dashboard/modals/DeleteProgramModal'
-import { notification, Select } from 'antd';
+import { notification } from 'antd';
 import { ProgramContext } from '../../../context/programs/ProgramContext';
 import api from '../../../api/axios';
 import { useMutation } from '@tanstack/react-query';
+import GroupButton from '../../../components/atoms/Button/GroupButton';
 
 
 const ProgramGeneralSettings = () => {
@@ -17,8 +17,8 @@ const ProgramGeneralSettings = () => {
   const [title, setTitle] = useState(activeProgram?.title);
   const [description, setDescription] = useState(activeProgram?.description);
   const [format, setFormat] = useState(activeProgram?.format)
-  const [thumbnail, setThumbnail] = useState<string>("");
-  const [banner, setBanner] = useState<string>("");
+  const [thumbnail, setThumbnail] = useState<string>(activeProgram.logo);
+  const [banner, setBanner] = useState<string>(activeProgram.cover);
 
   console.log(activeProgram)
 
@@ -104,27 +104,22 @@ const ProgramGeneralSettings = () => {
 
 
 
-  // const buttonOptions = [
-  //   {
-  //     label: "Hybrid",
-  //     onClick: () => handleButtonClick("Hybrid"),
-  //     active: activeView === "Hybrid",
-  //   },
-  //   {
-  //     label: "Online",
-  //     onClick: () => handleButtonClick("Online"),
-  //     active: activeView === "Online",
-  //   },
-  //   {
-  //     label: "Physical",
-  //     onClick: () => handleButtonClick("Physical"),
-  //     active: activeView === "Physical",
-  //   },
-  // ];
+  const buttonOptions = [
+    {
+      label: "Hybrid",
+    },
+    {
+      label: "Online",
+    },
+    {
+      label: "Physical",
+
+    },
+  ];
   return (
-    <div className='d-flex gap-133 align-items-start'>
-      <div className='w-60'>
-        <DragNDropInput
+    <>
+      <div className='w-100'>
+        {/* <DragNDropInput
           id='logo' 
           label='Program Logo' 
           detail='Program’s Logo' 
@@ -144,8 +139,26 @@ const ProgramGeneralSettings = () => {
         {uploadImageMutation.isPending ? <p>Uploading image...</p> :
         <p className='fs-small manrope-500 primary-400 pb-4'>
           Banner image will be displayed across your Program (png, jpg, jpeg)
-          </p>}
+          </p>} */}
+        <div style={{position: "relative"}}>
 
+        <img src={banner} alt="Banner" style={{width: "100%", height: "183px"}} />
+        <img src={thumbnail} 
+          alt="logo" 
+          style={{width: "80px",
+          height: "80px",
+          borderRadius: "50%", 
+          position: "absolute",
+          left: 30,
+          top: 143,
+        }}
+        />
+        <FiEdit2 />
+
+        </div>
+
+        <div className='pb-4'></div>
+        <div className='pb-5'></div>
         <TextInput2 id='program-title' 
           label='Program Title' 
           value={title}
@@ -161,9 +174,10 @@ const ProgramGeneralSettings = () => {
           value={description}
           />
 
-        <div className='pb-4'></div>
-        
-      <Select
+        <div className='pb-5'></div>
+      <h4 className='fs-body manrope-600 primary-950'>Program Format</h4>
+      <GroupButton buttons={buttonOptions}/>
+      {/* <Select
       defaultValue={format}
       size='large'
       style={{ width: '50%', marginBottom: '50px', borderRadius: '12px' }}
@@ -173,7 +187,8 @@ const ProgramGeneralSettings = () => {
         { value: 'virtual', label: 'Virtual' },
         { value: 'physical', label: 'Physical' },
       ]}
-    />
+    /> */}
+    <div className='pb-4'></div>
 
         <OutlineButton 
             action={handleProgramSubmit} 
@@ -191,8 +206,8 @@ const ProgramGeneralSettings = () => {
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
-      </div>
-      
+        <div className='pb-4'></div>
+        <div className='pb-4'></div>
 
       <div>
       <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
@@ -200,15 +215,23 @@ const ProgramGeneralSettings = () => {
         onClick={() => setModal((prev) => ({ open: true, name: "deleteProgramModal" }))}>
           Delete Program <FiTrash2 />
       </span>
+      
 
       </div>
+    </div>
+    <div className='pb-4'></div>
+    <div className='pb-4'></div>
+      
+
+      
       {modal.name === "deleteProgramModal" && (
         <DeleteProgramModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}
         />
       )}
-    </div>
+    </>
+    
   )
 }
 
