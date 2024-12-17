@@ -25,7 +25,7 @@ const SetupProgram: FC<ISetupProgram> = () => {
           <h2 className="manrope-600">Setup Your Program</h2>
           <FiBookOpen className="icon-right" />
         </div>
-        <p>
+        <p className="dark-700 manrope-600 fs-body">
           With Cohut, Create and Launch Your Program in 5 minutes. Start Today
         </p>
         <div>
