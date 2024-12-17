@@ -23,6 +23,7 @@ const ProgramGeneralSettings = () => {
   const [banner, setBanner] = useState<string>(activeProgram.cover);
 
 const defaultBanner = "/Thumbnail.png";
+const defaultLogo = "/Camera_Avatar.png";
 
 
   console.log(activeProgram);
@@ -126,7 +127,7 @@ const defaultBanner = "/Thumbnail.png";
           {/* Logo Thumbnail */}
           <div
             style={{
-              backgroundImage: `url(${thumbnail})`,
+              backgroundImage: `url(${thumbnail || defaultLogo})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               width: "80px",
