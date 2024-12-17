@@ -14,7 +14,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     description: "",
     cover: null,
     logo: null,
-    format: "hybrid",
+    format: "",
     communities: [],
     certificates: [],
   });
@@ -37,7 +37,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       description: "",
       cover: null,
       logo: null,
-      format: "hybrid",
+      format: "",
       communities: [],
       certificates: [],
     });
@@ -64,7 +64,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       {contextHolder}
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 && (
-          <ProgramDetail onContinue={handleProgramDetailContinue} closeModal={closeModal} />
+          <ProgramDetail programData={programData} onContinue={handleProgramDetailContinue} closeModal={closeModal} />
         )}
         {currentStep === 2 && (
           <CustomizeProgram

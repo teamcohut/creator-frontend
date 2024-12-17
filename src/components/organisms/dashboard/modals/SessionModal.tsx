@@ -1,5 +1,5 @@
 import { notification } from "antd";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { ISetupModal } from "../../../../@types/dashboard.interface";
 import AddSession from "../../forms/Session/AddSession";
 import AdditionalSession from "../../forms/Session/AdditionalSession";
@@ -16,19 +16,18 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   };
 
   const prevStep = () => {
-
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
   const closeModal = () => {
-    setModalOpen(false, "");
+    setModalOpen(false, null);
     setCurrentStep(1);
     setFormData({});
   };
 
   const handleSuccess = () => {
     api.success({ message: "Session successfully created!" });
-    setModalOpen(false, "sessionModal");
+    setModalOpen(false, null);
     setCurrentStep(1);
     setFormData({});
   };

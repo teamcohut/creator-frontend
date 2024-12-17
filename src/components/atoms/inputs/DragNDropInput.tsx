@@ -4,7 +4,7 @@ import "../style.css";
 import { FiImage } from "react-icons/fi";
 
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
-  const { label, id, onchange, detail, icon } = props;
+  const { label, id, onchange, detail, icon, value } = props;
 
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -49,9 +49,8 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
         </label>
       )}
       <div
-        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${
-          dragActive ? "drag-active" : ""
-        }`}
+        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${dragActive ? "drag-active" : ""
+          }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -74,6 +73,7 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
                 type="file"
                 id={id}
                 className="file-input "
+                value={value}
                 onChange={handleFileChange}
                 style={{ display: "none" }}
               />
@@ -92,6 +92,7 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
                   type="file"
                   id={id}
                   className="file-input"
+                  value={value}
                   onChange={handleFileChange}
                   style={{ display: "none" }}
                 />

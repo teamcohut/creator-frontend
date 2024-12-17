@@ -92,14 +92,17 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
         <div>
           <p className="manrope-600 primary-950 fs-h4">Location</p>
           <div className="location-input-wrapper">
-            <select
-              value={locationType}
-              onChange={handleDropdownChange}
-              className="location-dropdown"
-            >
-              <option value="Online">Online</option>
-              <option value="Physical">Physical</option>
-            </select>
+            <div>
+              <select
+                value={locationType}
+                onChange={handleDropdownChange}
+                className="location-dropdown"
+              >
+                <option value="Online">Online</option>
+                <option value="Physical">Physical</option>
+              </select>
+            </div>
+
             <input
               type="text"
               placeholder={
