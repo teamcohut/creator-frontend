@@ -65,8 +65,8 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   const createProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
-      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
       setCurrentStep(3);
+      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
     },
     onError: (error: any) => {
       notification.error({

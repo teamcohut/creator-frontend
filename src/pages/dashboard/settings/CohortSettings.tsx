@@ -29,9 +29,9 @@ const CohortSettings = () => {
   // };
 
   const handleChange = (e: any) => {
-    setCohortName(e.target.value)
-    console.log(cohortName)
-  }
+    setCohortName(e.target.value);
+    console.log(cohortName);
+  };
 
   // const tagRender = (props: CustomTagProps) => {
   //   const { label, closable, onClose } = props;
@@ -66,9 +66,10 @@ const CohortSettings = () => {
   // };
 
   const updateCohortInfoMutation = useMutation({
-    mutationFn: (payload: any) => api.cohort.updateCohort(activeCohort.id, payload),
+    mutationFn: (payload: any) =>
+      api.cohort.updateCohort(activeCohort.id, payload),
     onSuccess: (data: any) => {
-      notification.success({ message: "Account updated successfully" })
+      notification.success({ message: "Account updated successfully" });
       dispatch({ type: "ACTIVE_COHORT", payload: data.data.data });
     },
     onError: (error: any) => {
@@ -76,7 +77,10 @@ const CohortSettings = () => {
 
       if (error.response?.data) {
         // Handle backend-provided error messages
-        if (Array.isArray(error.response.data.errors) && error.response.data.errors.length > 0) {
+        if (
+          Array.isArray(error.response.data.errors) &&
+          error.response.data.errors.length > 0
+        ) {
           errorMessage = error.response.data.errors[0];
         } else if (error.response.data.message) {
           errorMessage = error.response.data.message;
@@ -88,17 +92,16 @@ const CohortSettings = () => {
 
       // Special case for ObjectId casting error
       if (errorMessage.includes("Cast to ObjectId failed")) {
-        errorMessage = "No cohort found, setup your program and onboard new cohort.";
+        errorMessage =
+          "No cohort found, setup your program and onboard new cohort.";
       }
 
       // Display the notification
       notification.error({
         message: errorMessage,
       });
-    }
+    },
   });
-
-
 
   const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
@@ -107,21 +110,26 @@ const CohortSettings = () => {
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  const hoverStyle = isHovered ? {
-    color: 'var(--primary-800) !important',
-    borderColor: 'var(--primary-800) !important',
-  } : {};
-
+  const hoverStyle = isHovered
+    ? {
+        color: "var(--primary-800) !important",
+        borderColor: "var(--primary-800) !important",
+      }
+    : {};
 
   return (
     <>
-      <div className='d-flex gap-133 align-items-start pt-4'>
-        <div className='w-60'>
-          <div className='d-flex gap-2'>
-            <p className='d-flex justify-content-center align-items-center w-45'>
-              <TextInput2 id='cohort-name' placeHolder='Cohut123' label='Cohort Name'
+      <div className="d-flex gap-133 align-items-start pt-4">
+        <div className="w-60">
+          <div className="d-flex gap-2">
+            <p className="d-flex justify-content-center align-items-center w-45">
+              <TextInput2
+                id="cohort-name"
+                placeHolder="Cohut123"
+                label="Cohort Name"
                 onchange={handleChange}
-                value={cohortName} />
+                value={cohortName}
+              />
             </p>
           </div>
           <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
@@ -132,16 +140,18 @@ const CohortSettings = () => {
               label="Set Cohort Duration"
               value={startDate}
             />
-            <h3 className='dark-700'>-</h3>
+            <h3 className="dark-700">-</h3>
             <DateInput2
               id="endDate"
-              onchange={(e) => { setEndDate(e.target.value) }}
+              onchange={(e) => {
+                setEndDate(e.target.value);
+              }}
               placeHolder="mm/dd/yy"
               value={endDate}
             />
           </div>
 
-         {/* <span className='fs-body manrope-600 primary-950'>Track</span>
+          {/* <span className='fs-body manrope-600 primary-950'>Track</span>
 
       <Select
       mode="tags"
@@ -159,9 +169,7 @@ const CohortSettings = () => {
     </Select>
     <div className='pb-4'></div> */}
 
-        
-
-        {/* <TextInput2 id='link' 
+          {/* <TextInput2 id='link' 
           label='Link to Generate Certificate' 
           placeHolder='Unique link for learners to access their certificates' 
           icon={<FiLink/>} 
@@ -173,7 +181,7 @@ const CohortSettings = () => {
 
         <div className='pb-4'></div> */}
 
-        {/* <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
+          {/* <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
         
         <span className='fs-small manrope-500 primary-700'>
           Once you graduate a learner, this message will automatically get sent to them
@@ -181,16 +189,19 @@ const CohortSettings = () => {
 
         <div className='pb-4'></div> */}
 
-        <OutlineButton 
-            action={()=>{updateCohortInfoMutation.mutate({
-              name: cohortName,
-              startDate,
-              endDate,
-            })}} 
+          <OutlineButton
+            action={() => {
+              updateCohortInfoMutation.mutate({
+                name: cohortName,
+                startDate,
+                endDate,
+              });
+            }}
             type="button"
             fill={false}
-            outline='primary'
-            gap={true} width={120}
+            outline="primary"
+            gap={true}
+            width={120}
             border={true}
             customStyle={hoverStyle}
             handleMouseEnter={handleMouseEnter}
@@ -201,7 +212,6 @@ const CohortSettings = () => {
             <FiSave />
             <span>Save</span>
           </OutlineButton>
-
         </div>
         <div>
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
@@ -219,7 +229,7 @@ const CohortSettings = () => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default CohortSettings
+export default CohortSettings;

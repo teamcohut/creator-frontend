@@ -56,7 +56,7 @@ export interface IinfoCardProps {
   dateOfSession?: string;
 }
 
-export interface ISetupProgram { }
+export interface ISetupProgram {}
 
 export interface ICohort {
   name: string;
@@ -76,6 +76,7 @@ export interface IModal {
 export interface ISetupModal {
   modalOpen: boolean;
   setModalOpen: (open: boolean, name: TModal) => void;
+  setCurrentStep?: (step: number) => void;
 }
 
 export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
