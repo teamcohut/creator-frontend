@@ -79,7 +79,7 @@ const AccountSettings = () => {
             onchange={(e) => setEmail(e.target.value)}
           />
 
-
+          
           <OutlineButton
             action={() => {
               updateAccountInfoMutation.mutate({firstName, lastName, email})

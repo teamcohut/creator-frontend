@@ -40,13 +40,6 @@ const ProgramGeneralSettings = () => {
     },
   });
 
-  const handleThumbnailChange = async (file: any) => {
-    uploadImageMutation.mutate({ type: "thumbnail", file });
-  };
-
-  const handleBannerChange = async (file: any) => {
-    uploadImageMutation.mutate({ type: "banner", file });
-  };
 
   const [modal, setModal] = useState({ name: "", open: false } as {
     name: string;
@@ -65,12 +58,6 @@ const ProgramGeneralSettings = () => {
     color: 'var(--primary-800) !important',
     borderColor: 'var(--primary-800) !important',
   } : {};
-
-
-
-  const handleChange = (value: string) => {
-    setFormat(value)
-  };
 
 
   const updateProgramMutation = useMutation({
@@ -180,7 +167,9 @@ const ProgramGeneralSettings = () => {
       <h4 className='fs-body manrope-600 primary-950'>Program Format</h4>
       <GroupButton buttons={buttonOptions}/>
 
-    <div className='pb-4'></div>
+      <div className='pb-4'></div>
+
+      <div className='pb-4'></div>
 
         <OutlineButton 
             action={handleProgramSubmit} 
@@ -198,8 +187,9 @@ const ProgramGeneralSettings = () => {
           <FiSave/>
           <span>Save</span>
         </OutlineButton>
-        <div className='pb-4'></div>
-        <div className='pb-4'></div>
+        <div className='pb-5'></div>
+        <div className='pb-5'></div>
+        
 
       <div>
       <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
