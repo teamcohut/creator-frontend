@@ -7,8 +7,9 @@ import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
+import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -67,7 +68,10 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
           rounded={false}
         />
         <div className="d-flex flex-column gap-2">
-          <h1 className="manrope-600 primary-950 fs-h2">Onboard New Cohort</h1>
+          <div className="d-flex flex-row justify-content-between">
+            <h1 className="manrope-600 primary-950 fs-h2">Onboard New Cohort</h1>
+            <FiX className="fs-h3" onClick={closeModal} />
+          </div>
           <span className="manrope-500 dark-700 fs-body">
             Let's invite and guide your Cohort to Success
           </span>
@@ -133,6 +137,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit }) => {
 
 interface IOnboardCohortModal {
   onSubmit: (cohort: ICohort) => void;
+  closeModal: any;
 }
 
 export default OnboardCohortModal;

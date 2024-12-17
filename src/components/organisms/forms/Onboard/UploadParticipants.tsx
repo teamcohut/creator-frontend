@@ -9,9 +9,12 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import { FaFileCsv } from 'react-icons/fa';
+import { FiArrowLeft, FiX } from "react-icons/fi";
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,
   hasTrack,
+  closeModal,
+  prevStep
 }) => {
   const [track, setTrack] = useState("");
   const { activeCohort } = useContext(ProgramContext);
@@ -86,6 +89,10 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           gap
           rounded={false}
         />
+        <div className="d-flex flex-row justify-content-between">
+          <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+          <FiX className="fs-h3" onClick={closeModal} />
+        </div>
         <div className="d-flex flex-column gap-2">
           <h1 className="manrope-600 primary-950 fs-h2">
             Upload Cohort Participants
@@ -145,6 +152,8 @@ const UploadParticipants: FC<IUploadParticipants> = ({
 interface IUploadParticipants {
   onSubmit: () => void;
   hasTrack: boolean;
+  closeModal: any;
+  prevStep: any;
 }
 
 // interface ITracks {

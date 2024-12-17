@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { notification } from "antd";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { FiArrowLeft, FiX } from "react-icons/fi";
 
 type ProgramData = {
   title: string;
@@ -20,11 +21,15 @@ type ProgramData = {
 interface CustomizeProgramProps {
   programData: ProgramData;
   setCurrentStep?: (step: number) => void;
+  closeModal: any;
+  prevStep: any;
 }
 
 const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   programData,
   setCurrentStep,
+  closeModal,
+  prevStep
 }) => {
   const [thumbnail, setThumbnail] = useState<string>("");
   const [banner, setBanner] = useState<string>("");
@@ -102,6 +107,10 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
         gap
         rounded={false}
       />
+      <div className="d-flex flex-row justify-content-between">
+        <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+        <FiX className="fs-h3" onClick={closeModal} />
+      </div>
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Customize Program</h1>
         <span className="manrope-500 dark-700 fs-body">

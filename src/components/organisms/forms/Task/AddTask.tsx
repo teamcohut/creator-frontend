@@ -10,6 +10,7 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { notification } from "antd";
+import { FiX } from "react-icons/fi";
 
 const AddTask: FC<IAddTask> = ({ closeModal }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -115,7 +116,10 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         className="form bg-white d-flex flex-column rounded-5 mx-auto"
       >
         <div className="d-flex flex-column gap-2">
-          <h1 className="manrope-600 primary-950 fs-h2">Add New Task</h1>
+          <div className="d-flex flex-row justify-content-between">
+            <h1 className="manrope-600 primary-950 fs-h2">Add New Task</h1>
+            <FiX className="fs-h3" onClick={closeModal} />
+          </div>
           <span className="manrope-500 dark-700 fs-body">
             Add a task or to-do and assign to your participants
           </span>
@@ -180,7 +184,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Save"
-            action={() => {}}
+            action={() => { }}
             type="submit"
             fill={true}
             loading={taskMutation.isPending}
