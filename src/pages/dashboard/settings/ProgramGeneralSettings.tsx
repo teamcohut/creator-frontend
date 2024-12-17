@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { TModal } from "../../../@types/dashboard.interface";
 import GroupButton from "../../../components/atoms/Button/GroupButton";
 import EditProgramImagesModal from "../../../components/organisms/dashboard/modals/EditProgramImagesModal";
+import SetupProgram from "../../../components/organisms/dashboard/SetupProgram/SetupProgram";
 
 const ProgramGeneralSettings = () => {
   const { dispatch, activeProgram } = useContext(ProgramContext);
@@ -20,6 +21,9 @@ const ProgramGeneralSettings = () => {
   const [format, setFormat] = useState(activeProgram?.format);
   const [thumbnail, setThumbnail] = useState<string>(activeProgram.logo);
   const [banner, setBanner] = useState<string>(activeProgram.cover);
+
+const defaultBanner = "/Thumbnail.png";
+
 
   console.log(activeProgram);
 
@@ -104,12 +108,12 @@ const ProgramGeneralSettings = () => {
   ];
   return (
     <>
-      <div className="w-100">
+      {activeProgram.title ? <div className="w-100">
         <div style={{ position: "relative" }}>
           {/* Banner Background */}
           <div
             style={{
-              backgroundImage: `url(${banner})`,
+              backgroundImage: `url(${banner || defaultBanner})`,
               backgroundSize: "cover", // Ensures the image covers the container without distortion
               backgroundPosition: "center", // Centers the image
               width: "100%",
@@ -228,7 +232,7 @@ const ProgramGeneralSettings = () => {
             setModalOpen={setModalOpenState}
           />
         )}
-      </div>
+      </div> : <SetupProgram />}
     </>
   );
 };

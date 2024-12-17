@@ -10,6 +10,7 @@ import DeleteCohortModal from "../../../components/organisms/dashboard/modals/De
 import DateInput2 from "../../../components/atoms/inputs/DateInput2";
 import TextAreaInput from "../../../components/atoms/inputs/TextareaInput";
 import { TModal } from "../../../@types/dashboard.interface";
+import SetupProgram from "../../../components/organisms/dashboard/SetupProgram/SetupProgram";
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -120,7 +121,7 @@ const CohortSettings = () => {
 
   return (
     <>
-      <div>
+      {activeCohort.id ? <div>
         <div className="w-75">
           <div className="d-flex gap-2">
             <p className="d-flex justify-content-center align-items-center w-45">
@@ -227,7 +228,7 @@ const CohortSettings = () => {
         </div>
         </div>
 
-      </div>
+      </div> : <SetupProgram />}
       {modal.name === "deletecohort" && (
         <DeleteCohortModal
           modalOpen={modal.open}
