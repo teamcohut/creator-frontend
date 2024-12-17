@@ -99,7 +99,7 @@
 
 
 import { notification } from "antd";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ISetupModal } from "../../../../@types/dashboard.interface";
 import AddSession from "../../forms/Session/AddSession";
 import AdditionalSession from "../../forms/Session/AdditionalSession";
@@ -111,25 +111,26 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const nextStep = (data: any) => {
-    // Merge new data with existing formData
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const prevStep = () => {
-    // Simply decrement step without modifying formData
+
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
   const closeModal = () => {
     setModalOpen(false, "");
+    setCurrentStep(1);
+    setFormData({});
   };
 
   const handleSuccess = () => {
     api.success({ message: "Session successfully created!" });
     setModalOpen(false, "sessionModal");
-    setCurrentStep(1); // Reset step
-    setFormData({}); // Clear form data
+    setCurrentStep(1);
+    setFormData({});
   };
 
   return (
@@ -141,13 +142,13 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       >
         {currentStep === 1 ? (
           <AddSession
-            initialData={formData} // Pass existing formData as initial values
+            initialData={formData}
             onSubmit={nextStep}
             closeModal={closeModal}
           />
         ) : currentStep === 2 ? (
           <AdditionalSession
-            initialData={formData} // Pass formData to repopulate fields
+            initialData={formData}
             onSuccess={handleSuccess}
             closeModal={closeModal}
             prevStep={prevStep}

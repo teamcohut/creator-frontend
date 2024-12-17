@@ -36,6 +36,7 @@ export interface ITimeInput {
   defaultValue?: string;
   onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: string;
+  value?: string;
 }
 
 
