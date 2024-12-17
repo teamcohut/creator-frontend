@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { notification } from "antd";
-import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { FiArrowLeft, FiX } from "react-icons/fi";
 
 type ProgramData = {
@@ -20,20 +19,23 @@ type ProgramData = {
 
 interface CustomizeProgramProps {
   programData: ProgramData;
-  setCurrentStep?: (step: number) => void;
+  setProgramData: (data: any) => void;
+  setCurrentStep: (step: number) => void;
+  setSuccessful: (status: boolean) => void;
   closeModal: any;
   prevStep: any;
 }
 
 const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   programData,
+  setProgramData,
   setCurrentStep,
+  setSuccessful,
   closeModal,
   prevStep
 }) => {
   const [thumbnail, setThumbnail] = useState<string>("");
   const [banner, setBanner] = useState<string>("");
-  const { dispatch } = useContext(ProgramContext);
 
   const uploadImageMutation = useMutation({
     mutationFn: (data: any) => api.program.uploadProgramImage(data.file),
@@ -70,8 +72,10 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   const createProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
-      dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
-      setCurrentStep?.(3);
+      setCurrentStep(3);
+      setSuccessful(true);
+      localStorage.setItem('programId', data.data.data._id)
+      setProgramData(data.data.data)
     },
     onError: (error: any) => {
       notification.error({
@@ -81,12 +85,6 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   });
 
   const handleProgramSubmit = async () => {
-    if (!thumbnail || !banner) {
-      notification.warning({
-        message: "Cover and logo must be uploaded before submission.",
-      });
-      return;
-    }
 
     const payload = {
       ...programData,
@@ -119,14 +117,14 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
       </div>
       <div className="d-flex flex-column gap-4">
         <DragNDropInput
-          label="Program Logo"
+          label="Program Logo (Optional)"
           id="thumbnail-upload"
           detail="Program's Logo"
           onchange={(file) => handleThumbnailChange(file)}
         />
         <div>
           <DragNDropInput
-            label="Banner Image"
+            label="Banner Image (Optional)"
             id="banner-upload"
             detail="Program's Cover Image"
             onchange={(file) => handleBannerChange(file)}

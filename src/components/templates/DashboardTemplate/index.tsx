@@ -20,6 +20,7 @@ const DashboardTemplate: FC = () => {
         dispatch({ type: "PROGRAMS", payload: response.data.data });
       }
       if (response.data.data?.length > 0) {
+        localStorage.setItem('programId', response.data.data[0]._id)
         dispatch({ type: "ACTIVE_PROGRAM", payload: response.data.data[0] });
       }
       if (

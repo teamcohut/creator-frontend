@@ -9,11 +9,12 @@ import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeModal }) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  const programId = localStorage.getItem('programId') || activeProgram._id
 
   const [form, setForm] = useState<ICohort>({
     name: "",
@@ -21,7 +22,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
     startDate: "",
     endDate: "",
     hasTrack: false,
-    program: activeProgram._id,
+    program: programId,
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -34,29 +35,23 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const handleSubmit = async () => {
     if (form.name === "" || form.endDate === "" || form.startDate === "") {
       api.warning({
         message: "Please enter all input fields",
         placement: "top",
       });
-      setIsLoading(false);
       return;
     }
     console.log(form);
     await onSubmit(form);
-    setIsLoading(false);
   };
 
   return (
     <>
       {contextHolder}
-      <form
+      <div
         className="form bg-white d-flex flex-column rounded-5 mx-auto"
-        onSubmit={handleSubmit}
-        action=""
       >
         {/* Progress bar dynamically changes length */}
         <ProgressBar
@@ -124,19 +119,20 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Continue"
-            action={() => { }}
-            type="submit"
+            action={handleSubmit}
+            type="button"
             fill={true}
-            loading={isLoading}
+            loading={pending}
           />
         </div>
-      </form>
+      </div>
     </>
   );
 };
 
 interface IOnboardCohortModal {
   onSubmit: (cohort: ICohort) => void;
+  pending: boolean;
   closeModal: any;
 }
 

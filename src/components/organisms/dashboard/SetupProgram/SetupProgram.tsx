@@ -7,12 +7,10 @@ import SetupProgramModal from "../modals/SetupProgramModal";
 import SetupCohortModal from "../modals/SetupCohortModal";
 
 const SetupProgram: FC<ISetupProgram> = () => {
-  const [activeModal, setActiveModal] = useState<TModal>(null);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modal, setModal] = useState({name: null, open: false} as {name: TModal, open: boolean});
 
   const openModalHandler = (open: boolean, modal: TModal) => {
-    setActiveModal(modal);
-    setModalOpen(open);
+    setModal({name: modal, open});
   };
 
   return (
@@ -37,11 +35,11 @@ const SetupProgram: FC<ISetupProgram> = () => {
         </div>
       </div>
 
-      {activeModal === "program" && (
-        <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {modal.name === "program" && (
+        <SetupProgramModal modalOpen={modal.open} setModalOpen={openModalHandler} />
       )}
-      {activeModal === "cohort" && (
-        <SetupCohortModal modalOpen={modalOpen} setModalOpen={openModalHandler} />
+      {modal.name === "cohort" && (
+        <SetupCohortModal modalOpen={modal.open} setModalOpen={openModalHandler} />
       )}
     </>
   );
