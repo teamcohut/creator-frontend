@@ -1,130 +1,156 @@
-import { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { FiArrowLeft, FiCalendar, FiClock, FiEdit3, FiMapPin, FiTrash2, FiVideo } from 'react-icons/fi';
-import Button from '../../../atoms/Button';
-import { notification } from 'antd';
-import api from '../../../../api/axios';
-import { TModal } from '../../../../@types/dashboard.interface';
-import EditSessionModal from '../modals/EditSessionModal';
+import { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  FiArrowLeft,
+  FiCalendar,
+  FiClock,
+  FiEdit3,
+  FiMapPin,
+  FiTrash2,
+  FiVideo,
+} from "react-icons/fi";
+import Button from "../../../atoms/Button";
+import { notification } from "antd";
+import api from "../../../../api/axios";
+import { TModal } from "../../../../@types/dashboard.interface";
+import EditSessionModal from "../modals/EditSessionModal";
 
 const SessionDetails = () => {
-    const { sessionId } = useParams();
-    const navigate = useNavigate();
-    const [modal, setModal] = useState({ name: null, open: false } as {
-        name: TModal;
-        open: boolean;
+  const { sessionId } = useParams();
+  const navigate = useNavigate();
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
+    open: boolean;
+  });
+
+  const setModalOpen = (open: boolean, name: TModal) => {
+    setModal({ name, open });
+  };
+
+  const { isLoading, isError, data, isSuccess } = useQuery({
+    queryKey: ["session", sessionId],
+    queryFn: () => api.session.findSession(sessionId!),
+    enabled: !!sessionId,
+  });
+
+  const deleteSessionMutation = useMutation({
+    mutationFn: () => api.session.deleteSession(sessionId!),
+    onSuccess: () => {
+      notification.success({ message: "Session deleted successfully!" });
+      localStorage.removeItem("sessionId");
+      navigate(-1);
+    },
+    onError: () => {
+      notification.error({
+        message: "Failed to delete session. Please try again.",
       });
+    },
+  });
 
-    const setModalOpen = (open: boolean, name: TModal) => {
-        setModal({name, open})
-    }
+  if (isLoading) return <p>Loading session details...</p>;
+  if (isError) return <p>Error loading session details.</p>;
+  if (isSuccess) {
+    localStorage.setItem("sessionId", data._id);
+  }
 
-    const { isLoading, isError, data, isSuccess } = useQuery({
-        queryKey: ["session", sessionId],
-        queryFn: () => api.session.findSession(sessionId!),
-        enabled: !!sessionId,
-    });
+  const session = data?.data.data;
+  const sessionLink = session?.location.address;
 
-    const deleteSessionMutation = useMutation({
-        mutationFn: () => api.session.deleteSession(sessionId!),
-        onSuccess: () => {
-            notification.success({ message: "Session deleted successfully!" });
-            localStorage.removeItem('sessionId')
-            navigate(-1);
-        },
-        onError: () => {
-            notification.error({
-                message: "Failed to delete session. Please try again.",
-            });
-        },
-    });
-
-    if (isLoading) return <p>Loading session details...</p>;
-    if (isError) return <p>Error loading session details.</p>;
-    if (isSuccess) {
-        localStorage.setItem('sessionId', data._id)
-    }
-
-    const session = data?.data.data;
-    const sessionLink = session?.location.address;
-
-    const date = new Date(session?.date);
-    console.log(date);
-
-
-    return (
-        <>
-            <div className='pt-5 d-flex flex-column gap-5'>
-                <p
-                    className='manrope-500 fs-body dark-700 d-flex align-items-center gap-1'
-                    onClick={() => navigate(-1)}
-                    style={{ cursor: 'pointer' }}
-                >
-                    <FiArrowLeft />
-                    Back to Learning
+  return (
+    <>
+      <div className="pt-5 d-flex flex-column gap-5">
+        <p
+          className="manrope-500 fs-body dark-700 d-flex align-items-center gap-1"
+          onClick={() => navigate(-1)}
+          style={{ cursor: "pointer" }}
+        >
+          <FiArrowLeft />
+          Back to Learning
+        </p>
+        <div className="d-flex flex-column gap-5">
+          <div className="border rounded-4 p-5 d-flex flex-column gap-5 w-75">
+            <div className="d-flex flex-column gap-2">
+              <div className="d-flex justify-content-between">
+                <h2 className="fs-h3 manrope-600 primary-950">
+                  {session?.title}
+                </h2>
+                <div className="w-fit">
+                  <Button
+                    action={() => setModalOpen(true, "session")}
+                    fill={false}
+                    type="button"
+                  >
+                    <FiEdit3 className="fs-h3 primary-400" />
+                  </Button>
+                </div>
+              </div>
+              <p className="manrope-500 fs-body dark-700">
+                {session?.description}
+              </p>
+            </div>
+            <div className="d-flex flex-column gap-4">
+              <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+                <FiClock /> {session?.start} - {session?.end}
+              </p>
+              <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+                <FiCalendar /> {session?.date}
+              </p>
+              {session?.location.name === "Physical" ? (
+                <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+                  <FiMapPin /> {session.location.address}
                 </p>
-                <div className="d-flex flex-column gap-5">
-                    <div className="border rounded-4 p-5 d-flex flex-column gap-5 w-75">
-                        <div className='d-flex flex-column gap-2'>
-                            <div className='d-flex justify-content-between'>
-                                <h2 className='fs-h3 manrope-600 primary-950'>{session?.title}</h2>
-                                <div className="w-fit">
-                                    <Button action={() => setModalOpen(true, 'session')} fill={false} type='button'>
-                                        <FiEdit3 className='fs-h3 primary-400' />
-                                    </Button>
-                                </div>
-                            </div>
-                            <p className='manrope-500 fs-body dark-700'>{session?.description}</p>
-                        </div>
-                        <div className="d-flex flex-column gap-4">
-                            <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'><FiClock /> {session?.start} - {session?.end}</p>
-                            <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'><FiCalendar /> {session?.date}</p>
-                            {
-                                session?.location.name === 'Physical' ?
-                                    <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'><FiMapPin /> {session.location.address}</p> :
-                                    <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'>
-                                        <FiVideo />
-                                        <Link to={`http://${sessionLink}`} target="_blank" rel="noopener noreferrer">
-                                            {sessionLink}
-                                        </Link>
-                                    </p>
-                            }
-
-                        </div>
-                        <div className="d-flex justify-content-between align-items-center">
-                            <div className="w-75">
-                                <Button
-                                    action={() => window.open(sessionLink, '_blank')}
-                                    fill={true}
-                                    type="button"
-                                    border
-                                    outline="primary"
-                                    gap
-                                >
-                                    <FiVideo /> Join Session
-                                </Button>
-                            </div>
-                            <div className='w-fit'>
-                                <Button action={deleteSessionMutation.mutate} loading={deleteSessionMutation.isPending} fill={false} type='button' customStyle={{ color: 'var(--error-300' }} ><FiTrash2 className='fs-h3' /></Button>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div>
+              ) : (
+                <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+                  <FiVideo />
+                  <Link
+                    to={`http://${sessionLink}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {sessionLink}
+                  </Link>
+                </p>
+              )}
+            </div>
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="w-75">
+                <Button
+                  action={() => window.open(sessionLink, "_blank")}
+                  fill={true}
+                  type="button"
+                  border
+                  outline="primary"
+                  gap
+                >
+                  <FiVideo /> Join Session
+                </Button>
+              </div>
+              <div className="w-fit">
+                <Button
+                  action={deleteSessionMutation.mutate}
+                  loading={deleteSessionMutation.isPending}
+                  fill={false}
+                  type="button"
+                  customStyle={{ color: "var(--error-300" }}
+                >
+                  <FiTrash2 className="fs-h3" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          {/* <div>
                     <h2>Additional Resources</h2>
                     <span></span>
                 </div> */}
-                </div>
-            </div>
-            
+        </div>
+      </div>
 
-            {
-                modal.name === 'session' &&
-                <EditSessionModal modalOpen={modal.open} setModalOpen={setModalOpen} />
-            }
-        </>
-    );
+      {modal.name === "session" && (
+        <EditSessionModal modalOpen={modal.open} setModalOpen={setModalOpen} />
+      )}
+    </>
+  );
 };
 
 export default SessionDetails;
-

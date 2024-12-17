@@ -13,7 +13,7 @@ export interface ISuccessCard {
   description: string;
   email?: string;
   width?: number;
-  cancelBtn?: React.ReactNode
+  cancelBtn?: React.ReactNode;
   children?: ReactNode;
 }
 
@@ -27,7 +27,8 @@ export interface IAuthProvider {
 
 export type TAuthAction =
   | { type: "LOGIN"; payload: Record<string, any> }
-  | { type: "LOGOUT" };
+  | { type: "LOGOUT" }
+  | { type: "SET_USER"; payload: Record<string, any> };
 
 export interface IUserChoice {
   onSubmit: (selected: string) => void;

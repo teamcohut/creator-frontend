@@ -14,17 +14,15 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SendParticipantMail from "../../forms/Participants/SendParticipantMail";
 
 const Table: React.FC<ITable> = ({ header, body, refresh }) => {
-  const [modal, setModal] = useState<IModal>({ open: false, modal: '' })
-  const [email, setEmail] = useState('')
-  const [partipantId, setPartipantId] = useState('')
+  const [modal, setModal] = useState<IModal>({ open: false, modal: "" });
+  const [email, setEmail] = useState("");
+  const [partipantId, setPartipantId] = useState("");
   const { activeProgram } = useContext(ProgramContext);
-
 
   const handleDropdownAction = (action: TModal, email: string) => {
     // Action for a specific participant
-    setEmail(email)
-    setModal({ open: true, modal: action })
-    console.log(`Action: ${action} for ${email}`);
+    setEmail(email);
+    setModal({ open: true, modal: action });
   };
 
   const openModal = (open: boolean, modal: TModal) => {
@@ -38,20 +36,20 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
     onSuccess: (data: any) => {
       notification.open({
         message: "Participant removed",
-      })
-      setModal({ open: false, modal: '' })
-      refresh && refresh()
+      });
+      setModal({ open: false, modal: "" });
+      refresh && refresh();
     },
     onError: (error: any) => {
       notification.error({
         message: error.response.data.errors[0] ?? error.response.data.message,
       });
     },
-  })
+  });
 
   const removeParticipant = async () => {
-    await removeMutation.mutate()
-  }
+    await removeMutation.mutate();
+  };
 
   return (
     <>
@@ -71,7 +69,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
               id="session"
               label=""
               placeHolder="Search"
-              onchange={(e) => { }}
+              onchange={(e) => {}}
             />
           </div>
         </div>
@@ -87,9 +85,10 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
 
           <tbody className="fs-body manrope-500 dark-700">
             {body?.map((participant, idx) => (
-
               <tr key={idx}>
-                <td>{participant.firstName} {participant.lastName}</td>
+                <td>
+                  {participant.firstName} {participant.lastName}
+                </td>
                 <td>{participant.email}</td>
                 <td>{participant.trackTitle}</td>
                 <td>
@@ -108,8 +107,8 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                     <ul className="dropdown-menu">
                       <button
                         onClick={() => {
-                          setPartipantId(participant._id)
-                          handleDropdownAction("mail", participant.email)
+                          setPartipantId(participant._id);
+                          handleDropdownAction("mail", participant.email);
                         }}
                         className="dropdown-item cursor-pointer"
                       >
@@ -117,8 +116,8 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                       </button>
                       <button
                         onClick={() => {
-                          setPartipantId(participant._id)
-                          handleDropdownAction("remove", participant.email)
+                          setPartipantId(participant._id);
+                          handleDropdownAction("remove", participant.email);
                         }}
                         className="dropdown-item cursor-pointer"
                       >
@@ -132,36 +131,50 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
           </tbody>
         </table>
       </div>
-      {
-        modal.open && (
-          <Modal open={modal.open} setModalOpen={openModal}>
-            {
-              modal.modal === 'remove' ?
-                <SettingsStatusCard
-                  title="Confirm Removal"
-                  description={`Are you sure you want to remove ${email}? You will not be able to undo this action.`}
-                  icon={<FiAlertCircle className="warning-500 fs-icon" />}
-                >
-                  <div className="d-flex gap-4">
-                    <Button action={removeParticipant} loading={removeMutation.isPending} children='Remove Participant' fill={false} type="button" border outline="primary" />
-                    <Button action={() => setModal({ open: false, modal: '' })} children='Cancel' fill type="button" />
-                  </div>
-                </SettingsStatusCard> :
-                modal.modal === 'mail' ?
-                  <SendParticipantMail email={email.split(',')} setModalOpen={openModal} /> :
-                  <></>
-            }
-          </Modal>
-        )
-      }
+      {modal.open && (
+        <Modal open={modal.open} setModalOpen={openModal}>
+          {modal.modal === "remove" ? (
+            <SettingsStatusCard
+              title="Confirm Removal"
+              description={`Are you sure you want to remove ${email}? You will not be able to undo this action.`}
+              icon={<FiAlertCircle className="warning-500 fs-icon" />}
+            >
+              <div className="d-flex gap-4">
+                <Button
+                  action={removeParticipant}
+                  loading={removeMutation.isPending}
+                  children="Remove Participant"
+                  fill={false}
+                  type="button"
+                  border
+                  outline="primary"
+                />
+                <Button
+                  action={() => setModal({ open: false, modal: "" })}
+                  children="Cancel"
+                  fill
+                  type="button"
+                />
+              </div>
+            </SettingsStatusCard>
+          ) : modal.modal === "mail" ? (
+            <SendParticipantMail
+              email={email.split(",")}
+              setModalOpen={openModal}
+            />
+          ) : (
+            <></>
+          )}
+        </Modal>
+      )}
     </>
   );
 };
 
 interface IModal {
-  open: boolean,
-  modal: TModal
+  open: boolean;
+  modal: TModal;
 }
-type TModal = 'remove' | 'mail' | ''
+type TModal = "remove" | "mail" | "";
 
 export default Table;

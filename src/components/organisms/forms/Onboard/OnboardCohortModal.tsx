@@ -9,7 +9,11 @@ import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pending }) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({
+  onSubmit,
+  closeModal,
+  pending,
+}) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,8 +32,6 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
     name: string,
     value: string | boolean | number
   ) => {
-    console.log(name, " : ", value);
-
     setForm({ ...form, [name]: value });
   };
 
@@ -42,7 +44,6 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
       });
       return;
     }
-    console.log(form);
     await onSubmit(form);
   };
 
@@ -65,7 +66,9 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
         />
         <div className="d-flex flex-column gap-2">
           <div className="d-flex flex-row justify-content-between">
-            <h1 className="manrope-600 primary-950 fs-h2">Onboard New Cohort</h1>
+            <h1 className="manrope-600 primary-950 fs-h2">
+              Onboard New Cohort
+            </h1>
             <FiX className="fs-h3" onClick={closeModal} />
           </div>
           <span className="manrope-500 dark-700 fs-body">
@@ -120,7 +123,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Continue"
-            action={() => { }}
+            action={() => {}}
             type="submit"
             fill={true}
             loading={pending}

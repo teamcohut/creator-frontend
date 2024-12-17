@@ -5,17 +5,16 @@ import { useAuthContext } from "./useAuthContext";
 
 const useRefreshToken = () => {
   const { setAuth } = useContext(AuthContext);
-  const { dispatch } = useAuthContext()
+  const { dispatch } = useAuthContext();
 
   const refresh = async () => {
     const response = await axiosPrivate.get("/auth/refresh-token");
-    console.log(response);
-    
+
     if (response.data) {
-      dispatch({type: 'LOGIN', payload: response.data});
+      dispatch({ type: "LOGIN", payload: response.data });
       setAuth(() => response.data);
     } else {
-      dispatch({type: 'LOGIN', payload: response.data});
+      dispatch({ type: "LOGIN", payload: response.data });
       setAuth(null);
     }
 

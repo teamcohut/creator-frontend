@@ -16,13 +16,14 @@ const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { dispatch, activeCohort } = useContext(ProgramContext);
   const [cohortName, setCohortName] = useState(activeCohort?.name);
-  const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
-  const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
+  const [startDate, setStartDate] = useState(
+    activeCohort?.startDate?.split("T")[0]
+  );
+  const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0]);
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
     open: boolean;
   });
-  console.log(activeCohort.graduationMessage)
 
   // const tracks: ITrack[] = activeCohort?.tracks;
 
@@ -33,7 +34,6 @@ const CohortSettings = () => {
 
   const handleChange = (e: any) => {
     setCohortName(e.target.value);
-    console.log(cohortName);
   };
 
   // const tagRender = (props: CustomTagProps) => {
@@ -122,39 +122,40 @@ const CohortSettings = () => {
 
   return (
     <>
-      {activeCohort.id ? <div>
-        <div className="w-75">
-          <div className="d-flex gap-2">
-            <p className="d-flex justify-content-center align-items-center w-45">
-              <TextInput2
-                id="cohort-name"
-                placeHolder="Cohut123"
-                label="Cohort Name"
-                onchange={handleChange}
-                value={cohortName}
+      {activeCohort.id ? (
+        <div>
+          <div className="w-75">
+            <div className="d-flex gap-2">
+              <p className="d-flex justify-content-center align-items-center w-45">
+                <TextInput2
+                  id="cohort-name"
+                  placeHolder="Cohut123"
+                  label="Cohort Name"
+                  onchange={handleChange}
+                  value={cohortName}
+                />
+              </p>
+            </div>
+            <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
+              <DateInput2
+                id="startDate"
+                onchange={(e) => setStartDate(e.target.value)}
+                placeHolder=""
+                label="Set Cohort Duration"
+                value={startDate}
               />
-            </p>
-          </div>
-          <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
-            <DateInput2
-              id="startDate"
-              onchange={(e) => setStartDate(e.target.value)}
-              placeHolder=""
-              label="Set Cohort Duration"
-              value={startDate}
-            />
-            <h3 className="dark-700">-</h3>
-            <DateInput2
-              id="endDate"
-              onchange={(e) => {
-                setEndDate(e.target.value);
-              }}
-              placeHolder="mm/dd/yy"
-              value={endDate}
-            />
-          </div>
+              <h3 className="dark-700">-</h3>
+              <DateInput2
+                id="endDate"
+                onchange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+                placeHolder="mm/dd/yy"
+                value={endDate}
+              />
+            </div>
 
-          {/* <span className='fs-body manrope-600 primary-950'>Track</span>
+            {/* <span className='fs-body manrope-600 primary-950'>Track</span>
 
       <Select
       mode="tags"
@@ -172,7 +173,7 @@ const CohortSettings = () => {
     </Select>
     <div className='pb-4'></div> */}
 
-          {/* <TextInput2 id='link' 
+            {/* <TextInput2 id='link' 
           label='Link to Generate Certificate' 
           placeHolder='Unique link for learners to access their certificates' 
           icon={<FiLink/>} 
@@ -181,59 +182,68 @@ const CohortSettings = () => {
         <span className='fs-small manrope-500 primary-700'>
           You'll need to have created digital certificates on an external platform
         </span> */}
-        <div className='pb-3'></div>
+            <div className="pb-3"></div>
 
-          <TextAreaInput id='message' 
-            placeHolder='Enter Text' 
-            label='Graduation Message' 
-            value={activeCohort.graduationMessage}
-            onchange={() => {}}/>
-        
-        <span className='fs-small manrope-500 primary-700'>
-          Once you graduate a learner, this message will automatically get sent to them
-        </span>
+            <TextAreaInput
+              id="message"
+              placeHolder="Enter Text"
+              label="Graduation Message"
+              value={activeCohort.graduationMessage}
+              onchange={() => {}}
+            />
 
-        <div className='pb-4'></div>
-        <div className='pb-3'></div>
+            <span className="fs-small manrope-500 primary-700">
+              Once you graduate a learner, this message will automatically get
+              sent to them
+            </span>
 
-          <OutlineButton
-            action={() => {
-              updateCohortInfoMutation.mutate({
-                name: cohortName,
-                startDate,
-                endDate,
-              });
-            }}
-            type="button"
-            fill={false}
-            outline="primary"
-            gap={true}
-            width={120}
-            border={true}
-            customStyle={hoverStyle}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}
-            loading={updateCohortInfoMutation.isPending}
-            disabled={updateCohortInfoMutation.isPending}
-          >
-            <FiSave />
-            <span>Save</span>
-          </OutlineButton>
+            <div className="pb-4"></div>
+            <div className="pb-3"></div>
 
-          <div className='pb-5'></div>
-          <div className='pb-4'></div>
-          
-          <div>
-          <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span onClick={() => setModal({ name: "deletecohort",  open: true })} className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
-            style={{ cursor: 'pointer' }}
-          >
-            Delete Cohort <FiTrash2 />
-          </span>
+            <OutlineButton
+              action={() => {
+                updateCohortInfoMutation.mutate({
+                  name: cohortName,
+                  startDate,
+                  endDate,
+                });
+              }}
+              type="button"
+              fill={false}
+              outline="primary"
+              gap={true}
+              width={120}
+              border={true}
+              customStyle={hoverStyle}
+              handleMouseEnter={handleMouseEnter}
+              handleMouseLeave={handleMouseLeave}
+              loading={updateCohortInfoMutation.isPending}
+              disabled={updateCohortInfoMutation.isPending}
+            >
+              <FiSave />
+              <span>Save</span>
+            </OutlineButton>
+
+            <div className="pb-5"></div>
+            <div className="pb-4"></div>
+
+            <div>
+              <h4 className="manrope-600 fs-h4 primary-950 pb-1">
+                Danger Zone
+              </h4>
+              <span
+                onClick={() => setModal({ name: "deletecohort", open: true })}
+                className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
+                style={{ cursor: "pointer" }}
+              >
+                Delete Cohort <FiTrash2 />
+              </span>
+            </div>
+          </div>
         </div>
-        </div>
-
-      </div> : <SetupCohort />}
+      ) : (
+        <SetupCohort />
+      )}
       {modal.name === "deletecohort" && (
         <DeleteCohortModal
           modalOpen={modal.open}
