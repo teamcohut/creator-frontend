@@ -32,20 +32,30 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     createCohortMutation.mutate(cohort);
   };
 
+  const closeModal = () => {
+    setModalOpen(false, '')
+  }
+
+  const prevStep = (data: any) => {
+    setCurrentStep(currentStep - 1);
+  };
+
   return (
     <>
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 ? (
-          <OnboardCohortModal onSubmit={createCohort} />
+          <OnboardCohortModal onSubmit={createCohort} closeModal={closeModal} />
         ) : currentStep === 2 ? (
           <UploadParticipants onSubmit={() => {
-                  setCurrentStep(1);
-                  setModalOpen(false, "");
-          }} hasTrack={hasTrack} />
-        ) : 
-        (
-          <></>
-        )}
+            setCurrentStep(1);
+            setModalOpen(false, "");
+          }} hasTrack={hasTrack}
+            closeModal={closeModal}
+            prevStep={prevStep} />
+        ) :
+          (
+            <></>
+          )}
       </Modal>
     </>
   );

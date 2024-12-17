@@ -3,8 +3,6 @@ import { IDragnDrop } from "./types";
 import "../style.css";
 import { FiImage } from "react-icons/fi";
 
-const allowedImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
   const { label, id, onchange, detail, icon } = props;
 
@@ -51,8 +49,9 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
         </label>
       )}
       <div
-        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${dragActive ? "drag-active" : ""
-          }`}
+        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${
+          dragActive ? "drag-active" : ""
+        }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -66,30 +65,41 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
             width={50}
           />
         ) : (
-          <div>
-            {
-              icon ? icon : (<FiImage className="h1 dark-400" />)
-            }
-          </div>
+          <div>{icon ? icon : <FiImage className="h1 dark-400" />}</div>
         )}
         <p className="fs-caption">
           {file ? (
             <>
-              <input type="file" id={id} className="file-input " onChange={handleFileChange} style={{ display: "none" }} />
+              <input
+                type="file"
+                id={id}
+                className="file-input "
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
               <label htmlFor={id} className="btn-upload primary-600 mt-2 px-2">
                 {file ? "Change File" : "Upload"}:
               </label>
-              <span className="primary-600 align-content-center">{file.name}</span>
+              <span className="primary-600 align-content-center">
+                {file.name}
+              </span>
             </>
           ) : (
             <>
-              Drag-n-drop or <span className="primary-600">
-                <input type="file" id={id} className="file-input" onChange={handleFileChange} style={{ display: "none" }} />
+              Drag-n-drop or{" "}
+              <span className="primary-600">
+                <input
+                  type="file"
+                  id={id}
+                  className="file-input"
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                />
                 <label htmlFor={id} className="btn-upload primary-600 mt-2">
                   {file ? "Change File" : "Upload"}
                 </label>
-              </span> your{" "}
-              {detail}
+              </span>{" "}
+              your {detail}
             </>
           )}
         </p>

@@ -4,6 +4,7 @@ import DragNDropInput from '../../../atoms/inputs/DragNDropInput';
 import { useMutation } from '@tanstack/react-query';
 import axiosAPI from '../../../../api/axios';
 import { notification } from 'antd';
+import { FaFileCsv } from 'react-icons/fa';
 
 interface Track {
     id: string;
@@ -82,6 +83,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
             <DragNDropInput
                 label="Upload Participant List"
                 id="thumbnail-upload"
+                icon={<FaFileCsv className="fs-small-icon dark-300" />}
                 detail="Upload the cohort's list of participants (CSV)"
                 onchange={(file: any) => handleFileChange(file)}
             />

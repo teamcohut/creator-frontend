@@ -4,6 +4,7 @@ import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { notification } from "antd";
+import { FiX } from "react-icons/fi";
 
 interface ProgramDetailProps {
   onContinue: (data: {
@@ -11,9 +12,10 @@ interface ProgramDetailProps {
     description: string;
     format: string;
   }) => void;
+  closeModal: any;
 }
 
-const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue }) => {
+const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [format, setFormat] = useState("");
@@ -41,7 +43,10 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue }) => {
         rounded={false}
       />
       <div className="d-flex flex-column gap-2">
-        <h1 className="manrope-600 primary-950 fs-h2">Program Details</h1>
+        <div className="d-flex flex-row justify-content-between">
+          <h1 className="manrope-600 primary-950 fs-h2">Program Details</h1>
+          <FiX className="fs-h3" onClick={closeModal} />
+        </div>
         <span className="manrope-500 dark-700 fs-body">
           Let&apos;s input what makes your learning program special
         </span>

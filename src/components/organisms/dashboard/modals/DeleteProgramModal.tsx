@@ -1,7 +1,7 @@
-import { FC, useState } from 'react'
-import { ISetupModal } from '../../../../@types/dashboard.interface';
-import Modal from '../../../templates/Modal';
-import DangerDeleteProgram from '../../forms/Settings/DangerDeleteProgram';
+import { FC, useState } from "react";
+import { ISetupModal } from "../../../../@types/dashboard.interface";
+import Modal from "../../../templates/Modal";
+import DangerDeleteProgram from "../../forms/Settings/DangerDeleteProgram";
 
 const DeleteProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -9,12 +9,22 @@ const DeleteProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <>
       <Modal
         open={modalOpen}
-        setModalOpen={(open: boolean) => setModalOpen(open, "deleteProgramModal")}
+        setModalOpen={(open: boolean) =>
+          setModalOpen(open, "deleteProgramModal")
+        }
       >
-        {currentStep === 1 ? <DangerDeleteProgram modalOpen={modalOpen} setModalOpen={setModalOpen}/> :''}
+        {currentStep === 1 ? (
+          <DangerDeleteProgram
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            setCurrentStep={setCurrentStep}
+          />
+        ) : (
+          ""
+        )}
       </Modal>
     </>
   );
 };
 
-export default DeleteProgramModal
+export default DeleteProgramModal;

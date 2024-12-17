@@ -8,20 +8,27 @@ import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { FiUpload, FiUploadCloud } from "react-icons/fi";
-
+import { FaFileCsv } from 'react-icons/fa';
+import { FiArrowLeft, FiX } from "react-icons/fi";
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,
   hasTrack,
+  closeModal,
+  prevStep
 }) => {
   const [track, setTrack] = useState("");
   const { activeCohort } = useContext(ProgramContext);
-
+  const [progress, setProgress] = useState(0);
   console.log("activeCohort", activeCohort);
 
   const inviteParticipantsMutation = useMutation({
     mutationFn: (payload: File) =>
-      api.participant.inviteGroupParticipant(activeCohort?._id, track, payload),
+      api.participant.inviteGroupParticipant(activeCohort?._id, track, payload, {
+        onUploadProgress: (event: any) => {
+          const progress = Math.round((event.loaded / event.total) * 100);
+          setProgress(progress);
+        },
+      }),
     onSuccess: () => {
       notification.success({ message: "Participants invited successfully!" });
     },
@@ -55,8 +62,21 @@ const UploadParticipants: FC<IUploadParticipants> = ({
       return;
     }
 
-    inviteParticipantsMutation.mutate(file);
+    // inviteParticipantsMutation.mutate(file);
+    setProgress(0);
+
+    // Simulate progress
+    inviteParticipantsMutation.mutate(file, {
+      onSuccess: () => {
+        setProgress(100); // Ensure progress completes on success
+      },
+      onError: () => {
+        notification.error({ message: "Upload failed. Please try again." });
+      },
+    });
   };
+
+
 
   return (
     <>
@@ -69,6 +89,10 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           gap
           rounded={false}
         />
+        <div className="d-flex flex-row justify-content-between">
+          <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+          <FiX className="fs-h3" onClick={closeModal} />
+        </div>
         <div className="d-flex flex-column gap-2">
           <h1 className="manrope-600 primary-950 fs-h2">
             Upload Cohort Participants
@@ -94,10 +118,11 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           <div>
             <DragNDropInput
               label="Upload Participants List"
-              icon={<FiUploadCloud className="fs-small-icon dark-300" />}
+              icon={<FaFileCsv className="fs-small-icon dark-300" />}
               id="thumbnail-upload"
               detail="Cohort's list of Participants"
               onchange={(file: any) => handleFileInput(file)}
+              uploadProgress={progress}
             />
             {inviteParticipantsMutation.isPending ? (
               <>Uploading file...</>
@@ -127,6 +152,8 @@ const UploadParticipants: FC<IUploadParticipants> = ({
 interface IUploadParticipants {
   onSubmit: () => void;
   hasTrack: boolean;
+  closeModal: any;
+  prevStep: any;
 }
 
 // interface ITracks {

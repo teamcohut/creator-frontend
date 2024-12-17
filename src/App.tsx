@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/Login";
@@ -18,8 +19,18 @@ import { ProtectedRoute } from "./components/utils/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GeneralSettings from "./pages/dashboard/settings/GeneralSettings";
 import SessionDetails from "./components/organisms/dashboard/Sessions/SessionDetails";
+import { ErrorBoundary } from "react-error-boundary";
+import Mainloader from "./helpers/loader";
+import ErrorUI from "./helpers/ErrorUI";
+
 
 function App() {
+
+  const errorHandler = (err: any, info: any) => {
+    console.log(err, 'logged error');
+    console.log(info, 'Logged error info');
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -97,7 +108,11 @@ function App() {
     <>
       <AuthContextProvider>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <Suspense fallback={<Mainloader />}>
+            <ErrorBoundary FallbackComponent={ErrorUI} onReset={() => { window.location.reload() }} onError={errorHandler}>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
+          </Suspense>
         </QueryClientProvider>
       </AuthContextProvider>
     </>
