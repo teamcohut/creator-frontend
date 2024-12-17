@@ -6,7 +6,7 @@ import { ISetupModal } from '../../../../@types/dashboard.interface';
 
 const EditPermissions: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
   type CheckedStates = {
     participant: boolean;

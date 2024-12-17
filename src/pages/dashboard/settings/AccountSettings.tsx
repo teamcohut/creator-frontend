@@ -1,39 +1,37 @@
 import { useState } from "react";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
 import {FiEdit3, FiSave, FiTrash2, FiUser } from "react-icons/fi";
-import OutlineButton from "../../../components/atoms/Button/OutlineButton";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../../api/axios";
 import { notification } from "antd";
 import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
+import Button from "../../../components/atoms/Button";
+import { TModal } from "../../../@types/dashboard.interface";
 import PasswordInput from "../../../components/atoms/inputs/PasswordInput";
 import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
-  const [isHovered, setIsHovered] = useState(false);
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  // const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
   const [firstName, setFirstName] = useState(user?.firstName)
   const [lastName, setLastName] = useState(user?.lastName)
   const [email, setEmail] = useState(user?.email)
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
-  const hoverStyle = isHovered
-    ? {
-        color: "var(--primary-800) !important",
-        borderColor: "var(--primary-800) !important",
-      }
-    : {};
+  // const hoverStyle = isHovered
+    // ? {
+    //     color: "var(--primary-800) !important",
+    //     borderColor: "var(--primary-800) !important",
+    //   }
+    // : {};
 
     const updateAccountInfoMutation = useMutation({
       mutationFn: (payload: any) => api.user.update(payload),
@@ -79,25 +77,21 @@ const AccountSettings = () => {
             onchange={(e) => setEmail(e.target.value)}
           />
 
-          
-          <OutlineButton
+          <Button
             action={() => {
               updateAccountInfoMutation.mutate({firstName, lastName, email})
             }}
+            loading={updateAccountInfoMutation.isPending}
             type="button"
-            fill={false}
             outline="primary"
-            gap={true}
+            fill={false}
             width={120}
-            border={true}
-            customStyle={hoverStyle}
-            handleMouseEnter={handleMouseEnter}
-            handleMouseLeave={handleMouseLeave}
+            gap
+            border
           >
             <FiSave />
             <span>Save</span>
-          </OutlineButton>
-
+          </Button>
           {/* <div className="pb-4"></div> */}
           <PasswordInput 
             id="change-password" 
@@ -106,7 +100,7 @@ const AccountSettings = () => {
             value="*********"
             icon={
               <span onClick={
-                (e) => setModal((prev) => ({ open: true, name: "changePasswordModal" }))}>
+                (e) => setModal((prev) => ({ open: true, name: "changepassword" }))}>
                   <FiEdit3 color="#453BDB"/>
               </span>
             }
@@ -124,20 +118,20 @@ const AccountSettings = () => {
           </div>
 
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
-            onClick={() => setModal((prev) => ({ open: true, name: "deactivateAccountModal" }))}>
+          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+            onClick={() => setModal((prev) => ({ open: true, name: "deactivateaccount" }))}>
               Deactivate Account <FiTrash2 />
           </span>
         
         </div>
       </div>
-      {modal.name === "deactivateAccountModal" && (
+      {modal.name === "deactivateaccount" && (
         <DeactivateAccountModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}
         />
       )}
-      {modal.name === "changePasswordModal" && (
+      {modal.name === "changepassword" && (
         <ChangePasswordModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

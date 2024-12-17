@@ -4,16 +4,17 @@ import GroupButton from '../../../components/atoms/Button/GroupButton';
 import OutlineButton from '../../../components/atoms/Button/OutlineButton';
 import { useState } from 'react';
 import AddNewAdminModal from '../../../components/organisms/dashboard/modals/AddNewAdminModal';
+import { TModal } from '../../../@types/dashboard.interface';
 
 const PermissionsSettings = () => {
   const [activeView, setActiveView] = useState("All");
   const [isHovered, setIsHovered] = useState(false);
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 
@@ -55,7 +56,7 @@ const PermissionsSettings = () => {
     <div>
       <div className="d-flex w-100 justify-content-between align-items-center pb-5">
         <h5>Admin Accounts</h5>
-        <OutlineButton action={() => setModal((prev) => ({ open: true, name: "addNewAdminModal" }))} 
+        <OutlineButton action={() => setModal((prev) => ({ open: true, name: "addAdmin" }))} 
           type="button" fill={false} 
           outline='primary' 
           gap={true} 
@@ -86,7 +87,7 @@ const PermissionsSettings = () => {
   
       
     </div>
-    {modal.name === "addNewAdminModal" && (
+    {modal.name === "addAdmin" && (
         <AddNewAdminModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

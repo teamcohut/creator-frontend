@@ -9,7 +9,7 @@ const TaskModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const closeModal = () => {
-    setModalOpen(false, '')
+    setModalOpen(false, null)
   }
 
   return (

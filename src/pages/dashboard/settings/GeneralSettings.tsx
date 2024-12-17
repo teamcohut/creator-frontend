@@ -7,13 +7,11 @@ import AccountSettings from "./AccountSettings";
 import ProgramSettings from "./ProgramSettings";
 import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
+import { TModal } from "../../../@types/dashboard.interface";
 
 const GeneralSettings = () => {
-  const [modal, setModal] = useState({
-    name: "",
-    open: false,
-  } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
   const { activeProgram } = useContext(ProgramContext);
@@ -32,7 +30,7 @@ const GeneralSettings = () => {
     localStorage.setItem(STORAGE_KEY, key);
   };
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 
@@ -72,7 +70,7 @@ const GeneralSettings = () => {
         />
       </div>
 
-      {modal.name === "changePasswordModal" && (
+      {modal.name === "changepassword" && (
         <ChangePasswordModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

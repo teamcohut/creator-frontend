@@ -11,7 +11,7 @@ import { ISetupModal } from '../../../../@types/dashboard.interface';
 
 const DangerDeleteAccount: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);

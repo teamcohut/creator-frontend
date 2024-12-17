@@ -15,7 +15,7 @@ const ChangePassword: FC<ISetupModal> = ({
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const handleClose = () => {
-    setModalOpen(false, "");
+    setModalOpen(false, null);
   };
 
   const changePasswordMutation = useMutation({
