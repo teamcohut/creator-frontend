@@ -29,3 +29,36 @@ export interface IProgramDTO {
   endDate: Date;
   status: string;
 }
+
+export interface ProgramDetailProps {
+  onContinue: (data: {
+    title: string;
+    description: string;
+    format: string;
+  }) => void;
+  closeModal: any;
+  programData: {
+    title: string;
+    description: string;
+    format: string;
+  };
+}
+
+
+
+type ProgramData = {
+  title: string;
+  description: string;
+  cover: any;
+  logo: any;
+  format: string;
+  communities: string[];
+  certificates: string[];
+};
+
+export interface CustomizeProgramProps {
+  programData: ProgramData;
+  setCurrentStep: (step: number) => void;
+  closeModal: any;
+  prevStep: any;
+}

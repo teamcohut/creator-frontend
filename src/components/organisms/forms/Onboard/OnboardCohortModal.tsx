@@ -9,10 +9,9 @@ import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pending }) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const [form, setForm] = useState<ICohort>({
@@ -36,18 +35,15 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setIsLoading(true);
     if (form.name === "" || form.endDate === "" || form.startDate === "") {
       api.warning({
         message: "Please enter all input fields",
         placement: "top",
       });
-      setIsLoading(false);
       return;
     }
     console.log(form);
     await onSubmit(form);
-    setIsLoading(false);
   };
 
   return (
@@ -127,7 +123,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
             action={() => { }}
             type="submit"
             fill={true}
-            loading={isLoading}
+            loading={pending}
           />
         </div>
       </form>
@@ -138,6 +134,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal }) =
 interface IOnboardCohortModal {
   onSubmit: (cohort: ICohort) => void;
   closeModal: any;
+  pending: any;
 }
 
 export default OnboardCohortModal;

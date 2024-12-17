@@ -7,23 +7,8 @@ import api from "../../../../api/axios";
 import { notification } from "antd";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { FiArrowLeft, FiX } from "react-icons/fi";
+import { CustomizeProgramProps } from "../../../../@types/program.interface";
 
-type ProgramData = {
-  title: string;
-  description: string;
-  cover: any;
-  logo: any;
-  format: string;
-  communities: string[];
-  certificates: string[];
-};
-
-interface CustomizeProgramProps {
-  programData: ProgramData;
-  setCurrentStep?: (step: number) => void;
-  closeModal: any;
-  prevStep: any;
-}
 
 const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   programData,
@@ -62,16 +47,14 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
     uploadImageMutation.mutate({ type: "banner", file });
   };
 
-  console.log({
-    thumbnail,
-    banner,
-  });
-
   const createProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
-      setCurrentStep?.(3);
+      notification.success({
+        message: "successfully created your program",
+      });
+      setCurrentStep(3);
     },
     onError: (error: any) => {
       notification.error({
@@ -137,7 +120,7 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
         </div>
 
       </div>
-      {uploadImageMutation.isPending && <p>Uploading image...</p>}
+      {/* {uploadImageMutation.isPending && <p>Uploading image...</p>} */}
       <div className="d-flex flex-column align-items-center gap-3">
         <Button
           children="Complete Setup"
