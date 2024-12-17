@@ -22,6 +22,7 @@ const CohortSettings = () => {
     name: TModal;
     open: boolean;
   });
+  console.log(activeCohort.graduationMessage)
 
   // const tracks: ITrack[] = activeCohort?.tracks;
 
@@ -182,7 +183,11 @@ const CohortSettings = () => {
         </span> */}
         <div className='pb-3'></div>
 
-          <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
+          <TextAreaInput id='message' 
+            placeHolder='Enter Text' 
+            label='Graduation Message' 
+            value={activeCohort.graduationMessage}
+            onchange={() => {}}/>
         
         <span className='fs-small manrope-500 primary-700'>
           Once you graduate a learner, this message will automatically get sent to them
