@@ -1,10 +1,11 @@
-import  { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { FiUser, FiBookOpen } from "react-icons/fi";
 import Button from "../../../atoms/Button";
 import "./SetupProgram.css";
 import { ISetupProgram, TModal } from "../../../../@types/dashboard.interface";
 import SetupProgramModal from "../modals/SetupProgramModal";
 import SetupCohortModal from "../modals/SetupCohortModal";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 
 const SetupProgram: FC<ISetupProgram> = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null);
@@ -14,7 +15,8 @@ const SetupProgram: FC<ISetupProgram> = () => {
     setActiveModal(modal);
     setModalOpen(open);
   };
-  const user = JSON.parse(localStorage.getItem("user") || "Admin")
+  // const user = JSON.parse(localStorage.getItem("user") || "Admin")
+  const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -32,7 +34,7 @@ const SetupProgram: FC<ISetupProgram> = () => {
           <Button
             children="Setup Your Program"
             type="button"
-            action={()=>openModalHandler(true, 'program')}
+            action={() => openModalHandler(true, "program")}
             fill={true}
           />
         </div>
@@ -42,7 +44,10 @@ const SetupProgram: FC<ISetupProgram> = () => {
         <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
       {activeModal === "cohort" && (
-        <SetupCohortModal modalOpen={modalOpen} setModalOpen={openModalHandler} />
+        <SetupCohortModal
+          modalOpen={modalOpen}
+          setModalOpen={openModalHandler}
+        />
       )}
     </>
   );
