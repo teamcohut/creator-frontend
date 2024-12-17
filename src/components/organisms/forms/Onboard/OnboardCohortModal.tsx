@@ -9,14 +9,12 @@ import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({
-  onSubmit,
-  closeModal,
-  pending,
-}) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeModal }) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  const programId = localStorage.getItem('programId') || activeProgram._id
 
   const [form, setForm] = useState<ICohort>({
     name: "",
@@ -24,7 +22,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({
     startDate: "",
     endDate: "",
     hasTrack: false,
-    program: activeProgram._id,
+    program: programId,
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -35,8 +33,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (form.name === "" || form.endDate === "" || form.startDate === "") {
       api.warning({
         message: "Please enter all input fields",
@@ -50,10 +47,8 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({
   return (
     <>
       {contextHolder}
-      <form
+      <div
         className="form bg-white d-flex flex-column rounded-5 mx-auto"
-        onSubmit={handleSubmit}
-        action=""
       >
         {/* Progress bar dynamically changes length */}
         <ProgressBar
@@ -123,21 +118,21 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Continue"
-            action={() => {}}
-            type="submit"
+            action={handleSubmit}
+            type="button"
             fill={true}
             loading={pending}
           />
         </div>
-      </form>
+      </div>
     </>
   );
 };
 
 interface IOnboardCohortModal {
   onSubmit: (cohort: ICohort) => void;
+  pending: boolean;
   closeModal: any;
-  pending: any;
 }
 
 export default OnboardCohortModal;

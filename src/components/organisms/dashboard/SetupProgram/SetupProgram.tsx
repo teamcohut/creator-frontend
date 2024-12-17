@@ -8,12 +8,10 @@ import SetupCohortModal from "../modals/SetupCohortModal";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 
 const SetupProgram: FC<ISetupProgram> = () => {
-  const [activeModal, setActiveModal] = useState<TModal>(null);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modal, setModal] = useState({name: null, open: false} as {name: TModal, open: boolean});
 
   const openModalHandler = (open: boolean, modal: TModal) => {
-    setActiveModal(modal);
-    setModalOpen(open);
+    setModal({name: modal, open});
   };
   // const user = JSON.parse(localStorage.getItem("user") || "Admin")
   const { user } = useContext(AuthContext);
@@ -40,14 +38,11 @@ const SetupProgram: FC<ISetupProgram> = () => {
         </div>
       </div>
 
-      {activeModal === "program" && (
-        <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {modal.name === "program" && (
+        <SetupProgramModal modalOpen={modal.open} setModalOpen={openModalHandler} />
       )}
-      {activeModal === "cohort" && (
-        <SetupCohortModal
-          modalOpen={modalOpen}
-          setModalOpen={openModalHandler}
-        />
+      {modal.name === "cohort" && (
+        <SetupCohortModal modalOpen={modal.open} setModalOpen={openModalHandler} />
       )}
     </>
   );

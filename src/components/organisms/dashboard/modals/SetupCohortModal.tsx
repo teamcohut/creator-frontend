@@ -43,10 +43,15 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <>
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 ? (
-          <OnboardCohortModal
-            onSubmit={createCohort}
+          <OnboardCohortModal pending={createCohortMutation.isPending} onSubmit={createCohort} closeModal={closeModal} />
+        ) : currentStep === 2 ? (
+          <UploadParticipants 
+            onSubmit={() => {
+            setCurrentStep(1);
+            setModalOpen(false, null);
+          }} hasTrack={hasTrack}
             closeModal={closeModal}
-            pending={createCohortMutation.isPending}
+            prevStep={prevStep}
           />
         ) : currentStep === 2 ? (
           <UploadParticipants
