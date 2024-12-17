@@ -14,7 +14,7 @@ class Program {
     return this.client.put(`/program/${id}`, payload);
   }
 
-  uploadProgramImage(data: any) {
+  uploadProgramImage(data: any, progress?:any) {
     return this.client.post(
       "/upload",
       {

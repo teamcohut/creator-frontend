@@ -22,7 +22,7 @@ class Participant {
     return this.client.delete(`/program/remove-participant/${programId}/${participantId}`);
   }
 
-  inviteGroupParticipant(cohortId: string, track: string, data: any) {
+  inviteGroupParticipant(cohortId: string, track: string, data: any, progress?: any) {
     return this.client.put(
       `/cohort/${cohortId}/upload-participants-csv?track=${track}`,
       {

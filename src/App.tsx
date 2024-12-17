@@ -111,9 +111,7 @@ function App() {
           <Suspense fallback={<Mainloader />}>
             <ErrorBoundary FallbackComponent={ErrorUI} onReset={() => { window.location.reload() }} onError={errorHandler}>
               <RouterProvider router={router} />
-
             </ErrorBoundary>
-
           </Suspense>
         </QueryClientProvider>
       </AuthContextProvider>

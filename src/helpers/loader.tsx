@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 const Mainloader = () => {
     return (
-        <div>
-            <div>
-                <h1>Loading ...</h1>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="spinner-border text-primary" style={{ width: '5rem', height: '5rem' }} role="status">
+                <span className="visually-hidden">Loading...</span>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Mainloader
+export default Mainloader;

@@ -130,6 +130,7 @@ export interface IDragnDrop {
   detail: string,
   onchange?: (file: File | null) => void;
   icon?: ReactNode;
+  uploadProgress?: number;
 }
 
 

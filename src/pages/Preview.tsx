@@ -31,6 +31,7 @@ import AccountSettings from "./dashboard/settings/AccountSettings";
 import EditPermissions from "../components/organisms/forms/Settings/EditPermissions";
 import SendEmail from "../components/recycle/SendEmail";
 import ErrorUI from "../helpers/ErrorUI";
+import Mainloader from "../helpers/loader";
 
 const Preview = () => {
   const [modal, setModal] = useState({ name: "", open: false } as {
@@ -81,7 +82,7 @@ const Preview = () => {
       {/* <AddNewAdmin /> */}
       {/* <EditPermissions /> */}
       {/* <ErrorUI /> */}
-
+      {/* <Mainloader /> */}
 
 
     </>
