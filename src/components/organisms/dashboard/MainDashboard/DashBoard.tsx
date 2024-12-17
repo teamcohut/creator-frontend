@@ -11,15 +11,16 @@ import SessionModal from "../modals/SessionModal";
 import TaskModal from "../modals/TaskModal";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
+import { TModal } from "../../../../@types/dashboard.interface";
 
 const DashBoard: FC<IDashboard> = () => {
   const { activeProgram, activeCohort } = useContext(ProgramContext);
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 

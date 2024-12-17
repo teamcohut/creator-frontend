@@ -33,7 +33,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   };
 
   const closeModal = () => {
-    setModalOpen(false, '')
+    setModalOpen(false, null)
   }
 
   const prevStep = (data: any) => {
@@ -48,7 +48,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         ) : currentStep === 2 ? (
           <UploadParticipants onSubmit={() => {
             setCurrentStep(1);
-            setModalOpen(false, "");
+            setModalOpen(false, null);
           }} hasTrack={hasTrack}
             closeModal={closeModal}
             prevStep={prevStep} />

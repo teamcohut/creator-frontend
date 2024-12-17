@@ -11,6 +11,10 @@ class Session {
         return this.client.post("/session", payload);
     }
 
+    editSession(payload: ISessionDTO, id: string) {
+            return this.client.put(`/session/${id}`, payload);
+    }
+
     getSession(cohortId: string, trackId?: string) {
         return this.client.get(
             `/session/cohort/${cohortId}`

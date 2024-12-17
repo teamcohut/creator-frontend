@@ -62,7 +62,7 @@ const VerifyMail = () => {
         <SuccessCard
           icon={<FiUserCheck className="success-600 fs-icon" />}
           title="Account Verified!"
-          description="Your account has been successfully verified. You can now proceed to sign up"
+          description="Your account has been successfully verified. You can now proceed to sign in"
         >
           <div className="w-auto">
             <Button

@@ -1,5 +1,11 @@
 import { ReactElement, ReactNode } from "react";
 
+export interface IStatus {
+  status: TStatus;
+}
+
+export type TStatus = "pending" | "error" | "success"
+
 export interface INavLink {
   path: string;
   children: ReactNode;
@@ -69,10 +75,10 @@ export interface IModal {
 
 export interface ISetupModal {
   modalOpen: boolean;
-  setModalOpen: (open: boolean, name: string) => void;
+  setModalOpen: (open: boolean, name: TModal) => void;
   setCurrentStep?: (step: number) => void;
 }
 
-export type TModal = "program" | "cohort" | "session" | "task" | null;
+export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changeProgramImages" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
 
 export type TActiveModal = "program" | "cohort" | null;

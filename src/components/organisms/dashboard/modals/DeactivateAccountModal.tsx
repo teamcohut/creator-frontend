@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { FC, useState } from "react";
 import Modal from "../../../templates/Modal";
 import { ISetupModal } from "../../../../@types/dashboard.interface";
 import DangerDeleteAccount from "../../forms/Settings/DangerDeleteAccount";
@@ -13,9 +13,7 @@ const DeactivateAccountModal: FC<ISetupModal> = ({
     <>
       <Modal
         open={modalOpen}
-        setModalOpen={(open: boolean) =>
-          setModalOpen(open, "deactivateAccountModal")
-        }
+        setModalOpen={(open: boolean) => setModalOpen(open, "deactivateaccount")}
       >
         {currentStep === 1 ? (
           <DangerDeleteAccount

@@ -10,7 +10,7 @@ const SignupSuccess = () => {
     <>
         <SuccessCard 
             title="You've got mail" 
-            description='You have succeeded in creating your account. You can now click the link in your mail to verify your mail'
+            description=''
             icon={<FiMail className='fs-icon success-600' />}>
               <div className="w-auto d-flex flex-column align-items-center gap-5">
               <span className='manrope-500 dark-700 fs-body'>A verification link has been sent to <span className="primary-700"></span>. Please check your inbox and click the link to continue.</span>

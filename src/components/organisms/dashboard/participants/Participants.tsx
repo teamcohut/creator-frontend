@@ -8,15 +8,16 @@ import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
+import { TModal } from "../../../../@types/dashboard.interface";
 
 const ParticipantsPage: React.FC = () => {
   const { activeCohort } = useContext(ProgramContext);
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 

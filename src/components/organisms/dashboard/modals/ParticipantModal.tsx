@@ -7,7 +7,7 @@ const ParticipantModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentStep, setCurrentStep] = useState<number>(1);
   const closeModal = () => {
-    setModalOpen(false, '')
+    setModalOpen(false, null)
   }
   return (
     <>

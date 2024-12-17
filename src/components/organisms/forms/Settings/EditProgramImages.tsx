@@ -64,7 +64,7 @@ const EditProgramImages: FC<ISetupModal> = ({
     onSuccess: (data: any) => {
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
       setCurrentStep?.(3);
-      setModalOpen(false, "");
+      setModalOpen(false, null);
     },
     onError: (error: any) => {
       notification.error({
