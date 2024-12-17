@@ -40,7 +40,7 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
         ) : currentStep === 2 ? (
           <UploadParticipants onSubmit={() => {
                   setCurrentStep(1);
-                  setModalOpen(false, "");
+                  setModalOpen(false, null);
           }} hasTrack={hasTrack} />
         ) : 
         (

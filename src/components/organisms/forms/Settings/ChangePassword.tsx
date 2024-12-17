@@ -12,7 +12,7 @@ const ChangePassword: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
 
   const navigate = useNavigate()

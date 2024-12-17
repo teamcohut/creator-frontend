@@ -2,14 +2,13 @@ import { useContext, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { FiSave, FiTrash2 } from 'react-icons/fi';
 import { notification } from 'antd'
-import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import api from '../../../api/axios'
-import { ITrack } from '../../../@types/settings.interface'
 import { ProgramContext } from '../../../context/programs/ProgramContext'
 import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
 import OutlineButton from '../../../components/atoms/Button/OutlineButton'
 import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
 import DateInput2 from '../../../components/atoms/inputs/DateInput2'
+import { TModal } from '../../../@types/dashboard.interface';
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -17,11 +16,10 @@ const CohortSettings = () => {
   const [cohortName, setCohortName] = useState(activeCohort?.name);
   const [startDate, setStartDate] = useState(activeCohort?.startDate?.split("T")[0])
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0])
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
-  const [tags, setTags] = useState<ITrack[]>(activeCohort?.tracks);
 
   // const tracks: ITrack[] = activeCohort?.tracks;
 
@@ -102,7 +100,7 @@ const CohortSettings = () => {
 
 
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 
@@ -207,14 +205,14 @@ const CohortSettings = () => {
         </div>
         <div>
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span onClick={() => setModal((prev) => ({ open: true, name: "deleteCohortModal" }))} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+          <span onClick={() => setModal({ name: "deletecohort",  open: true })} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
             style={{ cursor: 'pointer' }}
           >
             Delete Cohort <FiTrash2 />
           </span>
         </div>
       </div>
-      {modal.name === "deleteCohortModal" && (
+      {modal.name === "deletecohort" && (
         <DeleteCohortModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

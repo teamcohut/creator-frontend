@@ -11,7 +11,7 @@ const ChangePasswordModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <>
       <Modal
         open={modalOpen}
-        setModalOpen={(open: boolean) => setModalOpen(open, "changePasswordModal")}
+        setModalOpen={(open: boolean) => setModalOpen(open, "changepassword")}
       >
         {currentStep === 1 ? <ChangePassword modalOpen={modalOpen} setModalOpen={setModalOpen} /> :
           currentStep === 2 ? <ChangePasswordSuccess /> : null}

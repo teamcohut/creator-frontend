@@ -9,6 +9,7 @@ import { notification, Select } from 'antd';
 import { ProgramContext } from '../../../context/programs/ProgramContext';
 import api from '../../../api/axios';
 import { useMutation } from '@tanstack/react-query';
+import { TModal } from '../../../@types/dashboard.interface';
 
 
 const ProgramGeneralSettings = () => {
@@ -47,13 +48,13 @@ const ProgramGeneralSettings = () => {
     uploadImageMutation.mutate({ type: "banner", file });
   };
 
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
   
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
   
@@ -197,12 +198,12 @@ const ProgramGeneralSettings = () => {
       <div>
       <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
       <span style={{cursor: 'pointer'}} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
-        onClick={() => setModal((prev) => ({ open: true, name: "deleteProgramModal" }))}>
+        onClick={() => setModal((prev) => ({ open: true, name: "deleteProgram" }))}>
           Delete Program <FiTrash2 />
       </span>
 
       </div>
-      {modal.name === "deleteProgramModal" && (
+      {modal.name === "deleteProgram" && (
         <DeleteProgramModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

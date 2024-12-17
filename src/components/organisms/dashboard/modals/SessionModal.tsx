@@ -60,7 +60,7 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
 
   const handleSuccess = () => {
     api.success({ message: "Session successfully created!" });
-    setModalOpen(false, "sessionModal");
+    setModalOpen(false, "session");
     setCurrentStep(1);
     setFormData({});
   };
@@ -72,7 +72,7 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   return (
     <>
       {contextHolder}
-      <Modal open={modalOpen} setModalOpen={(open: boolean) => setModalOpen(open, "sessionModal")}>
+      <Modal open={modalOpen} setModalOpen={(open: boolean) => setModalOpen(open, "session")}>
         {currentStep === 1 ? (
           <AddSession onSubmit={nextStep} />
         ) : currentStep === 2 ? (

@@ -22,12 +22,12 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const openModal = (modal: TModal) => {
     // setCurrentStep(1);
     // setActiveModal(modal)
-    setModalOpen(true, "cohort");
+    setModalOpen(true, modal);
   };
 
   // Helper function to reset state
   const resetState = () => {
-    setModalOpen(false, "");
+    setModalOpen(false, null);
     setProgramData({
       title: "",
       description: "",

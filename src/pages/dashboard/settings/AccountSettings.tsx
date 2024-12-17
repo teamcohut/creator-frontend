@@ -7,31 +7,29 @@ import api from "../../../api/axios";
 import { notification } from "antd";
 import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
 import Button from "../../../components/atoms/Button";
+import { TModal } from "../../../@types/dashboard.interface";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
-  const [isHovered, setIsHovered] = useState(false);
-  const [modal, setModal] = useState({ name: "", open: false } as {
-    name: string;
+  // const [isHovered, setIsHovered] = useState(false);
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
     open: boolean;
   });
   const [firstName, setFirstName] = useState(user?.firstName)
   const [lastName, setLastName] = useState(user?.lastName)
   const [email, setEmail] = useState(user?.email)
 
-  const setModalOpenState = (open: boolean, name: string) => {
+  const setModalOpenState = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
-  const hoverStyle = isHovered
-    ? {
-        color: "var(--primary-800) !important",
-        borderColor: "var(--primary-800) !important",
-      }
-    : {};
+  // const hoverStyle = isHovered
+    // ? {
+    //     color: "var(--primary-800) !important",
+    //     borderColor: "var(--primary-800) !important",
+    //   }
+    // : {};
 
     const updateAccountInfoMutation = useMutation({
       mutationFn: (payload: any) => api.user.update(payload),
@@ -99,13 +97,13 @@ const AccountSettings = () => {
 
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
           <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
-            onClick={() => setModal((prev) => ({ open: true, name: "deactivateAccountModal" }))}>
+            onClick={() => setModal((prev) => ({ open: true, name: "deactivateaccount" }))}>
               Deactivate Account <FiTrash2 />
           </span>
         
         </div>
       </div>
-      {modal.name === "deactivateAccountModal" && (
+      {modal.name === "deactivateaccount" && (
         <DeactivateAccountModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}

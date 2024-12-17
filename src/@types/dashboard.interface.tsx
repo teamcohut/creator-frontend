@@ -4,7 +4,7 @@ export interface IStatus {
   status: TStatus;
 }
 
-export type TStatus = 'pending' | 'error' | 'success'
+export type TStatus = "pending" | "error" | "success"
 
 export interface INavLink {
   path: string;
@@ -75,9 +75,9 @@ export interface IModal {
 
 export interface ISetupModal {
   modalOpen: boolean;
-  setModalOpen: (open: boolean, name: string) => void;
+  setModalOpen: (open: boolean, name: TModal) => void;
 }
 
-export type TModal = "program" | "cohort" | "session" | "task" | null;
+export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
 
 export type TActiveModal = "program" | "cohort" | null;
