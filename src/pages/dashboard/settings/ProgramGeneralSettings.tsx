@@ -93,8 +93,6 @@ const ProgramGeneralSettings = () => {
       title,
       format,
       description,
-      cover: banner,
-      logo: thumbnail,
       communities: [],
       certificates: [],
       
@@ -108,13 +106,18 @@ const ProgramGeneralSettings = () => {
   const buttonOptions = [
     {
       label: "Hybrid",
+      onClick: () => setFormat("hybrid"),
+      active: format === "hybrid", 
     },
     {
-      label: "Online",
+      label: "Virtual",
+      onClick: () => setFormat("virtual"),
+      active: format === "virtual",
     },
     {
       label: "Physical",
-
+      onClick: () => setFormat("physical"),
+      active: format === "physical",
     },
   ];
   return (
@@ -176,17 +179,7 @@ const ProgramGeneralSettings = () => {
         <div className='pb-5'></div>
       <h4 className='fs-body manrope-600 primary-950'>Program Format</h4>
       <GroupButton buttons={buttonOptions}/>
-      {/* <Select
-      defaultValue={format}
-      size='large'
-      style={{ width: '50%', marginBottom: '50px', borderRadius: '12px' }}
-      onChange={handleChange}
-      options={[
-        { value: 'hybrid', label: 'Hybrid' },
-        { value: 'virtual', label: 'Virtual' },
-        { value: 'physical', label: 'Physical' },
-      ]}
-    /> */}
+
     <div className='pb-4'></div>
 
         <OutlineButton 

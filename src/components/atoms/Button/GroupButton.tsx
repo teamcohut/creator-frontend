@@ -16,10 +16,10 @@ const GroupButton: React.FC<GroupButtonProps> = ({ buttons }) => {
       {buttons.map((button, index) => (
         <button
           key={index}
-          className={`btn rounded-pill min-width-button manrope-500 ${
+          className={`btn btn-small rounded-pill min-width-button manrope-500 ${
             button.active
               ? "bg-secondary-450 primary-950"
-              : "border-secondary dark-400"
+              : "border-secondary dark-200"
           }`}
           onClick={button.onClick}
         >
