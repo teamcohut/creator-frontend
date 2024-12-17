@@ -19,6 +19,10 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     certificates: [],
   });
 
+  const closeModal = () => {
+    setModalOpen(false, null)
+  }
+
   const openModal = (modal: TModal) => {
     // setCurrentStep(1);
     // setActiveModal(modal)
@@ -51,17 +55,23 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     setCurrentStep(2);
   };
 
+  const prevStep = (data: any) => {
+    setCurrentStep(currentStep - 1);
+  };
+
   return (
     <>
       {contextHolder}
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 && (
-          <ProgramDetail onContinue={handleProgramDetailContinue} />
+          <ProgramDetail onContinue={handleProgramDetailContinue} closeModal={closeModal} />
         )}
         {currentStep === 2 && (
           <CustomizeProgram
             programData={programData}
             setCurrentStep={setCurrentStep}
+            closeModal={closeModal}
+            prevStep={prevStep}
           />
         )}
         {currentStep === 3 && (

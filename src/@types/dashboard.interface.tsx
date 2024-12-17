@@ -79,6 +79,6 @@ export interface ISetupModal {
   setCurrentStep?: (step: number) => void;
 }
 
-export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
+export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changeProgramImages" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
 
 export type TActiveModal = "program" | "cohort" | null;

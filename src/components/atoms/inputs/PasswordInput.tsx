@@ -5,7 +5,7 @@ import ProgressBar from "../../molecules/auth/PregressBar";
 import "../style.css";
 
 const PasswordInput: React.FC<IPasswordInput> = (props) => {
-  const { id, label, placeHolder, onchange, showStrength, valid } = props;
+  const { id, label, placeHolder, onchange, showStrength, valid, value, icon, onIconClick } = props;
 
   const [strengthBar, setStrengthBar] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +62,8 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
     checkStrength(e);
   };
 
+
+
   return (
     <>
       <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
@@ -76,6 +78,7 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
               type={showPassword ? "text" : "password"}
               placeholder={placeHolder}
               onChange={handleOnChange}
+              value={value}
               onInvalid={() => setIsInvalid(true)}
               onFocus={checkStrength}
               required
@@ -83,13 +86,19 @@ const PasswordInput: React.FC<IPasswordInput> = (props) => {
             <button
               type="button"
               className="password-eye bg-transparent icon btn border-transparent"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => {
+                if(icon) {
+                  return
+                }
+                setShowPassword(!showPassword)}}
             >
-              {showPassword ? (
-                <FiEyeOff className="icon" />
+            {icon ? <>{ icon }</> : (
+              showPassword ? (
+              <FiEyeOff className="icon" />
               ) : (
-                <FiEye className="icon" />
-              )}
+                <FiEye className="icon" />)
+)}
+
             </button>
           </div>
         </label>

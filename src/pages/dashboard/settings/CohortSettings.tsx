@@ -1,14 +1,15 @@
-import { useContext, useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
-import { FiSave, FiTrash2 } from 'react-icons/fi';
-import { notification } from 'antd'
-import api from '../../../api/axios'
-import { ProgramContext } from '../../../context/programs/ProgramContext'
-import { TextInput2 } from '../../../components/atoms/inputs/TextInput'
-import OutlineButton from '../../../components/atoms/Button/OutlineButton'
-import DeleteCohortModal from '../../../components/organisms/dashboard/modals/DeleteCohortModal'
-import DateInput2 from '../../../components/atoms/inputs/DateInput2'
-import { TModal } from '../../../@types/dashboard.interface';
+import { useContext, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { FiSave, FiTrash2 } from "react-icons/fi";
+import { notification } from "antd";
+import api from "../../../api/axios";
+import { ProgramContext } from "../../../context/programs/ProgramContext";
+import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
+import OutlineButton from "../../../components/atoms/Button/OutlineButton";
+import DeleteCohortModal from "../../../components/organisms/dashboard/modals/DeleteCohortModal";
+import DateInput2 from "../../../components/atoms/inputs/DateInput2";
+import TextAreaInput from "../../../components/atoms/inputs/TextareaInput";
+import { TModal } from "../../../@types/dashboard.interface";
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -119,8 +120,8 @@ const CohortSettings = () => {
 
   return (
     <>
-      <div className="d-flex gap-133 align-items-start pt-4">
-        <div className="w-60">
+      <div>
+        <div className="w-75">
           <div className="d-flex gap-2">
             <p className="d-flex justify-content-center align-items-center w-45">
               <TextInput2
@@ -177,17 +178,17 @@ const CohortSettings = () => {
         
         <span className='fs-small manrope-500 primary-700'>
           You'll need to have created digital certificates on an external platform
-        </span>
+        </span> */}
+        <div className='pb-3'></div>
 
-        <div className='pb-4'></div> */}
-
-          {/* <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
+          <TextAreaInput id='message' placeHolder='Enter Text' label='Graduation Message' onchange={() => {}}/>
         
         <span className='fs-small manrope-500 primary-700'>
           Once you graduate a learner, this message will automatically get sent to them
         </span>
 
-        <div className='pb-4'></div> */}
+        <div className='pb-4'></div>
+        <div className='pb-3'></div>
 
           <OutlineButton
             action={() => {
@@ -212,8 +213,11 @@ const CohortSettings = () => {
             <FiSave />
             <span>Save</span>
           </OutlineButton>
-        </div>
-        <div>
+
+          <div className='pb-5'></div>
+          <div className='pb-4'></div>
+          
+          <div>
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
           <span onClick={() => setModal({ name: "deletecohort",  open: true })} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
             style={{ cursor: 'pointer' }}
@@ -221,6 +225,8 @@ const CohortSettings = () => {
             Delete Cohort <FiTrash2 />
           </span>
         </div>
+        </div>
+
       </div>
       {modal.name === "deletecohort" && (
         <DeleteCohortModal

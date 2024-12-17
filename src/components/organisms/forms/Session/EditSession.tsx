@@ -55,7 +55,7 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
 
   return (
     <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
-      {/* <ProgressBar height={8} length={2} page={1} absolute={true} gap rounded={false} /> */}
+      <ProgressBar height={8} length={2} page={1} absolute={true} gap rounded={false} />
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Session Details</h1>
         <span className="manrope-500 dark-700 fs-body">

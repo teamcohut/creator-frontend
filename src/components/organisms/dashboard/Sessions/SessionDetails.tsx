@@ -6,7 +6,6 @@ import Button from '../../../atoms/Button';
 import { notification } from 'antd';
 import api from '../../../../api/axios';
 import { TModal } from '../../../../@types/dashboard.interface';
-import SessionModal from '../modals/SessionModal';
 import EditSessionModal from '../modals/EditSessionModal';
 
 const SessionDetails = () => {

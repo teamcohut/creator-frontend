@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
-import {FiSave, FiTrash2, FiUser } from "react-icons/fi";
+import {FiEdit3, FiSave, FiTrash2, FiUser } from "react-icons/fi";
 import DeactivateAccountModal from "../../../components/organisms/dashboard/modals/DeactivateAccountModal";
 import { useMutation } from "@tanstack/react-query";
 import api from "../../../api/axios";
@@ -8,6 +8,8 @@ import { notification } from "antd";
 import EmailInput2 from "../../../components/atoms/inputs/EmailInput2";
 import Button from "../../../components/atoms/Button";
 import { TModal } from "../../../@types/dashboard.interface";
+import PasswordInput from "../../../components/atoms/inputs/PasswordInput";
+import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
 
 const AccountSettings = () => {
   const user = JSON.parse(localStorage.getItem("user") || "");
@@ -46,6 +48,7 @@ const AccountSettings = () => {
   return (
     <>
       <div className="d-flex gap-133 align-items-start">
+  
         <div className="d-flex flex-column w-60 gap-4">
           <div className="d-flex gap-4 ">
             <TextInput2
@@ -65,6 +68,7 @@ const AccountSettings = () => {
               icon={<FiUser className="dark-300" />}
             />
           </div>
+          
           <EmailInput2
             id="email"
             label="Email"
@@ -88,6 +92,24 @@ const AccountSettings = () => {
             <FiSave />
             <span>Save</span>
           </Button>
+          {/* <div className="pb-4"></div> */}
+          <PasswordInput 
+            id="change-password" 
+            placeHolder=""
+            label="Password"
+            value="*********"
+            icon={
+              <span onClick={
+                (e) => setModal((prev) => ({ open: true, name: "changepassword" }))}>
+                  <FiEdit3 color="#453BDB"/>
+              </span>
+            }
+            onchange={() => {}}
+            valid={true}
+
+            />
+        
+
         </div>
         <div>
           <div>
@@ -109,8 +131,15 @@ const AccountSettings = () => {
           setModalOpen={setModalOpenState}
         />
       )}
+      {modal.name === "changepassword" && (
+        <ChangePasswordModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
     </>
   );
 };
 
 export default AccountSettings;
+

@@ -7,14 +7,17 @@ import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
+import { FiArrowLeft, FiX } from "react-icons/fi";
 
 
 interface IAdditionalSessionProps {
   initialData: any;
   onSuccess: () => void;
+  closeModal: any;
+  prevStep: any;
 }
 
-const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess }) => {
+const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess, closeModal, prevStep }) => {
   const { activeCohort } = useContext(ProgramContext);
 
   const [locationType, setLocationType] = useState<string>("Online");
@@ -74,6 +77,10 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   return (
     <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
       <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
+      <div className="d-flex flex-row justify-content-between">
+        <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+        <FiX className="fs-h3" onClick={closeModal} />
+      </div>
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Additional Session Info</h1>
         <span className="manrope-500 dark-700 fs-body">
