@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import AuthTemplate from "../../components/templates/AuthTemplate";
 import ForgotPasswordForm from "../../components/organisms/forms/loginForm/ForgotPasswordForm";
 import SuccessCard from "../../components/molecules/auth/SuccessCard";
@@ -9,7 +8,6 @@ import { FiMail } from "react-icons/fi";
 const ForgotPassword = () => {
   const [verified, setVerified] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
-  const route = useParams();
 
   const verify = (email: string) => {
     setVerified(true);
