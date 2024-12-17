@@ -18,7 +18,6 @@ export const axiosPrivate = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  // withCredentials: true,
 });
 
 const api = {
@@ -33,9 +32,9 @@ const api = {
 
 axiosPrivate.interceptors.request.use(
   function (config) {
-    const user = JSON.parse(localStorage.getItem("user") as any);
+    const authToken = JSON.parse(localStorage.getItem("authToken") as any);
 
-    config.headers.authorization = `Bearer ${user.authToken}`;
+    config.headers.authorization = `Bearer ${authToken}`;
     return config;
   },
   function (error) {
@@ -50,7 +49,7 @@ axiosPrivate.interceptors.response.use(
   function (error) {
     console.log(error);
     if (error?.response?.status === 403) {
-      localStorage.removeItem("user");
+      localStorage.removeItem("authToken");
       window.location.href = "/login";
     }
     return Promise.reject(error);

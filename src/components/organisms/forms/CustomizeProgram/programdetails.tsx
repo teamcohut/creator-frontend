@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { notification } from "antd";
 import { FiX } from "react-icons/fi";
+import { ProgramDetailProps } from "../../../../@types/program.interface";
 
-interface ProgramDetailProps {
-  onContinue: (data: {
-    title: string;
-    description: string;
-    format: string;
-  }) => void;
-  closeModal: any;
-}
 
-const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [format, setFormat] = useState("");
+
+const ProgramDetail: React.FC<ProgramDetailProps> = ({
+  onContinue,
+  closeModal,
+  programData,
+}) => {
+  const [title, setTitle] = useState(programData.title || "");
+  const [description, setDescription] = useState(programData.description || "");
+  const [format, setFormat] = useState(programData.format || "");
+
+  useEffect(() => {
+    setTitle(programData.title);
+    setDescription(programData.description);
+    setFormat(programData.format);
+  }, [programData]);
 
   const handleFormatSelect = (selectedFormat: string) => {
     setFormat(selectedFormat);
@@ -26,7 +30,9 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal })
 
   const handleContinue = () => {
     if (!title || !description || !format) {
-      notification.error({ message: "Please fill in all fields, including selecting a format." });
+      notification.error({
+        message: "Please fill in all fields, including selecting a format.",
+      });
       return;
     }
     onContinue({ title, description, format });
@@ -56,6 +62,7 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal })
           label="Program Title"
           id="programtitle"
           placeHolder="Enter Title"
+          value={title}
           onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTitle(e.target.value)
           }
@@ -64,6 +71,7 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal })
           label="Description"
           id="description"
           placeHolder="What is your program about?"
+          value={description}
           onchange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setDescription(e.target.value)
           }
@@ -106,3 +114,4 @@ const ProgramDetail: React.FC<ProgramDetailProps> = ({ onContinue, closeModal })
 };
 
 export default ProgramDetail;
+

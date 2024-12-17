@@ -28,13 +28,12 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   });
 
   const createCohort = async (cohort: ICohort) => {
-    console.log("Cohort: Setup Cohort Modal", cohort);
     createCohortMutation.mutate(cohort);
   };
 
   const closeModal = () => {
-    setModalOpen(false, null)
-  }
+    setModalOpen(false, null);
+  };
 
   const prevStep = (data: any) => {
     setCurrentStep(currentStep - 1);
@@ -44,18 +43,29 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <>
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {currentStep === 1 ? (
-          <OnboardCohortModal onSubmit={createCohort} closeModal={closeModal} />
+          <OnboardCohortModal pending={createCohortMutation.isPending} onSubmit={createCohort} closeModal={closeModal} />
         ) : currentStep === 2 ? (
-          <UploadParticipants onSubmit={() => {
+          <UploadParticipants 
+            onSubmit={() => {
             setCurrentStep(1);
             setModalOpen(false, null);
           }} hasTrack={hasTrack}
             closeModal={closeModal}
-            prevStep={prevStep} />
-        ) :
-          (
-            <></>
-          )}
+            prevStep={prevStep}
+          />
+        ) : currentStep === 2 ? (
+          <UploadParticipants
+            onSubmit={() => {
+              setCurrentStep(1);
+              setModalOpen(false, null);
+            }}
+            hasTrack={hasTrack}
+            closeModal={closeModal}
+            prevStep={prevStep}
+          />
+        ) : (
+          <></>
+        )}
       </Modal>
     </>
   );

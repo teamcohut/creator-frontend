@@ -18,7 +18,7 @@ const VerifyMail = () => {
     queryKey: ["activate-account"],
     queryFn: async () => {
       const response = await api.auth.activateAccount(id);
-      console.log("error from query", response.data);
+
       if (!response.data.error) {
         setTimeout(() => {
           navigate("/login");

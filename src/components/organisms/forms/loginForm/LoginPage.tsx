@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../atoms/Button";
 import EmailInput from "../../../atoms/inputs/EmailInput";
@@ -7,18 +7,24 @@ import "../../style.css";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
   const loginMutation = useMutation({
     mutationFn: (payload: any) => {
       return axiosAPI.auth.login(payload);
     },
     onSuccess: (data: any) => {
-      localStorage.setItem("user", JSON.stringify(data?.data?.data || ""));
+      localStorage.setItem(
+        "authToken",
+        JSON.stringify(data?.data?.data?.authToken)
+      );
+      dispatch({ type: "LOGIN", payload: data?.data?.data });
       navigate("/");
     },
     onError: (error: any) => {
