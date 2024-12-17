@@ -7,7 +7,7 @@ const ChangePasswordSuccess: FC<ISetupModal> = ({
   setModalOpen,
 }) => {
   const handleClose = () => {
-    setModalOpen(false, "");
+    setModalOpen(false, "changepassword");
   };
   return (
     <div className='d-flex align-items-center justify-content-center' style={{ height: "100vh"}}>

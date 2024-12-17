@@ -219,7 +219,7 @@ const CohortSettings = () => {
           
           <div>
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span onClick={() => setModal({ name: "deletecohort",  open: true })} className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+          <span onClick={() => setModal({ name: "deletecohort",  open: true })} className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
             style={{ cursor: 'pointer' }}
           >
             Delete Cohort <FiTrash2 />

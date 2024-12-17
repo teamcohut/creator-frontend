@@ -118,7 +118,7 @@ const AccountSettings = () => {
           </div>
 
           <h4 className="manrope-600 fs-h4 primary-950 pb-1">Danger Zone</h4>
-          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-300"
+          <span style={{cursor: "pointer"}}className="d-flex align-items-center gap-1 manrope-700 fs-body error-400"
             onClick={() => setModal((prev) => ({ open: true, name: "deactivateaccount" }))}>
               Deactivate Account <FiTrash2 />
           </span>
