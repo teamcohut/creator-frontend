@@ -1,14 +1,14 @@
 import { notification } from "antd";
 import { FC, useState } from "react";
 import { ISetupModal } from "../../../../@types/dashboard.interface";
-import AddSession from "../../forms/Session/AddSession";
-import AdditionalSession from "../../forms/Session/AdditionalSession";
 import Modal from "../../../templates/Modal";
+import EditSession from "../../forms/Session/EditSession";
+import EditAdditionalSession from "../../forms/Session/EditAdditionalSession";
 
 
 
 
-const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
+const EditSessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [api, contextHolder] = notification.useNotification();
@@ -34,9 +34,9 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       {contextHolder}
       <Modal open={modalOpen} setModalOpen={(open: boolean) => setModalOpen(open, "session")}>
         {currentStep === 1 ? (
-          <AddSession onSubmit={nextStep} />
+          <EditSession onSubmit={nextStep} />
         ) : currentStep === 2 ? (
-          <AdditionalSession
+          <EditAdditionalSession
             initialData={formData}
             onSuccess={handleSuccess}
           // onError={handleError}
@@ -47,4 +47,4 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   );
 };
 
-export default SessionModal;
+export default EditSessionModal;

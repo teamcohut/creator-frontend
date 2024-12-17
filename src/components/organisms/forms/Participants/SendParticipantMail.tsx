@@ -74,23 +74,20 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
                         placeholder="user@email.com"
                     />
 
-                    <div className="d-flex flex-column gap-2">
+                    <TextInput
+                        label="Email Subject"
+                        id="subject"
+                        onchange={(e) => setDetails({ ...details, subject: e.target.value })}
+                        placeHolder="Enter Subject"
+                    />
 
-                        <TextInput
-                            label="Email Subject"
-                            id="subject"
-                            onchange={(e) => setDetails({ ...details, subject: e.target.value })}
-                            placeHolder="Enter Subject"
-                        />
+                    <RTEInput
+                        id='body'
+                        label='Body'
+                        placeholder='What would you like to email this participant about?'
+                        onChange={(e) => setDetails({ ...details, body: e })}
+                    />
 
-                        <RTEInput
-                             id='body'
-                             label='Body'
-                             placeholder='What would you like to email this participant about?'
-                             onChange={(e) => setDetails({ ...details, body: e })}
-                        />
-
-                    </div>
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-3">

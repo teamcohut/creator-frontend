@@ -1,15 +1,27 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FiArrowLeft, FiCalendar, FiClock, FiEdit3, FiMapPin, FiTrash2, FiVideo } from 'react-icons/fi';
 import Button from '../../../atoms/Button';
 import { notification } from 'antd';
 import api from '../../../../api/axios';
+import { TModal } from '../../../../@types/dashboard.interface';
+import SessionModal from '../modals/SessionModal';
+import EditSessionModal from '../modals/EditSessionModal';
 
 const SessionDetails = () => {
     const { sessionId } = useParams();
     const navigate = useNavigate();
+    const [modal, setModal] = useState({ name: null, open: false } as {
+        name: TModal;
+        open: boolean;
+      });
 
-    const { isLoading, isError, data } = useQuery({
+    const setModalOpen = (open: boolean, name: TModal) => {
+        setModal({name, open})
+    }
+
+    const { isLoading, isError, data, isSuccess } = useQuery({
         queryKey: ["session", sessionId],
         queryFn: () => api.session.findSession(sessionId!),
         enabled: !!sessionId,
@@ -19,6 +31,7 @@ const SessionDetails = () => {
         mutationFn: () => api.session.deleteSession(sessionId!),
         onSuccess: () => {
             notification.success({ message: "Session deleted successfully!" });
+            localStorage.removeItem('sessionId')
             navigate(-1);
         },
         onError: () => {
@@ -30,6 +43,9 @@ const SessionDetails = () => {
 
     if (isLoading) return <p>Loading session details...</p>;
     if (isError) return <p>Error loading session details.</p>;
+    if (isSuccess) {
+        localStorage.setItem('sessionId', data._id)
+    }
 
     const session = data?.data.data;
     const sessionLink = session?.location.address;
@@ -55,7 +71,7 @@ const SessionDetails = () => {
                             <div className='d-flex justify-content-between'>
                                 <h2 className='fs-h3 manrope-600 primary-950'>{session?.title}</h2>
                                 <div className="w-fit">
-                                    <Button action={() => { }} fill={false} type='button'>
+                                    <Button action={() => setModalOpen(true, 'session')} fill={false} type='button'>
                                         <FiEdit3 className='fs-h3 primary-400' />
                                     </Button>
                                 </div>
@@ -70,9 +86,9 @@ const SessionDetails = () => {
                                     <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'><FiMapPin /> {session.location.address}</p> :
                                     <p className='d-flex align-items-center gap-2 manrope-500 fs-body dark-700'>
                                         <FiVideo />
-                                        <a href={sessionLink} target="_blank" rel="noopener noreferrer">
+                                        <Link to={`http://${sessionLink}`} target="_blank" rel="noopener noreferrer">
                                             {sessionLink}
-                                        </a>
+                                        </Link>
                                     </p>
                             }
 
@@ -91,7 +107,7 @@ const SessionDetails = () => {
                                 </Button>
                             </div>
                             <div className='w-fit'>
-                                <Button action={() => { }} fill={false} type='button' customStyle={{ color: 'var(--error-300' }} ><FiTrash2 className='fs-h3' /></Button>
+                                <Button action={deleteSessionMutation.mutate} loading={deleteSessionMutation.isPending} fill={false} type='button' customStyle={{ color: 'var(--error-300' }} ><FiTrash2 className='fs-h3' /></Button>
                             </div>
                         </div>
                     </div>
@@ -104,7 +120,8 @@ const SessionDetails = () => {
             
 
             {
-                
+                modal.name === 'session' &&
+                <EditSessionModal modalOpen={modal.open} setModalOpen={setModalOpen} />
             }
         </>
     );
