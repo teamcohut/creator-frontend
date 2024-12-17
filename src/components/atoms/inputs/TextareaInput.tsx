@@ -8,7 +8,7 @@ const TextAreaInput: React.FC<ITextAreaInput> = (props) => {
     <>
       <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
         {label && <label className='manrope-600 fs-body' htmlFor={id}>{label}</label>}
-        <div className='d-flex align-items-center gap-2 rounded px-2'>
+        <div className='d-flex align-items-center gap-2 rounded'>
           <textarea
             id={id}
             name={id}

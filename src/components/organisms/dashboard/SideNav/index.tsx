@@ -9,9 +9,10 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SetupProgramModal from "../modals/SetupProgramModal";
 import SetupCohortModal from "../modals/SetupCohortModal";
 import CohortsDropdown from "../../../molecules/dashboard/CohortsDropdown";
-import { TActiveModal } from "../../../../@types/dashboard.interface";
+import { IStatus, TActiveModal } from "../../../../@types/dashboard.interface";
+import Button from "../../../atoms/Button";
 
-const SideNav: FC = () => {
+const SideNav: FC<IStatus> = ({ status }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
   const { activeProgram } = useContext(ProgramContext);
@@ -22,31 +23,39 @@ const SideNav: FC = () => {
   };
 
   const ActionButton = () => {
-    if (!activeProgram.title) {
+    if (status === 'pending') {
       return (
-        <button
-          onClick={() => openModal("program")}
-          className="setup-button no-wrap border-none rounded-4 manrope-500 fs-button w-100 d-flex align-items-center justify-content-start gap text-white"
-          type="button"
-        >
-          <FiPlus className="fs-h2 plus-icon" />
-          <span className="text-white">Setup Your Program</span>
-        </button>
-      );
+        <Button action={()=>{}} children='' fill type="button" loading outline="primary" />
+      )
+    } else if (status === 'error') {
+      return <></>
     } else {
-      if (activeProgram.cohorts?.length < 1) {
+      if (!activeProgram.title) {
         return (
           <button
-            onClick={() => openModal("cohort")}
+            onClick={() => openModal("program")}
             className="setup-button no-wrap border-none rounded-4 manrope-500 fs-button w-100 d-flex align-items-center justify-content-start gap text-white"
             type="button"
           >
             <FiPlus className="fs-h2 plus-icon" />
-            <span className="text-white">Onboard New Cohort</span>
+            <span className="text-white">Setup Your Program</span>
           </button>
         );
       } else {
-        return <CohortsDropdown />;
+        if (activeProgram.cohorts?.length < 1) {
+          return (
+            <button
+              onClick={() => openModal("cohort")}
+              className="setup-button no-wrap border-none rounded-4 manrope-500 fs-button w-100 d-flex align-items-center justify-content-start gap text-white"
+              type="button"
+            >
+              <FiPlus className="fs-h2 plus-icon" />
+              <span className="text-white">Onboard New Cohort</span>
+            </button>
+          );
+        } else {
+          return <CohortsDropdown />;
+        }
       }
     }
   };

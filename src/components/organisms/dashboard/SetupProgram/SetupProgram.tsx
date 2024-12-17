@@ -10,9 +10,9 @@ const SetupProgram: FC<ISetupProgram> = () => {
   const [activeModal, setActiveModal] = useState<TModal>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const openModalHandler = () => {
-    setActiveModal("program");
-    setModalOpen(true);
+  const openModalHandler = (open: boolean, modal: TModal) => {
+    setActiveModal(modal);
+    setModalOpen(open);
   };
 
   return (
@@ -31,7 +31,7 @@ const SetupProgram: FC<ISetupProgram> = () => {
           <Button
             children="Setup Your Program"
             type="button"
-            action={openModalHandler}
+            action={()=>openModalHandler(true, 'program')}
             fill={true}
           />
         </div>
@@ -41,7 +41,7 @@ const SetupProgram: FC<ISetupProgram> = () => {
         <SetupProgramModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
       {activeModal === "cohort" && (
-        <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        <SetupCohortModal modalOpen={modalOpen} setModalOpen={openModalHandler} />
       )}
     </>
   );

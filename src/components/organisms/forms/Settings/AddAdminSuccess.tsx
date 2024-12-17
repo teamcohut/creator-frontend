@@ -4,9 +4,7 @@ import SettingsStatusCard from './SettingsStatusCard'
 import { FiUserPlus } from 'react-icons/fi';
 
 const AddAdminSuccess: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
-  const handleClose = () => {
-    setModalOpen(false, '');
-  };
+  
   return (
     <div className='d-flex align-items-center justify-content-center' style={{ height: "100vh"}}>
       <SettingsStatusCard title="New Admin Added!" 

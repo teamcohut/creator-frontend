@@ -14,7 +14,7 @@ import { useProgramContext } from '../../../../hooks/program/useProgramContext';
 const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const { dispatch } = useProgramContext()
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
   const [isHovered, setIsHovered] = useState(false);
   const {activeProgram} = useContext(ProgramContext)

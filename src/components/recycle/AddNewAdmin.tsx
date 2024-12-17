@@ -8,7 +8,7 @@ import { ISetupModal } from '../../@types/dashboard.interface';
 
 const AddNewAdmin: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
   type CheckedStates = {
     participant: boolean;

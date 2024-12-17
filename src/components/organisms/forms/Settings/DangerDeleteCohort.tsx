@@ -12,7 +12,7 @@ import { ProgramContext } from '../../../../context/programs/ProgramContext';
 
 const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const handleClose = () => {
-    setModalOpen(false, '');
+    setModalOpen(false, null);
   };
   const [isHovered, setIsHovered] = useState(false);
   const {dispatch, activeCohort} = useContext(ProgramContext)
