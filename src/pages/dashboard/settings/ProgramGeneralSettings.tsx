@@ -9,6 +9,7 @@ import { ProgramContext } from '../../../context/programs/ProgramContext';
 import api from '../../../api/axios';
 import { useMutation } from '@tanstack/react-query';
 import GroupButton from '../../../components/atoms/Button/GroupButton';
+import EditProgramImagesModal from '../../../components/organisms/dashboard/modals/EditProgramImagesModal';
 
 
 const ProgramGeneralSettings = () => {
@@ -119,30 +120,13 @@ const ProgramGeneralSettings = () => {
   return (
     <>
       <div className='w-100'>
-        {/* <DragNDropInput
-          id='logo' 
-          label='Program Logo' 
-          detail='Program’s Logo' 
-          icon={<img width={50} src={activeProgram.logo} alt='Logo' />}
-          onchange={(file) => handleThumbnailChange(file)}
-        />
-        {uploadImageMutation.isPending ? <p>Uploading image...</p> :
-        <p className='fs-small manrope-500 primary-400 pb-4'>(png, jpg, jpeg)</p>}
-
-        <DragNDropInput
-          id='banner' 
-          label='Banner Image' 
-          detail='Program’s Cover Image' 
-          icon={<img width={50} src={activeProgram.cover} alt='Banner' />}
-          onchange={(file) => handleBannerChange(file)}
-        />
-        {uploadImageMutation.isPending ? <p>Uploading image...</p> :
-        <p className='fs-small manrope-500 primary-400 pb-4'>
-          Banner image will be displayed across your Program (png, jpg, jpeg)
-          </p>} */}
         <div style={{position: "relative"}}>
 
-        <img src={banner} alt="Banner" style={{width: "100%", height: "183px"}} />
+        <img src={banner} alt="Banner" 
+          style={{width: "100%",
+          height: "183px",
+          borderBottomLeftRadius: "25px",
+          borderBottomRightRadius: "25px"}} />
         <img src={thumbnail} 
           alt="logo" 
           style={{width: "80px",
@@ -153,7 +137,22 @@ const ProgramGeneralSettings = () => {
           top: 143,
         }}
         />
-        <FiEdit2 />
+        <div 
+          style={{backgroundColor: "white", 
+          width: "32px", 
+          height: "32px", 
+          borderRadius: "50%",
+          position: "absolute",
+          right: 40,
+          top: 22,
+          cursor: "pointer"
+          }}
+          className='d-flex align-items-center justify-content-center'
+          onClick={() => setModal((prev) => ({ open: true, name: "changeProgramImaagesModal" }))}
+          >
+
+        <FiEdit2 color='#453BDB'/>
+        </div>
 
         </div>
 
@@ -226,6 +225,12 @@ const ProgramGeneralSettings = () => {
       
       {modal.name === "deleteProgramModal" && (
         <DeleteProgramModal
+          modalOpen={modal.open}
+          setModalOpen={setModalOpenState}
+        />
+      )}
+      {modal.name === "changeProgramImaagesModal" && (
+        <EditProgramImagesModal
           modalOpen={modal.open}
           setModalOpen={setModalOpenState}
         />
