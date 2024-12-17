@@ -10,7 +10,7 @@ import DeleteCohortModal from "../../../components/organisms/dashboard/modals/De
 import DateInput2 from "../../../components/atoms/inputs/DateInput2";
 import TextAreaInput from "../../../components/atoms/inputs/TextareaInput";
 import { TModal } from "../../../@types/dashboard.interface";
-import SetupProgram from "../../../components/organisms/dashboard/SetupProgram/SetupProgram";
+import SetupCohort from "../../../components/organisms/dashboard/SetupProgram/SetupCohort";
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -228,7 +228,7 @@ const CohortSettings = () => {
         </div>
         </div>
 
-      </div> : <SetupProgram />}
+      </div> : <SetupCohort />}
       {modal.name === "deletecohort" && (
         <DeleteCohortModal
           modalOpen={modal.open}
