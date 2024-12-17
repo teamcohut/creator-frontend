@@ -1,4 +1,6 @@
-import { ChangeEvent, ReactNode } from "react"
+import { ChangeEvent, ReactNode, MouseEvent } from "react"
+import { IconBaseProps, IconType } from "react-icons";
+import { FiEdit3 } from "react-icons/fi";
 
 export interface IEmailInput {
   id: string,
@@ -44,8 +46,12 @@ export interface IPasswordInput {
   label: string;
   showStrength?: Boolean;
   valid?: Boolean;
+  value?: string;
+  onIconClick?: () => void;
   onchange(e: ChangeEvent<HTMLInputElement>): void
 }
+
+
 
 export interface IOtherInput {
   id: string,

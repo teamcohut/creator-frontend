@@ -8,9 +8,8 @@ import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { FiUpload, FiUploadCloud } from "react-icons/fi";
+import { FiUploadCloud } from "react-icons/fi";
 import { FaFileCsv } from 'react-icons/fa';
-
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,
   hasTrack,
