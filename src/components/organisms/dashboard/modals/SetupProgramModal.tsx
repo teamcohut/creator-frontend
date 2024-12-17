@@ -71,7 +71,7 @@ const SetupProgramModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       <Modal open={modalOpen} setModalOpen={setModalOpen}>
         {
           currentStep === 1 ?
-            <ProgramDetail onContinue={handleProgramDetailContinue} closeModal={closeModal} /> :
+            <ProgramDetail programData={programData} onContinue={handleProgramDetailContinue} closeModal={closeModal} /> :
           currentStep === 2 ?
             <CustomizeProgram
               programData={programData}

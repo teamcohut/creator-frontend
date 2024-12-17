@@ -30,8 +30,6 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeM
     name: string,
     value: string | boolean | number
   ) => {
-    console.log(name, " : ", value);
-
     setForm({ ...form, [name]: value });
   };
 
@@ -43,7 +41,6 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeM
       });
       return;
     }
-    console.log(form);
     await onSubmit(form);
   };
 
@@ -64,7 +61,9 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeM
         />
         <div className="d-flex flex-column gap-2">
           <div className="d-flex flex-row justify-content-between">
-            <h1 className="manrope-600 primary-950 fs-h2">Onboard New Cohort</h1>
+            <h1 className="manrope-600 primary-950 fs-h2">
+              Onboard New Cohort
+            </h1>
             <FiX className="fs-h3" onClick={closeModal} />
           </div>
           <span className="manrope-500 dark-700 fs-body">

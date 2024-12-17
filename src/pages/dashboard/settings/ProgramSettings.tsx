@@ -1,11 +1,10 @@
 import { Tabs, TabsProps } from "antd";
 import CohortSettings from "./CohortSettings";
 import ProgramGeneralSettings from "./ProgramGeneralSettings";
-import { useContext, useState } from "react";
-import { ProgramContext } from "../../../context/programs/ProgramContext";
+import { useState } from "react";
 
 const ProgramSettings = () => {
-  const { activeCohort } = useContext(ProgramContext);
+
 
   // Key for saving the active tab in localStorage
   const STORAGE_KEY = "programActiveTab";
@@ -31,7 +30,6 @@ const ProgramSettings = () => {
       key: "2",
       label: "Cohort",
       children: <CohortSettings />,
-      disabled: !activeCohort?.id,
     },
   ];
 

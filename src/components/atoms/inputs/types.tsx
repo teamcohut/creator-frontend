@@ -36,6 +36,7 @@ export interface ITimeInput {
   defaultValue?: string;
   onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: string;
+  value?: string;
 }
 
 
@@ -134,6 +135,7 @@ export interface IDragnDrop {
   id: string
   label?: string,
   detail: string,
+  value?: any;
   onchange?: (file: File | null) => void;
   icon?: ReactNode;
   uploadProgress?: number;

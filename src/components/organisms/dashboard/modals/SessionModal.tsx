@@ -11,23 +11,23 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [api, contextHolder] = notification.useNotification();
 
   const nextStep = (data: any) => {
-    // Merge new data with existing formData
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const prevStep = () => {
-    // Simply decrement step without modifying formData
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
   const closeModal = () => {
     setModalOpen(false, null);
+    setCurrentStep(1);
+    setFormData({});
   };
 
   const handleSuccess = () => {
     api.success({ message: "Session successfully created!" });
-    setModalOpen(false, "session");
+    setModalOpen(false, null);
     setCurrentStep(1);
     setFormData({});
   };
@@ -38,13 +38,13 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       <Modal open={modalOpen} setModalOpen={(open: boolean) => setModalOpen(open, "session")}>
         {currentStep === 1 ? (
           <AddSession
-            initialData={formData} // Pass existing formData as initial values
+            initialData={formData}
             onSubmit={nextStep}
             closeModal={closeModal}
           />
         ) : currentStep === 2 ? (
           <AdditionalSession
-            initialData={formData} // Pass formData to repopulate fields
+            initialData={formData}
             onSuccess={handleSuccess}
             closeModal={closeModal}
             prevStep={prevStep}

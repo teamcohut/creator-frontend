@@ -64,11 +64,6 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
     uploadImageMutation.mutate({ type: "banner", file });
   };
 
-  console.log({
-    thumbnail,
-    banner,
-  });
-
   const createProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
@@ -135,7 +130,7 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
         </div>
 
       </div>
-      {uploadImageMutation.isPending && <p>Uploading image...</p>}
+      {/* {uploadImageMutation.isPending && <p>Uploading image...</p>} */}
       <div className="d-flex flex-column align-items-center gap-3">
         <Button
           children="Complete Setup"

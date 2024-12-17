@@ -7,10 +7,12 @@ import api from "../../../api/axios";
 import { TStatus } from "../../../@types/dashboard.interface";
 import SideNav from "../../organisms/dashboard/SideNav";
 import "./index.css";
+import { AuthContext } from "../../../context/auth/AuthContext";
 
 const DashboardTemplate: FC = () => {
   const { dispatch } = useContext(ProgramContext);
-  const [status, setStatus] = useState<TStatus>('pending')
+  const { dispatch: userDispatch } = useContext(AuthContext);
+  const [status, setStatus] = useState<TStatus>("pending");
 
   const { isPending, isError, isSuccess } = useQuery({
     queryKey: ["programs"],
@@ -36,15 +38,26 @@ const DashboardTemplate: FC = () => {
     },
   });
 
+  useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await api.user.fetch();
+      if (response.status === 200) {
+        userDispatch({ type: "SET_USER", payload: response.data.data });
+      }
+      return response;
+    },
+  });
+
   useEffect(() => {
     if (isPending) {
-      setStatus('pending')
+      setStatus("pending");
     } else if (isError) {
-      setStatus('error')
+      setStatus("error");
     } else if (isSuccess) {
-      setStatus('success')
+      setStatus("success");
     }
-  }, [isPending, isError, isSuccess])
+  }, [isPending, isError, isSuccess]);
 
   return (
     <>
@@ -52,21 +65,21 @@ const DashboardTemplate: FC = () => {
         <SideNav status={status} />
         <div className="h-100 content-area dashboard-body w-100">
           <div className="content outlet-div">
-            {
-              isPending ?
-                <div className="bg-white h-100 w-100 d-flex justify-content-center align-items-center" >
-                  <div className="spinner-border p-3 primary-700"></div>
-                </div> :
-                isError ?
-                  <div>
-                    <div>
-                      <h3>Err...</h3>
-                      <p>Something went wrong ...</p>
-                    </div>
-                    <Skeleton loading avatar active paragraph title />
-                  </div> :
-                  <Outlet />
-            }
+            {isPending ? (
+              <div className="bg-white h-100 w-100 d-flex justify-content-center align-items-center">
+                <div className="spinner-border p-3 primary-700"></div>
+              </div>
+            ) : isError ? (
+              <div>
+                <div>
+                  <h3>Err...</h3>
+                  <p>Something went wrong ...</p>
+                </div>
+                <Skeleton loading avatar active paragraph title />
+              </div>
+            ) : (
+              <Outlet />
+            )}
           </div>
         </div>
       </div>

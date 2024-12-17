@@ -23,12 +23,19 @@ const SideNav: FC<IStatus> = ({ status }) => {
   };
 
   const ActionButton = () => {
-    if (status === 'pending') {
+    if (status === "pending") {
       return (
-        <Button action={()=>{}} children='' fill type="button" loading outline="primary" />
-      )
-    } else if (status === 'error') {
-      return <></>
+        <Button
+          action={() => {}}
+          children=""
+          fill
+          type="button"
+          loading
+          outline="primary"
+        />
+      );
+    } else if (status === "error") {
+      return <></>;
     } else {
       if (!activeProgram.title) {
         return (
@@ -92,7 +99,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
               <FiLogOut className="nav-icon" />
               <span
                 onClick={() => {
-                  localStorage.removeItem("user");
+                  localStorage.removeItem("authToken");
                   window.location.href = "/login";
                 }}
               >
