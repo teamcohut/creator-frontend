@@ -9,11 +9,12 @@ export interface IAuthContext {
 
 export interface ISuccessCard {
   title: string;
+  icon: ReactNode;
   description: string;
   email?: string;
   width?: number;
+  cancelBtn?: React.ReactNode
   children?: ReactNode;
-  icon: ReactNode;
 }
 
 export interface IAuthState {

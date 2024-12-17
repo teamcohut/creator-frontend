@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { ISuccessCard } from '../../../../@types/auth.interface'
 
-const SettingsStatusCard: FC<ISuccessCard> = ({ title, description, icon, email, width, children }) => {
+const SettingsStatusCard: FC<ISuccessCard> = ({ title, description, icon, email, width, children, cancelBtn }) => {
   return (
     <>
         <form className='form bg-white d-flex flex-column align-items-center gap-3 text-center rounded-5' action="">
             <div className="w-100 d-flex justify-content-end">
+            <> {cancelBtn} </>
             </div>
-            
             <div className="d-flex flex-column align-items-center gap-2 head">
                 {icon}
                 <h1 className='manrope-600 primary-950 fs-h2 pb-4 pt-1'>{title}</h1>
