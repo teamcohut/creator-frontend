@@ -11,7 +11,7 @@ const Preview = () => {
   //   setModal({ name, open });
   // };
   return (
-    <>
+    <div>
       {/* <h1 className='fs-h3 manrope-700 primary-800'>This page is for previewing components <br /> Preview your component below</h1>
       <DeadlineCalendar deadlines={[]} /> */}
 
@@ -50,7 +50,9 @@ const Preview = () => {
       {/* <AddNewAdmin /> */}
       {/* <EditPermissions /> */}
       {/* <ErrorUI /> */}
-    </>
+
+      {/* <Track /> */}
+    </div>
   );
 };
 

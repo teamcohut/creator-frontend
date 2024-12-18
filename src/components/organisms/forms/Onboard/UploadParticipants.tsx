@@ -1,82 +1,76 @@
-import { FC, useContext, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
-import "../../style.css";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { FaFileCsv } from 'react-icons/fa';
+import { FaFileCsv } from "react-icons/fa";
 import { FiArrowLeft, FiX } from "react-icons/fi";
+import Track from "../../../molecules/dashboard/Track";
+
 const UploadParticipants: FC<IUploadParticipants> = ({
   onSubmit,
   hasTrack,
   closeModal,
-  prevStep
+  prevStep,
 }) => {
-  const [track, setTrack] = useState("");
+  const [tracks, setTracks] = useState<{ name: string; file?: File | null }[]>([]);
+  const [isFormVisible, setFormVisible] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<{ name: string; file: File | null }>({ name: "", file: null });
   const { activeCohort } = useContext(ProgramContext);
-  const [progress, setProgress] = useState(0);
-  console.log("activeCohort", activeCohort);
 
   const inviteParticipantsMutation = useMutation({
-    mutationFn: (payload: File) =>
-      api.participant.inviteGroupParticipant(activeCohort?._id, track, payload, {
-        onUploadProgress: (event: any) => {
-          const progress = Math.round((event.loaded / event.total) * 100);
-          setProgress(progress);
-        },
-      }),
+    mutationFn: (payload: { track: string; file: File }) =>
+      api.participant.inviteGroupParticipant(
+        activeCohort?._id,
+        payload.track,
+        payload.file,
+      ),
     onSuccess: () => {
       notification.success({ message: "Participants invited successfully!" });
+      setTracks([...tracks, currentTrack]);
+      setCurrentTrack({ name: "", file: null });
+      setFormVisible(false);
     },
-    onError: (error: any) => {
+    onError: () => {
       notification.error({
         message: "Failed to invite participants. Please try again.",
       });
     },
   });
 
-  const handleFileInput = async (file: File) => {
-    if (file?.type !== "text/csv") {
-      notification.warning({
-        message: "File type not supported",
-        description: "Please upload a CSV file.",
-      });
-      return;
-    }
-
-    if (!activeCohort?._id) {
-      notification.warning({ message: "No active cohort detected." });
-    }
-
-    if (
-      (activeCohort.hasTrack && !track) ||
-      (activeCohort.hasTrack && track === "")
-    ) {
-      notification.warning({
-        message: "You are required to specify a track to add participants",
-      });
-      return;
-    }
-
-    // inviteParticipantsMutation.mutate(file);
-    setProgress(0);
-
-    // Simulate progress
-    inviteParticipantsMutation.mutate(file, {
-      onSuccess: () => {
-        setProgress(100); // Ensure progress completes on success
-      },
-      onError: () => {
-        notification.error({ message: "Upload failed. Please try again." });
-      },
-    });
+  const handleTrackChange = (name: string) => {
+    setCurrentTrack({ ...currentTrack, name });
   };
 
+  const handleFileChange = (file: File) => {
+    setCurrentTrack({ ...currentTrack, file });
+  };
 
+  const removeTrack = (index: number) => {
+    const updatedTracks = tracks.filter((_, i) => i !== index);
+    setTracks(updatedTracks);
+  };
+
+  const handleAddTrackClick = () => {
+    setFormVisible(true);
+  };
+
+  const handleSubmitForm = () => {
+    if (currentTrack.name && currentTrack.file) {
+      inviteParticipantsMutation.mutate({
+        track: currentTrack.name,
+        file: currentTrack.file!,
+      });
+    } else {
+      notification.error({
+        message: "Please provide both a track name and a file.",
+      });
+    }
+  };
 
   return (
     <>
@@ -90,7 +84,9 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           rounded={false}
         />
         <div className="d-flex flex-row justify-content-between">
-          <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+          <p onClick={prevStep}>
+            <FiArrowLeft /> Back
+          </p>
           <FiX className="fs-h3" onClick={closeModal} />
         </div>
         <div className="d-flex flex-column gap-2">
@@ -103,36 +99,50 @@ const UploadParticipants: FC<IUploadParticipants> = ({
         </div>
 
         <div className="d-flex flex-column gap-4">
-          {activeCohort.hasTrack && (
-            <div>
+          {tracks.map((track, index) => (
+            <Track
+              key={index}
+              name={track.name}
+              fileName={track.file?.name || ""}
+              onRemove={() => removeTrack(index)}
+            />
+          ))}
+
+          {isFormVisible && (
+            <div className="mb-4 gap-4">
               <TextInput
-                id="track"
-                label="Learning Tracks"
+                id="track-name"
+                label="Track Name"
                 placeHolder="Enter Learning Track"
-                onchange={(e) => setTrack(e.target.value)}
-                value={track}
+                value={currentTrack.name}
+                onchange={(e) => handleTrackChange(e.target.value)}
+              />
+              <DragNDropInput
+                label="Upload Participants List"
+                icon={<FaFileCsv className="fs-small-icon dark-300" />}
+                id="file-upload"
+                detail="Cohort's list of Participants"
+                onchange={(file: any) => handleFileChange(file)}
+              />
+              <Button
+                children="Submit Track"
+                action={handleSubmitForm}
+                type="button"
+                fill={true}
+                loading={inviteParticipantsMutation.isPending}
               />
             </div>
           )}
 
-          <div>
-            <DragNDropInput
-              label="Upload Participants List"
-              icon={<FaFileCsv className="fs-small-icon dark-300" />}
-              id="thumbnail-upload"
-              detail="Cohort's list of Participants"
-              onchange={(file: any) => handleFileInput(file)}
-              uploadProgress={progress}
+          {!isFormVisible && (
+            <Button
+              children="Add Track"
+              action={handleAddTrackClick}
+              type="button"
+              border
+              fill={false}
             />
-            {inviteParticipantsMutation.isPending ? (
-              <>Uploading file...</>
-            ) : (
-              <span className="fs-caption primary-400">
-                A csv (Comma separated Values) File containing First names, Last
-                names and Emails of Participants
-              </span>
-            )}
-          </div>
+          )}
         </div>
 
         <div className="d-flex flex-column align-items-center gap-3">
@@ -155,10 +165,5 @@ interface IUploadParticipants {
   closeModal: any;
   prevStep: any;
 }
-
-// interface ITracks {
-//   name: string;
-//   file: string;
-// }
 
 export default UploadParticipants;
