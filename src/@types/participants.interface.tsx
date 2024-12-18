@@ -43,7 +43,7 @@ export interface ISendMailDTO {
 type Modal = 'remove' | 'mail' | ''
 
 export interface IDetails {
-  email: string[];
+  emails: string[];
   subject: string;
-  body: string;
+  content: string;
 }
