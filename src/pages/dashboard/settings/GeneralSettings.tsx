@@ -1,12 +1,11 @@
 import Header from "../../../components/organisms/dashboard/Header";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import "./index.css";
 import AccountSettings from "./AccountSettings";
 import ProgramSettings from "./ProgramSettings";
 import ChangePasswordModal from "../../../components/organisms/dashboard/modals/ChangePasswordModal";
-import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { TModal } from "../../../@types/dashboard.interface";
 
 const GeneralSettings = () => {
@@ -14,7 +13,7 @@ const GeneralSettings = () => {
     name: TModal;
     open: boolean;
   });
-  const { activeProgram } = useContext(ProgramContext);
+
 
   // Storage key for persisting active tab
   const STORAGE_KEY = "activeTabKey";
@@ -45,7 +44,6 @@ const GeneralSettings = () => {
       key: "2",
       label: "Program",
       children: <ProgramSettings />,
-      disabled: !activeProgram?.id,
     },
   ];
 

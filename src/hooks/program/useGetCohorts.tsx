@@ -15,7 +15,6 @@ export const useGetCohorts = () => {
       const response = await axiosPrivate.get(
         `/cohort/program/${activeProgram._id}`
       );
-      console.log(activeProgram, response.data.data);
 
       dispatch({ type: "COHORTS", payload: response.data.data });
       dispatch({

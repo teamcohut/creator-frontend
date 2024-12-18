@@ -60,15 +60,12 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       return axiosAPI.task.createTask(payload);
     },
     onSuccess(data) {
-      console.log(data);
       notification.success({ message: "Task Added successfully!" });
 
       api.success({
         message: "Successful",
       });
-      setTimeout(() => {
-        closeModal();
-      }, 3000);
+      
     },
   });
 
@@ -86,7 +83,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       });
     }
     const payload = form;
-    console.log(payload);
 
     try {
       await taskMutation.mutate(payload);
@@ -184,7 +180,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Save"
-            action={() => { }}
+            action={() => {}}
             type="submit"
             fill={true}
             loading={taskMutation.isPending}

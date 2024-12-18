@@ -15,7 +15,7 @@ import Button from "../../../atoms/Button";
 const SideNav: FC<IStatus> = ({ status }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
-  const { activeProgram } = useContext(ProgramContext);
+  const { activeProgram, activeCohort } = useContext(ProgramContext);
 
   const openModal = (modal: TActiveModal) => {
     setActiveModal(modal);
@@ -23,12 +23,19 @@ const SideNav: FC<IStatus> = ({ status }) => {
   };
 
   const ActionButton = () => {
-    if (status === 'pending') {
+    if (status === "pending") {
       return (
-        <Button action={()=>{}} children='' fill type="button" loading outline="primary" />
-      )
-    } else if (status === 'error') {
-      return <></>
+        <Button
+          action={() => {}}
+          children=""
+          fill
+          type="button"
+          loading
+          outline="primary"
+        />
+      );
+    } else if (status === "error") {
+      return <></>;
     } else {
       if (!activeProgram.title) {
         return (
@@ -42,7 +49,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
           </button>
         );
       } else {
-        if (activeProgram.cohorts?.length < 1) {
+        if (!activeCohort.name) {
           return (
             <button
               onClick={() => openModal("cohort")}
@@ -92,7 +99,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
               <FiLogOut className="nav-icon" />
               <span
                 onClick={() => {
-                  localStorage.removeItem("user");
+                  localStorage.removeItem("authToken");
                   window.location.href = "/login";
                 }}
               >

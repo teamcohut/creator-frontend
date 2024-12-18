@@ -21,9 +21,8 @@ const ResendMail = () => {
         "/auth/resend-verification-email",
         { email }
       );
-      console.log(response);
+
       if (!response.data.message) {
-        console.log(response.data.message);
         setSent(false);
       }
       setSent(true);
@@ -32,7 +31,7 @@ const ResendMail = () => {
       api.error({
         message: error.response.data.errors[0],
       });
-      console.log(error);
+
       setSent(false);
       setIsLoading(false);
     }

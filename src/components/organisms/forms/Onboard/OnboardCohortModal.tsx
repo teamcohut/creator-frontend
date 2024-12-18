@@ -9,10 +9,12 @@ import { notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
 
-const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pending }) => {
+const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeModal }) => {
   const { activeProgram } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  const programId = localStorage.getItem('programId') || activeProgram._id
 
   const [form, setForm] = useState<ICohort>({
     name: "",
@@ -20,7 +22,7 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
     startDate: "",
     endDate: "",
     hasTrack: false,
-    program: activeProgram._id,
+    program: programId,
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
@@ -28,13 +30,10 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
     name: string,
     value: string | boolean | number
   ) => {
-    console.log(name, " : ", value);
-
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (form.name === "" || form.endDate === "" || form.startDate === "") {
       api.warning({
         message: "Please enter all input fields",
@@ -42,17 +41,14 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
       });
       return;
     }
-    console.log(form);
     await onSubmit(form);
   };
 
   return (
     <>
       {contextHolder}
-      <form
+      <div
         className="form bg-white d-flex flex-column rounded-5 mx-auto"
-        onSubmit={handleSubmit}
-        action=""
       >
         {/* Progress bar dynamically changes length */}
         <ProgressBar
@@ -65,7 +61,9 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
         />
         <div className="d-flex flex-column gap-2">
           <div className="d-flex flex-row justify-content-between">
-            <h1 className="manrope-600 primary-950 fs-h2">Onboard New Cohort</h1>
+            <h1 className="manrope-600 primary-950 fs-h2">
+              Onboard New Cohort
+            </h1>
             <FiX className="fs-h3" onClick={closeModal} />
           </div>
           <span className="manrope-500 dark-700 fs-body">
@@ -120,21 +118,21 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, closeModal, pen
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Continue"
-            action={() => { }}
-            type="submit"
+            action={handleSubmit}
+            type="button"
             fill={true}
             loading={pending}
           />
         </div>
-      </form>
+      </div>
     </>
   );
 };
 
 interface IOnboardCohortModal {
   onSubmit: (cohort: ICohort) => void;
+  pending: boolean;
   closeModal: any;
-  pending: any;
 }
 
 export default OnboardCohortModal;

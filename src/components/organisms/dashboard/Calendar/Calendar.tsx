@@ -4,36 +4,33 @@ import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import convertTimeToDate from "../../../utils/convertTimeToData"
+import convertTimeToDate from "../../../utils/convertTimeToData";
 import "./calendar.css";
 
 const CalendarComponent: React.FC = () => {
   const { activeCohort } = useContext(ProgramContext);
   const [view, setView] = useState<"month" | "week" | "day">("month");
 
-
   const { isLoading, isError, data } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
-      console.log("API Response", response);
       return response.data?.data && Array.isArray(response.data.data)
         ? response.data.data.map((item: any) => ({
-          id: item.cohort,
-          calendarId: item._id,
-          title: item.title,
-          category: "time",
-          start: convertTimeToDate(item.start),
-          end: convertTimeToDate(item.end),
-        }))
+            id: item.cohort,
+            calendarId: item._id,
+            title: item.title,
+            category: "time",
+            start: convertTimeToDate(item.start),
+            end: convertTimeToDate(item.end),
+          }))
         : [];
     },
     enabled: !!activeCohort._id,
   });
 
-  console.log("ta da data", data);
-  if (isLoading) return <p>Loading calendar...</p>
-  if (isError) return <p>Failed to load calendar data.</p>
+  if (isLoading) return <p>Loading calendar...</p>;
+  if (isError) return <p>Failed to load calendar data.</p>;
   return (
     <div>
       <div className="d-flex flex-row justify-content-between py-5">
@@ -62,12 +59,14 @@ const CalendarComponent: React.FC = () => {
       <Calendar
         height="900px"
         view={view}
-        events={Array.isArray(data)
-          ? data.map((event: any) => ({
-            ...event,
-            isReadOnly: true,
-          }))
-          : []}
+        events={
+          Array.isArray(data)
+            ? data.map((event: any) => ({
+                ...event,
+                isReadOnly: true,
+              }))
+            : []
+        }
         usageStatistics={false}
         onClickSchedule={(event: any) => {
           alert(`Event clicked: ${event.schedule.title}`);

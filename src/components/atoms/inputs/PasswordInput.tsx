@@ -5,7 +5,7 @@ import ProgressBar from "../../molecules/auth/PregressBar";
 import "../style.css";
 
 const PasswordInput: React.FC<IPasswordInput> = (props) => {
-  const { id, label, placeHolder, onchange, showStrength, valid, value, icon, onIconClick } = props;
+  const { id, label, placeHolder, onchange, showStrength, valid, value, icon } = props;
 
   const [strengthBar, setStrengthBar] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
