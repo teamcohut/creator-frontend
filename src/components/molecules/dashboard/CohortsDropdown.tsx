@@ -19,7 +19,7 @@ const CohortsDropdown = () => {
   };
 
   const setActiveCohort = (cohort: any) => {
-    dispatch({ type: 'ACTIVE_COHORT', payload: cohort})
+    dispatch({ type: 'ACTIVE_COHORT', payload: cohort })
   }
 
   return (
@@ -29,19 +29,21 @@ const CohortsDropdown = () => {
       )}
       <div className="programs w-100">
         <button
-          className="current-program d-flex align-items-center w-100"
+          className="current-program d-flex align-items-center justify-content-between w-100"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <img
-            className="rounded-circle"
-            src={activeProgram.logo}
-            width={36}
-            height={36}
-            alt=""
-          />
-          <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
-            {activeProgram.title}
-            <small className="fs-small">{activeCohort.name}</small>
+          <span className="program-name d-flex">
+            <img
+              className="rounded-circle"
+              src={activeProgram.logo}
+              width={36}
+              height={36}
+              alt=""
+            />
+            <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
+              {activeProgram.title}
+              <small className="fs-small">{activeCohort.name}</small>
+            </span>
           </span>
           {dropdownOpen ? (
             <FiChevronUp className="manrope-500 fs-body primary-950" />
@@ -50,13 +52,12 @@ const CohortsDropdown = () => {
           )}
         </button>
         <div
-          className={`flex-column py-3 program-dropdown ${
-            dropdownOpen ? "d-flex" : "d-none"
-          }`}
+          className={`flex-column py-3 program-dropdown ${dropdownOpen ? "d-flex" : "d-none"
+            }`}
         >
           <div className="d-flex flex-column gap-3 py-2">
             {activeProgram.cohorts?.map((el: any, i: number) => (
-              <button key={i} onClick={()=> setActiveCohort(el)} className="border-none bg-transparent other-program d-flex align-items-center px-3 py-2">
+              <button key={i} onClick={() => setActiveCohort(el)} className="border-none bg-transparent other-program d-flex align-items-center px-3 py-2">
                 <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
                   {el.name}
                 </span>

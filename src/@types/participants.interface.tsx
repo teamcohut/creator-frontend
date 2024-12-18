@@ -45,5 +45,5 @@ type Modal = 'remove' | 'mail' | ''
 export interface IDetails {
   email: string[];
   subject: string;
-  body: ReactNode;
+  body: string;
 }
