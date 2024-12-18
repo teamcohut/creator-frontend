@@ -46,7 +46,7 @@ const DashBoard: FC<IDashboard> = () => {
           title={`${getGreeting()} Admin,`}
           subtitle="A Cohort is a group of individuals learning together through a shared program over a set period"
         >
-          {activeProgram.cohorts?.length > 0 ? (
+          {activeCohort.name ? (
             <div className="d-flex gap-4">
               <Button
                 action={() => setModal({ open: true, name: "task" })}

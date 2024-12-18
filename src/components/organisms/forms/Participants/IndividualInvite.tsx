@@ -5,6 +5,7 @@ import EmailInput from '../../../atoms/inputs/EmailInput';
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 interface Track {
     id: string;
@@ -23,6 +24,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         email: '',
         trackId: '', // Track is optional
     });
+    const navigate = useNavigate()
 
     const inviteIndividualMutation = useMutation({
         mutationFn: (payload: any) =>
@@ -35,6 +37,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
                 email: '',
                 trackId: '',
             });
+            navigate('participant')
         },
         onError: (error: any) => {
             console.error(error);
@@ -68,6 +71,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         if (formData.trackId) {
             payload.track = formData.trackId;
         }
+        
 
         inviteIndividualMutation.mutate(payload);
     };

@@ -4,11 +4,13 @@ import { ISetupModal } from "../../../../@types/dashboard.interface";
 import AddSession from "../../forms/Session/AddSession";
 import AdditionalSession from "../../forms/Session/AdditionalSession";
 import Modal from "../../../templates/Modal";
+import { useNavigate } from "react-router-dom";
 
 const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [api, contextHolder] = notification.useNotification();
+  const navigate = useNavigate()
 
   const nextStep = (data: any) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -30,6 +32,7 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     setModalOpen(false, null);
     setCurrentStep(1);
     setFormData({});
+    navigate('/learning')
   };
 
   return (

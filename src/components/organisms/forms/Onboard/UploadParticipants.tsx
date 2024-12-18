@@ -10,6 +10,7 @@ import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import { FaFileCsv } from 'react-icons/fa';
 import { FiArrowLeft, FiX } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 
 const UploadParticipants: FC<IUploadParticipants> = ({
@@ -21,7 +22,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
   const [track, setTrack] = useState("");
   const { activeCohort } = useContext(ProgramContext);
   const [progress, setProgress] = useState(0);
-  console.log("activeCohort", activeCohort);
+  const navigate = useNavigate()
 
   const inviteParticipantsMutation = useMutation({
     mutationFn: (payload: File) =>
@@ -33,6 +34,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
       }),
     onSuccess: () => {
       notification.success({ message: "Participants invited successfully!" });
+      navigate('participants')
     },
     onError: (error: any) => {
       notification.error({

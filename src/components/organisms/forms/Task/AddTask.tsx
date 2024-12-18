@@ -65,9 +65,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       api.success({
         message: "Successful",
       });
-      setTimeout(() => {
-        closeModal();
-      }, 3000);
+      
     },
   });
 
