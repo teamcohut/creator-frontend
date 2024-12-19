@@ -12,7 +12,7 @@ const CalendarComponent: React.FC = () => {
   const [view, setView] = useState<"month" | "week" | "day">("month");
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["session"],
+    queryKey: ["session", activeCohort],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
       return response.data?.data && Array.isArray(response.data.data)

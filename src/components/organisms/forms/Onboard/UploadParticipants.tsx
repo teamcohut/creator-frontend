@@ -109,7 +109,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           ))}
 
           {isFormVisible && (
-            <div className="mb-4 gap-4">
+            <div className="d-flex flex-column gap-4">
               <TextInput
                 id="track-name"
                 label="Track Name"
@@ -128,7 +128,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
                 children="Submit Track"
                 action={handleSubmitForm}
                 type="button"
-                fill={true}
+                fill={false}
                 loading={inviteParticipantsMutation.isPending}
               />
             </div>
