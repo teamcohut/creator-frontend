@@ -58,6 +58,14 @@ export interface IinfoCardProps {
 
 export interface ISetupProgram {}
 
+export interface ISetup {
+  icon: React.ReactNode;
+  subtitle1: string;
+  title: string;
+  subtitle2?: string;
+
+}
+
 export interface ICohort {
   name: string;
   description: string;

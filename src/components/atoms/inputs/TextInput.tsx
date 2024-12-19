@@ -4,7 +4,7 @@ import "../style.css";
 import { ITextInput } from "./types";
 
 export const TextInput2: React.FC<ITextInput> = (props) => {
-    const { label, id, icon, placeHolder, value, onchange } = props;
+    const { label, id, icon, placeHolder, value, defaultValue, onchange } = props;
 
     const [isInvalid, setIsInvalid] = useState(false);
 
@@ -34,6 +34,7 @@ export const TextInput2: React.FC<ITextInput> = (props) => {
                         type="text"
                         placeholder={placeHolder}
                         value={value}
+                        defaultValue={defaultValue}
                         onChange={handleOnChange}
                         onInvalid={handleOnInvalid}
                         required

@@ -7,7 +7,6 @@ import { ISetupModal } from '../../../../@types/dashboard.interface';
 import { notification } from 'antd';
 import { useMutation } from '@tanstack/react-query';
 import api from '../../../../api/axios';
-import { useNavigate } from 'react-router-dom';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 
 const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
@@ -26,14 +25,13 @@ const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     borderColor: 'var(--primary-800) !important',
   } : {};
 
-  const navigate = useNavigate()
 
   const deleteCohortInfoMutation = useMutation({
     mutationFn: () => api.cohort.deleteCohort(activeCohort?.id),
     onSuccess: (data: any) => {
       notification.success({message: "Cohort deleted"})
       dispatch({type: 'ACTIVE_COHORT', payload: {}})
-      navigate("/")
+      handleClose()
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";
