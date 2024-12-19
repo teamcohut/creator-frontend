@@ -60,7 +60,6 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
       onSuccess();
     },
     onError: (error: any) => {
-      console.error(error);
       notification.error({ message: "Failed to update. Please try again." });
     },
   });

@@ -30,7 +30,6 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
             setCsvFile(null);
         },
         onError: (error: any) => {
-            console.error(error);
             notification.error({ message: "Failed to invite participants. Please try again." });
 
         },
@@ -41,7 +40,6 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
     };
 
     const handleFileChange = (file: File) => {
-        console.log('Uploaded file:', file);
         setCsvFile(file);
     };
 

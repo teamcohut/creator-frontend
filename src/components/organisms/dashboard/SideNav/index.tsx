@@ -77,7 +77,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
         <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
       <div className={`sidenav-div ${navOpen && 'sidenav-open'}`}>
-          <button onClick={()=>setNavOpen(!navOpen)} className="toggle-nav dark-50 rounded-circle d-flex align-items-center justify-content-start">
+          <button onClick={()=>setNavOpen(!navOpen)} className="toggle-nav dark-50 rounded-pill d-flex align-items-center justify-content-start px-1">
             {
               navOpen?
               <FiChevronLeft />:

@@ -47,7 +47,6 @@ axiosPrivate.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error);
     if (error?.response?.status === 403) {
       localStorage.removeItem("authToken");
       window.location.href = "/login";

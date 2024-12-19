@@ -2,6 +2,7 @@ import React from 'react';
 import PercentageBar from '../../atoms/dashboard/PercentageBar';
 import '../style.css';
 import { IinfoCardProps } from '../../../@types/dashboard.interface';
+import { formatDate } from '../../utils/formatDate';
 
 
 const InfoCard: React.FC<IinfoCardProps> = ({
@@ -31,7 +32,7 @@ const InfoCard: React.FC<IinfoCardProps> = ({
           {isProgressBar ? (
             <PercentageBar progress={progress} />
           ) : (
-            <span className='fs-small manrope-600 primary-700'>{dateOfSession}</span>
+            <span className='fs-small manrope-600 primary-700'>{formatDate(dateOfSession!)}</span>
           )}
         </div>
         <button className="view-details">
