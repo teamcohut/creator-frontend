@@ -64,7 +64,7 @@ const DashboardTemplate: FC = () => {
       <div className="dashboard-template d-flex w-100">
         <SideNav status={status} />
         <div className="h-100 content-area dashboard-body w-100">
-          <div className="content outlet-div">
+          <div className="outlet-div">
             {isPending ? (
               <div className="bg-white h-100 w-100 d-flex justify-content-center align-items-center">
                 <div className="spinner-border p-3 primary-700"></div>

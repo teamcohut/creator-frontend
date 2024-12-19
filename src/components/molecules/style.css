@@ -41,7 +41,7 @@
 }
 
 .current-program {
-  padding: 8px;
+  padding: 8px 12px;
   border: 1px solid var(--dark-100);
   overflow-x: hidden;
   cursor: pointer;

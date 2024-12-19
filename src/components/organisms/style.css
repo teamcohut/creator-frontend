@@ -49,6 +49,7 @@
   left: 0;
   background-color: var(--dark-50);
   width: 96px;
+  min-width: 96px;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -58,7 +59,7 @@
 
 .sidenav-div .toggle-nav {
   background-color: var(--primary-300);
-  width: 24px;
+  width: 30px;
   height: 24px;
   border: none;
   position: absolute;
@@ -71,7 +72,7 @@
   background-color: var(--dark-50);
   padding: 15px 18px;
   border-right: 1px solid var(--primary-100) !important;
-  width: 100%;
+  width: 96px;
   overflow-y: auto;
   /* overflow-x: hidden; */
   position: sticky;
@@ -119,7 +120,7 @@
   margin-right: -24px;
 } */
 
-.sidenav-open {
+.sidenav-open, .sidenav-open .side-nav {
   min-width: 300px;
 }
 
