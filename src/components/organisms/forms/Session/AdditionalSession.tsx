@@ -62,7 +62,6 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       onSuccess();
     },
     onError: (error: any) => {
-      console.error(error);
       notification.error({ message: "Failed to create session. Please try again." });
     },
   });

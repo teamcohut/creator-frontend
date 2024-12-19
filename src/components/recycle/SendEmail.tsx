@@ -38,7 +38,7 @@ const SendEmail: FC<ISendEmail> = ({ onSubmit }) => {
             label="Body"
             id="description"
             placeHolder="Write your mail here"
-            onchange={(e: any) => console.log(e.target.value)}
+            onchange={(e: any) => { }}
           />
         </div>
 

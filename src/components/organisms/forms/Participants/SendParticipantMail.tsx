@@ -58,8 +58,6 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       });
       return;
     }
-    console.log(details);
-
     sendMailMutation.mutate(details);
   };
 
