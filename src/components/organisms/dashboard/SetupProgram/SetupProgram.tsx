@@ -18,7 +18,9 @@ const SetupProgram: FC<ISetupProgram> = () => {
 
   return (
     <>
-      <div className="setup-program-container gap-2">
+      <div className="setup-program-container d-flex align-items-center justify-content-center">
+        <div className="gap-2">
+
         <h3 className="manrope-600">Welcome {user?.firstName}</h3>
         <div className="icon-container">
           <FiUser className="icon-left" />
@@ -35,6 +37,7 @@ const SetupProgram: FC<ISetupProgram> = () => {
             action={() => openModalHandler(true, "program")}
             fill={true}
           />
+        </div>
         </div>
       </div>
 
