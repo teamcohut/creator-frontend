@@ -1,6 +1,4 @@
-import { ChangeEvent, ReactNode, MouseEvent } from "react"
-import { IconBaseProps, IconType } from "react-icons";
-import { FiEdit3 } from "react-icons/fi";
+import { ChangeEvent, ReactNode } from "react";
 
 export interface IEmailInput {
   id: string,
@@ -26,6 +24,7 @@ export interface IDateInput {
   icon?: React.ReactNode,
   onchange(e: ChangeEvent<HTMLInputElement>): void,
   value?: string
+  defaultValue?: string
 }
 
 export interface ITimeInput {
@@ -105,6 +104,7 @@ export interface ITextAreaInput {
   id: string
   label?: string,
   value?: string,
+  defaultValue?: string,
   placeHolder: string,
   onchange(e: ChangeEvent<HTMLTextAreaElement>): void,
 }
@@ -117,6 +117,7 @@ export interface ITextInput {
   onchange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   value?: string;
+  defaultValue?: string;
   tracks?: string[];
   onRemove?: (index: number) => void;
 }

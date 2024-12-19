@@ -147,7 +147,7 @@ const ProgramGeneralSettings = () => {
           <TextInput2
             id="program-title"
             label="Program Title"
-            value={title}
+            defaultValue={activeProgram.title}
             onchange={(e) => setTitle(e.target.value)}
           />
 
@@ -158,7 +158,8 @@ const ProgramGeneralSettings = () => {
             label="Description"
             placeHolder=""
             onchange={(e) => setDescription(e.target.value)}
-            value={description}
+            defaultValue={activeProgram.description}
+
           />
 
           <div className="pb-5"></div>

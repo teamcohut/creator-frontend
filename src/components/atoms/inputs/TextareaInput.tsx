@@ -3,7 +3,7 @@ import { ITextAreaInput } from "./types"
 import "../style.css"
 
 const TextAreaInput: React.FC<ITextAreaInput> = (props) => {
-  const { label, id, placeHolder, onchange, value } = props
+  const { label, id, placeHolder, onchange, value, defaultValue } = props
   return (
     <>
       <div className="input-cont d-flex flex-column align-items-stretch w-100 gap-2">
@@ -14,6 +14,7 @@ const TextAreaInput: React.FC<ITextAreaInput> = (props) => {
             name={id}
             rows={5}
             value={value}
+            defaultValue={defaultValue}
             className="input bg-transparent w-100 border border-1 rounded-4 px-3 py-2"
             placeholder={placeHolder}
             onChange={onchange}
