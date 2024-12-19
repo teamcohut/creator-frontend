@@ -15,15 +15,17 @@ const CalendarComponent: React.FC = () => {
     queryKey: ["session"],
     queryFn: async () => {
       const response = await api.session.getSession(activeCohort._id);
+      console.log("Response before", response?.data.data);
+
       return response.data?.data && Array.isArray(response.data.data)
         ? response.data.data.map((item: any) => ({
-            id: item.cohort,
-            calendarId: item._id,
-            title: item.title,
-            category: "time",
-            start: convertTimeToDate(item.start),
-            end: convertTimeToDate(item.end),
-          }))
+          id: item.cohort,
+          calendarId: item._id,
+          title: item.title,
+          category: "time",
+          start: convertTimeToDate(item.start, item.date),
+          end: convertTimeToDate(item.end, item.date),
+        }))
         : [];
     },
     enabled: !!activeCohort._id,
@@ -62,9 +64,9 @@ const CalendarComponent: React.FC = () => {
         events={
           Array.isArray(data)
             ? data.map((event: any) => ({
-                ...event,
-                isReadOnly: true,
-              }))
+              ...event,
+              isReadOnly: true,
+            }))
             : []
         }
         usageStatistics={false}
