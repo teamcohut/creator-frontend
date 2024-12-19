@@ -19,28 +19,9 @@ const ProgramGeneralSettings = () => {
   const [title, setTitle] = useState(activeProgram?.title);
   const [description, setDescription] = useState(activeProgram?.description);
   const [format, setFormat] = useState(activeProgram?.format);
-  const [thumbnail, setThumbnail] = useState<string>(activeProgram.logo);
-  const [banner, setBanner] = useState<string>(activeProgram.cover);
 
   const defaultBanner = "/Thumbnail.png";
   const defaultLogo = "/Camera_Avatar.png";
-
-  const uploadImageMutation = useMutation({
-    mutationFn: (data: any) => api.program.uploadProgramImage(data.file),
-    onSuccess: (data: any, variables) => {
-      if (variables.type === "thumbnail") {
-        setThumbnail(data.data.data.url);
-      }
-      if (variables.type === "banner") {
-        setBanner(data.data.data.url);
-      }
-    },
-    onError: (error: any) => {
-      notification.error({
-        message: error.response.data.errors[0] ?? error.response.data.message,
-      });
-    },
-  });
 
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
@@ -112,7 +93,7 @@ const ProgramGeneralSettings = () => {
             {/* Banner Background */}
             <div
               style={{
-                backgroundImage: `url(${banner || defaultBanner})`,
+                backgroundImage: `url(${activeProgram.cover || defaultBanner})`,
                 backgroundSize: "cover", // Ensures the image covers the container without distortion
                 backgroundPosition: "center", // Centers the image
                 width: "100%",
@@ -125,7 +106,7 @@ const ProgramGeneralSettings = () => {
             {/* Logo Thumbnail */}
             <div
               style={{
-                backgroundImage: `url(${thumbnail || defaultLogo})`,
+                backgroundImage: `url(${activeProgram.logo || defaultLogo})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 width: "80px",
@@ -200,9 +181,6 @@ const ProgramGeneralSettings = () => {
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             loading={updateProgramMutation.isPending}
-            disabled={
-              uploadImageMutation.isPending || updateProgramMutation.isPending
-            }
           >
             <FiSave />
             <span>Save</span>
