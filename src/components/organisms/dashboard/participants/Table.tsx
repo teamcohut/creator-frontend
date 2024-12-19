@@ -84,7 +84,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
 
   return (
     <>
-      <div className="p-table w-100">
+      <div className="p-table w-100 h-100 pb-5">
         <div className="d-flex align-items-center justify-content-between py-3">
           <div className="d-flex align-items-center gap-2">
             <h4 className="manrope-600 fs-h4 primary-950 align-content-center">
@@ -146,7 +146,10 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                         Send Mail
                       </button>
                       <button
-                        onClick={() => { }}
+                        onClick={() => {
+                          setPartipantId(participant._id);
+                          handleDropdownAction("graduate", participant.email);
+                        }}
                         className="dropdown-item cursor-pointer"
                       >
                         Graduate
@@ -194,6 +197,31 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                 />
               </div>
             </SettingsStatusCard>
+          ) : modal.modal === "graduate" ? (
+            <SettingsStatusCard
+              title="Confirm"
+              description={`Are you sure you want to graduate ${email}? `}
+              icon={<FiAlertCircle className="warning-500 fs-icon" />}
+            >
+              <div className="d-flex gap-4">
+                <span className="manrope-500 fs-body dark-700">You will not be able to undo this action.</span>
+                <Button
+                  action={removeParticipant}
+                  loading={removeMutation.isPending}
+                  children="Remove Participant"
+                  fill={false}
+                  type="button"
+                  border
+                  outline="primary"
+                />
+                <Button
+                  action={() => setModal({ open: false, modal: "" })}
+                  children="Cancel"
+                  fill
+                  type="button"
+                />
+              </div>
+            </SettingsStatusCard>
           ) : modal.modal === "mail" ? (
             <SendParticipantMail
               email={email.split(",")}
@@ -212,6 +240,6 @@ interface IModal {
   open: boolean;
   modal: TModal;
 }
-type TModal = "remove" | "mail" | "";
+type TModal = "remove" | "mail" | "graduate" | "";
 
 export default Table;

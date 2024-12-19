@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 
 const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [hasTrack] = useState<boolean>(false);
+  const [hasTrack, setHasTrack] = useState<boolean>(false);
   const { dispatch } = useContext(ProgramContext);
 
   const createCohortMutation = useMutation({
@@ -28,15 +28,12 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
   });
 
   const createCohort = async (cohort: ICohort) => {
-    createCohortMutation.mutate(cohort);
+    setHasTrack(cohort.hasTrack)
+    await createCohortMutation.mutate(cohort);
   };
 
   const closeModal = () => {
     setModalOpen(false, null);
-  };
-
-  const prevStep = (data: any) => {
-    setCurrentStep(currentStep - 1);
   };
 
   return (
@@ -53,7 +50,6 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
             }}
             hasTrack={hasTrack}
             closeModal={closeModal}
-            prevStep={prevStep}
           />
         ) : (
           <></>

@@ -1,6 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Skeleton } from "antd";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../api/axios";
@@ -8,6 +7,7 @@ import { TStatus } from "../../../@types/dashboard.interface";
 import SideNav from "../../organisms/dashboard/SideNav";
 import "./index.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
+import ErrorUI from "../../../helpers/ErrorUI";
 
 const DashboardTemplate: FC = () => {
   const { dispatch, activeCohort } = useContext(ProgramContext);
@@ -70,13 +70,7 @@ const DashboardTemplate: FC = () => {
                 <div className="spinner-border p-3 primary-700"></div>
               </div>
             ) : isError ? (
-              <div>
-                <div>
-                  <h3>Err...</h3>
-                  <p>Something went wrong ...</p>
-                </div>
-                <Skeleton loading avatar active paragraph title />
-              </div>
+              <ErrorUI />
             ) : (
               <Outlet />
             )}
