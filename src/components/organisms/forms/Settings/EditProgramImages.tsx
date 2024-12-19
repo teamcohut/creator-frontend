@@ -25,11 +25,10 @@ import { ISetupModal } from "../../../../@types/dashboard.interface";
 const EditProgramImages: FC<ISetupModal> = ({
   modalOpen,
   setModalOpen,
-  setCurrentStep,
 }) => {
-  const [thumbnail, setThumbnail] = useState<string>("");
-  const [banner, setBanner] = useState<string>("");
   const { dispatch, activeProgram } = useContext(ProgramContext);
+  const [thumbnail, setThumbnail] = useState<string>(activeProgram.logo);
+  const [banner, setBanner] = useState<string>(activeProgram.cover);
 
   const uploadImageMutation = useMutation({
     mutationFn: (data: any) => api.program.uploadProgramImage(data.file),
@@ -62,8 +61,11 @@ const EditProgramImages: FC<ISetupModal> = ({
     mutationFn: (payload: any) =>
       api.program.updateProgram(activeProgram?.id, payload),
     onSuccess: (data: any) => {
+      
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
-      setCurrentStep?.(3);
+      notification.success({
+        message: 'Updated successfully'
+      })
       setModalOpen(false, null);
     },
     onError: (error: any) => {

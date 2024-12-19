@@ -33,13 +33,17 @@ const CohortsDropdown = () => {
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <span className="program-name d-flex">
-            <img
-              className="rounded-circle"
-              src={activeProgram.logo}
-              width={36}
-              height={36}
-              alt=""
-            />
+            {
+              activeProgram.logo ?
+              <img
+                className="rounded-circle"
+                src={activeProgram.logo}
+                width={36}
+                height={36}
+                alt=""
+              /> :
+              <h3 className="dark-700 bg-secondary rounded-circle d-flex align-items-center justify-content-center" style={{'width': '36px', 'height': '36px'}}>{activeProgram.title.charAt(0)}</h3>
+            }
             <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
               {activeProgram.title}
               <small className="fs-small">{activeCohort.name}</small>

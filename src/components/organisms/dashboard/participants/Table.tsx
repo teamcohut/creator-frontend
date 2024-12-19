@@ -12,6 +12,7 @@ import api from "../../../../api/axios";
 import { notification } from "antd";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SendParticipantMail from "../../forms/Participants/SendParticipantMail";
+import { FormatDate } from "../../../utils/FormatDate";
 
 const Table: React.FC<ITable> = ({ header, body, refresh }) => {
   const [modal, setModal] = useState<IModal>({ open: false, modal: "" });
@@ -96,7 +97,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                     status={participant.isActive ? "active" : "inactive"}
                   ></StatusBadge>
                 </td>
-                <td>{participant.createdAt}</td>
+                <td>{FormatDate(participant.createdAt)}</td>
                 <td>
                   <div className="dropdown">
                     <FiMoreVertical
@@ -113,6 +114,12 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                         className="dropdown-item cursor-pointer"
                       >
                         Send Mail
+                      </button>
+                      <button
+                        onClick={() => {}}
+                        className="dropdown-item cursor-pointer"
+                      >
+                        Graduate
                       </button>
                       <button
                         onClick={() => {

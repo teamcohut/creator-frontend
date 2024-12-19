@@ -70,40 +70,42 @@ const ParticipantsPage: React.FC = () => {
         <p className="text-danger">Err... <br /> Something went wrong</p>
       ) : (
         <>
-          <div className="overview-container d-flex">
-            <OverviewCard
-              icon={<FiUsers className="fs-h1 primary-300" />}
-              title="Total Participants"
-              iconBgColor="#ECF1FF4D"
-              iconBorderColor="#ECF1FF"
-              subtitle={data?.data.data.noOfParticipants}
-            />
-            <OverviewCard
-              icon={<FiUsers className="fs-h1 primary-300" />}
-              title="Enrolled Participants"
-              iconBgColor="#ECF1FF4D"
-              iconBorderColor="#ECF1FF"
-              subtitle={(data?.data.data.noOfParticipants)}
-            >
+          <div className="h-100">
+            <div className="overview-container d-flex">
+              <OverviewCard
+                icon={<FiUsers className="fs-h1 primary-300" />}
+                title="Total Participants"
+                iconBgColor="#ECF1FF4D"
+                iconBorderColor="#ECF1FF"
+                subtitle={data?.data.data.noOfParticipants}
+              />
+              <OverviewCard
+                icon={<FiUsers className="fs-h1 primary-300" />}
+                title="Enrolled Participants"
+                iconBgColor="#ECF1FF4D"
+                iconBorderColor="#ECF1FF"
+                subtitle={(data?.data.data.noOfParticipants)}
+              >
 
-            </OverviewCard>
+              </OverviewCard>
 
-            <OverviewCard
-              icon={<FiUsers className="fs-h1 success-300" />}
-              title="Active Participants"
-              iconBgColor="#E9FFF74D"
-              iconBorderColor="#E9FFF7"
-              subtitle={data?.data.data.noOfActiveParticipants}
-            />
-            <OverviewCard
-              icon={<FiUsers className="fs-h1 error-300" />}
-              title="Inactive Participants"
-              iconBgColor="#FFF1F14D"
-              iconBorderColor="#FFF1F14D"
-              subtitle={data?.data.data.noInactiveParticipants}
-            />
+              <OverviewCard
+                icon={<FiUsers className="fs-h1 success-300" />}
+                title="Active Participants"
+                iconBgColor="#E9FFF74D"
+                iconBorderColor="#E9FFF7"
+                subtitle={data?.data.data.noOfActiveParticipants}
+              />
+              <OverviewCard
+                icon={<FiUsers className="fs-h1 error-300" />}
+                title="Inactive Participants"
+                iconBgColor="#FFF1F14D"
+                iconBorderColor="#FFF1F14D"
+                subtitle={data?.data.data.noInactiveParticipants}
+              />
+            </div>
+            <Table header={header} body={data?.data.data.participants} refresh={refetch} />
           </div>
-          <Table header={header} body={data?.data.data.participants} refresh={refetch} />
         </>
       )}
 

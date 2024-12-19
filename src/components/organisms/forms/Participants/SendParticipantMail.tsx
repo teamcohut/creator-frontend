@@ -13,9 +13,9 @@ import {
 
 const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
   const [details, setDetails] = useState<IDetails>({
-    email,
+    emails: email,
     subject: "",
-    body: "",
+    content: "",
   });
 
   const sendMailMutation = useMutation({
@@ -46,8 +46,8 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       return;
     }
     if (
-      details.body === "<></>" ||
-      details.body ===
+      details.content === "" ||
+      details.content ===
       (`
         <p>
           <br />
@@ -94,7 +94,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
             id="body"
             label="Body"
             placeholder="What would you like to email this participant about?"
-            onChange={(e) => setDetails({ ...details, body: String(e) })}
+            onChange={(e) => setDetails({ ...details, content: String(e) })}
           />
         </div>
 
