@@ -3,7 +3,7 @@ import NavLink from "../../../atoms/dashboard/NavLink";
 import { NavList } from "./NavList";
 import Icon from "../../../atoms/Icon";
 import { Link } from "react-router-dom";
-import { FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiLogOut, FiPlus, FiSettings } from "react-icons/fi";
 import "../../style.css";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SetupProgramModal from "../modals/SetupProgramModal";
@@ -15,6 +15,7 @@ import Button from "../../../atoms/Button";
 const SideNav: FC<IStatus> = ({ status }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [activeModal, setActiveModal] = useState<TActiveModal>(null);
+  const [navOpen, setNavOpen] = useState<boolean>(false)
   const { activeProgram, activeCohort } = useContext(ProgramContext);
 
   const openModal = (modal: TActiveModal) => {
@@ -75,7 +76,14 @@ const SideNav: FC<IStatus> = ({ status }) => {
       {modalOpen && activeModal === "cohort" && (
         <SetupCohortModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       )}
-      <div className="sidenav-div">
+      <div className={`sidenav-div ${navOpen && 'sidenav-open'}`}>
+          <button onClick={()=>setNavOpen(!navOpen)} className="toggle-nav dark-50 rounded-circle d-flex align-items-center justify-content-start">
+            {
+              navOpen?
+              <FiChevronLeft />:
+              <FiChevronRight />
+            }
+          </button>
         <div className="side-nav d-flex flex-column align-items-start justify-content-start gap-5">
           <Link className="logo-lg" to={"/"}>
             <Icon type="text-logo" fill={"true"} size={130} />

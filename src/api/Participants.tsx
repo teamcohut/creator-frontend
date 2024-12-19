@@ -19,7 +19,7 @@ class Participant {
    * @returns 
    */
   removeParticipant(programId: string, participantId: string) {
-    return this.client.delete(`/program/remove-participant/${programId}/${participantId}`);
+    return this.client.delete(`/program/${programId}/remove-participant/${participantId}`);
   }
 
   inviteGroupParticipant(cohortId: string, track: string, data: any, progress?: any) {

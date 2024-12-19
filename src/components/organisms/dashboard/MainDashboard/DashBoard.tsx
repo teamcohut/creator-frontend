@@ -12,9 +12,11 @@ import TaskModal from "../modals/TaskModal";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { TModal } from "../../../../@types/dashboard.interface";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 
 const DashBoard: FC<IDashboard> = () => {
-  const { activeProgram, activeCohort } = useContext(ProgramContext);
+  const { activeCohort } = useContext(ProgramContext);
+  const { user } = useContext(AuthContext)
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
     open: boolean;
@@ -43,7 +45,7 @@ const DashBoard: FC<IDashboard> = () => {
     <>
       <div>
         <Header
-          title={`${getGreeting()} Admin,`}
+          title={`${getGreeting()} ${user.firstName},`}
           subtitle="A Cohort is a group of individuals learning together through a shared program over a set period"
         >
           {activeCohort.name ? (

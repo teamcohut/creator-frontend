@@ -116,6 +116,12 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                         Send Mail
                       </button>
                       <button
+                        onClick={() => {}}
+                        className="dropdown-item cursor-pointer"
+                      >
+                        Graduate
+                      </button>
+                      <button
                         onClick={() => {
                           setPartipantId(participant._id);
                           handleDropdownAction("remove", participant.email);
