@@ -30,7 +30,6 @@ export const useGetParticipants = () => {
             hasFetched.current = true;
             setIsLoading(false);
         } catch (err: any) {
-            console.error(err);
             // setError("Unable to fetch participants. Please try again.");
             setIsLoading(false);
         }
