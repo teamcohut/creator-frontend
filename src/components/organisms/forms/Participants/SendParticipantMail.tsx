@@ -26,9 +26,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       notification.success({
         message: "Mail sent successfully",
       });
-      setTimeout(() => {
-        setModalOpen(false, "");
-      }, 3000);
+      setModalOpen(false, "");
     },
     onError: (error) => {
       notification.error({
@@ -61,7 +59,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       return;
     }
     console.log(details);
-    
+
     sendMailMutation.mutate(details);
   };
 
@@ -77,7 +75,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
             label="To"
             id="email"
             value={email.join(", ")}
-            onchange={() => {}}
+            onchange={() => { }}
             placeholder="user@email.com"
           />
 
