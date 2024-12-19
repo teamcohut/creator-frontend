@@ -65,7 +65,7 @@
   position: absolute;
   right: -12px;
   top: 52px;
-  z-index: 10 !important;
+  z-index: 4 !important;
 }
 
 .sidenav-div .side-nav {
@@ -336,5 +336,5 @@
 }
 
 .dropdown .dropdown-menu {
-  z-index: 10;
+  z-index: 2;
 }
