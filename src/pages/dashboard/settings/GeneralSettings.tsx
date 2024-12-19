@@ -56,7 +56,7 @@ const GeneralSettings = () => {
         <></>
       </Header>
 
-      <div style={{ maxWidth: "100%", height: "100vh" }}>
+      <div>
         <Tabs
           items={items}
           activeKey={activeKey} // Set the active tab key

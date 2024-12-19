@@ -48,6 +48,8 @@ const ProgramGeneralSettings = () => {
     onSuccess: (data: any) => {
       notification.success({ message: data.data.message });
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
+      
+      
     },
     onError: (error: any) => {
       notification.error({
@@ -72,17 +74,17 @@ const ProgramGeneralSettings = () => {
     {
       label: "Hybrid",
       onClick: () => setFormat("hybrid"),
-      active: format === "hybrid",
+      active: activeProgram?.format === "hybrid",
     },
     {
       label: "Virtual",
       onClick: () => setFormat("virtual"),
-      active: format === "virtual",
+      active: activeProgram?.format === "virtual",
     },
     {
       label: "Physical",
       onClick: () => setFormat("physical"),
-      active: format === "physical",
+      active: activeProgram?.format === "physical",
     },
   ];
   return (

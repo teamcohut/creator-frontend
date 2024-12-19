@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { FiSave, FiTrash2 } from "react-icons/fi";
 import { notification, Select } from "antd";
@@ -22,7 +22,7 @@ const CohortSettings = () => {
     activeCohort?.startDate?.split("T")[0]
   );
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0]);
-  const [tags, setTags] = useState(activeCohort?.tracks)
+  const [tags, setTags] = useState([])
   const [message, setMessage] = useState(activeCohort?.graduationMessage)
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
@@ -30,14 +30,18 @@ const CohortSettings = () => {
   });
 
   const tracks: ITrack[] = activeCohort?.tracks;
+  
+  // useEffect(()=>{
+  //   for (let i = 0; i < tracks.length; i++) {
+      
+  //   }
+  // }, [])
 
-  const handleTagsChange = (value: ITrack[]) => {
+  const handleTagsChange = (value: any) => {
     setTags(value);
+    console.log(value)
   };
 
-  const handleChange = (e: any) => {
-    setCohortName(e.target.value);
-  };
 
   const tagRender = (props: any) => {
     const { label, closable, onClose } = props;
@@ -134,7 +138,7 @@ const CohortSettings = () => {
                   id="cohort-name"
                   placeHolder="Cohut123"
                   label="Cohort Name"
-                  onchange={handleChange}
+                  onchange={(e)=>setCohortName(e.target.value)}
                   defaultValue={activeCohort?.name}
                 />
               </p>
@@ -165,7 +169,7 @@ const CohortSettings = () => {
       style={{ width: "100%" }}
       tagRender={tagRender}
       placeholder="Input and press 'Enter' to add a track or simply select one"
-      defaultValue={activeCohort?.tracks}
+      value={tags}
       onChange={handleTagsChange}
       >
       {tracks.map((option, i) => (
@@ -212,6 +216,7 @@ const CohortSettings = () => {
                   startDate,
                   endDate,
                   graduationMessage: message,
+                  tracks: tags
                 });
               }}
               type="button"
