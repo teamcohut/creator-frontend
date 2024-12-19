@@ -8,7 +8,7 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import { FaFileCsv } from "react-icons/fa";
-import { FiX } from "react-icons/fi";
+import { FiSave, FiX } from "react-icons/fi";
 import Track from "../../../molecules/dashboard/Track";
 
 const UploadParticipants: FC<IUploadParticipants> = ({
@@ -85,13 +85,15 @@ const UploadParticipants: FC<IUploadParticipants> = ({
           gap
           rounded={false}
         />
-        <div className="d-flex flex-row justify-content-between">
-          <FiX className="fs-h3" onClick={closeModal} />
-        </div>
+
         <div className="d-flex flex-column gap-2">
-          <h1 className="manrope-600 primary-950 fs-h2">
-            Upload Cohort Participants
-          </h1>
+          <div className="d-flex flex-row justify-content-between">
+            <h1 className="manrope-600 primary-950 fs-h2">
+              Upload Cohort Participants
+            </h1>
+            <FiX className="fs-h3" onClick={closeModal} />
+          </div>
+
           <span className="manrope-500 dark-700 fs-body">
             Upload a list of your learners based on their respective tracks
           </span>
@@ -125,14 +127,40 @@ const UploadParticipants: FC<IUploadParticipants> = ({
                     detail="Cohort's list of Participants"
                     onchange={(file: any) => handleFileChange(file)}
                   />
+                  {/* <div className="mx-auto"> */}
+                  {/* <Button
+                      children="Submit Track"
+                      action={handleSubmitForm}
+                      type="button"
+                      border
+                      fill={false}
+                      outline='primary'
+                      loading={inviteParticipantsMutation.isPending}
+                    /> */}
+
+
                   <Button
-                    children="Submit Track"
                     action={handleSubmitForm}
-                    type="button"
-                    fill={false}
-                    outline='primary'
                     loading={inviteParticipantsMutation.isPending}
-                  />
+                    type="button"
+                    outline="primary"
+                    fill={false}
+                    // width={120}
+                    gap
+                    border
+                  >
+                    <FiSave />
+                    <span>Save</span>
+                  </Button>
+
+
+
+
+                  {/* </div> */}
+
+
+
+
                 </div>
               )}
 
@@ -165,7 +193,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
             }}
             type="button"
             fill={true}
-            loading={inviteParticipantsMutation.isPending}
+            disabled={inviteParticipantsMutation.isPending}
           />
         </div>
       </form>
