@@ -26,9 +26,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       notification.success({
         message: "Mail sent successfully",
       });
-      setTimeout(() => {
-        setModalOpen(false, "");
-      }, 3000);
+      setModalOpen(false, "");
     },
     onError: (error) => {
       notification.error({

@@ -65,7 +65,7 @@
   position: absolute;
   right: -12px;
   top: 52px;
-  z-index: 10 !important;
+  z-index: 4 !important;
 }
 
 .sidenav-div .side-nav {
