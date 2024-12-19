@@ -15,6 +15,7 @@ import { notification } from "antd";
 import api from "../../../../api/axios";
 import { TModal } from "../../../../@types/dashboard.interface";
 import EditSessionModal from "../modals/EditSessionModal";
+import { formatDate } from "../../../utils/formatDate";
 
 const SessionDetails = () => {
   const { sessionId } = useParams();
@@ -94,7 +95,7 @@ const SessionDetails = () => {
                 <FiClock /> {session?.start} - {session?.end}
               </p>
               <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
-                <FiCalendar /> {session?.date}
+                <FiCalendar /> {formatDate(session?.date)}
               </p>
               {session?.location.name === "Physical" ? (
                 <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">

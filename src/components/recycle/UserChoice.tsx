@@ -14,7 +14,6 @@ const UserChoice: FC<IUserChoice> = ({ onSubmit }) => {
     }
 
     const handleRadioChange = (e: string) => {
-        console.log(e);
         setSelected(e)
     }
 

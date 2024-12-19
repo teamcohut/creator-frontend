@@ -1,12 +1,13 @@
 import { parse, set } from "date-fns";
 
 
-function convertTimeToDate(timeInputValue: string) {
+function convertTimeToDate(timeInputValue: string, dateInputValue: string) {
     // 1. Parse the time value
     const parsedTime = parse(timeInputValue, "HH:mm", new Date());
 
     // 2. Optionally, set the date to today's date
-    const today = new Date();
+    const today = new Date(dateInputValue);
+
     const fullDateTime = set(parsedTime, {
         year: today.getFullYear(),
         month: today.getMonth(),

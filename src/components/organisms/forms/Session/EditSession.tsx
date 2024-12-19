@@ -44,7 +44,6 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
       notification.success({ message: "Session details updated successfully!" });
     },
     onError: (error: any) => {
-      console.error(error);
       notification.error({ message: "Failed to update. Please try again." });
     },
   });

@@ -40,7 +40,6 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
             navigate('participant')
         },
         onError: (error: any) => {
-            console.error(error);
             notification.error({ message: "Failed to send invitation. Please try again." });
         },
     });
@@ -71,7 +70,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
         if (formData.trackId) {
             payload.track = formData.trackId;
         }
-        
+
 
         inviteIndividualMutation.mutate(payload);
     };

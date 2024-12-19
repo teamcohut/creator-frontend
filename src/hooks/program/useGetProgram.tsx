@@ -17,7 +17,6 @@ export const useGetProgram = () => {
       dispatch({ type: "ACTIVE_PROGRAM", payload: response.data.data[0] });
       setIsLoading(false);
     } catch (error: any) {
-      console.error(error);
       setError(error.message);
       setIsLoading(false);
     }

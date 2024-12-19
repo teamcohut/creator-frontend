@@ -23,7 +23,6 @@ export const useGetCohorts = () => {
       });
       setIsLoading(false);
     } catch (error: any) {
-      console.error(error);
       setError(error.message);
       setIsLoading(false);
     }

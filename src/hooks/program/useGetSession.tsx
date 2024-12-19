@@ -27,7 +27,6 @@ export const useGetSession = () => {
             hasFetched.current = true;
             setIsLoading(false);
         } catch (error: any) {
-            console.error(error);
             // setError(
             //     "Something went wrong while fetching sessions. Please try again later."
             // );
