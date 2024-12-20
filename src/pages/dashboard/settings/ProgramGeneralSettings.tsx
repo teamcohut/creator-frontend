@@ -48,6 +48,8 @@ const ProgramGeneralSettings = () => {
     onSuccess: (data: any) => {
       notification.success({ message: data.data.message });
       dispatch({ type: "ACTIVE_PROGRAM", payload: data.data.data });
+      
+      
     },
     onError: (error: any) => {
       notification.error({
@@ -72,17 +74,17 @@ const ProgramGeneralSettings = () => {
     {
       label: "Hybrid",
       onClick: () => setFormat("hybrid"),
-      active: format === "hybrid",
+      active: activeProgram?.format === "hybrid",
     },
     {
       label: "Virtual",
       onClick: () => setFormat("virtual"),
-      active: format === "virtual",
+      active: activeProgram?.format === "virtual",
     },
     {
       label: "Physical",
       onClick: () => setFormat("physical"),
-      active: format === "physical",
+      active: activeProgram?.format === "physical",
     },
   ];
   return (
@@ -147,7 +149,7 @@ const ProgramGeneralSettings = () => {
           <TextInput2
             id="program-title"
             label="Program Title"
-            value={title}
+            defaultValue={activeProgram.title}
             onchange={(e) => setTitle(e.target.value)}
           />
 
@@ -158,7 +160,8 @@ const ProgramGeneralSettings = () => {
             label="Description"
             placeHolder=""
             onchange={(e) => setDescription(e.target.value)}
-            value={description}
+            defaultValue={activeProgram.description}
+
           />
 
           <div className="pb-5"></div>

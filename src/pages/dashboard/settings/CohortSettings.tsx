@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { FiSave, FiTrash2 } from "react-icons/fi";
-import { notification } from "antd";
+import { notification, Select } from "antd";
 import api from "../../../api/axios";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
@@ -11,6 +11,8 @@ import DateInput2 from "../../../components/atoms/inputs/DateInput2";
 import TextAreaInput from "../../../components/atoms/inputs/TextareaInput";
 import { TModal } from "../../../@types/dashboard.interface";
 import SetupCohort from "../../../components/organisms/dashboard/SetupProgram/SetupCohort";
+import { Option } from "antd/es/mentions";
+import { ITrack } from "../../../@types/settings.interface";
 
 const CohortSettings = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,53 +22,58 @@ const CohortSettings = () => {
     activeCohort?.startDate?.split("T")[0]
   );
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0]);
+  const [tags, setTags] = useState([])
+  const [message, setMessage] = useState(activeCohort?.graduationMessage)
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
     open: boolean;
   });
 
-  // const tracks: ITrack[] = activeCohort?.tracks;
+  const tracks: ITrack[] = activeCohort?.tracks;
+  
+  // useEffect(()=>{
+  //   for (let i = 0; i < tracks.length; i++) {
+      
+  //   }
+  // }, [])
 
-  // const handleTagsChange = (value: ITrack[]) => {
-  //   setTags(value);
-  //   console.log(tags)
-  // };
-
-  const handleChange = (e: any) => {
-    setCohortName(e.target.value);
+  const handleTagsChange = (value: any) => {
+    setTags(value);
+    console.log(value)
   };
 
-  // const tagRender = (props: CustomTagProps) => {
-  //   const { label, closable, onClose } = props;
 
-  //   return (
-  //     <span
-  //       style={{
-  //         borderRadius: "20px",
-  //         backgroundColor: "#ECF1FF",
-  //         color: "#888888",
-  //         padding: "4px 12px",
-  //         display: "inline-flex",
-  //         alignItems: "center",
-  //         margin: "8px",
-  //       }}
-  //     >
-  //       {label}
-  //       {closable && (
-  //         <span
-  //           onClick={onClose} // Call the default onClose to remove the tag
-  //           style={{
-  //             marginLeft: "8px",
-  //             cursor: "pointer",
-  //             fontWeight: "bold",
-  //           }}
-  //         >
-  //           &#x78;
-  //         </span>
-  //       )}
-  //     </span>
-  //   );
-  // };
+  const tagRender = (props: any) => {
+    const { label, closable, onClose } = props;
+
+    return (
+      <span
+        style={{
+          borderRadius: "20px",
+          backgroundColor: "#ECF1FF",
+          color: "#888888",
+          padding: "4px 12px",
+          display: "inline-flex",
+          alignItems: "center",
+          margin: "8px",
+        }}
+      >
+        {label}
+        {closable && (
+          <span
+            onClick={onClose} // Call the default onClose to remove the tag
+            style={{
+              marginLeft: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            &#x78;
+          </span>
+        )}
+      </span>
+    );
+  };
 
   const updateCohortInfoMutation = useMutation({
     mutationFn: (payload: any) =>
@@ -131,8 +138,8 @@ const CohortSettings = () => {
                   id="cohort-name"
                   placeHolder="Cohut123"
                   label="Cohort Name"
-                  onchange={handleChange}
-                  value={cohortName}
+                  onchange={(e)=>setCohortName(e.target.value)}
+                  defaultValue={activeCohort?.name}
                 />
               </p>
             </div>
@@ -142,7 +149,7 @@ const CohortSettings = () => {
                 onchange={(e) => setStartDate(e.target.value)}
                 placeHolder=""
                 label="Set Cohort Duration"
-                value={startDate}
+                value={activeCohort?.startDate?.split("T")[0]}
               />
               <h3 className="dark-700">-</h3>
               <DateInput2
@@ -151,11 +158,11 @@ const CohortSettings = () => {
                   setEndDate(e.target.value);
                 }}
                 placeHolder="mm/dd/yy"
-                value={endDate}
+                value={activeCohort?.endDate?.split("T")[0]}
               />
             </div>
 
-            {/* <span className='fs-body manrope-600 primary-950'>Track</span>
+            <span className='fs-body manrope-600 primary-950'>Track</span>
 
       <Select
       mode="tags"
@@ -171,7 +178,7 @@ const CohortSettings = () => {
         </Option>
       ))}
     </Select>
-    <div className='pb-4'></div> */}
+    <div className='pb-4'></div>
 
             {/* <TextInput2 id='link' 
           label='Link to Generate Certificate' 
@@ -188,8 +195,10 @@ const CohortSettings = () => {
               id="message"
               placeHolder="Enter Text"
               label="Graduation Message"
-              value={activeCohort.graduationMessage}
-              onchange={() => {}}
+              defaultValue={activeCohort.graduationMessage}
+              onchange={(e) => {
+                setMessage(e.target.value);
+              }}
             />
 
             <span className="fs-small manrope-500 primary-700">
@@ -206,6 +215,8 @@ const CohortSettings = () => {
                   name: cohortName,
                   startDate,
                   endDate,
+                  graduationMessage: message,
+                  tracks: tags
                 });
               }}
               type="button"

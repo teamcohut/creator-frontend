@@ -1,6 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Skeleton } from "antd";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../api/axios";
@@ -8,9 +7,10 @@ import { TStatus } from "../../../@types/dashboard.interface";
 import SideNav from "../../organisms/dashboard/SideNav";
 import "./index.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
+import ErrorUI from "../../../helpers/ErrorUI";
 
 const DashboardTemplate: FC = () => {
-  const { dispatch } = useContext(ProgramContext);
+  const { dispatch, activeCohort } = useContext(ProgramContext);
   const { dispatch: userDispatch } = useContext(AuthContext);
   const [status, setStatus] = useState<TStatus>("pending");
 
@@ -26,7 +26,7 @@ const DashboardTemplate: FC = () => {
         dispatch({ type: "ACTIVE_PROGRAM", payload: response.data.data[0] });
       }
       if (
-        response.data.data?.length > 0 &&
+        !activeCohort._id && response.data.data?.length > 0 &&
         response.data.data[0]?.cohorts.length > 0
       ) {
         dispatch({
@@ -70,13 +70,7 @@ const DashboardTemplate: FC = () => {
                 <div className="spinner-border p-3 primary-700"></div>
               </div>
             ) : isError ? (
-              <div>
-                <div>
-                  <h3>Err...</h3>
-                  <p>Something went wrong ...</p>
-                </div>
-                <Skeleton loading avatar active paragraph title />
-              </div>
+              <ErrorUI />
             ) : (
               <Outlet />
             )}

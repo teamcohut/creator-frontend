@@ -19,11 +19,6 @@ const VerifyMail = () => {
     queryFn: async () => {
       const response = await api.auth.activateAccount(id);
 
-      if (!response.data.error) {
-        setTimeout(() => {
-          navigate("/login");
-        }, 60000);
-      }
       return response;
     },
   });

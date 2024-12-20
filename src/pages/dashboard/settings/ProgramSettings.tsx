@@ -36,7 +36,7 @@ const ProgramSettings = () => {
   return (
     <>
       <div className="pb-4"></div>
-      <div style={{ height: "100vh" }}>
+      <div>
         <Tabs
           items={items}
           activeKey={activeKey} // Controlled active tab key

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiAlertCircle, FiMoreVertical } from "react-icons/fi";
 import StatusBadge from "../../../atoms/dashboard/StatusBadge";
 import { ITable } from "../../../../@types/participants.interface";
@@ -14,10 +14,26 @@ import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import SendParticipantMail from "../../forms/Participants/SendParticipantMail";
 import { FormatDate } from "../../../utils/FormatDateTime";
 
+
+interface IParticipant {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  trackTitle: string;
+  isActive: boolean;
+  createdAt: string;
+  title?: string; // Assuming these are optional for search
+  subtitle?: string;
+}
+
 const Table: React.FC<ITable> = ({ header, body, refresh }) => {
   const [modal, setModal] = useState<IModal>({ open: false, modal: "" });
   const [email, setEmail] = useState("");
   const [partipantId, setPartipantId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  // const [filteredSessions, setFilteredSessions] = useState([]);
+  const [filteredParticipants, setFilteredParticipants] = useState<IParticipant[]>([]);
   const { activeProgram } = useContext(ProgramContext);
 
   const handleDropdownAction = (action: TModal, email: string) => {
@@ -52,15 +68,29 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
     await removeMutation.mutate();
   };
 
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    setFilteredParticipants(
+      body.filter(
+        (participant: IParticipant) =>
+          participant.title?.toLowerCase().includes(lowerCaseQuery) ||
+          participant.subtitle?.toLowerCase().includes(lowerCaseQuery) ||
+          participant.firstName.toLowerCase().includes(lowerCaseQuery) ||
+          participant.lastName.toLowerCase().includes(lowerCaseQuery)
+      )
+    );
+  }, [body, searchQuery]);
+
+
   return (
     <>
-      <div className="p-table w-100">
+      <div className="p-table w-100 h-100 pb-5">
         <div className="d-flex align-items-center justify-content-between py-3">
           <div className="d-flex align-items-center gap-2">
             <h4 className="manrope-600 fs-h4 primary-950 align-content-center">
               Participants
               <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-                {body?.length}
+                {filteredParticipants?.length}
               </span>
             </h4>
           </div>
@@ -70,7 +100,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
               id="session"
               label=""
               placeHolder="Search"
-              onchange={(e) => { }}
+              onchange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
         </div>
@@ -85,7 +115,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
           </thead>
 
           <tbody className="fs-body manrope-500 dark-700">
-            {body?.map((participant, idx) => (
+            {filteredParticipants?.map((participant, idx) => (
               <tr key={idx}>
                 <td>
                   {participant.firstName} {participant.lastName}
@@ -116,7 +146,10 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                         Send Mail
                       </button>
                       <button
-                        onClick={() => { }}
+                        onClick={() => {
+                          setPartipantId(participant._id);
+                          handleDropdownAction("graduate", participant.email);
+                        }}
                         className="dropdown-item cursor-pointer"
                       >
                         Graduate
@@ -164,6 +197,31 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                 />
               </div>
             </SettingsStatusCard>
+          ) : modal.modal === "graduate" ? (
+            <SettingsStatusCard
+              title="Confirm"
+              description={`Are you sure you want to graduate ${email}? `}
+              icon={<FiAlertCircle className="warning-500 fs-icon" />}
+            >
+              <div className="d-flex gap-4">
+                <span className="manrope-500 fs-body dark-700">You will not be able to undo this action.</span>
+                <Button
+                  action={removeParticipant}
+                  loading={removeMutation.isPending}
+                  children="Remove Participant"
+                  fill={false}
+                  type="button"
+                  border
+                  outline="primary"
+                />
+                <Button
+                  action={() => setModal({ open: false, modal: "" })}
+                  children="Cancel"
+                  fill
+                  type="button"
+                />
+              </div>
+            </SettingsStatusCard>
           ) : modal.modal === "mail" ? (
             <SendParticipantMail
               email={email.split(",")}
@@ -182,6 +240,6 @@ interface IModal {
   open: boolean;
   modal: TModal;
 }
-type TModal = "remove" | "mail" | "";
+type TModal = "remove" | "mail" | "graduate" | "";
 
 export default Table;

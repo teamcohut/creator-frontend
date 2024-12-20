@@ -7,7 +7,6 @@ import { ISetupModal } from '../../../../@types/dashboard.interface';
 import { useMutation } from '@tanstack/react-query';
 import api from '../../../../api/axios';
 import { notification } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 import { useProgramContext } from '../../../../hooks/program/useProgramContext';
 
@@ -27,14 +26,16 @@ const DangerDeleteProgram: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     borderColor: 'var(--primary-800) !important',
   } : {};
 
-  const navigate = useNavigate()
+  
 
   const deleteProgramInfoMutation = useMutation({
     mutationFn: () => api.program.deleteProgram(activeProgram.id),
     onSuccess: (data: any) => {
       notification.success({message: "Program deleted"})
       dispatch({type: 'ACTIVE_PROGRAM', payload: {}})
-      navigate("/")
+      dispatch({type: 'ACTIVE_COHORT', payload: {}})
+      dispatch({type: 'COHORTS', payload: []})
+      handleClose()
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";

@@ -22,7 +22,7 @@ const ParticipantsPage: React.FC = () => {
   };
 
   const { isLoading, isError, data, refetch } = useQuery({
-    queryKey: ["participants"],
+    queryKey: ["participants", activeCohort],
     queryFn: () => api.participant.getParticipants(activeCohort._id),
     enabled: !!activeCohort._id,
   });

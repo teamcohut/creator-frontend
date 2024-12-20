@@ -3,7 +3,7 @@ import { IDateInput } from "./types";
 import "../style.css";
 
 const DateInput2: FC<IDateInput> = (props) => {
-  const { id, label, icon, placeHolder, onchange, value } = props;
+  const { id, label, icon, placeHolder, onchange, value, defaultValue } = props;
   const [dateValue, setDateValue] = useState(value || "");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,8 @@ const DateInput2: FC<IDateInput> = (props) => {
           className="input bg-transparent w-100 h-100 border-none"
           type="date"
           placeholder={placeHolder}
-          value={dateValue} 
+          value={dateValue}
+          defaultValue={defaultValue} 
           onChange={handleChange}
         />
       </div>
