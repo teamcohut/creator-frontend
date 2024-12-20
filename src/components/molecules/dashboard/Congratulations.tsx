@@ -29,8 +29,7 @@ const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
                     <Button children='Onboard New Cohort' type='button' action={() => setModal((prev) => ({ open: true, name: "cohort" }))} fill={true} />
                 </div>
                 <div>
-                    <p>A Cohort is a group of individuals learning together through a shared program over a set period
-                        <span>Onboard yours today</span>
+                    <p>A Cohort is a group of individuals learning together through a shared program over a set period. <span> Onboard yours today</span>
                     </p>
                 </div>
             </div>
