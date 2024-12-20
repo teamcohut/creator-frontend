@@ -16,7 +16,7 @@ const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
 
     return (
         <>
-            <div className='form bg-secondary-450 d-flex flex-column align-items-center gap-4 text-center rounded-5 mx-auto'>
+            <div className='form d-flex flex-column align-items-center gap-4 text-center rounded-5 mx-auto'>
 
                 <div className="d-flex flex-column align-items-center gap-2 w-75 head">
                     {<FiBookOpen className='fiBookOpen' />}
@@ -29,8 +29,7 @@ const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
                     <Button children='Onboard New Cohort' type='button' action={() => setModal((prev) => ({ open: true, name: "cohort" }))} fill={true} />
                 </div>
                 <div>
-                    <p>A Cohort is a group of individuals learning together through a shared program over a set period
-                        <span>Onboard yours today</span>
+                    <p>A Cohort is a group of individuals learning together through a shared program over a set period. <span> Onboard yours today</span>
                     </p>
                 </div>
             </div>

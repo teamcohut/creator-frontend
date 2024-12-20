@@ -65,7 +65,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       api.success({
         message: "Successful",
       });
-      
+
     },
   });
 
@@ -137,6 +137,12 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
           />
 
           <div className="d-flex align-items-end gap-4 w-75">
+            <DateInput
+              label="Task Due"
+              id="dueDate"
+              onchange={(e) => handleInputChange(e.target.name, e.target.value)}
+              placeHolder=""
+            />
             <div className="">
               <TimeInput
                 id="dueTime"
@@ -144,14 +150,9 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
                   handleInputChange(e.target.name, e.target.value)
                 }
                 placeHolder=""
-                label="Task Due"
               />
             </div>
-            <DateInput
-              id="dueDate"
-              onchange={(e) => handleInputChange(e.target.name, e.target.value)}
-              placeHolder=""
-            />
+
           </div>
 
           <div>
@@ -180,7 +181,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
         <div className="d-flex flex-column align-items-center gap-3">
           <Button
             children="Save"
-            action={() => {}}
+            action={() => { }}
             type="submit"
             fill={true}
             loading={taskMutation.isPending}
