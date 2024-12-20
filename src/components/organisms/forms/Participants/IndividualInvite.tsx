@@ -15,9 +15,10 @@ interface Track {
 interface IndividualInviteProps {
     tracks: Track[];
     cohortId: string;
+    closeModal: any;
 }
 
-const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId }) => {
+const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId, closeModal }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -37,7 +38,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId })
                 email: '',
                 trackId: '',
             });
-            navigate('participant')
+            closeModal();
         },
         onError: (error: any) => {
             notification.error({ message: "Failed to send invitation. Please try again." });

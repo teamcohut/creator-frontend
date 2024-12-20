@@ -40,17 +40,15 @@ const InviteParticipants: FC<ParticipantModal> = ({ closeModal }) => {
 
         <div className="d-flex gap-3 mt-4">
           <p
-            className={`btn ${
-              activeTab === "individual" ? "btn-primary" : "btn-outline-primary"
-            }`}
+            className={`btn ${activeTab === "individual" ? "btn-primary" : "btn-outline-primary"
+              }`}
             onClick={() => handleTabClick("individual")}
           >
             + Add Individual
           </p>
           <p
-            className={`btn ${
-              activeTab === "group" ? "btn-primary" : "btn-outline-primary"
-            }`}
+            className={`btn ${activeTab === "group" ? "btn-primary" : "btn-outline-primary"
+              }`}
             onClick={() => handleTabClick("group")}
           >
             + Add Group
@@ -60,9 +58,9 @@ const InviteParticipants: FC<ParticipantModal> = ({ closeModal }) => {
         {/* Conditional Rendering of Forms */}
         <div className="">
           {activeTab === "individual" ? (
-            <IndividualInvite tracks={tracks} cohortId={cohortId} />
+            <IndividualInvite tracks={tracks} cohortId={cohortId} closeModal={closeModal} />
           ) : (
-            <GroupInvite tracks={tracks} cohortId={cohortId} />
+            <GroupInvite tracks={tracks} cohortId={cohortId} closeModal={closeModal} />
           )}
         </div>
 

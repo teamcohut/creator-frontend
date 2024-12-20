@@ -14,9 +14,10 @@ interface Track {
 interface GroupInviteProps {
     tracks: Track[];
     cohortId: string;
+    closeModal: any;
 }
 
-const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
+const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId, closeModal }) => {
     const [selectedTrackId, setSelectedTrackId] = useState('');
     const [csvFile, setCsvFile] = useState<File | null>(null);
 
@@ -28,6 +29,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId }) => {
 
             setSelectedTrackId('');
             setCsvFile(null);
+            closeModal();
         },
         onError: (error: any) => {
             notification.error({ message: "Failed to invite participants. Please try again." });
