@@ -57,7 +57,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
       <div className="p-table w-100 h-100 pb-5">
         <div className="d-flex align-items-center justify-content-between py-3">
           <div className="d-flex align-items-center gap-2">
-            <h4 className="manrope-600 fs-h4 primary-950 align-content-center">
+            <h4 className="d-flex align-items-center gap-2 manrope-600 fs-h4 primary-950 align-content-center">
               Participants
               <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
                 {body?.length}
@@ -115,7 +115,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                       >
                         Send Mail
                       </button>
-                      <button
+                      {/* <button
                         onClick={() => {
                           setPartipantId(participant._id);
                           handleDropdownAction("graduate", participant.email);
@@ -123,7 +123,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
                         className="dropdown-item cursor-pointer"
                       >
                         Graduate
-                      </button>
+                      </button> */}
                       <button
                         onClick={() => {
                           setPartipantId(participant._id);
@@ -170,11 +170,10 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
           ) : modal.modal === "graduate" ? (
             <SettingsStatusCard
               title="Confirm"
-              description={`Are you sure you want to graduate ${email}? `}
+              description={`Are you sure you want to graduate ${email}? You will not be able to undo this action.`}
               icon={<FiAlertCircle className="warning-500 fs-icon" />}
             >
               <div className="d-flex gap-4">
-                <span className="manrope-500 fs-body dark-700">You will not be able to undo this action.</span>
                 <Button
                   action={removeParticipant}
                   loading={removeMutation.isPending}
