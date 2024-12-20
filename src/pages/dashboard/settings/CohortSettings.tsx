@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { FiSave, FiTrash2 } from "react-icons/fi";
-import { notification, Select } from "antd";
+import { notification } from "antd";
 import api from "../../../api/axios";
 import { ProgramContext } from "../../../context/programs/ProgramContext";
 import { TextInput2 } from "../../../components/atoms/inputs/TextInput";
@@ -11,7 +11,6 @@ import DateInput2 from "../../../components/atoms/inputs/DateInput2";
 import TextAreaInput from "../../../components/atoms/inputs/TextareaInput";
 import { TModal } from "../../../@types/dashboard.interface";
 import SetupCohort from "../../../components/organisms/dashboard/SetupProgram/SetupCohort";
-import { Option } from "antd/es/mentions";
 import { ITrack } from "../../../@types/settings.interface";
 
 const CohortSettings = () => {
@@ -22,7 +21,7 @@ const CohortSettings = () => {
     activeCohort?.startDate?.split("T")[0]
   );
   const [endDate, setEndDate] = useState(activeCohort?.endDate?.split("T")[0]);
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState<string[]>([])
   const [message, setMessage] = useState(activeCohort?.graduationMessage)
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
@@ -30,50 +29,48 @@ const CohortSettings = () => {
   });
 
   const tracks: ITrack[] = activeCohort?.tracks;
-  
-  // useEffect(()=>{
-  //   for (let i = 0; i < tracks.length; i++) {
-      
-  //   }
-  // }, [])
 
-  const handleTagsChange = (value: any) => {
-    setTags(value);
-    console.log(value)
-  };
+  useEffect(() => {
+    tracks?.map((el) => setTags([...tags, el.title]))
+  }, [activeCohort])
+
+  // const handleTagsChange = (value: any) => {
+  //   setTags(value);
+  //   console.log(value)
+  // };
 
 
-  const tagRender = (props: any) => {
-    const { label, closable, onClose } = props;
+  // const tagRender = (props: any) => {
+  //   const { label, closable, onClose } = props;
 
-    return (
-      <span
-        style={{
-          borderRadius: "20px",
-          backgroundColor: "#ECF1FF",
-          color: "#888888",
-          padding: "4px 12px",
-          display: "inline-flex",
-          alignItems: "center",
-          margin: "8px",
-        }}
-      >
-        {label}
-        {closable && (
-          <span
-            onClick={onClose} // Call the default onClose to remove the tag
-            style={{
-              marginLeft: "8px",
-              cursor: "pointer",
-              fontWeight: "bold",
-            }}
-          >
-            &#x78;
-          </span>
-        )}
-      </span>
-    );
-  };
+  //   return (
+  //     <span
+  //       style={{
+  //         borderRadius: "20px",
+  //         backgroundColor: "#ECF1FF",
+  //         color: "#888888",
+  //         padding: "4px 12px",
+  //         display: "inline-flex",
+  //         alignItems: "center",
+  //         margin: "8px",
+  //       }}
+  //     >
+  //       {label}
+  //       {closable && (
+  //         <span
+  //           onClick={onClose} // Call the default onClose to remove the tag
+  //           style={{
+  //             marginLeft: "8px",
+  //             cursor: "pointer",
+  //             fontWeight: "bold",
+  //           }}
+  //         >
+  //           &#x78;
+  //         </span>
+  //       )}
+  //     </span>
+  //   );
+  // };
 
   const updateCohortInfoMutation = useMutation({
     mutationFn: (payload: any) =>
@@ -122,9 +119,9 @@ const CohortSettings = () => {
 
   const hoverStyle = isHovered
     ? {
-        color: "var(--primary-800) !important",
-        borderColor: "var(--primary-800) !important",
-      }
+      color: "var(--primary-800) !important",
+      borderColor: "var(--primary-800) !important",
+    }
     : {};
 
   return (
@@ -133,15 +130,15 @@ const CohortSettings = () => {
         <div>
           <div className="w-75">
             <div className="d-flex gap-2">
-              <p className="d-flex justify-content-center align-items-center w-45">
+              <div className="d-flex justify-content-center align-items-center w-45">
                 <TextInput2
                   id="cohort-name"
                   placeHolder="Cohut123"
                   label="Cohort Name"
-                  onchange={(e)=>setCohortName(e.target.value)}
+                  onchange={(e) => setCohortName(e.target.value)}
                   defaultValue={activeCohort?.name}
                 />
-              </p>
+              </div>
             </div>
             <div className="d-flex flex-row align-items-end gap-3 pt-4 pb-4">
               <DateInput2
@@ -162,23 +159,23 @@ const CohortSettings = () => {
               />
             </div>
 
-            <span className='fs-body manrope-600 primary-950'>Track</span>
+            {/* <span className='fs-body manrope-600 primary-950'>Track</span>
 
-      <Select
-      mode="tags"
-      style={{ width: "100%" }}
-      tagRender={tagRender}
-      placeholder="Input and press 'Enter' to add a track or simply select one"
-      value={tags}
-      onChange={handleTagsChange}
-      >
-      {tracks.map((option, i) => (
-        <Option value={option.title}>
-          {option.title}
-        </Option>
-      ))}
-    </Select>
-    <div className='pb-4'></div>
+            <Select
+              mode="tags"
+              style={{ width: "100%" }}
+              tagRender={tagRender}
+              placeholder="Input and press 'Enter' to add a track or simply select one"
+              value={tags}
+              onChange={handleTagsChange}
+            >
+              {tracks.map((option, i) => (
+                <Option value={option.title}>
+                  {option.title}
+                </Option>
+              ))}
+            </Select>
+            <div className='pb-4'></div> */}
 
             {/* <TextInput2 id='link' 
           label='Link to Generate Certificate' 

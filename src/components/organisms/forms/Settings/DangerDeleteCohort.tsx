@@ -32,6 +32,7 @@ const DangerDeleteCohort: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       notification.success({message: "Cohort deleted"})
       dispatch({type: 'ACTIVE_COHORT', payload: {}})
       handleClose()
+      window.location.reload()
     },
     onError: (error: any) => {
       let errorMessage = "An unexpected error occurred.";
