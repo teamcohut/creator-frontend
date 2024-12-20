@@ -17,7 +17,7 @@ const SessionList = () => {
   const trackId = activeCohort.tracks?.[0]?.id;
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["session"],
+    queryKey: ["session", activeCohort],
     queryFn: () => api.session.getSession(activeCohort._id, trackId),
     enabled: !!activeCohort._id,
   });

@@ -35,14 +35,14 @@ const CohortsDropdown = () => {
           <span className="program-name d-flex">
             {
               activeProgram.logo ?
-              <img
-                className="rounded-circle"
-                src={activeProgram.logo}
-                width={36}
-                height={36}
-                alt=""
-              /> :
-              <h3 className="dark-700 bg-secondary rounded-circle d-flex align-items-center justify-content-center" style={{'width': '36px', 'height': '36px'}}>{activeProgram.title.charAt(0)}</h3>
+                <img
+                  className="rounded-circle"
+                  src={activeProgram.logo}
+                  width={36}
+                  height={36}
+                  alt=""
+                /> :
+                <h3 className="dark-700 bg-secondary rounded-circle d-flex align-items-center justify-content-center" style={{ 'width': '36px', 'height': '36px' }}>{activeProgram.title.charAt(0)}</h3>
             }
             <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
               {activeProgram.title}
@@ -60,13 +60,15 @@ const CohortsDropdown = () => {
             }`}
         >
           <div className="d-flex flex-column gap-3 py-2">
-            {activeProgram.cohorts?.map((el: any, i: number) => (
-              <button key={i} onClick={() => setActiveCohort(el)} className="border-none bg-transparent other-program d-flex align-items-center px-3 py-2">
-                <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
-                  {el.name}
-                </span>
-              </button>
-            ))}
+            {activeProgram.cohorts?.map((el: any, i: number) => {
+              return (
+                <button key={i} onClick={() => setActiveCohort(el)} className="border-none bg-transparent other-program d-flex align-items-center px-3 py-2">
+                  <span className="manrope-500 fs-body primary-950 d-flex flex-column align-items-start">
+                    {el.name}
+                  </span>
+                </button>
+              )
+            })}
             <button
               onClick={() => openModal("cohort")}
               className="border-none other-program d-flex align-items-center px-3 py-2 fs-body primary-700"

@@ -10,7 +10,7 @@ import { AuthContext } from "../../../context/auth/AuthContext";
 import ErrorUI from "../../../helpers/ErrorUI";
 
 const DashboardTemplate: FC = () => {
-  const { dispatch } = useContext(ProgramContext);
+  const { dispatch, activeCohort } = useContext(ProgramContext);
   const { dispatch: userDispatch } = useContext(AuthContext);
   const [status, setStatus] = useState<TStatus>("pending");
 
@@ -26,7 +26,7 @@ const DashboardTemplate: FC = () => {
         dispatch({ type: "ACTIVE_PROGRAM", payload: response.data.data[0] });
       }
       if (
-        response.data.data?.length > 0 &&
+        !activeCohort._id && response.data.data?.length > 0 &&
         response.data.data[0]?.cohorts.length > 0
       ) {
         dispatch({
