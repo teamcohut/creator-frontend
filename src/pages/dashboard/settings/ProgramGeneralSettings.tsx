@@ -11,7 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { TModal } from "../../../@types/dashboard.interface";
 import GroupButton from "../../../components/atoms/Button/GroupButton";
 import EditProgramImagesModal from "../../../components/organisms/dashboard/modals/EditProgramImagesModal";
-import SetupProgram from "../../../components/organisms/dashboard/SetupProgram/SetupProgram";
+import SetupCohort from "../../../components/organisms/dashboard/SetupProgram/SetupCohort";
 
 const ProgramGeneralSettings = () => {
   const { dispatch, activeProgram } = useContext(ProgramContext);
@@ -217,7 +217,7 @@ const ProgramGeneralSettings = () => {
           )}
         </div>
       ) : (
-        <SetupProgram />
+        <SetupCohort/>
       )}
     </>
   );
