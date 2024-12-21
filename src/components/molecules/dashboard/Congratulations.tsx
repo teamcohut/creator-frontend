@@ -16,7 +16,7 @@ const Congratulations: FC<ICongratulations> = ({ clear, openModal }) => {
 
     return (
         <>
-            <div className='form bg-secondary-450 d-flex flex-column align-items-center gap-4 text-center rounded-5 mx-auto'>
+            <div className='form d-flex flex-column align-items-center gap-4 text-center rounded-5 mx-auto'>
 
                 <div className="d-flex flex-column align-items-center gap-2 w-75 head">
                     {<FiBookOpen className='fiBookOpen' />}

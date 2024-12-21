@@ -21,7 +21,16 @@ const TimeInput: React.FC<ITimeInput> = (props) => {
     if (onchange) onchange(e);
   };
 
-  const isPlaceholderVisible = !time; // Show placeholder if no time is selected
+  const handleDivClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const inputElement = e.currentTarget.querySelector("input");
+    if (inputElement) {
+      (inputElement as HTMLInputElement).showPicker?.();
+      inputElement.focus();
+    }
+  };
+
+  const isPlaceholderVisible = !time;
 
   return (
     <div
@@ -33,8 +42,12 @@ const TimeInput: React.FC<ITimeInput> = (props) => {
           {label}
         </label>
       )}
-      <div className="input-div d-flex align-items-center gap-2 rounded-pill px-3 position-relative">
-        {icon && icon}
+      <div
+        className="input-div d-flex align-items-center gap-2 rounded-pill px-3 position-relative"
+        onClick={handleDivClick}
+        style={{ cursor: "pointer" }}
+      >
+        {icon && <span className="icon-container">{icon}</span>}
         {isPlaceholderVisible && (
           <span className="placeholder-text position-absolute">
             {placeHolder}
@@ -47,7 +60,6 @@ const TimeInput: React.FC<ITimeInput> = (props) => {
           type="time"
           value={time}
           onChange={handleChange}
-          style={{ caretColor: "transparent" }} // Hide caret when placeholder is visible
         />
       </div>
     </div>
@@ -55,4 +67,3 @@ const TimeInput: React.FC<ITimeInput> = (props) => {
 };
 
 export default TimeInput;
-
