@@ -10,6 +10,10 @@ class Task {
     createTask(task: ITask) {
         return this.client.post('/task', task)
     }
+
+    getAllTask(cohortId: any) {
+        return this.client.get(`/task?cohortId=${cohortId}`)
+    }
 }
 
 export default Task

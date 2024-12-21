@@ -3,6 +3,7 @@ import PercentageBar from '../../atoms/dashboard/PercentageBar';
 import '../style.css';
 import { IinfoCardProps } from '../../../@types/dashboard.interface';
 import { formatDate } from '../../utils/formatDate';
+import { FiArrowRight } from 'react-icons/fi';
 
 
 const InfoCard: React.FC<IinfoCardProps> = ({
@@ -18,9 +19,9 @@ const InfoCard: React.FC<IinfoCardProps> = ({
           {infoCardIcon}
         </div>
         <div className="card-info">
-          <h2 className="manrope-700 secondary-200 fs-body">{title}</h2>
+          <h2 className="manrope-700 primary-950 fs-body">{title}</h2>
           <div className="d-flex flex-row justify-content-between gap-3">
-            <p className="manrope-400 primary-500">
+            <p className="manrope-400 fs-small primary-500">
               {subtitle}
             </p>
           </div>
@@ -28,7 +29,7 @@ const InfoCard: React.FC<IinfoCardProps> = ({
       </div>
 
       <div className="d-flex flex-column align-items-start">
-        <div className="d-flex align-items-center">
+        <div className="">
           {isProgressBar ? (
             <PercentageBar progress={progress} />
           ) : (
@@ -36,7 +37,7 @@ const InfoCard: React.FC<IinfoCardProps> = ({
           )}
         </div>
         <button className="view-details">
-          <span className="">View Details</span> ➔
+          <span className="manrope-500 dark-500 fs-small m-0">View Details <FiArrowRight /></span>
         </button>
       </div>
     </div>

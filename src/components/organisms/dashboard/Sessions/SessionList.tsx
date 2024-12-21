@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../style.css";
 import InfoCard from "../../../molecules/dashboard/InfoCard";
-import { FiVideo } from "react-icons/fi";
+import { FiMapPin, FiVideo } from "react-icons/fi";
 import SearchInput from "../../../atoms/inputs/SearchInput";
 import api from "../../../../api/axios";
 import { useQuery } from "@tanstack/react-query";
@@ -22,6 +22,7 @@ const SessionList = () => {
     enabled: !!activeCohort._id,
   });
 
+
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase();
     setFilteredSessions(
@@ -32,14 +33,15 @@ const SessionList = () => {
       )
     );
   }, [data, searchQuery]);
+  
 
   return (
     <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
       <div className="d-flex align-items-center justify-content-between">
-        <div className="d-flex align-items-center gap-2">
-          <h4 className="manrope-600 fs-h4 primary-950">Sessions</h4>
+        <div className="d-flex align-items-center justify-content-center gap-2">
+          <h4 className="manrope-600 fs-h4 primary-950 m-0">Sessions</h4>
           <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-            {filteredSessions?.length}
+            {filteredSessions?.length || 0}
           </span>
         </div>
 
@@ -57,10 +59,10 @@ const SessionList = () => {
             All
           </button>
           <button className="btn rounded-pill border-secondary manrope-500 dark-400">
-            Completed
+            Upcoming
           </button>
           <button className="btn rounded-pill border-secondary manrope-500 dark-400">
-            Upcoming
+            Completed
           </button>
         </div>
       </div>
@@ -82,8 +84,9 @@ const SessionList = () => {
               subtitle={session.location.address || "No Link available yet"}
               dateOfSession={session.date || "Date not available"}
               infoCardIcon={
+                session.location.name === 'Online' ?
                 <FiVideo color="#FF63CD" className="infoIcon fs-h2" />
-              }
+              : <FiMapPin color="#FF63CD" className="infoIcon fs-h2"/>}
               infoCardIconBgColor="#FEF1FA"
             />
           </div>

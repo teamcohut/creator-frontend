@@ -186,3 +186,10 @@
   font-size: 60px;
   color: var(--rose-500);
 }
+
+.truncate-h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%; /* Or a specific pixel width for your layout */
+}
