@@ -10,6 +10,7 @@ import TaskInfoCard from '../../../molecules/dashboard/TaskInfoCard';
 const TaskDisplay = () => {
   const { activeCohort } = useContext(ProgramContext);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState("All");
   const [filteredTasks, setFilteredTasks] = useState([]);
 
 
@@ -24,14 +25,22 @@ const TaskDisplay = () => {
 
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase();
+    const now = new Date();
+
+    let sessions = data?.data?.data || []
+
+    if (filterType === "Upcoming") {
+      sessions = sessions.filter((session: any) => new Date(session.date) > now);
+    } else if (filterType === "Completed") sessions = sessions.filter((session: any) => new Date(session.date) < now);
+
     setFilteredTasks(
-      data?.data?.data?.filter(
+      sessions.filter(
         (task: any) =>
           task.title?.toLowerCase().includes(lowerCaseQuery) ||
           task.dueDate?.toLowerCase().includes(lowerCaseQuery)
       )
     );
-  }, [data, searchQuery]);
+  }, [data, searchQuery, filterType]);
   return (
     <div className=" w-100 d-flex flex-column gap-3">
       <div className="d-flex align-items-center justify-content-between">
@@ -52,13 +61,19 @@ const TaskDisplay = () => {
         </div>
 
         <div className="d-flex align-items-center gap-2">
-          <button className="btn rounded-pill bg-secondary-450 manrope-500 primary-950">
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "All" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"}`}
+            onClick={() => setFilterType("All")}>
             All
           </button>
-          <button className="btn rounded-pill border-secondary manrope-500 dark-400">
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "Upcoming" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"}`}
+            onClick={() => setFilterType("Upcoming")}>
             Upcoming
           </button>
-          <button className="btn rounded-pill border-secondary manrope-500 dark-400">
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "Completed" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"}`}
+            onClick={() => setFilterType("Completed")}>
             Completed
           </button>
         </div>
@@ -71,13 +86,13 @@ const TaskDisplay = () => {
       )}
       <div className="task-grid">
         {filteredTasks?.map((tasks: any, i: any) => (
-      
-            <TaskInfoCard
-              title={tasks.title || "No title available"}
-              dueTime={tasks.dueTime || "No Link available yet"}
-              dueDate={tasks.dueDate.split("T")[0]}
-            />
-          
+
+          <TaskInfoCard
+            title={tasks.title || "No title available"}
+            dueTime={tasks.dueTime || "No Link available yet"}
+            dueDate={tasks.dueDate.split("T")[0]}
+          />
+
         ))}
       </div>
     </div>
