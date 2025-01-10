@@ -11,10 +11,11 @@ const NavLink: FC<INavLink> = ({ path, children, type, dropdownList }) => {
   const { activeProgram, activeCohort } = useProgramContext()
   let { pathname } = useLocation()
   pathname = pathname.replace(/\//g, '')
-  const cPath = path.replace(/\//g, '')
-  let isActive: boolean = pathname === cPath
+  const currentPath = path.replace(/\//g, '')
+  let isActive: boolean = pathname === currentPath
 
   useEffect(() => {
+    // Disable if program data is not available
     if (!activeCohort || !activeCohort.name || !activeProgram || !activeProgram.title) {
       setDisabled(true)
     } else {
@@ -23,7 +24,9 @@ const NavLink: FC<INavLink> = ({ path, children, type, dropdownList }) => {
   }, [activeCohort, activeProgram])
 
   const handleClick = (e: any) => {
-    if (path !== 'settings' && disabled) {
+    console.log(currentPath);
+    
+    if ((!currentPath || currentPath !== 'settings') && disabled) {
       e.preventDefault()
     }
   }
@@ -56,7 +59,13 @@ const NavLink: FC<INavLink> = ({ path, children, type, dropdownList }) => {
     return <Link onClick={handleClick} className={`${isActive && 'active'} nav-link w-100 d-flex align-items-center justify-content-start manrope-500`} to={path}>{children}</Link>
   } else if (type === 'logout'){
     return (
-      <button className='nav-link w-100 d-flex align-items-center justify-content-start rounded-0 manrope-500 fs-body'>{children}</button>
+      <button onClick={() => {
+        localStorage.removeItem("authToken");
+        window.location.href = "/login";
+      }} 
+      className='nav-link w-100 d-flex align-items-center justify-content-start rounded-0 manrope-500 fs-body'>
+        {children}
+      </button>
     )
   }
   return <></>

@@ -11,6 +11,7 @@ export interface INavLink {
   children: ReactNode;
   type: "link" | "dropdown" | "logout";
   dropdownList: Array<IMenu>;
+  action?: () => void
 }
 
 export interface IHeader {

@@ -84,7 +84,8 @@ const SideNav: FC<IStatus> = ({ status }) => {
               <FiChevronRight />
             }
           </button>
-        <div className="side-nav d-flex flex-column align-items-start justify-content-start gap-5">
+        <div className="side-nav d-flex flex-column align-items-start justify-content-between">
+          <div className="w-100 d-flex flex-column align-items-start justify-content-start gap-5">
           <Link className="logo-lg" to={"/"}>
             <Icon type="text-logo" fill={"true"} size={130} />
           </Link>
@@ -97,6 +98,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
               </NavLink>
             ))}
           </div>
+          </div>
           <div className="w-100 d-flex flex-column gap-2 nav-tools">
             <hr />
             <NavLink type={"link"} dropdownList={[]} path={"settings"}>
@@ -105,12 +107,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
             </NavLink>
             <NavLink type={"logout"} dropdownList={[]} path={""}>
               <FiLogOut className="nav-icon" />
-              <span
-                onClick={() => {
-                  localStorage.removeItem("authToken");
-                  window.location.href = "/login";
-                }}
-              >
+              <span>
                 Sign Out
               </span>
             </NavLink>
