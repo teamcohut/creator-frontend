@@ -1,4 +1,4 @@
-import { FiUsers, FiVideo } from "react-icons/fi";
+import { FiBook, FiUsers, FiVideo } from "react-icons/fi";
 
 export const generateCardData = (data: any) => [
   {
@@ -18,6 +18,13 @@ export const generateCardData = (data: any) => [
   {
     icon: <FiVideo />,
     title: "Total Sessions",
+    subtitle: data?.noOfSessions || 0,
+    iconColor: "primary-300",
+    iconBgColor: "#ECF1FF",
+  },
+  {
+    icon: <FiBook />,
+    title: "Total Task",
     subtitle: data?.noOfSessions || 0,
     iconColor: "primary-300",
     iconBgColor: "#ECF1FF",
