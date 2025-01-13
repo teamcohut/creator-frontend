@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import { DatePicker, TimePicker, notification } from "antd";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
-import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
-import DateInput from "../../../atoms/inputs/DateInput";
-import TimeInput from "../../../atoms/inputs/TimeInput";
+import RTEInput from "../../../atoms/inputs/RTEInput";
 import "../../style.css";
-import { notification } from "antd";
 import { FiX } from "react-icons/fi";
-
+import dayjs from "dayjs";
 
 interface ISessionModal {
   onSubmit: (data: any) => void;
   closeModal: any;
-  initialData: Record<string, any>
+  initialData: Record<string, any>;
 }
+
 const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -31,7 +30,16 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
     }));
   }, [initialData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleDateChange = (date: any, dateString: any) => {
+    setFormData((prev) => ({ ...prev, date: dateString }));
+  };
+
+  const handleTimeChange = (field: any) => (time: any, timeString: any) => {
+    setFormData((prev) => ({ ...prev, [field]: timeString }));
+  };
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
@@ -59,16 +67,50 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <div className="d-flex flex-row align-items-end">
+          <div className="d-flex flex-row align-items-end gap-3">
             <div className="w-35">
-              <DateInput id="date" onchange={handleChange} placeHolder="Select date" label="Set a time" value={formData.date} />
+              <label htmlFor="date-picker" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+                Select Date
+              </label>
+              <DatePicker
+                className="rounded-5"
+                value={formData.date ? dayjs(formData.date, "YYYY-MM-DD") : null}
+                onChange={handleDateChange}
+                placeholder="Select Date"
+              />
             </div>
-            <TimeInput id="start" onchange={handleChange} placeHolder="Start Time" label="" value={formData.start} />
-            <TimeInput id="end" onchange={handleChange} placeHolder="End Time" label="" value={formData.end} />
+            <TimePicker
+              className="rounded-5"
+              value={formData.start ? dayjs(formData.start, "HH:mm") : null}
+              onChange={handleTimeChange("start")}
+              placeholder="Start Time"
+              format="HH:mm"
+            />
+            <TimePicker
+              className="rounded-5"
+              value={formData.end ? dayjs(formData.end, "HH:mm") : null}
+              onChange={handleTimeChange("end")}
+              placeholder="End Time"
+              format="HH:mm"
+            />
           </div>
         </div>
-        <TextInput id="title" label="Session Title" placeHolder="Enter Title" onchange={handleChange} value={formData.title} />
-        <TextAreaInput id="description" label="Session Description" placeHolder="Enter Description" onchange={handleChange} value={formData.description} />
+        <TextInput
+          id="title"
+          label="Session Title"
+          placeHolder="Enter Title"
+          onchange={handleInputChange}
+          value={formData.title}
+        />
+        <RTEInput
+          id="description"
+          label="Session Description"
+          placeholder="Enter Description"
+          onChange={(value: ReactNode) =>
+            setFormData((prev) => ({ ...prev, description: value as string }))
+          }
+          value={formData.description}
+        />
       </div>
 
       <div className="d-flex flex-column align-items-center gap-3">
@@ -79,3 +121,4 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
 };
 
 export default AddSession;
+

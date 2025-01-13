@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../style.css";
 import InfoCard from "../../../molecules/dashboard/InfoCard";
-import { FiVideo } from "react-icons/fi";
+import { FiMapPin, FiVideo } from "react-icons/fi";
 import SearchInput from "../../../atoms/inputs/SearchInput";
 import api from "../../../../api/axios";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +12,7 @@ const SessionList = () => {
   const { activeCohort } = useContext(ProgramContext);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState("All");
   const [filteredSessions, setFilteredSessions] = useState([]);
 
   const trackId = activeCohort.tracks?.[0]?.id;
@@ -24,22 +25,30 @@ const SessionList = () => {
 
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase();
+    const now = new Date();
+
+    let sessions = data?.data?.data || [];
+
+    if (filterType === "Upcoming") {
+      sessions = sessions.filter((session: any) => new Date(session.date) > now);
+    } else if (filterType === "Completed") sessions = sessions.filter((session: any) => new Date(session.date) < now);
+
     setFilteredSessions(
-      data?.data?.data?.filter(
+      sessions.filter(
         (session: any) =>
           session.title?.toLowerCase().includes(lowerCaseQuery) ||
           session.subtitle?.toLowerCase().includes(lowerCaseQuery)
       )
     );
-  }, [data, searchQuery]);
+  }, [data, searchQuery, filterType]);
 
   return (
     <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
       <div className="d-flex align-items-center justify-content-between">
-        <div className="d-flex align-items-center gap-2">
-          <h4 className="manrope-600 fs-h4 primary-950">Sessions</h4>
+        <div className="d-flex align-items-center justify-content-center gap-2">
+          <h4 className="manrope-600 fs-h4 primary-950 m-0">Sessions</h4>
           <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-            {filteredSessions?.length}
+            {filteredSessions?.length || 0}
           </span>
         </div>
 
@@ -53,14 +62,26 @@ const SessionList = () => {
         </div>
 
         <div className="d-flex align-items-center gap-2">
-          <button className="btn rounded-pill bg-secondary-450 manrope-500 primary-950">
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "All" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"
+              }`}
+            onClick={() => setFilterType("All")}
+          >
             All
           </button>
-          <button className="btn rounded-pill border-secondary manrope-500 dark-400">
-            Completed
-          </button>
-          <button className="btn rounded-pill border-secondary manrope-500 dark-400">
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "Upcoming" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"
+              }`}
+            onClick={() => setFilterType("Upcoming")}
+          >
             Upcoming
+          </button>
+          <button
+            className={`btn rounded-pill manrope-500 ${filterType === "Completed" ? "bg-secondary-450 primary-950" : "border-secondary dark-400"
+              }`}
+            onClick={() => setFilterType("Completed")}
+          >
+            Completed
           </button>
         </div>
       </div>
@@ -82,7 +103,11 @@ const SessionList = () => {
               subtitle={session.location.address || "No Link available yet"}
               dateOfSession={session.date || "Date not available"}
               infoCardIcon={
-                <FiVideo color="#FF63CD" className="infoIcon fs-h2" />
+                session.location.name === "Online" ? (
+                  <FiVideo color="#FF63CD" className="infoIcon fs-h2" />
+                ) : (
+                  <FiMapPin color="#FF63CD" className="infoIcon fs-h2" />
+                )
               }
               infoCardIconBgColor="#FEF1FA"
             />
@@ -94,3 +119,4 @@ const SessionList = () => {
 };
 
 export default SessionList;
+

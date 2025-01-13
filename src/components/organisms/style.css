@@ -338,3 +338,17 @@
 .dropdown .dropdown-menu {
   z-index: 2;
 }
+
+/** Task **/
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 16px; /* Add spacing between cards */
+  width: 100%; /* Prevent horizontal overflow */
+  padding: 0; /* Removes any padding that might add extra space */
+  margin: 0; /* Removes any margin */
+}
+
+.task-grid > * {
+  margin: 0; /* Ensures individual cards don’t have extra margins */
+}

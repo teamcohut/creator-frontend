@@ -22,6 +22,7 @@ import SessionDetails from "./components/organisms/dashboard/Sessions/SessionDet
 import { ErrorBoundary } from "react-error-boundary";
 import Mainloader from "./helpers/loader";
 import ErrorUI from "./helpers/ErrorUI";
+import LearningTabs from "./components/organisms/dashboard/Learning/LearningTabs";
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
         },
         {
           path: "learning",
-          element: <SessionsDisplay />,
+          element: <LearningTabs />,
         },
         {
           path: "/learning/:sessionId",

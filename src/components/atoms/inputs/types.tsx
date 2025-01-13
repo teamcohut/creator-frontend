@@ -148,4 +148,5 @@ export interface IRTEInput {
   id: string;
   label: string;
   placeholder: string;
+  value?: ReactNode;
 }

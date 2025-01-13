@@ -10,6 +10,7 @@ import {
   IDetails,
   ISendMailDTO,
 } from "../../../../@types/participants.interface";
+import { FiX } from "react-icons/fi";
 
 const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
   const [details, setDetails] = useState<IDetails>({
@@ -64,7 +65,10 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
     <>
       <div className="form bg-white d-flex flex-column rounded-5">
         <div className="d-flex flex-column gap-2">
-          <h1 className="manrope-600 primary-950 fs-h2">Email Participant</h1>
+          <div className="d-flex flex-row justify-content-between">
+            <h1 className="manrope-600 primary-950 fs-h2">Email Participant</h1>
+            <FiX className="fs-h3" />
+          </div>
         </div>
 
         <div className="d-flex flex-column gap-4">
@@ -89,6 +93,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
             id="body"
             label="Body"
             placeholder="What would you like to email this participant about?"
+            value={details.content}
             onChange={(e) => setDetails({ ...details, content: String(e) })}
           />
         </div>

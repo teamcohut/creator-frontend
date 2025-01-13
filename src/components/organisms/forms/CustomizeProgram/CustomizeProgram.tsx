@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { notification } from "antd";
 import { FiArrowLeft, FiX } from "react-icons/fi";
+import { ProgramContext } from "../../../../context/programs/ProgramContext";
 
 type ProgramData = {
   title: string;
@@ -67,10 +68,10 @@ const CustomizeProgram: React.FC<CustomizeProgramProps> = ({
   const createProgramMutation = useMutation({
     mutationFn: (payload: any) => api.program.createProgram(payload),
     onSuccess: (data: any) => {
-      setCurrentStep(3);
-      setSuccessful(true);
       localStorage.setItem('programId', data.data.data._id)
       setProgramData(data.data.data)
+      setSuccessful(true);
+      setCurrentStep(3);
     },
     onError: (error: any) => {
       notification.error({
