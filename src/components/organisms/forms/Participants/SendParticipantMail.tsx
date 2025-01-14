@@ -27,6 +27,7 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
       notification.success({
         message: "Mail sent successfully",
       });
+      setModalOpen(false, "")
     },
     onError: (error) => {
       notification.error({
@@ -65,9 +66,11 @@ const SendParticipantMail: FC<ISendMailDTO> = ({ email, setModalOpen }) => {
     <>
       <div className="form bg-white d-flex flex-column rounded-5">
         <div className="d-flex flex-column gap-2">
-          <div className="d-flex flex-row justify-content-between">
+          <div className="d-flex flex-row justify-content-between align-items-center">
             <h1 className="manrope-600 primary-950 fs-h2">Email Participant</h1>
-            <FiX className="fs-h3" />
+            <button onClick={()=>setModalOpen(false, "")} className="border-none bg-transparent">
+              <FiX className="fs-h3" />
+            </button>
           </div>
         </div>
 

@@ -26,14 +26,7 @@ const SideNav: FC<IStatus> = ({ status }) => {
   const ActionButton = () => {
     if (status === "pending") {
       return (
-        <Button
-          action={() => {}}
-          children=""
-          fill
-          type="button"
-          loading
-          outline="primary"
-        />
+        <></>
       );
     } else if (status === "error") {
       return <></>;
