@@ -58,7 +58,9 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
       <div className="d-flex flex-column gap-2">
         <div className="d-flex flex-row justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Add New Session</h1>
-          <FiX className="fs-h3" onClick={closeModal} />
+          <button onClick={closeModal} className="border-none bg-transparent">
+          <FiX className="fs-h3" />
+          </button>
         </div>
         <span className="manrope-500 dark-700 fs-body">
           Schedule a live session or event and notify participants.

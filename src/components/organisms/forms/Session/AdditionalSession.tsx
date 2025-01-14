@@ -78,7 +78,9 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
       <div className="d-flex flex-row justify-content-between">
         <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
-        <FiX className="fs-h3" onClick={closeModal} />
+        <button onClick={closeModal} className="border-none bg-transparent">
+          <FiX className="fs-h3" />
+        </button>
       </div>
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Additional Session Info</h1>
