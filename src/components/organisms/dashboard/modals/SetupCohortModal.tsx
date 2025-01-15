@@ -21,8 +21,14 @@ const SetupCohortModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       setCurrentStep(currentStep + 1);
     },
     onError: (error: any) => {
+      let message;
+      if (error.response.data.message.includes('E11000')) {
+        message = "Cohort already exists"
+      } else {
+        message = error.response.data.message || "Failed to create cohort"
+      }
       notification.error({
-        message: error.response.data.message || "Failed to create cohort",
+        message
       });
     },
   });

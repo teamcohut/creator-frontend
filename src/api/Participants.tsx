@@ -5,8 +5,8 @@ class Participant {
     this.client = client;
   }
 
-  getParticipants(cohortId: string) {
-    return this.client.get(`/cohort/get-participants/${cohortId}`);
+  getParticipants(cohortId: string, page: number) {
+    return this.client.get(`/cohort/get-participants/${cohortId}?page=${page}&limit=10`);
   }
 
   inviteIndividualParticipant(cohortId: string, data: any) {

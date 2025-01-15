@@ -258,6 +258,20 @@
   background-color: var(--hover-40);
 }
 
+.page-btn {
+  height: 30px;
+  width: 30px;
+}
+
+.active-page-btn {
+  background-color: var(--primary-100);
+  border: 1px solid var(--primary-100);
+}
+
+.inactive-page-btn {
+  border: 1px solid var(--dark-100);
+}
+
 /* SESSION */
 .location-input-wrapper {
   display: flex;

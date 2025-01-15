@@ -27,7 +27,7 @@ interface IParticipant {
   subtitle?: string;
 }
 
-const Table: React.FC<ITable> = ({ header, body, refresh }) => {
+const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
   const [modal, setModal] = useState<IModal>({ open: false, modal: "" });
   const [email, setEmail] = useState("");
   const [partipantId, setPartipantId] = useState("");
@@ -35,6 +35,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
   // const [filteredSessions, setFilteredSessions] = useState([]);
   const [filteredParticipants, setFilteredParticipants] = useState<IParticipant[]>([]);
   const { activeProgram } = useContext(ProgramContext);
+  
 
   const handleDropdownAction = (action: TModal, email: string) => {
     // Action for a specific participant
@@ -70,7 +71,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
 
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase();
-    setFilteredParticipants(
+    body && setFilteredParticipants(
       body.filter(
         (participant: IParticipant) =>
           participant.title?.toLowerCase().includes(lowerCaseQuery) ||
@@ -90,7 +91,7 @@ const Table: React.FC<ITable> = ({ header, body, refresh }) => {
             <h4 className="d-flex align-items-center gap-2 manrope-600 fs-h4 primary-950 align-content-center">
               Participants
               <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-                {filteredParticipants?.length}
+                {count}
               </span>
             </h4>
           </div>
