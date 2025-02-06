@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FiAlertCircle, FiMoreVertical } from "react-icons/fi";
+import { FiAlertCircle, FiChevronDown, FiMoreVertical } from "react-icons/fi";
 import StatusBadge from "../../../atoms/dashboard/StatusBadge";
 import { ITable } from "../../../../@types/participants.interface";
 import "../../style.css";
@@ -30,12 +30,24 @@ interface IParticipant {
 const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
   const [modal, setModal] = useState<IModal>({ open: false, modal: "" });
   const [email, setEmail] = useState("");
-  const [partipantId, setPartipantId] = useState("");
+  const [participantId, setParticipantId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  // const [filteredSessions, setFilteredSessions] = useState([]);
+  const [trackId, setTrackId] = useState<Array<string>>([]);
   const [filteredParticipants, setFilteredParticipants] = useState<IParticipant[]>([]);
-  const { activeProgram } = useContext(ProgramContext);
-  
+  const { activeProgram, activeCohort } = useContext(ProgramContext);
+
+  console.log('cohort: ', activeCohort);
+
+  useEffect(() => {
+    let participant = filteredParticipants.find(el => el._id === participantId)
+    let track = activeCohort.tracks.find((el: any) => el.title === participant?.trackTitle)
+
+    console.log(track);
+
+    setTrackId([track?._id])
+  }, [participantId])
+
+
 
   const handleDropdownAction = (action: TModal, email: string) => {
     // Action for a specific participant
@@ -49,7 +61,7 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
 
   const removeMutation = useMutation({
     mutationFn: () => {
-      return api.participant.removeParticipant(activeProgram._id, partipantId);
+      return api.participant.removeParticipant(activeProgram._id, participantId);
     },
     onSuccess: (data: any) => {
       notification.open({
@@ -67,6 +79,28 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
 
   const removeParticipant = async () => {
     await removeMutation.mutate();
+  };
+
+  const graduateMutation = useMutation({
+    mutationFn: () => {
+      return api.participant.graduateParticipant(activeCohort._id, trackId);
+    },
+    onSuccess: (data: any) => {
+      notification.open({
+        message: "Successfully graduated",
+      });
+      setModal({ open: false, modal: "" });
+      refresh && refresh();
+    },
+    onError: (error: any) => {
+      notification.error({
+        message: error.response.data.errors[0] ?? error.response.data.message,
+      });
+    },
+  });
+
+  const graduateParticipant = async () => {
+    await graduateMutation.mutate();
   };
 
   useEffect(() => {
@@ -109,6 +143,9 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
         <table className="table-div w-100">
           <thead>
             <tr className="manrope-600 fs-body primary-950">
+              {/* <th className="manrope-600 primary-950 fs-body">
+                <input type="checkbox" name="" id="" />
+              </th> */}
               {header.map((el, i) => (
                 <th key={i}>{el}</th>
               ))}
@@ -118,6 +155,9 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
           <tbody className="fs-body manrope-500 dark-700">
             {filteredParticipants?.map((participant, idx) => (
               <tr key={idx}>
+                {/* <td>
+                  <input type="checkbox" name="" id="" />
+                </td> */}
                 <td>
                   {participant.firstName} {participant.lastName}
                 </td>
@@ -139,25 +179,25 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
                     <ul className="dropdown-menu">
                       <button
                         onClick={() => {
-                          setPartipantId(participant._id);
+                          setParticipantId(participant._id);
                           handleDropdownAction("mail", participant.email);
                         }}
                         className="dropdown-item cursor-pointer"
                       >
                         Send Mail
                       </button>
-                      {/* <button
+                      <button
                         onClick={() => {
-                          setPartipantId(participant._id);
+                          setParticipantId(participant._id);
                           handleDropdownAction("graduate", participant.email);
                         }}
                         className="dropdown-item cursor-pointer"
                       >
                         Graduate
-                      </button> */}
+                      </button>
                       <button
                         onClick={() => {
-                          setPartipantId(participant._id);
+                          setParticipantId(participant._id);
                           handleDropdownAction("remove", participant.email);
                         }}
                         className="dropdown-item cursor-pointer"
@@ -206,9 +246,9 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
             >
               <div className="d-flex gap-4">
                 <Button
-                  action={removeParticipant}
-                  loading={removeMutation.isPending}
-                  children="Remove Participant"
+                  action={graduateParticipant}
+                  loading={graduateMutation.isPending}
+                  children="Graduate Participant"
                   fill={false}
                   type="button"
                   border

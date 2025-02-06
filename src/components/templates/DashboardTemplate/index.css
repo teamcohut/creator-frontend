@@ -12,3 +12,7 @@
 .top-nav {
   height: 70px;
 }
+
+input {
+  accent-color: var(--primary-600);
+}

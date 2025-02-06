@@ -10,6 +10,7 @@ import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { TModal } from "../../../../@types/dashboard.interface";
 import "../../style.css"
+import Pagination from "./Pagination";
 
 const ParticipantsPage: React.FC = () => {
   const { activeCohort } = useContext(ProgramContext);
@@ -123,60 +124,7 @@ const ParticipantsPage: React.FC = () => {
             </div>
             <div className="pb-5">
               <Table header={header} body={participants} count={data?.data.data.noOfParticipants} refresh={refetch} />
-              <div className="d-flex justify-content-between align-items-center px-5">
-                <span>Page {page} of {data?.data.data.totalPages}</span>
-                <div className="d-flex align-items-center gap-2">
-                  {
-                    Array.from({ length: data?.data.data.totalPages })
-                      .slice(start, end) // Extract the subset of the array
-                      .map((el: any, i: number) => {
-                        const pageNumber = start + i + 1; // Calculate the actual page number
-                        return (
-                          <button
-                            key={pageNumber} // Add a unique key for React
-                            onClick={() => {
-                              // Adjust start and end when a page other than 1 or 2 is clicked
-                              if (pageNumber > 2) {
-                                setStart(pageNumber - 2); // Move the clicked page to the second position
-                                setEnd(pageNumber + 3); // Show the next 3 pages
-                              } else {
-                                setStart(0); // Reset to the beginning for pages 1 and 2
-                                setEnd(5); // Show the first 5 pages
-                              }
-                              setPage(pageNumber); // Update the current page
-                            }}
-                            className={`${pageNumber === page
-                                ? "dark-950 active-page-btn"
-                                : "dark-700 bg-white inactive-page-btn"
-                              } rounded-2 manrope-500 fs-small page-btn`}
-                          >
-                            {pageNumber}
-                          </button>
-                        );
-                      })
-                  }
-
-                  {
-                    data?.data.data.totalPages > 5 && (
-                      <>
-                        <button
-                          disabled
-                          className="dark-700 bg-white inactive-page-btn rounded-2 manrope-500 fs-small page-btn">
-                          ...
-                        </button>
-                        <button
-                          onClick={() => setPage(data?.data.data.totalPages)}
-                          className={`${data?.data.data.totalPages === page ? "dark-950 active-page-btn" : "dark-700 bg-white inactive-page-btn"} rounded-2 manrope-500 fs-small page-btn`}>
-                          {data?.data.data.totalPages}
-                        </button>
-                      </>
-                    )
-                  }
-
-
-                </div>
-                <div></div>
-              </div>
+              <Pagination data={data?.data.data} end={end} setEnd={setEnd} start={start} setStart={setStart} page={page} setPage={setPage} />
             </div>
           </div>
         </>
