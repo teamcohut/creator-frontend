@@ -57,7 +57,7 @@ const SessionDetails = () => {
 
   const session = data?.data.data;
   const sessionLink = session?.location.address;
-  const zoomsession = session?.zoomStartSession;
+  // const zoomsession = session?.zoomStartSession;
 
   return (
     <>
@@ -98,7 +98,7 @@ const SessionDetails = () => {
               <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                 <FiCalendar /> {formatDate(session?.date)}
               </p>
-              <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+              {/* <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                 <FiVideo />
                 <Link
                   to={`${zoomsession}`}
@@ -107,7 +107,7 @@ const SessionDetails = () => {
                 >
                   https://us04web.zoom.us
                 </Link>
-              </p>
+              </p> */}
               {session?.location.name === "Physical" ? (
                 <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                   <FiMapPin /> {session.location.address}

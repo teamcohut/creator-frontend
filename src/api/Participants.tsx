@@ -22,8 +22,8 @@ class Participant {
     return this.client.delete(`/program/${programId}/remove-participant/${participantId}`);
   }
 
-  graduateParticipant(cohortId: string, trackIds: Array<string>) {
-    return this.client.post(`/cohort/graduate-participants/${cohortId}`, {trackIds});
+  graduateParticipant(cohortId: string, participantId: Array<string>) {
+    return this.client.post(`/cohort/graduate-participants/${cohortId}`, {participantId});
   }
 
   inviteGroupParticipant(cohortId: string, track: string, data: any, progress?: any) {

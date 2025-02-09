@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FiAlertCircle, FiChevronDown, FiMoreVertical } from "react-icons/fi";
+import { FiAlertCircle, FiMoreVertical } from "react-icons/fi";
 import StatusBadge from "../../../atoms/dashboard/StatusBadge";
 import { ITable } from "../../../../@types/participants.interface";
 import "../../style.css";
@@ -32,20 +32,19 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
   const [email, setEmail] = useState("");
   const [participantId, setParticipantId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [trackId, setTrackId] = useState<Array<string>>([]);
   const [filteredParticipants, setFilteredParticipants] = useState<IParticipant[]>([]);
   const { activeProgram, activeCohort } = useContext(ProgramContext);
 
-  console.log('cohort: ', activeCohort);
+  // const [trackId, setTrackId] = useState<Array<string>>([]);
+  // console.log('cohort: ', activeCohort);
+  // useEffect(() => {
+  //   let participant = filteredParticipants.find(el => el._id === participantId)
+  //   let track = activeCohort.tracks.find((el: any) => el.title === participant?.trackTitle)
 
-  useEffect(() => {
-    let participant = filteredParticipants.find(el => el._id === participantId)
-    let track = activeCohort.tracks.find((el: any) => el.title === participant?.trackTitle)
+  //   console.log(track);
 
-    console.log(track);
-
-    setTrackId([track?._id])
-  }, [participantId])
+  //   setTrackId([track?._id])
+  // }, [participantId])
 
 
 
@@ -83,7 +82,7 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
 
   const graduateMutation = useMutation({
     mutationFn: () => {
-      return api.participant.graduateParticipant(activeCohort._id, trackId);
+      return api.participant.graduateParticipant(activeCohort._id, [participantId]);
     },
     onSuccess: (data: any) => {
       notification.open({

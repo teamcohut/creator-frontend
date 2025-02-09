@@ -23,14 +23,14 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
 
   const [openLocation, setOpenLocation] = useState(false)
   const [useZoom, setUseZoom] = useState(false)
-  const [locationType, setLocationType] = useState<string>("Online");
+  // const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
     // track: "",
     resources: "",
     cohort: activeCohort.id,
-    sessionLink: "google",
+    sessionLink: "",
     location: {
-      name: locationType,
+      name: "Online",
       address: ""
     },
   });
@@ -66,6 +66,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   ) => {
     setFormData((prev) => ({
       ...prev,
+      sessionLink: value,
       location: {
         ...prev.location,
         [id]: value,
