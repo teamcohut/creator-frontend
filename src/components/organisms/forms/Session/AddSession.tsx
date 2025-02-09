@@ -1,9 +1,8 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker, TimePicker, notification } from "antd";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
-import RTEInput from "../../../atoms/inputs/RTEInput";
 import "../../style.css";
 import { FiX } from "react-icons/fi";
 import dayjs from "dayjs";
