@@ -88,11 +88,13 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   });
 
   const handleSubmit = () => {
-    console.log(formData);
+    // console.log(formData);
     
     const payload = { ...initialData, ...formData };
     payload.location.address = formData.location.address;
 
+    console.log(payload);
+    
     sessionMutation.mutate(payload);
   };
 

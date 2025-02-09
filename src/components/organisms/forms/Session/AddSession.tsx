@@ -7,6 +7,7 @@ import RTEInput from "../../../atoms/inputs/RTEInput";
 import "../../style.css";
 import { FiX } from "react-icons/fi";
 import dayjs from "dayjs";
+import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 
 interface ISessionModal {
   onSubmit: (data: any) => void;
@@ -104,14 +105,12 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
           onchange={handleInputChange}
           value={formData.title}
         />
-        <RTEInput
+        <TextAreaInput
           id="description"
           label="Session Description"
-          placeholder="Enter Description"
-          onChange={(value: ReactNode) =>
-            setFormData((prev) => ({ ...prev, description: value as string }))
-          }
-          value={formData.description}
+          placeHolder="Enter Description"
+          onchange={handleInputChange}
+          defaultValue={formData.description}
         />
       </div>
 

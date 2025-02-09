@@ -56,7 +56,7 @@ const SessionDetails = () => {
   }
 
   const session = data?.data.data;
-  const sessionLink = session?.location.address;
+  const sessionLink = session?.sessionLink;
   // const zoomsession = session?.zoomStartSession;
 
   return (
@@ -116,7 +116,7 @@ const SessionDetails = () => {
                 <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                   <FiVideo />
                   <Link
-                    to={`http://${sessionLink}`}
+                    to={`${sessionLink}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
