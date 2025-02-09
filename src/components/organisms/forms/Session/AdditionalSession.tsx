@@ -7,7 +7,8 @@ import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
-import { FiArrowLeft, FiX } from "react-icons/fi";
+import { FiArrowLeft, FiVideo, FiX } from "react-icons/fi";
+import { CiLocationOn } from "react-icons/ci";
 
 
 interface IAdditionalSessionProps {
@@ -20,14 +21,18 @@ interface IAdditionalSessionProps {
 const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess, closeModal, prevStep }) => {
   const { activeCohort } = useContext(ProgramContext);
 
+  const [openLocation, setOpenLocation] = useState(false)
+  const [useZoom, setUseZoom] = useState(false)
   const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
     // track: "",
     resources: "",
-    address: "",
     cohort: activeCohort.id,
     sessionLink: "google",
-    location: { name: locationType },
+    location: {
+      name: locationType,
+      address: ""
+    },
   });
 
 
@@ -35,14 +40,14 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
 
 
 
-  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setLocationType(value);
-    setFormData((prev) => ({
-      ...prev,
-      location: { ...prev.location, name: value, },
-    }));
-  };
+  // const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const { value } = e.target;
+  //   setLocationType(value);
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     location: { ...prev.location, name: value, },
+  //   }));
+  // };
 
   const handleChange = (
     id: string,
@@ -52,6 +57,21 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       ...prev,
       [id]: value,
     }));
+    value === "" ? setOpenLocation(true) : setOpenLocation(false)
+  };
+
+  const changeAddress = (
+    id: string,
+    value: string
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      location: {
+        ...prev.location,
+        [id]: value,
+      }
+    }));
+    value === "" ? setOpenLocation(true) : setOpenLocation(false)
   };
 
 
@@ -67,8 +87,10 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
   });
 
   const handleSubmit = () => {
+    console.log(formData);
+    
     const payload = { ...initialData, ...formData };
-    payload.location.address = formData.address;
+    payload.location.address = formData.location.address;
 
     sessionMutation.mutate(payload);
   };
@@ -89,36 +111,65 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
         </span>
       </div>
 
-      <div className="d-flex flex-column gap-4">
+      <div className="d-flex flex-column">
         <div>
-          <p className="manrope-600 primary-950 fs-h4">Location</p>
-          <div className="location-input-wrapper">
-            <div>
-              <select
-                value={locationType}
-                onChange={handleDropdownChange}
-                className="location-dropdown"
-              >
-                <option value="Online">Online</option>
-                <option value="Physical">Physical</option>
-              </select>
-            </div>
+          <span className="manrope-600 primary-950 pb-2">Location</span>
+          <div className="d-flex flex-column relative w-100 h-fit">
+            <div onClick={() => {
+              formData.location.address === "" ? setOpenLocation(!openLocation) : setOpenLocation(false)
+              console.log(openLocation);
+            }} className="location-input-wrapper w-100 d-flex flex-row gap-2">
+              <label htmlFor="location" className="p-2">
+                <CiLocationOn className="fs-h3" />
+              </label>
 
-            <input
-              type="text"
-              placeholder={
-                locationType === "Online" ? "Link" : "Address"
+              {
+                useZoom ?
+                  // <div>
+                  <div className="w-100 d-flex align-items-center justify-content-between">
+                    <span className="border w-25 rounded-5 px-1 no-wrap overflow-x-hidden no-wrap">https://zoom.com/u/0</span>
+                    <button onClick={() => setUseZoom(false)} className="border-none bg-transparent px-3">
+                      <FiX />
+                    </button>
+                    {/* </div> */}
+                  </div> :
+                  <input
+                    id="location"
+                    type="text"
+                    placeholder='Enter location or virtual link'
+                    className="location-text"
+                    onFocus={() => {
+                      formData.location.address === "" ? setOpenLocation(!openLocation) : setOpenLocation(false)
+                      console.log(openLocation);
+                    }}
+                    onChange={(e) =>
+                      changeAddress("address", e.target.value)
+                    }
+                  />
               }
-              className="location-text"
-              onChange={(e) =>
-                handleChange("address", e.target.value)
-              }
-            />
+            </div>
+            <div className={`w-100 d-flex flex-column gap-4 py-3 rounded-3 shadow ${!openLocation ? 'hidden' : ''}`}>
+              <span className="dark-300 fs-small manrope-500 px-3">Virtual Link Options</span>
+              <button onClick={() => {
+                setUseZoom(true)
+                setOpenLocation(false)
+                setFormData({
+                  ...formData,
+                  location: {
+                    name: "Online",
+                    address: "https://zoom.com/u/0/",
+                  }
+                })
+              }} type="button" className="primary-950 manrope-500 fs-body d-flex justify-content-start align-items-center gap-3 bg-white border-none p-2 px-3">
+                <FiVideo className="" />
+                Generate Zoom Link
+              </button>
+            </div>
           </div>
         </div>
 
-        <div>
-          <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
+        <div className="pb-4">
+          <label className="pb-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
           <select
             id="trackId"
             name="trackId"
