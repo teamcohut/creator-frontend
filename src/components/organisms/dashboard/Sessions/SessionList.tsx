@@ -28,6 +28,7 @@ const SessionList = () => {
     const now = new Date();
 
     let sessions = data?.data?.data || [];
+    console.log("I am data", sessions);
 
     if (filterType === "Upcoming") {
       sessions = sessions.filter((session: any) => new Date(session.date) > now);
