@@ -43,20 +43,21 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
     setFormData((prev) => {
       const newData = { ...prev, [field]: timeString };
 
-      // If setting start time and end time exists, validate end time
-      if (field === 'start' && newData.end) {
+      if (field === 'start') {
         const startTime = dayjs(timeString, 'HH:mm');
-        const endTime = dayjs(newData.end, 'HH:mm');
-        const minEndTime = startTime.add(30, 'minute');
-        
-        if (endTime.isBefore(minEndTime)) {
-          // If end time is less than 30 mins from new start time, adjust end time
-          newData.end = minEndTime.format('HH:mm');
-          notification.warning({ message: "End time adjusted to ensure minimum 30-minute duration" });
+        const suggestedEndTime = startTime.add(1, 'hour');
+        newData.end = suggestedEndTime.format('HH:mm');
+
+        if (prev.end) {
+          const endTime = dayjs(prev.end, 'HH:mm');
+          const minEndTime = startTime.add(30, 'minute');
+          
+          if (endTime.isBefore(minEndTime)) {
+            notification.warning({ message: "End time adjusted to ensure minimum 30-minute duration" });
+          }
         }
       }
 
-      // If setting end time, validate against start time
       if (field === 'end' && newData.start) {
         const startTime = dayjs(newData.start, 'HH:mm');
         const endTime = dayjs(timeString, 'HH:mm');
@@ -64,7 +65,7 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
         
         if (endTime.isBefore(minEndTime)) {
           notification.error({ message: "Session must be at least 30 minutes long" });
-          return prev; // Keep previous state
+          return prev;
         }
       }
 
@@ -112,6 +113,9 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
                 value={formData.date ? dayjs(formData.date, "YYYY-MM-DD") : null}
                 onChange={handleDateChange}
                 placeholder="Select Date"
+                disabledDate={(current) => {
+                  return current && current < dayjs().startOf('day');
+                }}
               />
             </div>
             <TimePicker
@@ -121,7 +125,28 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
               placeholder="Start Time"
               format="HH:mm"
               changeOnBlur
-              showNow={false}
+              showNow
+              disabledTime={() => {
+                const currentDate = dayjs(formData.date).startOf('day');
+                const today = dayjs().startOf('day');
+                const currentHour = dayjs().hour();
+                const currentMinute = dayjs().minute();
+
+                return {
+                  disabledHours: () => {
+                    if (currentDate.isSame(today)) {
+                      return Array.from({ length: currentHour }, (_, i) => i);
+                    }
+                    return [];
+                  },
+                  disabledMinutes: (selectedHour) => {
+                    if (currentDate.isSame(today) && selectedHour === currentHour) {
+                      return Array.from({ length: currentMinute }, (_, i) => i);
+                    }
+                    return [];
+                  }
+                };
+              }}
             />
             <TimePicker
               className="rounded-5"
