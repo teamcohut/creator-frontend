@@ -16,6 +16,10 @@ class User {
   deactivate() {
     return this.client.delete("/user/deactivate");
   }
+
+  dashboardStat(cohortId: string) {
+    return this.client.get(`/user/dashboard-stats/${cohortId}`);
+  }
 }
 
 export default User;
