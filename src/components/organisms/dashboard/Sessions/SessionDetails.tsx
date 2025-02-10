@@ -119,8 +119,9 @@ const SessionDetails = () => {
                     to={`${sessionLink}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="nowrap"
                   >
-                    {sessionLink}
+                    {sessionLink.substring(0, 22)}...
                   </Link>
                 </p>
               )}
