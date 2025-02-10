@@ -27,8 +27,8 @@ const DashBoard: FC<IDashboard> = () => {
   };
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["participants", activeCohort],
-    queryFn: () => api.participant.getParticipants(activeCohort._id, 1),
+    queryKey: ["user", activeCohort],
+    queryFn: () => api.user.dashboardStat(activeCohort._id),
     enabled: !!activeCohort._id,
   });
 

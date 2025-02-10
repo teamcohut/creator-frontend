@@ -25,7 +25,7 @@ export const generateCardData = (data: any) => [
   {
     icon: <FiBook />,
     title: "Total Task",
-    subtitle: data?.noOfSessions || 0,
+    subtitle: data?.noOfTasks || 0,
     iconColor: "primary-300",
     iconBgColor: "#ECF1FF",
   },
