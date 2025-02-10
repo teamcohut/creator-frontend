@@ -26,7 +26,10 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
   const handleDateChange = (date: dayjs.Dayjs | null, dateString: string | string[]) => {
     setFormData(prev => ({ 
       ...prev, 
-      date: Array.isArray(dateString) ? dateString[0] : dateString 
+      date: Array.isArray(dateString) ? dateString[0] : dateString,
+      // Reset times when date changes to prevent invalid combinations
+      start: "",
+      end: "" 
     }));
   };
 
@@ -141,6 +144,8 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
               changeOnBlur
               showNow
               disabledTime={() => {
+                if (!formData.date) return { disabledHours: () => [], disabledMinutes: () => [] };
+                
                 const currentDate = dayjs(formData.date).startOf('day');
                 const today = dayjs().startOf('day');
                 const currentHour = dayjs().hour();

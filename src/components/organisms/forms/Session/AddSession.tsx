@@ -31,10 +31,15 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
   }, [initialData]);
 
   const handleDateChange = (date: any, dateString: any) => {
-    setFormData((prev) => ({ ...prev, date: dateString }));
+    setFormData((prev) => ({ 
+      ...prev, 
+      date: dateString,
+      start: "",
+      end: ""
+    }));
   };
 
-  const handleTimeChange = (field: any) => (time: any, timeString: any) => {
+  const handleTimeChange = (field: "start" | "end") => (time: any, timeString: any) => {
     if (!time) {
       setFormData((prev) => ({ ...prev, [field]: "" }));
       return;
@@ -47,15 +52,6 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
         const startTime = dayjs(timeString, 'HH:mm');
         const suggestedEndTime = startTime.add(1, 'hour');
         newData.end = suggestedEndTime.format('HH:mm');
-
-        if (prev.end) {
-          const endTime = dayjs(prev.end, 'HH:mm');
-          const minEndTime = startTime.add(30, 'minute');
-          
-          if (endTime.isBefore(minEndTime)) {
-            notification.warning({ message: "End time adjusted to ensure minimum 30-minute duration" });
-          }
-        }
       }
 
       if (field === 'end' && newData.start) {
@@ -93,7 +89,7 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
         <div className="d-flex flex-row justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Add New Session</h1>
           <button onClick={closeModal} className="border-none bg-transparent">
-          <FiX className="fs-h3" />
+            <FiX className="fs-h3" />
           </button>
         </div>
         <span className="manrope-500 dark-700 fs-body">
@@ -126,7 +122,10 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
               format="HH:mm"
               changeOnBlur
               showNow
+              disabled={!formData.date}
               disabledTime={() => {
+                if (!formData.date) return { disabledHours: () => [], disabledMinutes: () => [] };
+
                 const currentDate = dayjs(formData.date).startOf('day');
                 const today = dayjs().startOf('day');
                 const currentHour = dayjs().hour();
@@ -156,6 +155,7 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
               format="HH:mm"
               changeOnBlur
               showNow={false}
+              disabled={!formData.start}
               disabledTime={() => ({
                 disabledHours: () => {
                   if (!formData.start) return [];
@@ -166,12 +166,13 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
                 disabledMinutes: (selectedHour) => {
                   if (!formData.start) return [];
                   const startTime = dayjs(formData.start, 'HH:mm');
-                  const minEndTime = startTime.add(30, 'minute');
+                  const startHour = startTime.hour();
                   
-                  if (selectedHour === startTime.hour()) {
-                    return Array.from({ length: minEndTime.minute() }, (_, i) => i);
+                  if (selectedHour === startHour) {
+                    const minEndMinute = startTime.minute() + 30;
+                    return Array.from({ length: minEndMinute }, (_, i) => i);
                   }
-                  if (selectedHour < startTime.hour()) {
+                  if (selectedHour < startHour) {
                     return Array.from({ length: 60 }, (_, i) => i);
                   }
                   return [];
