@@ -33,6 +33,8 @@ const ParticipantsPage: React.FC = () => {
     enabled: !!activeCohort._id,
   });
 
+  console.log("number of participant", data);
+
   // const getParticipantsMutation = useMutation({
   //   mutationFn: (page: number) => api.participant.getParticipants(activeCohort._id, page),
   //   onSuccess: (data: any) => {

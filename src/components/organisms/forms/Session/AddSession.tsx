@@ -31,8 +31,8 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
   }, [initialData]);
 
   const handleDateChange = (date: any, dateString: any) => {
-    setFormData((prev) => ({ 
-      ...prev, 
+    setFormData((prev) => ({
+      ...prev,
       date: dateString,
       start: "",
       end: ""
@@ -58,7 +58,7 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
         const startTime = dayjs(newData.start, 'HH:mm');
         const endTime = dayjs(timeString, 'HH:mm');
         const minEndTime = startTime.add(30, 'minute');
-        
+
         if (endTime.isBefore(minEndTime)) {
           notification.error({ message: "Session must be at least 30 minutes long" });
           return prev;
@@ -120,7 +120,6 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
               onChange={handleTimeChange("start")}
               placeholder="Start Time"
               format="HH:mm"
-              changeOnBlur
               showNow
               disabled={!formData.date}
               disabledTime={() => {
@@ -167,7 +166,7 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
                   if (!formData.start) return [];
                   const startTime = dayjs(formData.start, 'HH:mm');
                   const startHour = startTime.hour();
-                  
+
                   if (selectedHour === startHour) {
                     const minEndMinute = startTime.minute() + 30;
                     return Array.from({ length: minEndMinute }, (_, i) => i);

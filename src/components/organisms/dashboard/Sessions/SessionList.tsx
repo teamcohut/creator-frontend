@@ -24,7 +24,7 @@ const SessionList = () => {
   });
 
   useEffect(() => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
+    const lowerCaseQuery = searchQuery?.toLowerCase();
     const now = new Date();
 
     let sessions = data?.data?.data || [];

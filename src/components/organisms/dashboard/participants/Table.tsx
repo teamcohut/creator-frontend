@@ -103,14 +103,14 @@ const Table: React.FC<ITable> = ({ header, body, count, refresh }) => {
   };
 
   useEffect(() => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
+    const lowerCaseQuery = searchQuery?.toLowerCase();
     body && setFilteredParticipants(
       body.filter(
         (participant: IParticipant) =>
           participant.title?.toLowerCase().includes(lowerCaseQuery) ||
           participant.subtitle?.toLowerCase().includes(lowerCaseQuery) ||
-          participant.firstName.toLowerCase().includes(lowerCaseQuery) ||
-          participant.lastName.toLowerCase().includes(lowerCaseQuery)
+          participant.firstName?.toLowerCase().includes(lowerCaseQuery) ||
+          participant.lastName?.toLowerCase().includes(lowerCaseQuery)
       )
     );
   }, [body, searchQuery]);

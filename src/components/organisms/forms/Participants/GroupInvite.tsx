@@ -66,7 +66,7 @@ const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId, closeModal }) => 
                 <select
                     id="trackId"
                     name="trackId"
-                    className="form-select"
+                    className="form-select rounded-5"
                     value={selectedTrackId}
                     onChange={handleTrackChange}
                 >

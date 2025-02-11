@@ -84,7 +84,7 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId, c
                     <select
                         id="trackId"
                         name="trackId"
-                        className="form-select"
+                        className="form-select rounded-5"
                         value={formData.trackId}
                         onChange={handleInputChange}
                     >
