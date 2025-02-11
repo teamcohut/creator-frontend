@@ -64,7 +64,6 @@ export interface ISetup {
   subtitle1: string;
   title: string;
   subtitle2?: string;
-
 }
 
 export interface ICohort {
@@ -88,6 +87,19 @@ export interface ISetupModal {
   setCurrentStep?: (step: number) => void;
 }
 
-export type TModal = "program" | "cohort" | "participant" | "session" | "task" | "deletecohort" | "deleteProgram" | "changeProgramImages" | "changepassword" | "deactivateaccount" | "addAdmin" | null;
+export type TModal = 
+  | "program" 
+  | "cohort" 
+  | "participant" 
+  | "session" 
+  | "task" 
+  | "track"
+  | "deletecohort" 
+  | "deleteProgram" 
+  | "changeProgramImages" 
+  | "changepassword" 
+  | "deactivateaccount" 
+  | "addAdmin" 
+  | null;
 
 export type TActiveModal = "program" | "cohort" | null;

@@ -1,27 +1,17 @@
 class Track {
-    client;
+  client;
 
-    constructor(client: any) {
-        this.client = client;
-    }
+  constructor(client: any) {
+    this.client = client;
+  }
 
-    createTrack(payload: any) {
-        return this.client.post("/track", payload);
-    }
-
-    getTrack(cohortId: string) {
-        return this.client.get(
-            `/track/${cohortId}`
-        );
-    }
-
-    deleteTrack(trackId: string) {
-        return this.client.delete(
-            `/track/${trackId}`
-        );
-    }
-
-
+  createTrack(data: FormData) {
+    return this.client.post("/track", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  }
 }
 
 export default Track;

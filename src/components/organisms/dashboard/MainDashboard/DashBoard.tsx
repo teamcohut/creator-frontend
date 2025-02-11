@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import api from "../../../../api/axios";
 import { TModal } from "../../../../@types/dashboard.interface";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import TrackModal from "../modals/TrackModal";
 
 const DashBoard: FC<IDashboard> = () => {
   const { activeCohort } = useContext(ProgramContext);
@@ -51,14 +52,14 @@ const DashBoard: FC<IDashboard> = () => {
           {activeCohort.name ? (
             <div className="d-flex gap-4">
               <Button
-                action={() => setModal({ open: true, name: "task" })}
+                action={() => setModal({ open: true, name: "track" })}
                 fill={false}
                 type="button"
                 border
                 gap
                 outline="primary"
               >
-                <FiPlus className="fs-body" /> Add Task
+                <FiPlus className="fs-body" /> Add New Track
               </Button>
               <Button
                 action={() =>
@@ -110,6 +111,13 @@ const DashBoard: FC<IDashboard> = () => {
         <SessionModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
       )}
 
+      {modal.name === "task" && (
+        <TaskModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
+      )}
+      {modal.name === "track" && (
+        <TrackModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
+      )}
+      
       {modal.name === "task" && (
         <TaskModal modalOpen={modal.open} setModalOpen={setModalOpenState} />
       )}
