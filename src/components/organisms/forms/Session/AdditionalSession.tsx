@@ -114,43 +114,37 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
         </span>
       </div>
 
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column gap-4">
         <div>
-          <span className="manrope-600 primary-950 pb-2">Location</span>
-          <div className="d-flex flex-column relative w-100 h-fit">
-            <div onClick={() => {
-              formData.location.address === "" ? setOpenLocation(!openLocation) : setOpenLocation(false)
-              console.log(openLocation);
-            }} className="location-input-wrapper w-100 d-flex flex-row gap-2">
+          <label className="mb-2 d-block manrope-600">Location</label>
+          <div className="d-flex flex-column relative w-100">
+            <div className="location-input-wrapper w-100 d-flex flex-row gap-2 rounded-5" style={{ height: '48px', border: '1px solid #E5E7EB' }}>
               <label htmlFor="location" className="p-2">
                 <CiLocationOn className="fs-h3" />
               </label>
 
-              {
-                useZoom ?
-                  // <div>
-                  <div className="w-100 d-flex align-items-center justify-content-between">
-                    <span className="border w-25 rounded-5 px-1 no-wrap overflow-x-hidden no-wrap">https://zoom.com/u/0</span>
-                    <button onClick={() => setUseZoom(false)} className="border-none bg-transparent px-3">
-                      <FiX />
-                    </button>
-                    {/* </div> */}
-                  </div> :
-                  <input
-                    id="location"
-                    type="text"
-                    placeholder='Enter location or virtual link'
-                    className="location-text"
-                    onFocus={() => {
-                      formData.location.address === "" ? setOpenLocation(!openLocation) : setOpenLocation(false)
-                      console.log(openLocation);
-                    }}
-                    onChange={(e) =>
-                      changeAddress("address", e.target.value)
-                    }
-                  />
-              }
+              {useZoom ? (
+                <div className="w-100 d-flex align-items-center justify-content-between">
+                  <span className="border w-25 rounded-5 px-1 no-wrap overflow-x-hidden">https://zoom.com/u/0</span>
+                  <button onClick={() => setUseZoom(false)} className="border-none bg-transparent px-3">
+                    <FiX />
+                  </button>
+                </div>
+              ) : (
+                <input
+                  id="location"
+                  type="text"
+                  placeholder='Enter location or virtual link'
+                  className="location-text border-0 w-100"
+                  style={{ height: '100%', outline: 'none' }}
+                  onFocus={() => {
+                    formData.location.address === "" ? setOpenLocation(!openLocation) : setOpenLocation(false)
+                  }}
+                  onChange={(e) => changeAddress("address", e.target.value)}
+                />
+              )}
             </div>
+            
             <div className={`w-100 d-flex flex-column gap-4 py-3 rounded-3 shadow ${!openLocation ? 'hidden' : ''}`}>
               <span className="dark-300 fs-small manrope-500 px-3">Virtual Link Options</span>
               <button onClick={() => {
@@ -171,22 +165,19 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
           </div>
         </div>
 
-        <div className="pb-4">
-          <label className="pb-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
+        <div>
+          <label className="mb-2 d-block manrope-600" htmlFor="trackId">Tracks</label>
           <select
             id="trackId"
             name="trackId"
-            className="form-select rounded-4"
+            className="form-select rounded-5"
+            style={{ height: '48px', padding: '12px' }}
             defaultValue={''}
             onChange={(e) => handleChange("track", e.target.value)}
           >
-            <option value="" disabled>
-              Select a Track
-            </option>
+            <option value="" disabled>Select a Track</option>
             {tracks?.map((track: any) => (
-              <option key={track.id} value={track.id}>
-                {track.title}
-              </option>
+              <option key={track.id} value={track.id}>{track.title}</option>
             ))}
           </select>
         </div>
@@ -197,7 +188,6 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
           placeHolder="Add Resources"
           onchange={(e) => handleChange("resources", e.target.value)}
         />
-
       </div>
 
       <div className="d-flex flex-column align-items-center gap-3">

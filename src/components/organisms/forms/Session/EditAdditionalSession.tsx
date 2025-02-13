@@ -83,45 +83,40 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <p className="manrope-600 primary-950 fs-h4">Location</p>
-          <div className="location-input-wrapper">
+          <label className="mb-2 d-block manrope-600">Location</label>
+          <div className="location-input-wrapper rounded-5" style={{ height: '48px' }}>
             <select
               value={locationType}
               onChange={handleDropdownChange}
-              className="location-dropdown"
+              className="location-dropdown rounded-5"
+              style={{ height: '100%' }}
             >
               <option value="Online">Online</option>
               <option value="Physical">Physical</option>
             </select>
             <input
               type="text"
-              placeholder={
-                locationType === "Online" ? "Link" : "Address"
-              }
-              className="location-text"
-              onChange={(e) =>
-                handleChange("address", e.target.value)
-              }
+              placeholder={locationType === "Online" ? "Link" : "Address"}
+              className="location-text border-0"
+              style={{ height: '100%' }}
+              onChange={(e) => handleChange("address", e.target.value)}
             />
           </div>
         </div>
 
-        <div>
-          <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
+        <div className="mb-4">
+          <label className="mb-2 d-block manrope-600" htmlFor="trackId">Tracks</label>
           <select
             id="trackId"
             name="trackId"
-            className="form-select rounded-4"
+            className="form-select rounded-5"
+            style={{ height: '48px', padding: '12px' }}
             defaultValue={''}
             onChange={(e) => handleChange("track", e.target.value)}
           >
-            <option value="" disabled>
-              Select a Track
-            </option>
+            <option value="" disabled>Select a Track</option>
             {tracks?.map((track: any) => (
-              <option key={track.id} value={track.id}>
-                {track.title}
-              </option>
+              <option key={track.id} value={track.id}>{track.title}</option>
             ))}
           </select>
         </div>
