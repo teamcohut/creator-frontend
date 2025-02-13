@@ -114,7 +114,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
         </span>
       </div>
 
-      <div className="d-flex flex-column gap-4">
+      <div className="d-flex flex-column gap-2">
         <div>
           <label className="mb-2 d-block manrope-600">Location</label>
           <div className="d-flex flex-column relative w-100">
