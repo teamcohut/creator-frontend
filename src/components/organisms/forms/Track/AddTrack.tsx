@@ -3,8 +3,8 @@ import Button from "../../../atoms/Button";
 import TextInput from "../../../atoms/inputs/TextInput";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import { notification } from "antd";
-import { useMutation } from "@tanstack/react-query";
-import { FiX, FiArrowLeft } from "react-icons/fi";
+import { useMutation, useQueryClient } from "@tanstack/react-query";  // Add useQueryClient
+import { FiX, FiArrowLeft, FiUpload } from "react-icons/fi";  // Add FiUpload import
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import api from "../../../../api/axios";
 
@@ -14,12 +14,13 @@ interface IAddTrack {
 
 const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
   const { activeCohort } = useContext(ProgramContext);
+  const queryClient = useQueryClient();  // Add this
   const [trackName, setTrackName] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const [file, setFile] = useState<File | null>(null);
 
   const createTrackMutation = useMutation({
-    mutationFn: (payload: { name: string; file?: File }) => {
+    mutationFn: async (payload: { name: string; file?: File }) => {
       const formData = new FormData();
       formData.append("title", payload.name);
       formData.append("cohort", activeCohort?._id);
@@ -29,12 +30,24 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
         throw new Error("No active cohort selected");
       }
 
-      return api.track.createTrack(formData);
+      const trackResponse = await api.track.createTrack(formData);
+      
+      // If there's a file, invite participants after track creation
+      if (payload.file) {
+        await api.participant.inviteGroupParticipant(
+          activeCohort._id,
+          trackResponse.data.data._id,  // Use the new track ID
+          payload.file
+        );
+      }
+
+      return trackResponse;
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       notification.success({
-        message: "Track created successfully",
+        message: "Track created and participants invited successfully",
       });
+      queryClient.invalidateQueries({ queryKey: ["participants", activeCohort] });  // Fixed query invalidation
       closeModal();
     },
     onError: (error: any) => {
@@ -113,13 +126,20 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
           </div>
 
           <div
-            className={`cursor-pointer ${
+            className={`${
               showUpload ? 'text-black' : trackName.trim() ? "primary-600" : "text-gray-400"
-            }`}
-            style={{ margin: "0" }}
+            } d-flex align-items-center gap-2 hover-pointer`}  // Added gap-2
+            role="button"
+            style={{ 
+              margin: "0",
+              cursor: trackName.trim() ? "pointer" : "not-allowed",
+              userSelect: "none",
+              padding: "8px 0"
+            }}
             onClick={() => trackName.trim() && setShowUpload(true)}
           >
-            {showUpload ? "Upload Participants list" : "Upload New Participants +"}
+            <FiUpload />  {/* Add upload icon */}
+            {showUpload ? "Upload Participants list" : "Upload New Participants"}
           </div>
 
           {/* Placeholder div when upload section is not shown */}

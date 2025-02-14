@@ -10,7 +10,9 @@
   gap: 36px;
   overflow-x: hidden;
 }
-
+.hover-pointer:hover {
+  cursor: pointer !important;
+}
 .form .back {
   cursor: pointer;
 }
