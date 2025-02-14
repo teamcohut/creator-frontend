@@ -31,7 +31,7 @@ const CohortSettings = () => {
   const tracks: ITrack[] = activeCohort?.tracks;
 
   useEffect(() => {
-    tracks?.map((el) => setTags([...tags, el.title]))
+    tracks?.map((el) => setTags([...tags, el.id]))
   }, [activeCohort])
 
   // const handleTagsChange = (value: any) => {
@@ -213,7 +213,8 @@ const CohortSettings = () => {
                   startDate,
                   endDate,
                   graduationMessage: message,
-                  tracks: tags
+                  tracks: tags,
+                  hasTrack: tags.length > 0
                 });
               }}
               type="button"
