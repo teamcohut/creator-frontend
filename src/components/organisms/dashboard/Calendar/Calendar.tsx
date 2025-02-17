@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import { useQuery } from "@tanstack/react-query";
@@ -6,10 +6,13 @@ import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import convertTimeToDate from "../../../utils/convertTimeToData";
 import "./calendar.css";
+import { useNavigate } from "react-router-dom";
 
 const CalendarComponent: React.FC = () => {
   const { activeCohort } = useContext(ProgramContext);
   const [view, setView] = useState<"month" | "week" | "day">("month");
+  const navigate = useNavigate();
+  const calendarRef = useRef<any>(null);
 
   const { isLoading, isError, data } = useQuery({
     queryKey: ["session", activeCohort],
@@ -28,6 +31,21 @@ const CalendarComponent: React.FC = () => {
     },
     enabled: !!activeCohort._id,
   });
+
+  useEffect(() => {
+    const calendarInstance = calendarRef.current?.getInstance();
+    if (calendarInstance) {
+      calendarInstance.on("clickSchedule", (event: any) => {
+        navigate(`/sessions/${event.schedule.calendarId}`);
+      });
+    }
+
+    // return () => {
+    //   if (calendarInstance) {
+    //     calendarInstance.off("clickSchedule");
+    //   }
+    // };
+  }, [navigate]);
 
   if (isLoading) return <p>Loading calendar...</p>;
   if (isError) return <p>Failed to load calendar data.</p>;
@@ -57,6 +75,7 @@ const CalendarComponent: React.FC = () => {
         </div>
       </div>
       <Calendar
+        ref={calendarRef}
         height="900px"
         view={view}
         events={
@@ -68,9 +87,6 @@ const CalendarComponent: React.FC = () => {
             : []
         }
         usageStatistics={false}
-        onClickSchedule={(event: any) => {
-          alert(`Event clicked: ${event.schedule.title}`);
-        }}
       />
     </div>
   );

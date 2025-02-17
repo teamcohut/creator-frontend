@@ -5,8 +5,8 @@ import {
   FiArrowLeft,
   FiCalendar,
   FiClock,
+  FiCopy,
   FiEdit3,
-  FiMapPin,
   FiTrash2,
   FiVideo,
 } from "react-icons/fi";
@@ -16,6 +16,8 @@ import api from "../../../../api/axios";
 import { TModal } from "../../../../@types/dashboard.interface";
 import EditSessionModal from "../modals/EditSessionModal";
 import { formatDate } from "../../../utils/formatDate";
+import { Copy } from "../../../../helpers/Copy";
+import '../../style.css'
 
 const SessionDetails = () => {
   const { sessionId } = useParams();
@@ -108,23 +110,30 @@ const SessionDetails = () => {
                   https://us04web.zoom.us
                 </Link>
               </p> */}
-              {session?.location.name === "Physical" ? (
+              {/* {session?.location.name === "Physical" ? (
                 <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                   <FiMapPin /> {session.location.address}
                 </p>
-              ) : (
-                <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
-                  <FiVideo />
-                  <Link
-                    to={`${sessionLink}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="nowrap"
-                  >
-                    {sessionLink.substring(0, 22)}...
-                  </Link>
-                </p>
-              )}
+              ) : ( */}
+              <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700 sessionLink">
+                <FiVideo />
+                <Link
+                  to={`${sessionLink}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nowrap"
+                >
+                  {sessionLink.substring(0, 32)}...
+                </Link>
+                <button className="border-none bg-transparent primary-500 copy"
+                  onClick={() => {
+                    Copy(sessionLink)
+                  }
+                  }>
+                  <FiCopy />
+                </button>
+              </p>
+              {/* )} */}
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <div className="w-75">
