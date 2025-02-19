@@ -6,12 +6,29 @@ import '../../style.css';
 import api from '../../../../api/axios';
 import SearchInput from '../../../atoms/inputs/SearchInput';
 import TaskInfoCard from '../../../molecules/dashboard/TaskInfoCard';
+import { TModal } from '../../../../@types/dashboard.interface';
+import TaskDetails from '../../forms/Task/TaskDetails';
+import Modal from '../../../templates/Modal';
 
 const TaskDisplay = () => {
   const { activeCohort } = useContext(ProgramContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("All");
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [oneTask, setOneTask] = useState();
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
+    open: boolean;
+  });
+
+  const setModalOpen = (name: TModal, open: boolean) => {
+    setModal({name, open})
+  }
+
+  const openModal = (task: any) => {
+    setOneTask(task)
+    setModal({name: "task", open: true})
+  }
 
 
   const { isLoading, isError, data } = useQuery({
@@ -19,8 +36,6 @@ const TaskDisplay = () => {
     queryFn: () => api.task.getAllTask(activeCohort._id),
     enabled: !!activeCohort._id,
   });
-  console.log(data?.data?.data?.[0])
-  console.log(filteredTasks)
 
 
   useEffect(() => {
@@ -85,16 +100,24 @@ const TaskDisplay = () => {
         <p>You do not have any tasks</p>
       )}
       <div className="task-grid">
-        {filteredTasks?.map((tasks: any, i: any) => (
+        {filteredTasks?.map((task: any, i: any) => (
 
           <TaskInfoCard
-            title={tasks.title || "No title available"}
-            dueTime={tasks.dueTime || "No Link available yet"}
-            dueDate={tasks.dueDate.split("T")[0]}
+            key={i}
+            setModal={() => openModal(task)}
+            title={task.title || "No title available"}
+            dueTime={task.dueTime || "No Link available yet"}
+            dueDate={task.dueDate.split("T")[0]}
           />
 
         ))}
       </div>
+      
+      {modal.name === "task" && (
+        <Modal open={modal.open} setModalOpen={(open: boolean) => setModalOpen}>
+          <TaskDetails task={oneTask} closeModal={()=> setModal({name: null, open: false})} />
+        </Modal>
+      )}
     </div>
   )
 }

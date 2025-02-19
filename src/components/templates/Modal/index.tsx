@@ -6,7 +6,7 @@ const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
   useEffect(() => {
     const handleKeyDown = (event: any) => {
       if (event.key === "Escape") {
-        setModalOpen(false, "");
+        setModalOpen(false, null);
       }
     };
 
@@ -31,7 +31,7 @@ const Modal: FC<IModal> = ({ open, setModalOpen, children }) => {
   return (
     <>
       <div
-        onClick={() => setModalOpen(false, "")}
+        onClick={() => setModalOpen(false, null)}
         className={`modal-bg align-items-center justify-content-center ${
           open ? "d-flex" : "hidden"
         }`}

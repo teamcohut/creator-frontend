@@ -152,6 +152,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
                 setOpenLocation(false)
                 setFormData({
                   ...formData,
+                  sessionLink: "",
                   location: {
                     name: "Online",
                     address: "https://zoom.com/u/0/",
