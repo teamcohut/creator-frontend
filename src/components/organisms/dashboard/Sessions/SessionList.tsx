@@ -47,21 +47,21 @@ const SessionList = () => {
     <div className="courseDisplay w-100 d-flex flex-column align-items-stretch gap-3">
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-4">
-        <div className="d-flex align-items-center justify-content-center gap-2">
-          <h4 className="manrope-600 fs-h4 primary-950 m-0">Sessions</h4>
-          <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
-            {filteredSessions?.length || 0}
-          </span>
-        </div>
+          <div className="d-flex align-items-center justify-content-center gap-2">
+            <h4 className="manrope-600 fs-h4 primary-950 m-0">Sessions</h4>
+            <span className="manrope-500 fs-footer primary-950 bg-secondary-450 px-2 py-1 rounded-4">
+              {filteredSessions?.length || 0}
+            </span>
+          </div>
 
-        <div>
-          <SearchInput
-            id="session"
-            label=""
-            placeHolder="Search"
-            onchange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+          <div>
+            <SearchInput
+              id="session"
+              label=""
+              placeHolder="Search"
+              onchange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
 
         <div className="d-flex align-items-center gap-2">
@@ -103,13 +103,13 @@ const SessionList = () => {
           >
             <InfoCard
               title={session.title || "No title available"}
-              subtitle={session.sessionLink || "No Link available yet"}
+              subtitle={`${session.sessionLink.substring(0, 32)}...` || "No Link available yet"}
               dateOfSession={session.date || "Date not available"}
               infoCardIcon={
                 // session.location.name === "Online" ? (
                 //   <FiVideo color="#FF63CD" className="infoIcon fs-h2" />
                 // ) : (
-                  <FiMapPin color="#FF63CD" className="infoIcon fs-h2" />
+                <FiMapPin color="#FF63CD" className="infoIcon fs-h2" />
                 // )
               }
               infoCardIconBgColor="#FEF1FA"

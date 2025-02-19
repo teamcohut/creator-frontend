@@ -123,13 +123,13 @@ const SessionDetails = () => {
                   rel="noopener noreferrer"
                   className="nowrap"
                 >
-                  {sessionLink.substring(0, 22)}...
+                  {sessionLink.substring(0, 32)}...
                 </Link>
                 <button className="border-none bg-transparent primary-500 copy"
                   onClick={() => {
                     Copy(sessionLink)
                   }
-                }>
+                  }>
                   <FiCopy />
                 </button>
               </p>
