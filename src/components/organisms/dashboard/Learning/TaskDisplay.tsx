@@ -19,7 +19,7 @@ const TaskDisplay = () => {
     queryFn: () => api.task.getAllTask(activeCohort._id),
     enabled: !!activeCohort._id,
   });
-  console.log(data?.data?.data?.[0])
+  console.log("all task", data?.data?.data)
   console.log(filteredTasks)
 
 
