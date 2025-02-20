@@ -89,12 +89,12 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
 
   const handleSubmit = () => {
     // console.log(formData);
-    
+
     const payload = { ...initialData, ...formData };
     payload.location.address = formData.location.address;
 
     console.log(payload);
-    
+
     sessionMutation.mutate(payload);
   };
 
@@ -114,11 +114,11 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
         </span>
       </div>
 
-      <div className="d-flex flex-column gap-2">
+      <div className="d-flex flex-column">
         <div>
           <label className="mb-2 d-block manrope-600">Location</label>
           <div className="d-flex flex-column relative w-100">
-            <div className="location-input-wrapper w-100 d-flex flex-row gap-2 rounded-5" style={{ height: '48px', border: '1px solid #E5E7EB' }}>
+            <div className="location-input-wrapper bg-white w-100 d-flex flex-row gap-2 rounded-5" style={{ height: '48px', border: '1px solid #E5E7EB' }}>
               <label htmlFor="location" className="p-2">
                 <CiLocationOn className="fs-h3" />
               </label>
@@ -144,7 +144,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
                 />
               )}
             </div>
-            
+
             <div className={`w-100 d-flex flex-column gap-4 py-3 rounded-3 shadow ${!openLocation ? 'hidden' : ''}`}>
               <span className="dark-300 fs-small manrope-500 px-3">Virtual Link Options</span>
               <button onClick={() => {
@@ -166,29 +166,31 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
           </div>
         </div>
 
-        <div>
-          <label className="mb-2 d-block manrope-600" htmlFor="trackId">Tracks</label>
-          <select
-            id="trackId"
-            name="trackId"
-            className="form-select rounded-5"
-            style={{ height: '48px', padding: '12px' }}
-            defaultValue={''}
-            onChange={(e) => handleChange("track", e.target.value)}
-          >
-            <option value="" disabled>Select a Track</option>
-            {tracks?.map((track: any) => (
-              <option key={track.id} value={track.id}>{track.title}</option>
-            ))}
-          </select>
-        </div>
+        <div className="d-flex flex-column gap-4">
+          <div>
+            <label className="mb-2 d-block manrope-600" htmlFor="trackId">Tracks</label>
+            <select
+              id="trackId"
+              name="trackId"
+              className="form-select rounded-5"
+              style={{ height: '48px', padding: '12px' }}
+              defaultValue={''}
+              onChange={(e) => handleChange("track", e.target.value)}
+            >
+              <option value="" disabled>Select a Track</option>
+              {tracks?.map((track: any) => (
+                <option key={track.id} value={track.id}>{track.title}</option>
+              ))}
+            </select>
+          </div>
 
-        <TextAreaInput
-          id="resources"
-          label="Useful Links/Resources"
-          placeHolder="Add Resources"
-          onchange={(e) => handleChange("resources", e.target.value)}
-        />
+          <TextAreaInput
+            id="resources"
+            label="Useful Links/Resources"
+            placeHolder="Add Resources"
+            onchange={(e) => handleChange("resources", e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="d-flex flex-column align-items-center gap-3">

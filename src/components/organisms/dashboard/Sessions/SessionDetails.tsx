@@ -7,6 +7,7 @@ import {
   FiClock,
   FiCopy,
   FiEdit3,
+  FiMapPin,
   FiTrash2,
   FiVideo,
 } from "react-icons/fi";
@@ -116,7 +117,7 @@ const SessionDetails = () => {
                 </p>
               ) : ( */}
               <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700 sessionLink">
-                <FiVideo />
+                <FiMapPin />
                 <Link
                   to={`${sessionLink}`}
                   target="_blank"
