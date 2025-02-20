@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Button from '../../../atoms/Button';
 import DragNDropInput from '../../../atoms/inputs/DragNDropInput';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axiosAPI from '../../../../api/axios';
 import { notification } from 'antd';
 import { FaFileCsv } from 'react-icons/fa';
@@ -20,12 +20,14 @@ interface GroupInviteProps {
 const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId, closeModal }) => {
     const [selectedTrackId, setSelectedTrackId] = useState('');
     const [csvFile, setCsvFile] = useState<File | null>(null);
+  const queryClient = useQueryClient(); 
 
     const inviteGroupMutation = useMutation({
         mutationFn: (payload: File) =>
             axiosAPI.participant.inviteGroupParticipant(cohortId, selectedTrackId, payload),
         onSuccess: () => {
             notification.success({ message: "Participants invited successfully!" });
+            queryClient.invalidateQueries({ queryKey: ["participants", cohortId] });
 
             setSelectedTrackId('');
             setCsvFile(null);

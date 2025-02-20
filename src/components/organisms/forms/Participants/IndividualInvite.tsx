@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '../../../atoms/Button';
 import TextInput from '../../../atoms/inputs/TextInput';
 import EmailInput from '../../../atoms/inputs/EmailInput';
-import { useMutation } from "@tanstack/react-query";
+import { useMutation,useQueryClient } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -26,12 +26,15 @@ const IndividualInvite: React.FC<IndividualInviteProps> = ({ tracks, cohortId, c
         trackId: '', // Track is optional
     });
     const navigate = useNavigate()
+  const queryClient = useQueryClient(); 
 
     const inviteIndividualMutation = useMutation({
         mutationFn: (payload: any) =>
             axiosAPI.participant.inviteIndividualParticipant(cohortId, payload),
         onSuccess: () => {
             notification.success({ message: "Invitation sent successfully!" });
+      queryClient.invalidateQueries({ queryKey: ["participants", cohortId] });
+
             setFormData({
                 firstName: '',
                 lastName: '',

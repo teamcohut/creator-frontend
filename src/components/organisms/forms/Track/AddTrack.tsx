@@ -3,7 +3,7 @@ import Button from "../../../atoms/Button";
 import TextInput from "../../../atoms/inputs/TextInput";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import { notification } from "antd";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation,useQueryClient  } from "@tanstack/react-query";
 import { FiX, FiArrowLeft } from "react-icons/fi";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import api from "../../../../api/axios";
@@ -17,6 +17,7 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
   const [trackName, setTrackName] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const queryClient = useQueryClient(); 
 
   const createTrackMutation = useMutation({
     mutationFn: (payload: { name: string; file?: File }) => {
@@ -35,6 +36,8 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
       notification.success({
         message: "Track created successfully",
       });
+      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
+
       closeModal();
     },
     onError: (error: any) => {
