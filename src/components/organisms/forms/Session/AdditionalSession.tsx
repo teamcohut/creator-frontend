@@ -3,7 +3,7 @@ import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import "../../style.css";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient} from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
@@ -34,6 +34,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
       address: ""
     },
   });
+  const queryClient = useQueryClient(); 
 
 
   const tracks = activeCohort?.tracks;
@@ -80,6 +81,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     mutationFn: (payload: any) => axiosAPI.session.createSession(payload),
     onSuccess: () => {
       notification.success({ message: "Session created successfully!" });
+      queryClient.invalidateQueries({ queryKey: ["session", activeCohort] });
       onSuccess();
     },
     onError: (error: any) => {

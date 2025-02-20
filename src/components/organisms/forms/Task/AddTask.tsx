@@ -6,7 +6,7 @@ import "../../style.css";
 import { DatePicker, TimePicker, notification } from "antd";
 import { ITask } from "../../../../@types/task.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { FiX } from "react-icons/fi";
 import dayjs from "dayjs";
@@ -23,6 +23,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
     assignedToAll: false,
     cohortId: activeCohort.id,
   });
+  const queryClient = useQueryClient(); 
 
   const [selectedTrackId, setSelectedTrackId] = useState("");
   const tracks = activeCohort?.tracks;
@@ -50,6 +51,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
     },
     onSuccess(data) {
       notification.success({ message: "Task Added successfully!" });
+      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
       api.success({ message: "Successful" });
       closeModal();
     },
