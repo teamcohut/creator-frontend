@@ -4,7 +4,6 @@ import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import { DatePicker, TimePicker, notification } from "antd";
-import { ITask } from "../../../../@types/task.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
