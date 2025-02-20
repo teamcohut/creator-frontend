@@ -55,7 +55,7 @@ const Preview = () => {
 
       {/* <Track /> */}
 
-      <EditTask />
+      {/* <EditTask /> */}
     </div>
   );
 };
