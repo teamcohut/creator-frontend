@@ -15,8 +15,8 @@ class Task {
         return this.client.get(`/task?cohortId=${cohortId}`)
     }
 
-    editTask(taskId: any) {
-        return this.client.put(`/task/${taskId}`)
+    editTask(taskId: string, update: any) {
+        return this.client.put(`/task/${taskId}`, update)
     }
 }
 

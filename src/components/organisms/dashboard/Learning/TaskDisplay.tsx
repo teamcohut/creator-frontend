@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 import { useQuery } from '@tanstack/react-query';
 import '../../style.css';
@@ -7,7 +6,7 @@ import api from '../../../../api/axios';
 import SearchInput from '../../../atoms/inputs/SearchInput';
 import TaskInfoCard from '../../../molecules/dashboard/TaskInfoCard';
 import { TModal } from '../../../../@types/dashboard.interface';
-import TaskDetails from '../../forms/Task/TaskDetails';
+import EditTask from '../../forms/Task/EditTask';
 import Modal from '../../../templates/Modal';
 
 const TaskDisplay = () => {
@@ -42,14 +41,14 @@ const TaskDisplay = () => {
     const lowerCaseQuery = searchQuery.toLowerCase();
     const now = new Date();
 
-    let sessions = data?.data?.data || []
+    let tasks = data?.data?.data || []
 
     if (filterType === "Upcoming") {
-      sessions = sessions.filter((session: any) => new Date(session.date) > now);
-    } else if (filterType === "Completed") sessions = sessions.filter((session: any) => new Date(session.date) < now);
+      tasks = tasks.filter((session: any) => new Date(session.date) > now);
+    } else if (filterType === "Completed") tasks = tasks.filter((session: any) => new Date(session.date) < now);
 
     setFilteredTasks(
-      sessions.filter(
+      tasks.filter(
         (task: any) =>
           task.title?.toLowerCase().includes(lowerCaseQuery) ||
           task.dueDate?.toLowerCase().includes(lowerCaseQuery)
@@ -68,7 +67,7 @@ const TaskDisplay = () => {
           </div>
 
           <SearchInput
-            id="session"
+            id="task"
             label=""
             placeHolder="Search"
             onchange={(e) => setSearchQuery(e.target.value)}
@@ -115,7 +114,7 @@ const TaskDisplay = () => {
       
       {modal.name === "task" && (
         <Modal open={modal.open} setModalOpen={(open: boolean) => setModalOpen}>
-          <TaskDetails task={oneTask} closeModal={()=> setModal({name: null, open: false})} />
+          <EditTask task={oneTask} closeModal={()=> setModal({name: null, open: false})} />
         </Modal>
       )}
     </div>
