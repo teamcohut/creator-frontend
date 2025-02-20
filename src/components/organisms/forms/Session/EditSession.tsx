@@ -78,18 +78,18 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const validateForm = () => {
-    if (!formData.title || !formData.date || !formData.start || !formData.end) {
-      notification.error({ message: "Please fill all required fields." });
-      return false;
-    }
-    return true;
-  };
+  // const validateForm = () => {
+  //   if (!formData.title || !formData.date || !formData.start || !formData.end) {
+  //     notification.error({ message: "Please fill all required fields." });
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const nextPage = () => {
-    if (validateForm()) {
+    // if (validateForm()) {
       onSubmit(formData);
-    }
+    // }
   };
 
   const sessionMutation = useMutation({
@@ -103,9 +103,11 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit }) => {
   });
 
   const handleSubmit = () => {
-    if (validateForm()) {
+    // if (validateForm()) {
+    console.log(formData);
+    
       sessionMutation.mutate(formData);
-    }
+    // }
   };
 
   return (
