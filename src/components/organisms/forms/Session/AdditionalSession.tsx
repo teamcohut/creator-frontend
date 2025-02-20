@@ -104,7 +104,7 @@ const AdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onS
     <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
       <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
       <div className="d-flex flex-row justify-content-between">
-        <p className="" onClick={prevStep}><FiArrowLeft /> Back</p>
+        <button className="border-none bg-transparent" onClick={prevStep}><FiArrowLeft /> Back</button>
         <button onClick={closeModal} className="border-none bg-transparent">
           <FiX className="fs-h3" />
         </button>
