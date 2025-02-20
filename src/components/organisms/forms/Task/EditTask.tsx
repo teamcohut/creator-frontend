@@ -5,7 +5,7 @@ import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import { DatePicker, TimePicker, notification } from "antd";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { FiX } from "react-icons/fi";
 // import dayjs from "dayjs";
@@ -14,7 +14,7 @@ const EditTask: FC<IEditTask> = ({ task, closeModal }) => {
   const { activeCohort } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
   const [form, setForm] = useState<any>({});
-
+  const queryClient = useQueryClient(); 
   // const [selectedTrackId, setSelectedTrackId] = useState("");
   const tracks = activeCohort?.tracks;
 
@@ -45,6 +45,8 @@ const EditTask: FC<IEditTask> = ({ task, closeModal }) => {
     onSuccess(data) {
       notification.success({ message: "Task Updated successfully!" });
       api.success({ message: "Successful" });
+      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
+
       closeModal();
 
     },
