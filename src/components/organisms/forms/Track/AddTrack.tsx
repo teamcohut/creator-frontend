@@ -13,7 +13,7 @@ interface IAddTrack {
 }
 
 const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
-  const { activeCohort } = useContext(ProgramContext);
+  const { activeCohort, setActiveCohort } = useContext(ProgramContext);
   const [trackName, setTrackName] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -33,11 +33,16 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
       return api.track.createTrack(formData);
     },
     onSuccess: (response) => {
+      const newTrack = response as { data: any };
       notification.success({
         message: "Track created successfully",
       });
-      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
-
+      if (setActiveCohort && activeCohort) {
+        setActiveCohort({
+          ...activeCohort,
+          tracks: [...(activeCohort.tracks || []), newTrack.data],
+        });
+      }
       closeModal();
     },
     onError: (error: any) => {

@@ -20,7 +20,7 @@ interface GroupInviteProps {
 const GroupInvite: FC<GroupInviteProps> = ({ tracks, cohortId, closeModal }) => {
     const [selectedTrackId, setSelectedTrackId] = useState('');
     const [csvFile, setCsvFile] = useState<File | null>(null);
-  const queryClient = useQueryClient(); 
+    const queryClient = useQueryClient();
 
     const inviteGroupMutation = useMutation({
         mutationFn: (payload: File) =>
