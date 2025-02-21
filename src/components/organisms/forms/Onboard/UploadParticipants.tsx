@@ -31,7 +31,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
       ),
     onSuccess: () => {
       notification.success({ message: "Participants invited successfully!" });
-      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
+      queryClient.invalidateQueries({ queryKey: ["participants", activeCohort] });
       setTracks([...tracks, currentTrack]);
       setCurrentTrack({ name: "", file: null });
       setFormVisible(false);
