@@ -9,9 +9,15 @@ import api from "../../../../api/axios";
 import ParticipantModal from "../modals/ParticipantModal";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { TModal } from "../../../../@types/dashboard.interface";
+import "../../style.css"
+import Pagination from "./Pagination";
 
 const ParticipantsPage: React.FC = () => {
   const { activeCohort } = useContext(ProgramContext);
+  const [participants, setParticipants] = useState<any>()
+  const [page, setPage] = useState<number>(1)
+  const [start, setStart] = useState<number>(0)
+  const [end, setEnd] = useState<number>(5)
   const [modal, setModal] = useState({ name: null, open: false } as {
     name: TModal;
     open: boolean;
@@ -23,13 +29,27 @@ const ParticipantsPage: React.FC = () => {
 
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["participants", activeCohort],
-    queryFn: () => api.participant.getParticipants(activeCohort._id),
+    queryFn: () => api.participant.getParticipants(activeCohort._id, page),
     enabled: !!activeCohort._id,
   });
 
+  console.log("number of participant", data);
+
+  // const getParticipantsMutation = useMutation({
+  //   mutationFn: (page: number) => api.participant.getParticipants(activeCohort._id, page),
+  //   onSuccess: (data: any) => {
+  //     setParticipants(data.data.data.participants)
+  //   }
+  // })
+
+  useEffect(() => {
+    data && setParticipants(data.data.data.participants)
+  }, [data])
+
+
   useEffect(() => {
     refetch()
-  }, [activeCohort, refetch])
+  }, [activeCohort, refetch, page])
 
 
 
@@ -104,7 +124,10 @@ const ParticipantsPage: React.FC = () => {
                 subtitle={data?.data.data.noInactiveParticipants}
               />
             </div>
-            <Table header={header} body={data?.data.data.participants} refresh={refetch} />
+            <div className="pb-5">
+              <Table header={header} body={participants} count={data?.data.data.noOfParticipants} refresh={refetch} />
+              <Pagination data={data?.data.data} end={end} setEnd={setEnd} start={start} setStart={setStart} page={page} setPage={setPage} />
+            </div>
           </div>
         </>
       )}

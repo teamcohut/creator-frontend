@@ -61,10 +61,9 @@ const ChangePassword: FC<ISetupModal> = ({
       >
         <div className="d-flex justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Change Password</h1>
-          <FiX
-            style={{ fontSize: "24px", cursor: "pointer" }}
-            onClick={handleClose}
-          />
+          <button onClick={handleClose} className="border-none bg-transparent">
+            <FiX className="fs-h3" />
+          </button>
         </div>
 
         <div className="d-flex flex-column gap-4">

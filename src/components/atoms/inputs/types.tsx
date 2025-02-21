@@ -133,13 +133,15 @@ export interface ISearchInput {
 }
 
 export interface IDragnDrop {
-  id: string
-  label?: string,
-  detail: string,
+  id?: string;
+  label?: string;
+  detail?: string;
   value?: any;
-  onchange?: (file: File | null) => void;
+  onchange: (file: File | null) => void;
   icon?: ReactNode;
   uploadProgress?: number;
+  accept?: string;
+  description?: ReactNode;
 }
 
 

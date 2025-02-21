@@ -15,5 +15,6 @@ export interface ITasks {
   dueDate: string,
   assignedToTracks?: Array<string>,
   assignedToAll?: boolean,
-  cohortId?: string
+  cohortId?: string,
+  setModal: () => void
 }

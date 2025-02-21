@@ -15,11 +15,11 @@ const ChangePasswordSuccess: FC<ISetupModal> = ({
         description="You have successfully changed your password"
         icon={<FiCheckCircle style={{ fontSize: '70px', color: 'var(--success-600)' }}/>}
         cancelBtn ={
-          <span onClick={() =>{handleClose()}}
-          style={{cursor: "pointer"}}
+          <button onClick={() =>{handleClose()}}
+          className='border-none bg-transparent'
           >
-              <FiX size={24}/>
-          </span>
+              <FiX className='fs-h3'/>
+          </button>
         } 
       />
     </div>

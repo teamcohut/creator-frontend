@@ -15,8 +15,9 @@ export interface IBadge {
 }
 
 export interface ITable {
-  header: Array<string>,
+  header: Array<string>;
   body: Array<string | any>;
+  count: number;
   refresh?: () => void;
 }
 

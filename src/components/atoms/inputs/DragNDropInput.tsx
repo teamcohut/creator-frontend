@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { IDragnDrop } from "./types";
 import "../style.css";
-import { FiImage } from "react-icons/fi";
+import uploadIcon from "../../../assets/icons/Upload-icon.svg"; // Updated import path
 
 const DragNDropInput: React.FC<IDragnDrop> = (props) => {
-  const { label, id, onchange, detail, icon, value } = props;
+  const { label, id, onchange, detail, value, accept, description } = props;
 
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -49,8 +49,9 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
         </label>
       )}
       <div
-        className={`dashed-border p-3 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${dragActive ? "drag-active" : ""
-          }`}
+        className={`dashed-border p-2 rounded-2 d-flex flex-column align-items-center justify-content-center text-center rounded-5 ${
+          dragActive ? "drag-active" : ""
+        }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -60,50 +61,53 @@ const DragNDropInput: React.FC<IDragnDrop> = (props) => {
             src={previewUrl}
             alt="Preview"
             className="img-preview"
-            height={50}
-            width={50}
+            height={100}
+            width={100}
           />
         ) : (
-          <div>{icon ? icon : <FiImage className="h1 dark-400" />}</div>
-        )}
-        <p className="fs-caption">
-          {file ? (
-            <>
-              <input
-                type="file"
-                id={id}
-                className="file-input "
-                value={value}
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
-              <label htmlFor={id} className="btn-upload primary-600 mt-2 px-2">
-                {file ? "Change File" : "Upload"}:
-              </label>
-              <span className="primary-600 align-content-center">
-                {file.name}
-              </span>
-            </>
-          ) : (
-            <>
-              Drag-n-drop or{" "}
-              <span className="primary-600">
+          <>
+            <img 
+              src={uploadIcon} 
+              alt="Upload" 
+              height={150}
+              width={150} 
+              className="text-gray-400" 
+              style={{ marginBottom: '-10px' }} 
+            />
+
+            <div className="text-center">
+              <div className="text-muted fs-small text-center mb-0" style={{ fontSize: '0.875rem' }}>
+                Drag and drop or <label htmlFor={id} className="btn-upload primary-600 cursor-pointer" style={{ textDecoration: 'none', fontSize: '0.875rem' }}>upload</label> your {detail || "file"} here
+              </div>
+              {file ? (
+                <div>
+                  <input
+                    type="file"
+                    id={id}
+                    accept={accept}
+                    className="file-input"
+                    value={value}
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                  />
+                  <span className="primary-600 align-content-center">
+                    {file.name}
+                  </span>
+                </div>
+              ) : (
                 <input
                   type="file"
                   id={id}
+                  accept={accept}
                   className="file-input"
                   value={value}
                   onChange={handleFileChange}
                   style={{ display: "none" }}
                 />
-                <label htmlFor={id} className="btn-upload primary-600 mt-2">
-                  {file ? "Change File" : "Upload"}
-                </label>
-              </span>{" "}
-              your {detail}
-            </>
-          )}
-        </p>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

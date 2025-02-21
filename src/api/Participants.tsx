@@ -5,8 +5,8 @@ class Participant {
     this.client = client;
   }
 
-  getParticipants(cohortId: string) {
-    return this.client.get(`/cohort/get-participants/${cohortId}`);
+  getParticipants(cohortId: string, page: number) {
+    return this.client.get(`/cohort/get-participants/${cohortId}?page=${page}&limit=10`);
   }
 
   inviteIndividualParticipant(cohortId: string, data: any) {
@@ -20,6 +20,10 @@ class Participant {
    */
   removeParticipant(programId: string, participantId: string) {
     return this.client.delete(`/program/${programId}/remove-participant/${participantId}`);
+  }
+
+  graduateParticipant(cohortId: string, participantId: Array<string>) {
+    return this.client.post(`/cohort/graduate-participants/${cohortId}`, {participantId});
   }
 
   inviteGroupParticipant(cohortId: string, track: string, data: any, progress?: any) {

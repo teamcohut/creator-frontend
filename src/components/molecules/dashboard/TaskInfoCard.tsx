@@ -2,9 +2,11 @@ import { FiCheckSquare } from "react-icons/fi";
 import { ITasks } from "../../../@types/task.interface";
 import { FC } from "react";
 
-const TaskInfoCard: FC<ITasks> = ({ title, dueTime, dueDate }) => {
+const TaskInfoCard: FC<ITasks> = ({ title, dueTime, dueDate, setModal }) => {
+
   return (
     <div
+      onClick={setModal}
       className="task-info-card rounded-4 d-flex align-items-center"
       style={{
         border: "1px solid #ECF1FF",
@@ -13,6 +15,7 @@ const TaskInfoCard: FC<ITasks> = ({ title, dueTime, dueDate }) => {
         padding: "8px",
         margin: "0", // Ensure no extra spacing
         boxSizing: "border-box",
+        cursor: "pointer",
       }}
     >
       <div

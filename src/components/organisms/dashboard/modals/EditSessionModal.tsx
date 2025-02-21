@@ -34,11 +34,13 @@ const EditSessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
       {contextHolder}
       <Modal open={modalOpen} setModalOpen={(open: boolean) => setModalOpen(open, "session")}>
         {currentStep === 1 ? (
-          <EditSession onSubmit={nextStep} />
+          <EditSession onSubmit={nextStep} setModal={setModalOpen} />
         ) : currentStep === 2 ? (
           <EditAdditionalSession
             initialData={formData}
             onSuccess={handleSuccess}
+            setModal={setModalOpen}
+            prevStep={()=>setCurrentStep(1)}
           // onError={handleError}
           />
         ) : null}

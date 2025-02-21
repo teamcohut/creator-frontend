@@ -15,7 +15,9 @@ const Track: React.FC<TrackProps> = ({ name, fileName, onRemove }) => {
                 <div className="border w-75 rounded-5 px-1 no-wrap overflow-x-hidden d-flex align-items-center justify-content-center">
                     <span className="no-wrap">{fileName}</span>
                 </div>
-                <FiX onClick={onRemove} style={{ cursor: "pointer" }} />
+                <button onClick={onRemove} className="border-none bg-transparent">
+                    <FiX />
+                </button>
             </div>
 
         </div>

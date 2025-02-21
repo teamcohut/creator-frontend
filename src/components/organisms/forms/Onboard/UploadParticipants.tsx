@@ -6,7 +6,7 @@ import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import api from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation,useQueryClient } from "@tanstack/react-query";
 import { FaFileCsv } from "react-icons/fa";
 import { FiSave, FiX } from "react-icons/fi";
 import Track from "../../../molecules/dashboard/Track";
@@ -20,6 +20,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
   const [isFormVisible, setFormVisible] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<{ name: string; file: File | null }>({ name: "", file: null });
   const { activeCohort } = useContext(ProgramContext);
+  const queryClient = useQueryClient(); 
 
   const inviteParticipantsMutation = useMutation({
     mutationFn: (payload: { track: string; file: File }) =>
@@ -30,6 +31,7 @@ const UploadParticipants: FC<IUploadParticipants> = ({
       ),
     onSuccess: () => {
       notification.success({ message: "Participants invited successfully!" });
+      queryClient.invalidateQueries({ queryKey: ["participants", activeCohort] });
       setTracks([...tracks, currentTrack]);
       setCurrentTrack({ name: "", file: null });
       setFormVisible(false);
@@ -91,7 +93,9 @@ const UploadParticipants: FC<IUploadParticipants> = ({
             <h1 className="manrope-600 primary-950 fs-h2">
               Upload Cohort Participants
             </h1>
-            <FiX className="fs-h3" onClick={closeModal} />
+            <button onClick={closeModal} className="border-none bg-transparent">
+              <FiX className="fs-h3" />
+            </button>
           </div>
 
           <span className="manrope-500 dark-700 fs-body">

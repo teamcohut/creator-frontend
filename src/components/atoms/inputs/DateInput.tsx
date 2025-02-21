@@ -1,6 +1,7 @@
 import React from 'react';
 import { IDateInput } from './types';
 import '../style.css';
+import { DatePicker } from 'antd';
 
 const DateInput: React.FC<IDateInput> = (props) => {
   const { id, label, icon, placeHolder = "Select a date", onchange } = props;
@@ -27,6 +28,14 @@ const DateInput: React.FC<IDateInput> = (props) => {
         style={{ cursor: "pointer" }}
       >
         {icon && <span className="icon-container">{icon}</span>}
+        {/* <DatePicker
+          id={id}
+          name={id}
+          className="input bg-transparent w-100 h-100 border-none shadow-none"
+          type="date"
+          placeholder={placeHolder}
+         onChange={onchange} 
+        /> */}
         <input
           id={id}
           name={id}

@@ -7,19 +7,23 @@ import { useMutation } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { notification } from "antd";
+import { FiArrowLeft, FiX } from "react-icons/fi";
+import { TModal } from "../../../../@types/dashboard.interface";
 
 
 interface IAdditionalSessionProps {
   initialData: any;
   onSuccess: () => void;
+  setModal: (open: boolean, name: TModal) => void;
+  prevStep: () => void;
 }
 
-const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess }) => {
+const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData, onSuccess, setModal, prevStep }) => {
   const { activeCohort } = useContext(ProgramContext);
 
   const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
-    // track: "",
+    track: "",
     resources: "",
     address: "",
     cohort: activeCohort.id,
@@ -38,7 +42,7 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
     setLocationType(value);
     setFormData((prev) => ({
       ...prev,
-      location: { ...prev.location, name: value, },
+      location: { name: value, },
     }));
   };
 
@@ -66,7 +70,7 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
 
   const handleSubmit = () => {
     const payload = { ...initialData, ...formData };
-    payload.location.address = formData.address;
+    // payload.location.address = formData.address;
 
     sessionMutation.mutate(payload);
   };
@@ -74,6 +78,12 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
   return (
     <form className="form bg-white d-flex flex-column rounded-5 mx-auto">
       <ProgressBar height={8} length={2} page={2} absolute={true} gap rounded={false} />
+      <div className="d-flex flex-row justify-content-between">
+        <button className="border-none bg-transparent" onClick={prevStep}><FiArrowLeft /> Back</button>
+        <button onClick={()=> setModal(false, 'session')} className="border-none bg-transparent">
+          <FiX className="fs-h3" />
+        </button>
+      </div>
       <div className="d-flex flex-column gap-2">
         <h1 className="manrope-600 primary-950 fs-h2">Additional Session Info</h1>
         <span className="manrope-500 dark-700 fs-body">
@@ -83,45 +93,40 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <p className="manrope-600 primary-950 fs-h4">Location</p>
-          <div className="location-input-wrapper">
+          <label className="mb-2 d-block manrope-600">Location</label>
+          <div className="location-input-wrapper rounded-5" style={{ height: '48px' }}>
             <select
               value={locationType}
               onChange={handleDropdownChange}
-              className="location-dropdown"
+              className="location-dropdown rounded-5"
+              style={{ height: '100%' }}
             >
               <option value="Online">Online</option>
               <option value="Physical">Physical</option>
             </select>
             <input
               type="text"
-              placeholder={
-                locationType === "Online" ? "Link" : "Address"
-              }
-              className="location-text"
-              onChange={(e) =>
-                handleChange("address", e.target.value)
-              }
+              placeholder={locationType === "Online" ? "Link" : "Address"}
+              className="location-text border-0"
+              style={{ height: '100%' }}
+              onChange={(e) => handleChange("address", e.target.value)}
             />
           </div>
         </div>
 
-        <div>
-          <label className="py-2 primary-950 manrope-600" htmlFor="trackId">Tracks</label>
+        <div className="mb-4">
+          <label className="mb-2 d-block manrope-600" htmlFor="trackId">Tracks</label>
           <select
             id="trackId"
             name="trackId"
-            className="form-select rounded-4"
+            className="form-select rounded-5"
+            style={{ height: '48px', padding: '12px' }}
             defaultValue={''}
             onChange={(e) => handleChange("track", e.target.value)}
           >
-            <option value="" disabled>
-              Select a Track
-            </option>
+            <option value="" disabled>Select a Track</option>
             {tracks?.map((track: any) => (
-              <option key={track.id} value={track.id}>
-                {track.title}
-              </option>
+              <option key={track.id} value={track.id}>{track.title}</option>
             ))}
           </select>
         </div>

@@ -258,6 +258,20 @@
   background-color: var(--hover-40);
 }
 
+.page-btn {
+  height: 30px;
+  width: 30px;
+}
+
+.active-page-btn {
+  background-color: var(--primary-100);
+  border: 1px solid var(--primary-100);
+}
+
+.inactive-page-btn {
+  border: 1px solid var(--dark-100);
+}
+
 /* SESSION */
 .location-input-wrapper {
   display: flex;
@@ -265,7 +279,7 @@
   border: 1px solid #d1d5db;
   border-radius: 20px; 
   overflow: hidden;
-  background-color: #f9fafb;
+  background-color: white;
   transition: border-color 0.3s ease; 
 }
 
@@ -293,6 +307,7 @@
   outline: none;
   color: #374151;
   background-color: #f9fafb;
+  width: 100%;
 }
 
 .location-input-wrapper:focus-within {
@@ -305,6 +320,14 @@
 
 .location-text:hover {
   background-color: #f3f4f6; 
+}
+
+/* .sessionLink .copy {
+  display: none;
+} */
+
+.sessionLink:hover .sessionLink .copy {
+  display: flex !important;
 }
 
 

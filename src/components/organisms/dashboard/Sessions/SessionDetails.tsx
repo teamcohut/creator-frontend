@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   FiArrowLeft,
   FiCalendar,
   FiClock,
+  FiCopy,
   FiEdit3,
   FiMapPin,
   FiTrash2,
@@ -16,6 +17,8 @@ import api from "../../../../api/axios";
 import { TModal } from "../../../../@types/dashboard.interface";
 import EditSessionModal from "../modals/EditSessionModal";
 import { formatDate } from "../../../utils/formatDate";
+import { Copy } from "../../../../helpers/Copy";
+import '../../style.css'
 
 const SessionDetails = () => {
   const { sessionId } = useParams();
@@ -24,6 +27,14 @@ const SessionDetails = () => {
     name: TModal;
     open: boolean;
   });
+
+
+  useEffect(() => {
+    if (!modal.open) {
+      localStorage.removeItem("sessionId")
+    }
+  }, [modal])
+  
 
   const setModalOpen = (open: boolean, name: TModal) => {
     setModal({ name, open });
@@ -51,12 +62,13 @@ const SessionDetails = () => {
 
   if (isLoading) return <p>Loading session details...</p>;
   if (isError) return <p>Error loading session details.</p>;
-  if (isSuccess) {
-    localStorage.setItem("sessionId", data._id);
-  }
+  // if (isSuccess) {
+  //   localStorage.setItem("sessionId", data._id);
+  // }
 
   const session = data?.data.data;
-  const sessionLink = session?.location.address;
+  const sessionLink = session?.sessionLink;
+  // const zoomsession = session?.zoomStartSession;
 
   return (
     <>
@@ -78,7 +90,10 @@ const SessionDetails = () => {
                 </h2>
                 <div className="w-fit">
                   <Button
-                    action={() => setModalOpen(true, "session")}
+                    action={() =>{ 
+                      setModalOpen(true, "session")
+                      localStorage.setItem("sessionId", session._id)
+                    }}
                     fill={false}
                     type="button"
                   >
@@ -97,22 +112,40 @@ const SessionDetails = () => {
               <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                 <FiCalendar /> {formatDate(session?.date)}
               </p>
-              {session?.location.name === "Physical" ? (
+              {/* <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
+                <FiVideo />
+                <Link
+                  to={`${zoomsession}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://us04web.zoom.us
+                </Link>
+              </p> */}
+              {/* {session?.location.name === "Physical" ? (
                 <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
                   <FiMapPin /> {session.location.address}
                 </p>
-              ) : (
-                <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700">
-                  <FiVideo />
-                  <Link
-                    to={`http://${sessionLink}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {sessionLink}
-                  </Link>
-                </p>
-              )}
+              ) : ( */}
+              <p className="d-flex align-items-center gap-2 manrope-500 fs-body dark-700 sessionLink">
+                <FiMapPin />
+                <Link
+                  to={`${sessionLink}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nowrap"
+                >
+                  {sessionLink.substring(0, 32)}...
+                </Link>
+                <button className="border-none bg-transparent primary-500 copy"
+                  onClick={() => {
+                    Copy(sessionLink)
+                  }
+                  }>
+                  <FiCopy />
+                </button>
+              </p>
+              {/* )} */}
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <div className="w-75">

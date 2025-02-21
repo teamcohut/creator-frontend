@@ -33,7 +33,9 @@ const EditPermissions: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     <div className="form bg-white d-flex flex-column rounded-5 mx-auto gap-1">
       <div className="d-flex justify-content-between">
         <h1 className="manrope-600 primary-950 fs-h2">Edit Permissions</h1>
-        <FiX style={{ fontSize: '24px' }} onClick={handleClose}/>
+        <button onClick={handleClose} className='border-none bg-transparent'>
+          <FiX className='fs-h3' />
+        </button>
       </div>
       <p className='pb-4 dark-700 manrope-500 fs-body'>
       Control what your admin can do on your program

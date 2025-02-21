@@ -1,12 +1,12 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker, TimePicker, notification } from "antd";
 import Button from "../../../atoms/Button";
 import ProgressBar from "../../../molecules/auth/PregressBar";
 import TextInput from "../../../atoms/inputs/TextInput";
-import RTEInput from "../../../atoms/inputs/RTEInput";
 import "../../style.css";
 import { FiX } from "react-icons/fi";
 import dayjs from "dayjs";
+import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 
 interface ISessionModal {
   onSubmit: (data: any) => void;
@@ -31,13 +31,43 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
   }, [initialData]);
 
   const handleDateChange = (date: any, dateString: any) => {
-    setFormData((prev) => ({ ...prev, date: dateString }));
+    setFormData((prev) => ({
+      ...prev,
+      date: dateString,
+      start: "",
+      end: ""
+    }));
   };
 
-  const handleTimeChange = (field: any) => (time: any, timeString: any) => {
-    setFormData((prev) => ({ ...prev, [field]: timeString }));
-  };
+  const handleTimeChange = (field: "start" | "end") => (time: any, timeString: any) => {
+    if (!time) {
+      setFormData((prev) => ({ ...prev, [field]: "" }));
+      return;
+    }
 
+    setFormData((prev) => {
+      const newData = { ...prev, [field]: timeString };
+
+      if (field === 'start') {
+        const startTime = dayjs(timeString, 'HH:mm');
+        const suggestedEndTime = startTime.add(1, 'hour');
+        newData.end = suggestedEndTime.format('HH:mm');
+      }
+
+      if (field === 'end' && newData.start) {
+        const startTime = dayjs(newData.start, 'HH:mm');
+        const endTime = dayjs(timeString, 'HH:mm');
+        const minEndTime = startTime.add(30, 'minute');
+
+        if (endTime.isBefore(minEndTime)) {
+          notification.error({ message: "Session must be at least 30 minutes long" });
+          return prev;
+        }
+      }
+
+      return newData;
+    });
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -58,7 +88,9 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
       <div className="d-flex flex-column gap-2">
         <div className="d-flex flex-row justify-content-between">
           <h1 className="manrope-600 primary-950 fs-h2">Add New Session</h1>
-          <FiX className="fs-h3" onClick={closeModal} />
+          <button onClick={closeModal} className="border-none bg-transparent">
+            <FiX className="fs-h3" />
+          </button>
         </div>
         <span className="manrope-500 dark-700 fs-body">
           Schedule a live session or event and notify participants.
@@ -67,32 +99,88 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <div className="d-flex flex-row align-items-end gap-3">
-            <div className="w-35">
-              <label htmlFor="date-picker" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
-                Select Date
-              </label>
-              <DatePicker
-                className="rounded-5"
-                value={formData.date ? dayjs(formData.date, "YYYY-MM-DD") : null}
-                onChange={handleDateChange}
-                placeholder="Select Date"
+          <label htmlFor="date-picker" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
+            Select Date and Time
+          </label>
+          <div className="d-flex flex-column gap-3">
+            <DatePicker
+              className="rounded-5 w-100"
+              style={{ height: '48px', padding: '12px' }}
+              value={formData.date ? dayjs(formData.date, "YYYY-MM-DD") : null}
+              onChange={handleDateChange}
+              placeholder="Select Date"
+              disabledDate={(current) => {
+                return current && current < dayjs().startOf('day');
+              }}
+            />
+            <div className="d-flex gap-3">
+              <TimePicker
+                className="rounded-5 flex-grow-1"
+                style={{ height: '48px', padding: '12px' }}
+                value={formData.start ? dayjs(formData.start, "HH:mm") : null}
+                onChange={handleTimeChange("start")}
+                placeholder="Start Time"
+                format="HH:mm"
+                showNow
+                disabled={!formData.date}
+                disabledTime={() => {
+                  if (!formData.date) return { disabledHours: () => [], disabledMinutes: () => [] };
+
+                  const currentDate = dayjs(formData.date).startOf('day');
+                  const today = dayjs().startOf('day');
+                  const currentHour = dayjs().hour();
+                  const currentMinute = dayjs().minute();
+
+                  return {
+                    disabledHours: () => {
+                      if (currentDate.isSame(today)) {
+                        return Array.from({ length: currentHour }, (_, i) => i);
+                      }
+                      return [];
+                    },
+                    disabledMinutes: (selectedHour) => {
+                      if (currentDate.isSame(today) && selectedHour === currentHour) {
+                        return Array.from({ length: currentMinute }, (_, i) => i);
+                      }
+                      return [];
+                    }
+                  };
+                }}
+              />
+              <TimePicker
+                className="rounded-5 flex-grow-1"
+                style={{ height: '48px', padding: '12px' }}
+                value={formData.end ? dayjs(formData.end, "HH:mm") : null}
+                onChange={handleTimeChange("end")}
+                placeholder="End Time"
+                format="HH:mm"
+                changeOnBlur
+                showNow={false}
+                disabled={!formData.start}
+                disabledTime={() => ({
+                  disabledHours: () => {
+                    if (!formData.start) return [];
+                    const startTime = dayjs(formData.start, 'HH:mm');
+                    const currentHour = startTime.hour();
+                    return Array.from({ length: currentHour }, (_, i) => i);
+                  },
+                  disabledMinutes: (selectedHour) => {
+                    if (!formData.start) return [];
+                    const startTime = dayjs(formData.start, 'HH:mm');
+                    const startHour = startTime.hour();
+
+                    if (selectedHour === startHour) {
+                      const minEndMinute = startTime.minute() + 30;
+                      return Array.from({ length: minEndMinute }, (_, i) => i);
+                    }
+                    if (selectedHour < startHour) {
+                      return Array.from({ length: 60 }, (_, i) => i);
+                    }
+                    return [];
+                  }
+                })}
               />
             </div>
-            <TimePicker
-              className="rounded-5"
-              value={formData.start ? dayjs(formData.start, "HH:mm") : null}
-              onChange={handleTimeChange("start")}
-              placeholder="Start Time"
-              format="HH:mm"
-            />
-            <TimePicker
-              className="rounded-5"
-              value={formData.end ? dayjs(formData.end, "HH:mm") : null}
-              onChange={handleTimeChange("end")}
-              placeholder="End Time"
-              format="HH:mm"
-            />
           </div>
         </div>
         <TextInput
@@ -102,14 +190,12 @@ const AddSession: React.FC<ISessionModal> = ({ initialData, onSubmit, closeModal
           onchange={handleInputChange}
           value={formData.title}
         />
-        <RTEInput
+        <TextAreaInput
           id="description"
           label="Session Description"
-          placeholder="Enter Description"
-          onChange={(value: ReactNode) =>
-            setFormData((prev) => ({ ...prev, description: value as string }))
-          }
-          value={formData.description}
+          placeHolder="Enter Description"
+          onchange={handleInputChange}
+          defaultValue={formData.description}
         />
       </div>
 

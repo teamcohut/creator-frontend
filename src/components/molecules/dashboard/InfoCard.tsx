@@ -28,7 +28,7 @@ const InfoCard: React.FC<IinfoCardProps> = ({
         </div>
       </div>
 
-      <div className="d-flex flex-column align-items-start">
+      <div className="d-flex flex-column align-items-end  gap-3">
         <div className="">
           {isProgressBar ? (
             <PercentageBar progress={progress} />

@@ -14,46 +14,46 @@ const Button: React.FC<IButton> = ({
   disabled,
   loading,
   outlineColor,
-  customStyle
+  customStyle,
+  handleMouseEnter,
+  handleMouseLeave
 }) => {
-
   return (
-    <>
-      <button
-        type={type}
-        onClick={action}
-        className={`
+    <button
+      type={type}
+      onClick={action}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`
         ${fill ? 'fill' : 'outline'} 
-        ${outline === 'white' ? 'border-white text-white' : outline === 'primary' ? 'primary-600' : outline === 'primary-700' ? 'primary-700' : outline === 'outlineColor' ? `${outlineColor}` : ''} 
+        ${outline === 'white' ? 'border-white text-white' : 
+          outline === 'primary' ? 'primary-600' : 
+          outline === 'primary-700' ? 'primary-700' : 
+          outline === 'outlineColor' ? `${outlineColor}` : ''} 
         ${border ? '' : 'border-none'} 
         ${gap && 'gap'} 
-        button rounded-pill manrope-700 fs-button ${width ? '' : 'w-100'} d-flex align-items-center justify-content-center
-        ${loading ? 'btn-loading' : ''} 
+        button rounded-pill manrope-700 fs-button ${width ? '' : 'w-100'} 
+        d-flex align-items-center justify-content-center
+        ${loading ? 'btn-loading' : ''}
+        ${disabled ? 'opacity-50' : ''}
       `}
-        style={{
-          borderColor:
-            outline === 'primary'
-              ? 'var(--primary-600)'
-              : outline === 'outlineColor'
-                ? `var(--${outlineColor})`
-                : '',
-          width: `${width}px`,
-          ...customStyle,
-        }}
-        disabled={loading || disabled}
-      >
-        {loading ? (
-          <div
-            className={`spinner-border ${fill && 'text-white'} ${outline && outline === 'white' ? 'text-white' : 'text-primary'}`}
-          ></div>
-        ) : disabled ? (
-          <div className='opacity-50'>Loading ...</div>
-        ) : (
-          children
-        )}
-      </button>
-
-    </>
+      style={{
+        borderColor: outline === 'primary' 
+          ? 'var(--primary-600)' 
+          : outline === 'outlineColor' 
+            ? `var(--${outlineColor})`
+            : '',
+        width: width ? `${width}px` : undefined,
+        ...customStyle,
+      }}
+      disabled={loading || disabled}
+    >
+      {loading ? (
+        <div className={`spinner-border ${fill && 'text-white'} ${outline && outline === 'white' ? 'text-white' : 'text-primary'}`} />
+      ) : (
+        children
+      )}
+    </button>
   )
 }
 

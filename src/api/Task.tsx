@@ -14,6 +14,10 @@ class Task {
     getAllTask(cohortId: any) {
         return this.client.get(`/task?cohortId=${cohortId}`)
     }
+
+    editTask(taskId: string, update: any) {
+        return this.client.put(`/task/${taskId}`, update)
+    }
 }
 
 export default Task

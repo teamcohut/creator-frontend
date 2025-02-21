@@ -5,9 +5,10 @@ import "../../style.css";
 import DateInput from "../../../atoms/inputs/DateInput";
 import { ICohort } from "../../../../@types/dashboard.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
-import { notification } from "antd";
+import { DatePicker, notification } from "antd";
 import TextInput from "../../../atoms/inputs/TextInput";
 import { FiX } from "react-icons/fi";
+import dayjs from "dayjs";
 
 const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeModal }) => {
   const { activeProgram } = useContext(ProgramContext);
@@ -64,7 +65,9 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeM
             <h1 className="manrope-600 primary-950 fs-h2">
               Onboard New Cohort
             </h1>
-            <FiX className="fs-h3" onClick={closeModal} />
+            <button onClick={closeModal} className="border-none bg-transparent">
+              <FiX className="fs-h3" />
+            </button>
           </div>
           <span className="manrope-500 dark-700 fs-body">
             Let's invite and guide your Cohort to Success
@@ -81,19 +84,38 @@ const OnboardCohortModal: FC<IOnboardCohortModal> = ({ onSubmit, pending, closeM
             />
           </div>
 
-          <div className="d-flex flex-row align-items-end gap-3">
-            <DateInput
-              id="startDate"
-              onchange={(e) => handleInputChange(e.target.name, e.target.value)}
-              placeHolder=""
-              label="Set Cohort Duration"
-            />
-            <h2>-</h2>
-            <DateInput
-              id="endDate"
-              onchange={(e) => handleInputChange(e.target.name, e.target.value)}
-              placeHolder=""
-            />
+          <div className="d-flex flex-column gap-1">
+            <label htmlFor="dueDate" className="py-2 primary-950 manrope-600">
+              Set Cohort Duration
+            </label>
+            <div className="d-flex flex-row align-items-end gap-3">
+              <DatePicker
+                id="startDate"
+                className="rounded-5 w-100 bg-white"
+                style={{ height: '48px', padding: '12px' }}
+                onChange={(date, dateString) => {
+                  if (typeof dateString === "string") {
+                    handleInputChange("startDate", dateString);
+                  }
+                }}
+                placeholder="Start Date"
+              />
+              <h2>-</h2>
+              <DatePicker
+                id="endDate"
+                className="rounded-5 w-100 bg-white"
+                style={{ height: '48px', padding: '12px' }}
+                onChange={(date, dateString) => {
+                  if (typeof dateString === "string") {
+                    handleInputChange("endDate", dateString);
+                  }
+                }}
+                disabledDate={(current) => {
+                  return current && current < dayjs(form.startDate).startOf('day');
+                }}
+                placeholder="End Date"
+              />
+            </div>
           </div>
           {/* Checkbox to toggle track */}
           <div className="d-flex flex-column gap-2">
