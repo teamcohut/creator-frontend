@@ -81,18 +81,18 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit, setModal }) => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // const validateForm = () => {
-  //   if (!formData.title || !formData.date || !formData.start || !formData.end) {
-  //     notification.error({ message: "Please fill all required fields." });
-  //     return false;
-  //   }
-  //   return true;
-  // };
+  const validateForm = () => {
+    if (!formData.title || !formData.date || !formData.start || !formData.end) {
+      notification.error({ message: "Please fill all required fields." });
+      return false;
+    }
+    return true;
+  };
 
   const nextPage = () => {
-    // if (validateForm()) {
+    if (validateForm()) {
     onSubmit(formData);
-    // }
+    }
   };
 
   const sessionMutation = useMutation({
@@ -106,11 +106,11 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit, setModal }) => {
   });
 
   const handleSubmit = () => {
-    // if (validateForm()) {
+    if (validateForm()) {
     console.log(formData);
 
     sessionMutation.mutate(formData);
-    // }
+    }
   };
 
   return (
@@ -130,13 +130,14 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit, setModal }) => {
 
       <div className="d-flex flex-column gap-4">
         <div>
-          <div className="d-flex flex-row align-items-end gap-3">
-            <div className="w-35">
+          <div className="d-flex flex-column w-full gap-3">
+            <div className="w-full">
               <label htmlFor="date-picker" style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}>
                 Select Date
               </label>
               <DatePicker
                 className="rounded-5"
+                style={{ width: "100%", height: "45px" }}
                 value={formData.date ? dayjs(formData.date, "YYYY-MM-DD") : null}
                 onChange={handleDateChange}
                 placeholder="Select Date"
@@ -145,69 +146,73 @@ const EditSession: React.FC<ISessionModal> = ({ onSubmit, setModal }) => {
                 }}
               />
             </div>
-            <TimePicker
-              className="rounded-5"
-              value={formData.start ? dayjs(formData.start, "HH:mm") : null}
-              onChange={handleTimeChange("start")}
-              placeholder="Start Time"
-              format="HH:mm"
-              changeOnBlur
-              showNow
-              disabledTime={() => {
-                if (!formData.date) return { disabledHours: () => [], disabledMinutes: () => [] };
+            <div className="d-flex justify-content-between">
+              <TimePicker
+                className="rounded-5"
+                style={{ width: "47%", height: "45px" }}
+                value={formData.start ? dayjs(formData.start, "HH:mm") : null}
+                onChange={handleTimeChange("start")}
+                placeholder="Start Time"
+                format="HH:mm"
+                changeOnBlur
+                showNow
+                disabledTime={() => {
+                  if (!formData.date) return { disabledHours: () => [], disabledMinutes: () => [] };
 
-                const currentDate = dayjs(formData.date).startOf('day');
-                const today = dayjs().startOf('day');
-                const currentHour = dayjs().hour();
-                const currentMinute = dayjs().minute();
+                  const currentDate = dayjs(formData.date).startOf('day');
+                  const today = dayjs().startOf('day');
+                  const currentHour = dayjs().hour();
+                  const currentMinute = dayjs().minute();
 
-                return {
-                  disabledHours: () => {
-                    if (currentDate.isSame(today)) {
-                      return Array.from({ length: currentHour }, (_, i) => i);
+                  return {
+                    disabledHours: () => {
+                      if (currentDate.isSame(today)) {
+                        return Array.from({ length: currentHour }, (_, i) => i);
+                      }
+                      return [];
+                    },
+                    disabledMinutes: (selectedHour) => {
+                      if (currentDate.isSame(today) && selectedHour === currentHour) {
+                        return Array.from({ length: currentMinute }, (_, i) => i);
+                      }
+                      return [];
                     }
-                    return [];
+                  };
+                }}
+              />
+              <TimePicker
+                className="rounded-5"
+                style={{ width: "47%", height: "45px" }}
+                value={formData.end ? dayjs(formData.end, "HH:mm") : null}
+                onChange={handleTimeChange("end")}
+                placeholder="End Time"
+                format="HH:mm"
+                changeOnBlur
+                showNow={false}
+                disabledTime={() => ({
+                  disabledHours: () => {
+                    if (!formData.start) return [];
+                    const startTime = dayjs(formData.start, 'HH:mm');
+                    const currentHour = startTime.hour();
+                    return Array.from({ length: currentHour }, (_, i) => i);
                   },
                   disabledMinutes: (selectedHour) => {
-                    if (currentDate.isSame(today) && selectedHour === currentHour) {
-                      return Array.from({ length: currentMinute }, (_, i) => i);
+                    if (!formData.start) return [];
+                    const startTime = dayjs(formData.start, 'HH:mm');
+                    const startHour = startTime.hour();
+
+                    if (selectedHour === startHour) {
+                      const minEndMinute = startTime.minute() + 30;
+                      return Array.from({ length: minEndMinute }, (_, i) => i);
+                    }
+                    if (selectedHour < startHour) {
+                      return Array.from({ length: 60 }, (_, i) => i);
                     }
                     return [];
                   }
-                };
-              }}
-            />
-            <TimePicker
-              className="rounded-5"
-              value={formData.end ? dayjs(formData.end, "HH:mm") : null}
-              onChange={handleTimeChange("end")}
-              placeholder="End Time"
-              format="HH:mm"
-              changeOnBlur
-              showNow={false}
-              disabledTime={() => ({
-                disabledHours: () => {
-                  if (!formData.start) return [];
-                  const startTime = dayjs(formData.start, 'HH:mm');
-                  const currentHour = startTime.hour();
-                  return Array.from({ length: currentHour }, (_, i) => i);
-                },
-                disabledMinutes: (selectedHour) => {
-                  if (!formData.start) return [];
-                  const startTime = dayjs(formData.start, 'HH:mm');
-                  const startHour = startTime.hour();
-
-                  if (selectedHour === startHour) {
-                    const minEndMinute = startTime.minute() + 30;
-                    return Array.from({ length: minEndMinute }, (_, i) => i);
-                  }
-                  if (selectedHour < startHour) {
-                    return Array.from({ length: 60 }, (_, i) => i);
-                  }
-                  return [];
-                }
-              })}
-            />
+                })}
+              />
+            </div>
           </div>
         </div>
         <TextInput
