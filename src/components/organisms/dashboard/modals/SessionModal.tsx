@@ -32,7 +32,7 @@ const SessionModal: FC<ISetupModal> = ({ modalOpen, setModalOpen }) => {
     setModalOpen(false, null);
     setCurrentStep(1);
     setFormData({});
-    navigate('/learning')
+    // navigate('/learning')
   };
 
   return (
