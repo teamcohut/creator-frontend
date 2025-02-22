@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -28,6 +28,14 @@ const SessionDetails = () => {
     open: boolean;
   });
 
+
+  useEffect(() => {
+    if (!modal.open) {
+      localStorage.removeItem("sessionId")
+    }
+  }, [modal])
+  
+
   const setModalOpen = (open: boolean, name: TModal) => {
     setModal({ name, open });
   };
@@ -54,9 +62,9 @@ const SessionDetails = () => {
 
   if (isLoading) return <p>Loading session details...</p>;
   if (isError) return <p>Error loading session details.</p>;
-  if (isSuccess) {
-    localStorage.setItem("sessionId", data._id);
-  }
+  // if (isSuccess) {
+  //   localStorage.setItem("sessionId", data._id);
+  // }
 
   const session = data?.data.data;
   const sessionLink = session?.sessionLink;
@@ -82,7 +90,10 @@ const SessionDetails = () => {
                 </h2>
                 <div className="w-fit">
                   <Button
-                    action={() => setModalOpen(true, "session")}
+                    action={() =>{ 
+                      setModalOpen(true, "session")
+                      localStorage.setItem("sessionId", session._id)
+                    }}
                     fill={false}
                     type="button"
                   >

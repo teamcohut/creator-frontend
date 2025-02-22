@@ -23,7 +23,7 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
 
   const [locationType, setLocationType] = useState<string>("Online");
   const [formData, setFormData] = useState({
-    // track: "",
+    track: "",
     resources: "",
     address: "",
     cohort: activeCohort.id,
@@ -42,7 +42,7 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
     setLocationType(value);
     setFormData((prev) => ({
       ...prev,
-      location: { ...prev.location, name: value, },
+      location: { name: value, },
     }));
   };
 
@@ -70,7 +70,7 @@ const EditAdditionalSession: React.FC<IAdditionalSessionProps> = ({ initialData,
 
   const handleSubmit = () => {
     const payload = { ...initialData, ...formData };
-    payload.location.address = formData.address;
+    // payload.location.address = formData.address;
 
     sessionMutation.mutate(payload);
   };
