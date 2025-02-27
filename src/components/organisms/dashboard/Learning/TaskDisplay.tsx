@@ -1,17 +1,33 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ProgramContext } from '../../../../context/programs/ProgramContext';
 import { useQuery } from '@tanstack/react-query';
 import '../../style.css';
 import api from '../../../../api/axios';
 import SearchInput from '../../../atoms/inputs/SearchInput';
 import TaskInfoCard from '../../../molecules/dashboard/TaskInfoCard';
+import { TModal } from '../../../../@types/dashboard.interface';
+import EditTask from '../../forms/Task/EditTask';
+import Modal from '../../../templates/Modal';
 
 const TaskDisplay = () => {
   const { activeCohort } = useContext(ProgramContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("All");
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [oneTask, setOneTask] = useState();
+  const [modal, setModal] = useState({ name: null, open: false } as {
+    name: TModal;
+    open: boolean;
+  });
+
+  const setModalOpen = (name: TModal, open: boolean) => {
+    setModal({name, open})
+  }
+
+  const openModal = (task: any) => {
+    setOneTask(task)
+    setModal({name: "task", open: true})
+  }
 
 
   const { isLoading, isError, data } = useQuery({
@@ -19,22 +35,20 @@ const TaskDisplay = () => {
     queryFn: () => api.task.getAllTask(activeCohort._id),
     enabled: !!activeCohort._id,
   });
-  console.log(data?.data?.data?.[0])
-  console.log(filteredTasks)
 
 
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase();
     const now = new Date();
 
-    let sessions = data?.data?.data || []
+    let tasks = data?.data?.data || []
 
     if (filterType === "Upcoming") {
-      sessions = sessions.filter((session: any) => new Date(session.date) > now);
-    } else if (filterType === "Completed") sessions = sessions.filter((session: any) => new Date(session.date) < now);
+      tasks = tasks.filter((session: any) => new Date(session.date) > now);
+    } else if (filterType === "Completed") tasks = tasks.filter((session: any) => new Date(session.date) < now);
 
     setFilteredTasks(
-      sessions.filter(
+      tasks.filter(
         (task: any) =>
           task.title?.toLowerCase().includes(lowerCaseQuery) ||
           task.dueDate?.toLowerCase().includes(lowerCaseQuery)
@@ -53,7 +67,7 @@ const TaskDisplay = () => {
           </div>
 
           <SearchInput
-            id="session"
+            id="task"
             label=""
             placeHolder="Search"
             onchange={(e) => setSearchQuery(e.target.value)}
@@ -85,16 +99,24 @@ const TaskDisplay = () => {
         <p>You do not have any tasks</p>
       )}
       <div className="task-grid">
-        {filteredTasks?.map((tasks: any, i: any) => (
+        {filteredTasks?.map((task: any, i: any) => (
 
           <TaskInfoCard
-            title={tasks.title || "No title available"}
-            dueTime={tasks.dueTime || "No Link available yet"}
-            dueDate={tasks.dueDate.split("T")[0]}
+            key={i}
+            setModal={() => openModal(task)}
+            title={task.title || "No title available"}
+            dueTime={task.dueTime || "No Link available yet"}
+            dueDate={task.dueDate.split("T")[0]}
           />
 
         ))}
       </div>
+      
+      {modal.name === "task" && (
+        <Modal open={modal.open} setModalOpen={(open: boolean) => setModalOpen}>
+          <EditTask task={oneTask} closeModal={()=> setModal({name: null, open: false})} />
+        </Modal>
+      )}
     </div>
   )
 }

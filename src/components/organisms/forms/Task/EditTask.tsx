@@ -4,29 +4,22 @@ import TextAreaInput from "../../../atoms/inputs/TextareaInput";
 import TextInput from "../../../atoms/inputs/TextInput";
 import "../../style.css";
 import { DatePicker, TimePicker, notification } from "antd";
-import { ITask } from "../../../../@types/task.interface";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosAPI from "../../../../api/axios";
 import { FiX } from "react-icons/fi";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
-const AddTask: FC<IAddTask> = ({ closeModal }) => {
+const EditTask: FC<IEditTask> = ({ task, closeModal }) => {
   const { activeCohort } = useContext(ProgramContext);
   const [api, contextHolder] = notification.useNotification();
-  const [form, setForm] = useState<ITask>({
-    title: "",
-    description: "",
-    dueTime: "",
-    dueDate: "",
-    assignedToTracks: [],
-    assignedToAll: false,
-    cohortId: activeCohort.id,
-  });
+  const [form, setForm] = useState<any>({});
   const queryClient = useQueryClient(); 
-
-  const [selectedTrackId, setSelectedTrackId] = useState("");
+  // const [selectedTrackId, setSelectedTrackId] = useState("");
   const tracks = activeCohort?.tracks;
+
+  console.log(task);
+  
 
   const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -36,7 +29,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       setForm({
         ...form,
         assignedToAll: false,
-        assignedToTracks: [...form.assignedToTracks, value],
+        assignedToTracks: [value],
       });
     }
   };
@@ -47,29 +40,21 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
 
   const taskMutation = useMutation({
     mutationFn: (payload: any) => {
-      return axiosAPI.task.createTask(payload);
+      return axiosAPI.task.editTask(task._id, payload);
     },
     onSuccess(data) {
-      notification.success({ message: "Task Added successfully!" });
-      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
+      notification.success({ message: "Task Updated successfully!" });
       api.success({ message: "Successful" });
+      queryClient.invalidateQueries({ queryKey: ["track", activeCohort] });
+
       closeModal();
+
     },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (
-      form.title === "" ||
-      form.description === "" ||
-      form.dueTime === "" ||
-      form.dueDate === ""
-    ) {
-      api.warning({
-        message: "Missing required fields.",
-        placement: "top",
-      });
-    }
+    
     try {
       await taskMutation.mutate(form);
     } catch (error) {
@@ -87,13 +72,13 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
       >
         <div className="d-flex flex-column gap-2">
           <div className="d-flex flex-row justify-content-between">
-            <h1 className="manrope-600 primary-950 fs-h2">Add New Task</h1>
+            <h1 className="manrope-600 primary-950 fs-h2">Task Details</h1>
             <button onClick={closeModal} className="border-none bg-transparent">
               <FiX className="fs-h3" />
             </button>
           </div>
           <span className="manrope-500 dark-700 fs-body">
-            Add a task or to-do and assign to your participants
+          View and make changes to your task          
           </span>
         </div>
 
@@ -101,7 +86,8 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
           <TextInput
             id="title"
             label="Task Title"
-            placeHolder="Enter title"
+            placeHolder={task.title}
+            defaultValue={task.title}
             onchange={(e) => handleInputChange(e.target.name, e.target.value)}
           />
 
@@ -109,8 +95,34 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
             id="description"
             label="Task Description"
             placeHolder="Something about your task"
+            defaultValue={task.description}
             onchange={(e) => handleInputChange(e.target.name, e.target.value)}
           />
+
+          {/* Tracks Dropdown */}
+          {tracks && (
+            <div>
+              <label className="py-2 primary-950 manrope-600" htmlFor="trackId">
+                Tracks
+              </label>
+              <select
+                id="trackId"
+                name="trackId"
+                className="form-select rounded-4"
+                defaultValue={task.assignedToTracks[0]}
+                onChange={handleDropdownChange}
+              >
+                <option value="" disabled>
+                  Select a Track
+                </option>
+                {tracks?.map((track: any) => (
+                  <option key={track.id} value={track.id}>
+                    {track.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Date and Time Inputs */}
           <div className="d-flex align-items-center gap-4">
@@ -121,6 +133,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
               <DatePicker
                 className="rounded-5"
                 id="dueDate"
+                // defaultValue={task.dueDate}
                 style={{ borderRadius: "8px", width: "100%" }}
                 onChange={(date, dateString) => {
                   if (typeof dateString === "string") {
@@ -136,6 +149,7 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
               <TimePicker
                 className="rounded-5"
                 id="dueTime"
+                // defaultValue={task.dueTime}
                 style={{ borderRadius: "8px", width: "100%" }}
                 onChange={(time, timeString) => {
                   if (typeof timeString === "string") {
@@ -146,31 +160,6 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
               />
             </div>
           </div>
-
-          {/* Tracks Dropdown */}
-          {tracks && (
-            <div>
-              <label className="py-2 primary-950 manrope-600" htmlFor="trackId">
-                Tracks
-              </label>
-              <select
-                id="trackId"
-                name="trackId"
-                className="form-select rounded-4"
-                defaultValue={selectedTrackId}
-                onChange={handleDropdownChange}
-              >
-                <option value="" disabled>
-                  Select a Track
-                </option>
-                {tracks?.map((track: any) => (
-                  <option key={track.id} value={track.id}>
-                    {track.title}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
         </div>
 
         {/* Submit Button */}
@@ -188,9 +177,10 @@ const AddTask: FC<IAddTask> = ({ closeModal }) => {
   );
 };
 
-interface IAddTask {
+interface IEditTask {
   closeModal: () => void;
+  task: any
 }
 
-export default AddTask;
+export default EditTask;
 

@@ -3,8 +3,8 @@ import Button from "../../../atoms/Button";
 import TextInput from "../../../atoms/inputs/TextInput";
 import DragNDropInput from "../../../atoms/inputs/DragNDropInput";
 import { notification } from "antd";
-import { useMutation, useQueryClient } from "@tanstack/react-query";  // Add useQueryClient
-import { FiX, FiArrowLeft, FiUpload } from "react-icons/fi";  // Add FiUpload import
+import { useMutation,useQueryClient  } from "@tanstack/react-query";
+import { FiX, FiArrowLeft } from "react-icons/fi";
 import { ProgramContext } from "../../../../context/programs/ProgramContext";
 import api from "../../../../api/axios";
 
@@ -13,11 +13,11 @@ interface IAddTrack {
 }
 
 const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
-  const { activeCohort } = useContext(ProgramContext);
-  const queryClient = useQueryClient();  // Add this
+  const { activeCohort, setActiveCohort } = useContext(ProgramContext);
   const [trackName, setTrackName] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const queryClient = useQueryClient(); 
 
   const createTrackMutation = useMutation({
     mutationFn: async (payload: { name: string; file?: File }) => {
@@ -30,24 +30,19 @@ const AddTrack: FC<IAddTrack> = ({ closeModal }) => {
         throw new Error("No active cohort selected");
       }
 
-      const trackResponse = await api.track.createTrack(formData);
-      
-      // If there's a file, invite participants after track creation
-      if (payload.file) {
-        await api.participant.inviteGroupParticipant(
-          activeCohort._id,
-          trackResponse.data.data._id,  // Use the new track ID
-          payload.file
-        );
-      }
-
-      return trackResponse;
+      return api.track.createTrack(formData);
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
+      const newTrack = response as { data: any };
       notification.success({
         message: "Track created and participants invited successfully",
       });
-      queryClient.invalidateQueries({ queryKey: ["participants", activeCohort] });  // Fixed query invalidation
+      if (setActiveCohort && activeCohort) {
+        setActiveCohort({
+          ...activeCohort,
+          tracks: [...(activeCohort.tracks || []), newTrack.data],
+        });
+      }
       closeModal();
     },
     onError: (error: any) => {

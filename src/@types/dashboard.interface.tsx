@@ -100,6 +100,7 @@ export type TModal =
   | "changepassword" 
   | "deactivateaccount" 
   | "addAdmin" 
+  | ""
   | null;
 
 export type TActiveModal = "program" | "cohort" | null;
